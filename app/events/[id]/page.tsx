@@ -34,3 +34,4 @@ export default async function EventPage({ params }: Props) {
 
   return <EventDetailPage event={event} allEvents={EVENT_LIST} />;
 }
+
