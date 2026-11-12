@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ABOUT_SECTION, ORGANISER_INFO } from "@/content/events";
@@ -92,28 +93,16 @@ export default function About() {
           {/* Right Framed Tech Campus / Arena Illustration */}
           <div className="about-right lg:col-span-6">
             <div className="overflow-hidden border-2 border-[#0A1B3D] bg-[#06142E] p-3 shadow-[6px_6px_0_#0A1B3D]">
-              <div className="relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-br from-[#06142E] via-[#0C2A5A] to-[#123D7A] p-6">
-                {/* Architectural pixel-grid campus graphic */}
-                <svg
-                  viewBox="0 0 360 160"
-                  className="h-full w-full"
-                  role="img"
-                  aria-label="Campus Arena Blueprint Graphic"
-                >
-                  <rect x="20" y="75" width="70" height="60" fill="#FAF5E8" stroke="#0A1B3D" strokeWidth="2" />
-                  <rect x="32" y="90" width="14" height="14" fill="#22E5FF" />
-                  <rect x="58" y="90" width="14" height="14" fill="#22E5FF" />
-                  <rect x="115" y="45" width="125" height="90" fill="#F5EFE0" stroke="#0A1B3D" strokeWidth="2" />
-                  <rect x="135" y="65" width="22" height="22" fill="#A3F06D" />
-                  <rect x="168" y="65" width="22" height="22" fill="#A3F06D" />
-                  <rect x="201" y="65" width="22" height="22" fill="#A3F06D" />
-                  <rect x="260" y="65" width="80" height="70" fill="#FAF5E8" stroke="#0A1B3D" strokeWidth="2" />
-                  <rect x="275" y="82" width="18" height="18" fill="#19F58A" />
-                  <rect x="304" y="82" width="18" height="18" fill="#19F58A" />
-                  <rect x="0" y="135" width="360" height="25" fill="#19F58A" fillOpacity="0.22" />
-                </svg>
+              <div className="relative h-60 w-full overflow-hidden sm:h-64">
+                <Image
+                  src="/images/campus-arena.jpg"
+                  alt="Isometric engineering and robotics campus arena at dusk"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
-              <div className="mt-2 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-[#9EB3D6]">
+              <div className="mt-2.5 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-[#9EB3D6]">
                 <span>{ORGANISER_INFO.collegeName}</span>
                 <span>{ORGANISER_INFO.city}</span>
               </div>
