@@ -61,17 +61,17 @@ export const ORGANISER_INFO = {
   clubName: "IEEE & Quant Club",
   collegeName: "School of Engineering & Technology",
   city: "Bengaluru",
-  logoText: "TECHFEST",
-  festName: "YUGAANTAR TECH '26",
+  logoText: "AUTO×QUANT",
+  festName: "AUTOMATE × QUANT '26",
   heroEyebrow: "IEEE & QUANT CLUB PRESENTS",
-  heroHeadline: "YUGAANTAR",
+  heroHeadline: "AUTOMATE × QUANT",
   heroSubline:
     "Two flagship arenas — Robotics Automation & Quantitative Finance. December 2026 • Main Campus.",
   contactEmail: "events@campusfest.edu",
   contactPhone: "+91 98765 43210",
   upiId: "techfest.club@okaxis",
   upiPayeeName: "IEEE & Quant Club",
-  siteUrl: "https://yugaantar-tech.vercel.app",
+  siteUrl: "https://automate-quant-events.vercel.app",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
     { label: "LinkedIn", href: "https://linkedin.com" },
@@ -82,7 +82,7 @@ export const ORGANISER_INFO = {
 
 export const ABOUT_SECTION = {
   eyebrow: "CAMPUS QUEST",
-  titlePrefix: "TechFest is back in",
+  titlePrefix: "Engineering Arena",
   titleHighlight: "December 2026.",
   questRole: "EVENT GUIDE",
   questSubtitle: "Your first quest starts here.",

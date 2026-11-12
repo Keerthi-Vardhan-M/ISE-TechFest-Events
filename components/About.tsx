@@ -26,6 +26,16 @@ export default function About() {
       start: "top 80%",
       once: true,
       onEnter: () => {
+        gsap.fromTo(
+          ".about-left",
+          { x: -45, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        );
+        gsap.fromTo(
+          ".about-right",
+          { x: 45, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        );
         ABOUT_SECTION.metrics.forEach((metric, idx) => {
           const obj = { val: 0 };
           gsap.to(obj, {
@@ -61,7 +71,7 @@ export default function About() {
 
         <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
           {/* Left Quest Card with hard retro shadow */}
-          <div className="quest-shadow border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 sm:p-8 lg:col-span-6">
+          <div className="about-left quest-shadow border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 sm:p-8 lg:col-span-6">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-[#0A1B3D] bg-[#A3F06D] font-pixel text-lg font-bold text-[#0A1B3D]">
                 01
@@ -80,7 +90,7 @@ export default function About() {
           </div>
 
           {/* Right Framed Tech Campus / Arena Illustration */}
-          <div className="lg:col-span-6">
+          <div className="about-right lg:col-span-6">
             <div className="overflow-hidden border-2 border-[#0A1B3D] bg-[#06142E] p-3 shadow-[6px_6px_0_#0A1B3D]">
               <div className="relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-br from-[#06142E] via-[#0C2A5A] to-[#123D7A] p-6">
                 {/* Architectural pixel-grid campus graphic */}

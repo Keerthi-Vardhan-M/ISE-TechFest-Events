@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 import { SCHEDULE_STAGES } from "@/content/events";
+import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
 function StageArt({ type }: { type: "forge" | "ignite" | "arena" | "trophy" }) {
   return (
@@ -45,8 +48,32 @@ function StageArt({ type }: { type: "forge" | "ignite" | "arena" | "trophy" }) {
 }
 
 export default function Schedule() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    ensureGsapRegistered();
+    if (!sectionRef.current || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".schedule-card",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: MOTION_EASE,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="schedule" className="cream-dot-grid text-[#0A1B3D]">
+    <section id="schedule" ref={sectionRef} className="cream-dot-grid text-[#0A1B3D]">
       <div className="pixel-checker-divider" aria-hidden="true" />
 
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
@@ -58,7 +85,7 @@ export default function Schedule() {
           {SCHEDULE_STAGES.map((stage) => (
             <div
               key={stage.day}
-              className="quest-shadow flex flex-col justify-between border-2 border-[#0A1B3D] bg-[#FAF5E8]"
+              className="schedule-card quest-shadow flex flex-col justify-between border-2 border-[#0A1B3D] bg-[#FAF5E8] transition-transform duration-300 hover:-translate-y-1.5"
             >
               <div>
                 <StageArt type={stage.iconType} />
@@ -94,4 +121,3 @@ export default function Schedule() {
     </section>
   );
 }
-

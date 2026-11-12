@@ -6,25 +6,31 @@ import { ORGANISER_INFO } from "@/content/events";
 import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 
 const NAV_LINKS = [
-  { label: "EVENTS", href: "#events" },
-  { label: "SCHEDULE", href: "#schedule" },
-  { label: "ABOUT", href: "#about" },
-  { label: "PRIZES", href: "#prizes" },
-  { label: "FAQ", href: "#rules-faq" },
+  { id: "home", label: "HOME", href: "#home" },
+  { id: "about", label: "ABOUT", href: "#about" },
+  { id: "events", label: "EVENTS", href: "#events" },
+  { id: "schedule", label: "SCHEDULE", href: "#schedule" },
+  { id: "prizes", label: "PRIZES", href: "#prizes" },
+  { id: "rules-faq", label: "FAQ", href: "#rules-faq" },
 ];
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
   const lastY = useRef(0);
   const magneticRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      if (y > 80 && y > lastY.current + 6) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? Math.min(100, (y / docHeight) * 100) : 0);
+
+      if (y > 90 && y > lastY.current + 6) {
         setHidden(true);
-      } else if (y < lastY.current - 6 || y < 80) {
+      } else if (y < lastY.current - 6 || y < 90) {
         setHidden(false);
       }
       lastY.current = y;
@@ -32,6 +38,26 @@ export default function Navbar() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Track active section in viewport
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    for (const link of NAV_LINKS) {
+      const el = document.getElementById(link.id);
+      if (!el) continue;
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (entries[0]?.isIntersecting) {
+            setActiveId(link.id);
+          }
+        },
+        { rootMargin: "-40% 0px -45% 0px", threshold: 0.01 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    }
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   useEffect(() => {
@@ -42,6 +68,20 @@ export default function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
+
+  const scrollToTarget = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const el = document.getElementById(targetId);
+    if (!el) return;
+
+    const lenis = (window as Window & { __lenis?: { scrollTo: (t: HTMLElement, opts?: object) => void } }).__lenis;
+    if (lenis && !prefersReducedMotion()) {
+      lenis.scrollTo(el, { offset: -20, duration: 1.1 });
+    } else {
+      el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+    }
+  };
 
   const handleMagneticMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticRef.current) return;
@@ -60,42 +100,66 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-[#9EB3D6]/15 bg-[#040F24]/90 backdrop-blur-md transition-transform duration-300 ease-out ${
+        className={`fixed inset-x-0 top-0 z-50 border-b border-[#9EB3D6]/20 bg-[#040F24]/90 backdrop-blur-xl transition-transform duration-300 ease-out ${
           hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"
         }`}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
+        {/* Top scroll progress bar */}
+        <div className="h-[2px] w-full bg-[#091D42]">
+          <div
+            className="h-full bg-gradient-to-r from-[#22E5FF] via-[#A3F06D] to-[#19F58A] transition-[width] duration-75"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+
         <nav
           aria-label="Primary Navigation"
           className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"
         >
           <a
             href="#home"
-            className="flex min-h-[44px] items-center gap-2 font-pixel text-base font-bold tracking-wider text-[#A3F06D] drop-shadow-[0_2px_0_#0A1B3D] sm:text-lg"
+            onClick={(e) => scrollToTarget(e, "home")}
+            className="flex min-h-[44px] items-center gap-2 font-pixel text-sm font-bold tracking-wider text-[#A3F06D] transition-transform hover:scale-[1.03] sm:text-base"
           >
+            <span className="inline-block h-2.5 w-2.5 bg-[#22E5FF]" />
             <span>{ORGANISER_INFO.logoText}</span>
           </a>
 
-          <ul className="hidden items-center gap-6 md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="inline-flex min-h-[44px] items-center font-mono text-xs tracking-[0.18em] text-[#9EB3D6] transition-colors hover:text-[#A3F06D]"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+          <ul className="hidden items-center gap-1 md:flex lg:gap-2">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeId === link.id;
+              return (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => scrollToTarget(e, link.id)}
+                    className={`relative inline-flex min-h-[44px] items-center px-3 font-mono text-xs tracking-[0.16em] transition-colors ${
+                      isActive
+                        ? "font-bold text-[#A3F06D]"
+                        : "text-[#9EB3D6] hover:text-[#F4F6FB]"
+                    }`}
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute inset-x-3 bottom-2 h-[2px] bg-[#A3F06D] transition-transform duration-300 origin-left ${
+                        isActive ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex items-center gap-2.5">
             <a
               ref={magneticRef}
               href="#register"
+              onClick={(e) => scrollToTarget(e, "register")}
               onMouseMove={handleMagneticMove}
               onMouseLeave={resetMagnetic}
-              className="hidden min-h-[40px] items-center justify-center border border-[#A3F06D]/40 bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#040F24] transition-transform duration-200 hover:brightness-110 md:inline-flex"
+              className="hidden min-h-[40px] items-center justify-center border border-[#A3F06D]/40 bg-[#A3F06D] px-5 font-mono text-xs font-bold uppercase tracking-wider text-[#040F24] shadow-[3px_3px_0_#0A1B3D] transition-transform duration-200 hover:brightness-105 md:inline-flex"
             >
               REGISTER
             </a>
@@ -123,10 +187,10 @@ export default function Navbar() {
         >
           <ul className="flex flex-col gap-2">
             {NAV_LINKS.map((link, idx) => (
-              <li key={link.href}>
+              <li key={link.id}>
                 <a
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => scrollToTarget(e, link.id)}
                   className="flex min-h-[52px] items-center justify-between border border-[#9EB3D6]/20 bg-[#091D42]/60 px-5 font-pixel text-lg text-[#F4F6FB] active:bg-[#091D42]"
                 >
                   <span>{link.label}</span>
@@ -138,7 +202,7 @@ export default function Navbar() {
 
           <a
             href="#register"
-            onClick={() => setMenuOpen(false)}
+            onClick={(e) => scrollToTarget(e, "register")}
             className="flex min-h-[52px] w-full items-center justify-center bg-[#A3F06D] font-mono text-sm font-bold uppercase tracking-wider text-[#040F24]"
           >
             REGISTER YOUR TEAM →

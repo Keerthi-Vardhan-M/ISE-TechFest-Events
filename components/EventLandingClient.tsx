@@ -49,9 +49,11 @@ export default function EventLandingClient() {
     if (isTouchDevice() || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 0.09,
       smoothWheel: true,
     });
+
+    (window as Window & { __lenis?: Lenis }).__lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -63,6 +65,7 @@ export default function EventLandingClient() {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      delete (window as Window & { __lenis?: Lenis }).__lenis;
       gsap.ticker.remove(tickerCallback);
       lenis.destroy();
     };
