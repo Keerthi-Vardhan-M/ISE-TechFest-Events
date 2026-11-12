@@ -8,7 +8,6 @@ import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 const NAV_LINKS = [
   { id: "home", label: "HOME", href: "#home" },
   { id: "about", label: "ABOUT", href: "#about" },
-  { id: "memories", label: "MEMORIES", href: "#memories" },
   { id: "events", label: "EVENTS", href: "#events" },
   { id: "prizes", label: "PRIZES", href: "#prizes" },
   { id: "sponsors", label: "SPONSORS", href: "#sponsors" },

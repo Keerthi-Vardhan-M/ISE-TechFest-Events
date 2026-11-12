@@ -16,35 +16,36 @@ export default function Memories() {
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion()) {
-        gsap.set(".memory-char", { opacity: 1, y: 0 });
+        gsap.set(".memory-char", { opacity: 1, y: 0, filter: "none" });
         return;
       }
 
-      // Letter-by-letter smooth slow entrance as user scrolls to photo section
-      gsap.fromTo(
-        ".memory-char",
-        { opacity: 0, y: 40, filter: "blur(8px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.75,
-          stagger: 0.09,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        }
-      );
+      // Hide initially so it never appears beforehand
+      gsap.set(".memory-char", { opacity: 0, y: 50, scale: 0.85, filter: "blur(12px)" });
+
+      // Letter-by-letter reveal tied to scrolling through the images
+      // Only starts when the user scrolls deeply into the photo section
+      gsap.to(".memory-char", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        stagger: 0.14,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 30%", // triggers only once photos are actively in view
+          end: "top 5%",
+          scrub: 1.2,
+        },
+      });
 
       // Alternating columns moving vertically upward & downward slowly with scroll scrub
       gsap.fromTo(
         ".memories-col-up",
-        { y: 80 },
+        { y: 70 },
         {
-          y: -160,
+          y: -140,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -57,9 +58,9 @@ export default function Memories() {
 
       gsap.fromTo(
         ".memories-col-down",
-        { y: -80 },
+        { y: -70 },
         {
-          y: 160,
+          y: 140,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -96,13 +97,14 @@ export default function Memories() {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Floating Memories Title: Card container removed, appears cleanly letter-by-letter on scroll */}
+        {/* Floating Memories Title: Invisible until user actively scrolls into the images, then slowly reveals letter by letter */}
         <div className="pointer-events-none sticky top-1/2 z-30 -translate-y-1/2 text-center">
-          <h2 className="font-heading text-5xl font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-8xl">
+          <h2 className="font-heading text-5xl font-black tracking-tight text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-8xl">
             {titleLetters.map((char, i) => (
               <span
                 key={i}
                 className="memory-char inline-block transition-transform duration-300"
+                style={{ opacity: 0 }}
               >
                 {char}
               </span>
