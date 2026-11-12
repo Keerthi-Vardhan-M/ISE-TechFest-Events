@@ -96,41 +96,6 @@ export const ABOUT_SECTION = {
   ],
 } as const;
 
-export const SCHEDULE_STAGES = [
-  {
-    day: "ROUND 01",
-    title: "Blueprint & Aptitude",
-    description:
-      "Architecture pitch for Automate Boring Task and quantitative probability & market microstructure sprint for QuantFinance.",
-    sessions: "MORNING SESSION",
-    iconType: "forge" as const,
-  },
-  {
-    day: "ROUND 02",
-    title: "Live Build & Backtest",
-    description:
-      "Teams deploy autonomous workflows on the test track or backtest systematic trading signals on historical tick data.",
-    sessions: "MIDDAY ARENA",
-    iconType: "ignite" as const,
-  },
-  {
-    day: "ROUND 03",
-    title: "The Battlefield",
-    description:
-      "Fault-injection stress tests for robotics and live simulated order-book shocks with real-time P&L leaderboards.",
-    sessions: "AFTERNOON FINALS",
-    iconType: "arena" as const,
-  },
-  {
-    day: "FINALE",
-    title: "The Grand Podium",
-    description:
-      "Jury evaluation, P&L & throughput audit, trophy presentation, and prize pool disbursement.",
-    sessions: "CLOSING CEREMONY",
-    iconType: "trophy" as const,
-  },
-] as const;
-
 export const EVENTS: Record<EventId, EventConfig> = {
   automate: {
     id: "automate",
