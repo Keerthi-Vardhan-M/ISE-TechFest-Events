@@ -29,19 +29,19 @@ export default function About() {
       onEnter: () => {
         gsap.fromTo(
           ".about-left",
-          { x: -45, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+          { x: -50, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.85, ease: "power3.out" }
         );
         gsap.fromTo(
           ".about-right",
-          { x: 45, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+          { x: 50, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.85, ease: "power3.out" }
         );
         ABOUT_SECTION.metrics.forEach((metric, idx) => {
           const obj = { val: 0 };
           gsap.to(obj, {
             val: metric.value,
-            duration: 1.0,
+            duration: 1.1,
             ease: "power3.out",
             onUpdate: () => {
               setCounts((prev) => {
@@ -64,10 +64,11 @@ export default function About() {
       ref={sectionRef}
       className="cream-dot-grid relative text-[#0A1B3D]"
     >
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-        {/* Softly blurred/glowing title matching reference screenshot */}
+      {/* Expansive wide container matching reference screenshot */}
+      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-28">
+        {/* Large pixel heading with soft blur/glow */}
         <h2
-          className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl"
+          className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl md:text-6xl"
           style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
         >
           {ABOUT_SECTION.titlePrefix}{" "}
@@ -79,56 +80,63 @@ export default function About() {
           </span>
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-          {/* Left Quest Card with authentic cream background and hard retro shadow */}
-          <div className="about-left quest-shadow border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 sm:p-8 lg:col-span-6">
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-[#0A1B3D] bg-[#A3F06D] font-pixel text-lg font-bold text-[#0A1B3D]">
-                01
+        {/* Much wider 2-card layout matching screenshot */}
+        <div className="mt-12 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+          {/* Left Quest Card: wider, spacious with soft beige background & retro border */}
+          <div className="about-left flex flex-col justify-between border-2 border-[#0A1B3D] bg-[#FAF5E8] p-7 shadow-[6px_6px_0_#0A1B3D] sm:p-9 lg:col-span-6 lg:p-10">
+            <div>
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-[#0A1B3D] bg-[#A3F06D] font-pixel text-xl font-bold text-[#0A1B3D] shadow-[3px_3px_0_#0A1B3D]">
+                  01
+                </div>
+                <div>
+                  <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#1D5BC6]">
+                    {ABOUT_SECTION.questRole}
+                  </p>
+                  <p className="mt-0.5 text-sm font-medium text-[#4B5C7D]">
+                    {ABOUT_SECTION.questSubtitle}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-mono text-xs font-bold tracking-[0.18em] text-[#1D5BC6]">
-                  {ABOUT_SECTION.questRole}
-                </p>
-                <p className="text-sm text-[#4B5C7D]">{ABOUT_SECTION.questSubtitle}</p>
-              </div>
+
+              <p className="mt-8 text-base leading-relaxed text-[#0A1B3D] sm:text-lg lg:text-xl">
+                {ABOUT_SECTION.questDescription}
+              </p>
             </div>
 
-            <p className="mt-5 text-base leading-relaxed text-[#0A1B3D]/90 sm:text-lg">
-              {ABOUT_SECTION.questDescription}
-            </p>
+            <div className="mt-8 border-t border-[#D9D0B8] pt-4 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
+              FLAGSHIP TECH ARENA • BENGALURU
+            </div>
           </div>
 
-          {/* Right Framed Tech Campus / Arena Illustration */}
-          <div className="about-right lg:col-span-6">
-            <div className="overflow-hidden border-2 border-[#0A1B3D] bg-[#06142E] p-3 shadow-[6px_6px_0_#0A1B3D]">
-              <div className="relative h-60 w-full overflow-hidden sm:h-64">
-                <Image
-                  src="/images/campus-arena.jpg"
-                  alt="Isometric engineering and robotics campus arena at dusk"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="mt-2.5 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-[#9EB3D6]">
-                <span>{ORGANISER_INFO.collegeName}</span>
-                <span>{ORGANISER_INFO.city}</span>
-              </div>
+          {/* Right Campus Illustration: wide framed arena visual matching reference */}
+          <div className="about-right flex flex-col justify-between border-2 border-[#0A1B3D] bg-[#06142E] p-3.5 shadow-[6px_6px_0_#0A1B3D] lg:col-span-6">
+            <div className="relative h-72 w-full overflow-hidden sm:h-80 md:h-96 lg:h-full lg:min-h-[340px]">
+              <Image
+                src="/images/campus-arena.jpg"
+                alt="Isometric engineering and robotics campus arena at dusk"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 hover:scale-103"
+              />
+            </div>
+            <div className="mt-3 flex items-center justify-between px-1 font-mono text-xs uppercase tracking-widest text-[#9EB3D6]">
+              <span>OUR NEW CAMPUS</span>
+              <span>{ORGANISER_INFO.city.toUpperCase()}</span>
             </div>
           </div>
         </div>
 
-        {/* Clean 4-column metric bar with cream parchment dividers */}
-        <div className="mt-14 grid grid-cols-2 divide-y divide-[#D9D0B8] border-y border-[#D9D0B8] sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+        {/* Expansive 4-column metric bar spanning wide container */}
+        <div className="mt-16 grid grid-cols-2 divide-y divide-[#D9D0B8] border-y border-[#D9D0B8] sm:grid-cols-4 sm:divide-x sm:divide-y-0">
           {ABOUT_SECTION.metrics.map((metric, idx) => (
-            <div key={metric.label} className="px-4 py-6 sm:px-6">
-              <div className="font-pixel text-3xl font-bold tabular-nums text-[#0A1B3D] sm:text-4xl">
+            <div key={metric.label} className="px-5 py-8 sm:px-8 sm:py-10">
+              <div className="font-pixel text-4xl font-bold tabular-nums text-[#0A1B3D] sm:text-5xl lg:text-6xl">
                 {"prefix" in metric ? metric.prefix : ""}
                 {counts[idx].toLocaleString("en-IN")}
                 {metric.suffix}
               </div>
-              <p className="mt-1.5 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
+              <p className="mt-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#4B5C7D] sm:text-sm">
                 {metric.label}
               </p>
             </div>
