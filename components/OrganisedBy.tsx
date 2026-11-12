@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Mail, Phone } from "lucide-react";
-import { EVENTS, ORGANISER_INFO } from "@/content/events";
+import { ORGANISER_INFO } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
 export default function OrganisedBy() {
@@ -42,14 +42,18 @@ export default function OrganisedBy() {
     {
       name: "Aarav Sharma",
       role: "Robotics Track Lead",
+      track: "automate",
       phone: "+91 98765 43211",
       email: "automate@campusfest.edu",
+      accent: "#22E5FF",
     },
     {
       name: "Diya Nair",
       role: "Quant Track Lead",
+      track: "quant",
       phone: "+91 98765 43212",
       email: "quant@campusfest.edu",
+      accent: "#19F58A",
     },
   ];
 
@@ -67,7 +71,7 @@ export default function OrganisedBy() {
           className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl"
           style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
         >
-          ORGANISED <span className="text-[#C82333]">BY</span>
+          ORGANISED <span className="text-[#1648A8]">BY</span>
         </h2>
 
         <div className="mx-auto my-6 h-px max-w-md bg-[#D9D0B8]" />
@@ -96,21 +100,27 @@ export default function OrganisedBy() {
             For queries and assistance
           </p>
 
+          {/* Theme-based Deep Royal Blue Contact Cards */}
           <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
             {contacts.map((c) => (
               <div
                 key={c.name}
-                className="org-item border-2 border-[#0A1B3D] bg-[#0B1220] p-6 text-center text-[#FAF5E8] shadow-[5px_5px_0_#C82333]"
+                className="org-item border-2 border-[#1648A8] bg-[#0A1E46] p-7 text-center text-[#F4F6FB] shadow-[6px_6px_0_#06142E] transition-transform duration-300 hover:-translate-y-1"
               >
-                <p className="font-heading text-lg font-bold tracking-wide uppercase text-[#FAF5E8]">
+                <p className="font-heading text-xl font-bold tracking-wide uppercase text-white">
                   {c.name}
                 </p>
-                <p className="mt-1 font-mono text-xs font-semibold text-[#F5C451]">{c.role}</p>
+                <p
+                  className="mt-1.5 font-mono text-xs font-bold uppercase tracking-wider"
+                  style={{ color: c.accent }}
+                >
+                  {c.role}
+                </p>
 
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
                   <a
                     href={`tel:${c.phone.replace(/\s+/g, "")}`}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded border border-[#9EB3D6]/20 bg-[#06142E]/70 px-3.5 py-1.5 text-[#D8E3F5] transition-colors hover:border-[#A3F06D] hover:text-[#A3F06D]"
+                    className="inline-flex min-h-[40px] items-center gap-2 rounded border border-white/20 bg-[#06142E]/80 px-4 py-2 text-[#D8E3F5] transition-colors hover:border-[#A3F06D] hover:text-[#A3F06D]"
                   >
                     <Phone className="h-3.5 w-3.5 text-[#A3F06D]" />
                     <span>{c.phone}</span>
@@ -118,7 +128,7 @@ export default function OrganisedBy() {
 
                   <a
                     href={`mailto:${c.email}`}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded bg-[#1648A8] px-3.5 py-1.5 font-bold uppercase tracking-wider text-white shadow transition-colors hover:bg-[#1D5BC6]"
+                    className="inline-flex min-h-[40px] items-center gap-2 rounded bg-[#1D5BC6] px-4 py-2 font-bold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(29,91,198,0.45)] transition-colors hover:bg-[#2563EB]"
                   >
                     <Mail className="h-3.5 w-3.5" />
                     <span>CONTACT</span>
