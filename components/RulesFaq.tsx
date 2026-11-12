@@ -112,11 +112,26 @@ export default function RulesFaq() {
 
         {/* Questions Accordion */}
         <div className="rules-reveal mt-20">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h3 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-4xl">
-              Questions
+          <div className="text-center">
+            <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
+              EVERYTHING YOU NEED TO KNOW
+            </p>
+            <h3 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+              FREQUENTLY ASKED <span className="text-[#1648A8]">QUESTIONS</span>
             </h3>
+            <div className="mx-auto my-4 flex max-w-xs items-center gap-3">
+              <div className="h-px flex-1 bg-[#D9D0B8]" />
+              <span className="text-sm text-[#1648A8]" aria-hidden="true">
+                ✦
+              </span>
+              <div className="h-px flex-1 bg-[#D9D0B8]" />
+            </div>
+            <p className="text-base text-[#4B5C7D] sm:text-lg">
+              Have questions before entering the arena? Find your answers here.
+            </p>
+          </div>
 
+          <div className="mt-8 flex justify-center">
             <div
               role="tablist"
               aria-label="FAQ Filter"
@@ -130,7 +145,7 @@ export default function RulesFaq() {
                   setActiveTab("general");
                   setOpenFaqIndex(0);
                 }}
-                className={`min-h-[44px] whitespace-nowrap border-2 px-4 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+                className={`min-h-[44px] whitespace-nowrap border-2 px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
                   activeTab === "general"
                     ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
                     : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
@@ -148,7 +163,7 @@ export default function RulesFaq() {
                     setActiveTab(ev.id);
                     setOpenFaqIndex(0);
                   }}
-                  className={`min-h-[44px] whitespace-nowrap border-2 px-4 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+                  className={`min-h-[44px] whitespace-nowrap border-2 px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
                     activeTab === ev.id
                       ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
                       : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
@@ -160,28 +175,38 @@ export default function RulesFaq() {
             </div>
           </div>
 
-          <div className="mt-8 border-t border-[#D9D0B8]">
+          <div className="mt-10 border-t border-[#D9D0B8]">
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
-                <div key={faq.question} className="border-b border-[#D9D0B8]">
+                <div
+                  key={faq.question}
+                  onMouseEnter={() => setOpenFaqIndex(idx)}
+                  className={`border-b border-[#D9D0B8] transition-colors duration-200 ${
+                    isOpen ? "bg-[#FAF5E8]/90" : "hover:bg-[#FAF5E8]/50"
+                  }`}
+                >
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="flex min-h-[64px] w-full items-center justify-between gap-4 py-4 text-left"
+                    className="flex min-h-[78px] w-full items-center justify-between gap-4 px-3 py-5 text-left sm:px-5"
                   >
                     <div className="flex items-baseline gap-5">
-                      <span className="font-mono text-xs font-semibold text-[#4B5C7D]">
+                      <span
+                        className={`font-mono text-sm font-bold transition-colors ${
+                          isOpen ? "text-[#1648A8]" : "text-[#4B5C7D]"
+                        }`}
+                      >
                         {String(idx + 1).padStart(2, "0")}
                       </span>
-                      <span className="font-heading text-base font-bold text-[#0A1B3D] sm:text-xl">
+                      <span className="font-heading text-lg font-bold text-[#0A1B3D] sm:text-2xl">
                         {faq.question}
                       </span>
                     </div>
                     <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-[#4B5C7D] transition-transform duration-200 ${
-                        isOpen ? "rotate-180 text-[#0A1B3D]" : ""
+                      className={`h-6 w-6 shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180 text-[#1648A8]" : "text-[#4B5C7D]"
                       }`}
                     />
                   </button>
@@ -191,10 +216,10 @@ export default function RulesFaq() {
                         initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
                         animate={reduced ? { opacity: 1 } : { height: "auto", opacity: 1 }}
                         exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 pl-10 pr-6 text-sm leading-relaxed text-[#4B5C7D] sm:text-base">
+                        <p className="pb-6 pl-12 pr-6 text-base leading-relaxed text-[#4B5C7D] sm:pl-14 sm:text-lg">
                           {faq.answer}
                         </p>
                       </motion.div>
