@@ -93,17 +93,24 @@ export default function Footer({ onOpenRegister }: FooterProps) {
             <nav aria-label="Footer Navigation" className="flex flex-wrap items-center gap-6 sm:gap-8">
               <button
                 type="button"
-                onClick={() => scrollTo("events")}
-                className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
-              >
-                EVENTS
-              </button>
-              <button
-                type="button"
                 onClick={() => scrollTo("about")}
                 className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
               >
                 ABOUT
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo("memories")}
+                className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
+              >
+                MEMORIES
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo("events")}
+                className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
+              >
+                EVENTS
               </button>
               <button
                 type="button"

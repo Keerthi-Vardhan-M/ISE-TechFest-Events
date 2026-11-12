@@ -116,6 +116,9 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
         onClose={() => setSelectedModalEvent(null)}
         onRegister={onSelectRegister}
       />
+
+      {/* Pixel Checkerboard Divider into Cream Prizes Section */}
+      <div className="pixel-checker-divider mt-20" aria-hidden="true" />
     </section>
   );
 }
