@@ -121,17 +121,21 @@ export default function Navbar() {
           <a
             href="#home"
             onClick={(e) => scrollToTarget(e, "home")}
-            className="flex min-h-[44px] items-center gap-2.5 text-left"
+            className="group flex min-h-[44px] items-center gap-3 text-left"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0A1B3D] font-pixel text-[10px] font-bold text-[#A3F06D]">
-              AQ
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#22E5FF]/40 bg-[#06142E] shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+                <circle cx="16" cy="16" r="11" fill="none" stroke="#22E5FF" strokeWidth="1.6" strokeDasharray="4 2" />
+                <path d="M9 20 L14 14 L18 17 L24 10" fill="none" stroke="#A3F06D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="24" cy="10" r="2.2" fill="#A3F06D" />
+              </svg>
             </span>
             <div className="leading-tight">
-              <span className="block font-heading text-xs font-bold text-[#0A1B3D] sm:text-sm">
+              <span className="block font-pixel text-xs font-bold tracking-wider text-[#0A1B3D] sm:text-sm">
                 {ORGANISER_INFO.clubName}
               </span>
-              <span className="hidden font-mono text-[10px] text-[#4B5C7D] sm:block">
-                {ORGANISER_INFO.collegeName}
+              <span className="hidden font-mono text-[10px] font-semibold tracking-wider text-[#1648A8] sm:block">
+                {ORGANISER_INFO.collegeName} • {ORGANISER_INFO.city}
               </span>
             </div>
           </a>
