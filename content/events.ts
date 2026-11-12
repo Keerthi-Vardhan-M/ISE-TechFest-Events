@@ -384,27 +384,62 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "Who can participate?",
     answer:
-      "All college students with a valid institution ID card can register for either or both events.",
+      "All undergraduate and postgraduate college students with a valid institution ID card are eligible. Cross-college, cross-branch, and cross-year teams are welcome.",
   },
   {
     question: "How do I register?",
     answer:
-      "Scroll to the Registration section below, select your event, enter your team details and UPI transaction ID, and submit to receive an instant Reference ID.",
+      "Scroll to the Registration section below, pick your event, enter your team details (leader + 2–3 members), and submit to receive your instant Reference ID.",
   },
   {
-    question: "When and where is the fest?",
+    question: "What is the team size requirement?",
     answer:
-      "12–13 December 2026 at MSRIT, Bengaluru (Block A Robotics Lab & Seminar Hall).",
+      "Team size must be strictly 3 to 4 members (1 Leader + 2 or 3 additional members). Solo or 2-member participation is not permitted.",
   },
   {
-    question: "Is there a registration fee?",
+    question: "Is there any registration fee?",
     answer:
-      "No! Registration is completely FREE for both Automate Boring Task and QuantFinance.",
+      "No! Registration is 100% FREE for both Automate Boring Task and QuantFinance.",
   },
   {
-    question: "Are there prizes?",
+    question: "When and where are the competitions hosted?",
     answer:
-      "Yes! ₹50,000+ total prize pool split across both events (1st, 2nd, 3rd place), plus trophies and verified finalist certificates.",
+      "12–13 December 2026 at MSRIT, Bengaluru (Robotics Lab Block A for Automate Boring Task and Seminar Hall for QuantFinance).",
+  },
+  {
+    question: "Can our team participate in both events?",
+    answer:
+      "Yes! Automate Boring Task takes place on 12 December and QuantFinance on 13 December, so your team can register for both tracks individually.",
+  },
+  {
+    question: "What hardware or software do we need to bring?",
+    answer:
+      "Bring laptops with chargers. For Automate Boring Task, bring your microcontrollers, sensors, and cables (bench AC power and test crates provided). For QuantFinance, laptops with Python 3.10+ or spreadsheet tools pre-installed.",
+  },
+  {
+    question: "Is real money involved in QuantFinance?",
+    answer:
+      "No. All trading rounds run on simulated virtual capital with historical, simulated, and synthetic market feeds.",
+  },
+  {
+    question: "Are pre-built commercial robots allowed in Automate Boring Task?",
+    answer:
+      "No. Turnkey commercial off-the-shelf robots are strictly disallowed. Custom prototypes, modular kits, and scripted hybrid pipelines built by the team are required.",
+  },
+  {
+    question: "What prizes and certificates will participants receive?",
+    answer:
+      "₹50,000+ total cash prize pool split across podium finishers in both tracks, plus championship trophies and verified participation certificates for all registered teams.",
+  },
+  {
+    question: "Will food, Wi-Fi, and accommodation be provided?",
+    answer:
+      "High-speed campus Wi-Fi, power strips, lunch, and refreshments are provided on event days. Outstation teams should contact the track leads for nearby accommodation guidance.",
+  },
+  {
+    question: "Who do I contact if I have further queries?",
+    answer:
+      "Reach out to Aarav Sharma (Robotics Lead: +91 98765 43211) or Diya Nair (Quant Lead: +91 98765 43212), or email events@campusfest.edu.",
   },
 ];
 
