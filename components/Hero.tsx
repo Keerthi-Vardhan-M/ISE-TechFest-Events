@@ -165,13 +165,7 @@ export default function Hero({ onOpenRegister }: HeroProps) {
             {ORGANISER_INFO.heroHeadline}
           </h1>
 
-          <div className="hero-reveal my-3 flex w-48 items-center gap-3">
-            <div className="h-px flex-1 bg-white/30" />
-            <span className="text-xs text-white" aria-hidden="true">
-              ❖
-            </span>
-            <div className="h-px flex-1 bg-white/30" />
-          </div>
+          <div className="hero-reveal my-3 h-px w-48 bg-white/30" />
 
           <p className="hero-reveal font-mono text-xs uppercase tracking-[0.26em] text-white sm:text-sm">
             ANNUAL TECH SYMPOSIUM 2026

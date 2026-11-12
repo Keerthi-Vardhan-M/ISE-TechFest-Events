@@ -119,13 +119,7 @@ export default function RulesFaq() {
             >
               FREQUENTLY ASKED <span className="text-[#1648A8]">QUESTIONS</span>
             </h3>
-            <div className="mx-auto my-4 flex max-w-xs items-center gap-3">
-              <div className="h-px flex-1 bg-[#D9D0B8]" />
-              <span className="text-sm text-[#1648A8]" aria-hidden="true">
-                ✦
-              </span>
-              <div className="h-px flex-1 bg-[#D9D0B8]" />
-            </div>
+            <div className="mx-auto my-4 h-px max-w-xs bg-[#D9D0B8]" />
             <p className="text-base text-[#4B5C7D] sm:text-lg">
               Have questions before entering the arena? Find your answers here.
             </p>

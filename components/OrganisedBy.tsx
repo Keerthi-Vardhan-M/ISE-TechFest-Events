@@ -70,13 +70,7 @@ export default function OrganisedBy() {
           ORGANISED <span className="text-[#C82333]">BY</span>
         </h2>
 
-        <div className="mx-auto my-6 flex max-w-md items-center gap-3">
-          <div className="h-px flex-1 bg-[#D9D0B8]" />
-          <span className="text-xs text-[#C82333]" aria-hidden="true">
-            ◆
-          </span>
-          <div className="h-px flex-1 bg-[#D9D0B8]" />
-        </div>
+        <div className="mx-auto my-6 h-px max-w-md bg-[#D9D0B8]" />
 
         {/* 4 Partner / Institution Cards */}
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
