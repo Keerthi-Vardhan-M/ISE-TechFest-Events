@@ -32,7 +32,7 @@ export default function Footer() {
           <a
             href="#register"
             onClick={scrollToRegister}
-            className="mt-7 inline-flex min-h-[48px] items-center justify-center bg-[#A31C24] px-8 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#FAF5E8] transition-colors hover:bg-[#8C161D]"
+            className="mt-7 inline-flex min-h-[48px] items-center justify-center bg-[#1648A8] px-8 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#FAF5E8] transition-colors hover:bg-[#113987]"
           >
             REGISTER NOW
           </a>

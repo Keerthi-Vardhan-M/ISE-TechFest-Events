@@ -113,7 +113,7 @@ export default function Navbar() {
           {/* Scroll progress strip */}
           <div className="absolute inset-x-0 bottom-0 h-[2.5px] bg-[#D9D0B8]/50">
             <div
-              className="h-full bg-[#C82333] transition-[width] duration-75"
+              className="h-full bg-[#1648A8] transition-[width] duration-75"
               style={{ width: `${scrollProgress}%` }}
             />
           </div>
@@ -146,13 +146,13 @@ export default function Navbar() {
                     onClick={(e) => scrollToTarget(e, link.id)}
                     className={`relative inline-flex min-h-[44px] items-center px-2.5 font-mono text-[11px] tracking-[0.14em] transition-colors ${
                       isActive
-                        ? "font-bold text-[#C82333]"
+                        ? "font-bold text-[#1648A8]"
                         : "text-[#0A1B3D]/80 hover:text-[#0A1B3D]"
                     }`}
                   >
                     {link.label}
                     <span
-                      className={`absolute inset-x-2.5 bottom-2 h-[2px] origin-left bg-[#C82333] transition-transform duration-300 ${
+                      className={`absolute inset-x-2.5 bottom-2 h-[2px] origin-left bg-[#1648A8] transition-transform duration-300 ${
                         isActive ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
@@ -169,7 +169,7 @@ export default function Navbar() {
               onClick={(e) => scrollToTarget(e, "register")}
               onMouseMove={handleMagneticMove}
               onMouseLeave={resetMagnetic}
-              className="hidden min-h-[40px] items-center justify-center rounded-xl bg-[#A31C24] px-5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-sm transition-transform duration-200 hover:bg-[#8C161D] md:inline-flex"
+              className="hidden min-h-[40px] items-center justify-center rounded-xl bg-[#1648A8] px-5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-sm transition-transform duration-200 hover:bg-[#113987] md:inline-flex"
             >
               REGISTER NOW
             </a>
