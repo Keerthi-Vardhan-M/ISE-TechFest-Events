@@ -8,7 +8,7 @@ import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/m
 
 export default function Memories() {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const titleLetters = "Memories".split("");
 
   useEffect(() => {
     ensureGsapRegistered();
@@ -16,61 +16,56 @@ export default function Memories() {
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion()) {
-        if (titleRef.current) {
-          gsap.set(titleRef.current, { opacity: 1, scale: 1 });
-        }
+        gsap.set(".memory-char", { opacity: 1, y: 0 });
         return;
       }
 
-      // Memories title dynamic reveal when user scrolls into section
-      if (titleRef.current) {
-        gsap.fromTo(
-          titleRef.current,
-          { opacity: 0, scale: 0.7, y: 60, filter: "blur(12px)" },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 1.1,
-            ease: MOTION_EASE,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              end: "center center",
-              scrub: 0.6,
-            },
-          }
-        );
-      }
-
-      // Dynamic alternating column vertical scrub motion on scroll
+      // Letter-by-letter smooth slow entrance as user scrolls to photo section
       gsap.fromTo(
-        ".memories-col-odd",
-        { y: 60 },
+        ".memory-char",
+        { opacity: 0, y: 40, filter: "blur(8px)" },
         {
-          y: -120,
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.75,
+          stagger: 0.09,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
+
+      // Alternating columns moving vertically upward & downward slowly with scroll scrub
+      gsap.fromTo(
+        ".memories-col-up",
+        { y: 80 },
+        {
+          y: -160,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1,
+            scrub: 1.2,
           },
         }
       );
 
       gsap.fromTo(
-        ".memories-col-even",
-        { y: -60 },
+        ".memories-col-down",
+        { y: -80 },
         {
-          y: 120,
+          y: 160,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1,
+            scrub: 1.2,
           },
         }
       );
@@ -79,56 +74,55 @@ export default function Memories() {
     return () => ctx.revert();
   }, []);
 
-  // Split photos into 4 balanced columns for the staggered masonry look
+  // Split photos into 4 balanced columns for the staggered masonry layout
   const columns: MemoryPhoto[][] = [[], [], [], []];
   MEMORIES_GALLERY.forEach((photo, idx) => {
     columns[idx % 4].push(photo);
   });
 
   const heightClass = (aspect: MemoryPhoto["aspect"]) =>
-    aspect === "tall" ? "h-64 sm:h-76" : aspect === "wide" ? "h-44 sm:h-52" : "h-52 sm:h-60";
+    aspect === "tall" ? "h-64 sm:h-80" : aspect === "wide" ? "h-48 sm:h-56" : "h-56 sm:h-68";
 
   return (
     <section
       id="memories"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#06142E] px-4 py-24 sm:px-6 lg:py-32"
+      className="relative overflow-hidden bg-[#06142E] px-4 py-24 sm:px-6 lg:py-36"
     >
-      {/* Background radial glow */}
+      {/* Background radial atmosphere */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,229,255,0.06)_0%,_transparent_65%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,229,255,0.06)_0%,_transparent_70%)]"
       />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Dynamic floating Memories heading that appears and scales up on scroll */}
-        <div
-          ref={titleRef}
-          className="pointer-events-none sticky top-1/2 z-30 -translate-y-1/2 text-center"
-        >
-          <div className="inline-block rounded-full bg-[#06142E]/70 px-8 py-3 backdrop-blur-md">
-            <h2 className="font-heading text-5xl font-black tracking-tight text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.9)] sm:text-7xl lg:text-8xl">
-              Memories
-            </h2>
-            <p className="mt-1 font-mono text-xs uppercase tracking-[0.3em] text-[#A3F06D]">
-              FLASHBACKS • 2025 EDITION
-            </p>
-          </div>
+        {/* Floating Memories Title: Card container removed, appears cleanly letter-by-letter on scroll */}
+        <div className="pointer-events-none sticky top-1/2 z-30 -translate-y-1/2 text-center">
+          <h2 className="font-heading text-6xl font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] sm:text-8xl lg:text-9xl">
+            {titleLetters.map((char, i) => (
+              <span
+                key={i}
+                className="memory-char inline-block transition-transform duration-300"
+              >
+                {char}
+              </span>
+            ))}
+          </h2>
         </div>
 
-        {/* Dynamic Moving Gallery Columns */}
-        <div className="relative z-10 -mt-16 grid grid-cols-2 gap-3.5 sm:gap-5 md:grid-cols-4">
+        {/* Dynamic Moving Gallery Columns (Upward / Downward slow vertical motion) */}
+        <div className="relative z-10 -mt-20 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
           {columns.map((col, colIdx) => (
             <div
               key={colIdx}
-              className={`flex flex-col gap-4 sm:gap-5 ${
-                colIdx % 2 === 0 ? "memories-col-odd" : "memories-col-even"
+              className={`flex flex-col gap-5 sm:gap-6 ${
+                colIdx % 2 === 0 ? "memories-col-up" : "memories-col-down"
               }`}
             >
               {col.map((photo) => (
                 <figure
                   key={photo.id}
-                  className={`group relative overflow-hidden rounded-2xl border border-[#9EB3D6]/20 bg-[#0A1E46]/80 transition-all duration-300 hover:border-[#22E5FF]/60 hover:shadow-[0_12px_32px_rgba(4,15,36,0.8)] ${heightClass(
+                  className={`group relative overflow-hidden rounded-2xl border border-[#9EB3D6]/20 bg-[#0A1E46]/80 transition-all duration-300 hover:border-[#22E5FF]/60 hover:shadow-[0_14px_36px_rgba(4,15,36,0.85)] ${heightClass(
                     photo.aspect
                   )}`}
                 >
@@ -139,7 +133,7 @@ export default function Memories() {
                     sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#06142E]/90 via-[#06142E]/20 to-transparent opacity-75 transition-opacity group-hover:opacity-95" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06142E]/90 via-[#06142E]/25 to-transparent opacity-75 transition-opacity group-hover:opacity-95" />
                   <figcaption className="absolute bottom-3 left-3 right-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-white">
                     <span className="font-medium text-[#D8E3F5]">{photo.caption}</span>
                     <span className="rounded bg-[#06142E]/80 px-1.5 py-0.5 text-[9px] text-[#A3F06D]">
