@@ -1,10 +1,8 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
-import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 
 interface EventCardProps {
   event: EventConfig;
@@ -21,52 +19,22 @@ export default function EventCard({
   onSelectRegister,
   onHoverTheme,
 }: EventCardProps) {
-  const cardRef = useRef<HTMLElement>(null);
   const isAutomate = event.id === "automate";
   const pctLeft = Math.max(0, Math.min(100, Math.round((seatsLeft / event.seatCap) * 100)));
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (isTouchDevice() || prefersReducedMotion() || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    const rotateY = px * 7;
-    const rotateX = -py * 7;
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(
-      2
-    )}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -4px, 0)`;
-  };
-
-  const handleMouseEnter = () => {
-    onHoverTheme(event.id);
-  };
-
-  const handleMouseLeave = () => {
-    onHoverTheme(null);
-    if (cardRef.current) {
-      cardRef.current.style.transform =
-        "perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
-    }
-  };
-
   return (
     <article
-      ref={cardRef}
       data-theme={event.theme}
       data-cursor={event.theme}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => onHoverTheme(event.id)}
+      onMouseLeave={() => onHoverTheme(null)}
       onClick={() => onOpenDetails(event)}
-      className="event-card group relative mx-auto mt-14 flex w-full max-w-[440px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/25 bg-[#0A1E46]/90 p-6 transition-shadow duration-300 hover:border-[#9EB3D6]/55 hover:shadow-[0_14px_40px_rgba(4,15,36,0.65)] sm:p-7"
-      style={{
-        transition: "transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease",
-      }}
+      className="event-card group relative mx-auto mt-14 flex w-full max-w-[440px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/25 bg-[#0A1E46]/90 p-6 shadow-[0_10px_30px_rgba(4,15,36,0.6)] transition-colors duration-200 hover:border-[#22E5FF]/50 sm:p-7"
     >
       <div>
-        {/* Top Row: Borderless 3D Mascot popping above top edge + TEAM Badge */}
+        {/* Top Row: Fixed 3D Mascot positioned above top edge + TEAM Badge */}
         <div className="mb-2 flex items-start justify-between">
-          <div className="animate-float-slow relative -mt-20 h-28 w-32 sm:h-32 sm:w-36">
+          <div className="relative -mt-20 h-28 w-32 sm:h-32 sm:w-36">
             <Image
               src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
               alt={
@@ -76,7 +44,7 @@ export default function EventCard({
               }
               fill
               sizes="144px"
-              className="object-contain mix-blend-lighten drop-shadow-[0_12px_18px_rgba(0,0,0,0.55)]"
+              className="object-contain mix-blend-lighten drop-shadow-[0_10px_16px_rgba(0,0,0,0.5)]"
             />
           </div>
 
@@ -137,7 +105,7 @@ export default function EventCard({
         </div>
       </div>
 
-      {/* Bottom Row matching reference: Prize Pool on left, Square → button on right */}
+      {/* Bottom Row: Prize Pool on left, Square Details + Register → buttons on right */}
       <div
         className="mt-6 flex items-center justify-between gap-3 pt-2"
         onClick={(e) => e.stopPropagation()}
