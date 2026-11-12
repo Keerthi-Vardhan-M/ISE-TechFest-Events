@@ -97,7 +97,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
           {EVENT_LIST.map((ev) => (
             <EventCard
               key={ev.id}
