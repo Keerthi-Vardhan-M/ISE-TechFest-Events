@@ -23,7 +23,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
-  const magneticRef = useRef<HTMLAnchorElement>(null);
+  const magneticRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -79,7 +79,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
     }
   };
 
-  const handleMagneticMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMagneticMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticRef.current) return;
     const rect = magneticRef.current.getBoundingClientRect();
     const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.18;

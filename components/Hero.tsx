@@ -33,7 +33,7 @@ export default function Hero({ onOpenRegister }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const magneticBtnRef = useRef<HTMLAnchorElement>(null);
+  const magneticBtnRef = useRef<HTMLButtonElement>(null);
 
   const targetISO = getEarliestEventDateISO();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => computeTimeLeft(targetISO));
@@ -93,7 +93,7 @@ export default function Hero({ onOpenRegister }: HeroProps) {
     bgRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.04)`;
   };
 
-  const handleMagnetic = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMagnetic = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticBtnRef.current) return;
     const rect = magneticBtnRef.current.getBoundingClientRect();
     const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.18;
