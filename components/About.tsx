@@ -62,37 +62,37 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="cream-dot-grid relative text-[#0A1B3D]"
+      className="dark-dot-grid relative bg-[#06142E] text-[#F4F6FB]"
     >
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
           {ABOUT_SECTION.titlePrefix}{" "}
-          <span className="text-[#1D5BC6]" style={{ textShadow: "0 0 10px rgba(29,91,198,0.24)" }}>{ABOUT_SECTION.titleHighlight}</span>
+          <span className="text-[#A3F06D]">{ABOUT_SECTION.titleHighlight}</span>
         </h2>
 
         <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-          {/* Left Quest Card with hard retro shadow */}
-          <div className="about-left quest-shadow border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 sm:p-8 lg:col-span-6">
+          {/* Left Quest Card */}
+          <div className="about-left navy-card p-6 sm:p-8 lg:col-span-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-[#0A1B3D] bg-[#A3F06D] font-pixel text-lg font-bold text-[#0A1B3D]">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center border border-[#A3F06D]/40 bg-[#A3F06D]/15 font-pixel text-lg font-bold text-[#A3F06D]">
                 01
               </div>
               <div>
-                <p className="font-mono text-xs font-bold tracking-[0.18em] text-[#1D5BC6]">
+                <p className="font-mono text-xs font-bold tracking-[0.18em] text-[#22E5FF]">
                   {ABOUT_SECTION.questRole}
                 </p>
-                <p className="text-sm text-[#4B5C7D]">{ABOUT_SECTION.questSubtitle}</p>
+                <p className="text-sm text-[#9EB3D6]">{ABOUT_SECTION.questSubtitle}</p>
               </div>
             </div>
 
-            <p className="mt-5 text-base leading-relaxed text-[#0A1B3D]/90 sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-[#D8E3F5] sm:text-lg">
               {ABOUT_SECTION.questDescription}
             </p>
           </div>
 
           {/* Right Framed Tech Campus / Arena Illustration */}
           <div className="about-right lg:col-span-6">
-            <div className="overflow-hidden border-2 border-[#0A1B3D] bg-[#06142E] p-3 shadow-[6px_6px_0_#0A1B3D]">
+            <div className="navy-card overflow-hidden p-3">
               <div className="relative h-60 w-full overflow-hidden sm:h-64">
                 <Image
                   src="/images/campus-arena.jpg"
@@ -110,25 +110,22 @@ export default function About() {
           </div>
         </div>
 
-        {/* Clean 4-column metric bar with vertical dividers */}
-        <div className="mt-14 grid grid-cols-2 divide-y divide-[#D9D0B8] border-y border-[#D9D0B8] sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+        {/* 4-column metric bar */}
+        <div className="mt-14 grid grid-cols-2 divide-y divide-[#9EB3D6]/15 border-y border-[#9EB3D6]/20 bg-[#081A3D]/40 sm:grid-cols-4 sm:divide-x sm:divide-y-0">
           {ABOUT_SECTION.metrics.map((metric, idx) => (
             <div key={metric.label} className="px-4 py-6 sm:px-6">
-              <div className="font-pixel text-3xl font-bold tabular-nums text-[#0A1B3D] sm:text-4xl">
+              <div className="font-pixel text-3xl font-bold tabular-nums text-[#A3F06D] sm:text-4xl">
                 {"prefix" in metric ? metric.prefix : ""}
                 {counts[idx].toLocaleString("en-IN")}
                 {metric.suffix}
               </div>
-              <p className="mt-1.5 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
+              <p className="mt-1.5 font-mono text-xs uppercase tracking-widest text-[#9EB3D6]">
                 {metric.label}
               </p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Pixel Checkerboard Divider into Navy Events Section */}
-      <div className="pixel-checker-divider" aria-hidden="true" />
     </section>
   );
 }

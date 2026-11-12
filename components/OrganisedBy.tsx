@@ -44,22 +44,22 @@ export default function OrganisedBy() {
     <section
       id="contact"
       ref={ref}
-      className="cream-dot-grid border-t border-[#D9D0B8] px-4 py-20 text-[#0A1B3D] sm:px-6"
+      className="dark-dot-grid border-t border-[#9EB3D6]/20 bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6"
     >
       <div className="mx-auto max-w-5xl text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#9EB3D6]">
           THE MINDS BEHIND THE EVENT
         </p>
-        <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
-          ORGANISED <span className="text-[#C82333]">BY</span>
+        <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
+          ORGANISED <span className="text-[#A3F06D]">BY</span>
         </h2>
 
         <div className="mx-auto my-6 flex max-w-md items-center gap-3">
-          <div className="h-px flex-1 bg-[#D9D0B8]" />
-          <span className="text-xs text-[#C82333]" aria-hidden="true">
+          <div className="h-px flex-1 bg-white/15" />
+          <span className="text-xs text-[#A3F06D]" aria-hidden="true">
             ◆
           </span>
-          <div className="h-px flex-1 bg-[#D9D0B8]" />
+          <div className="h-px flex-1 bg-white/15" />
         </div>
 
         {/* 4 Partner / Club Logo Cards */}
@@ -67,10 +67,10 @@ export default function OrganisedBy() {
           {partners.map((p) => (
             <div
               key={p.name}
-              className="org-item flex min-h-[112px] flex-col items-center justify-center border border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1"
+              className="org-item navy-card flex min-h-[112px] flex-col items-center justify-center p-5 transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="font-heading text-sm font-bold text-[#0A1B3D]">{p.name}</span>
-              <span className="mt-1 font-mono text-[10px] uppercase tracking-widest text-[#4B5C7D]">
+              <span className="font-heading text-sm font-bold text-[#F4F6FB]">{p.name}</span>
+              <span className="mt-1 font-mono text-[10px] uppercase tracking-widest text-[#9EB3D6]">
                 {p.sub}
               </span>
             </div>
@@ -79,16 +79,16 @@ export default function OrganisedBy() {
 
         {/* Get In Touch */}
         <div className="mt-16">
-          <h3 className="font-pixel text-2xl font-bold text-[#0A1B3D] sm:text-3xl">
+          <h3 className="font-pixel text-2xl font-bold text-[#F4F6FB] sm:text-3xl">
             GET IN TOUCH
           </h3>
-          <p className="mt-1.5 text-sm text-[#4B5C7D]">For queries and assistance</p>
+          <p className="mt-1.5 text-sm text-[#9EB3D6]">For queries and assistance</p>
 
           <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
             {contacts.map((c) => (
               <div
                 key={c.name}
-                className="org-item border-2 border-[#0A1B3D] bg-[#0B1220] p-6 text-[#FAF5E8] shadow-[5px_5px_0_#C82333]"
+                className="org-item navy-card border border-[#22E5FF]/30 p-6 text-[#F4F6FB] shadow-[0_10px_30px_rgba(34,229,255,0.12)]"
               >
                 <p className="font-heading text-lg font-bold tracking-wide uppercase">{c.name}</p>
                 <p className="mt-1 font-mono text-xs text-[#F5C451]">{c.role}</p>
@@ -97,14 +97,14 @@ export default function OrganisedBy() {
                     href={`tel:${c.phone.replace(/\s+/g, "")}`}
                     className="inline-flex min-h-[36px] items-center gap-1.5 hover:text-[#A3F06D]"
                   >
-                    <Phone className="h-3.5 w-3.5" />
+                    <Phone className="h-3.5 w-3.5 text-[#A3F06D]" />
                     <span>{c.phone}</span>
                   </a>
                   <a
                     href={`mailto:${c.email}`}
-                    className="inline-flex min-h-[36px] items-center gap-1.5 border-b border-[#C82333] pb-0.5 uppercase tracking-wider hover:text-[#A3F06D]"
+                    className="inline-flex min-h-[36px] items-center gap-1.5 border-b border-[#22E5FF]/40 pb-0.5 uppercase tracking-wider hover:text-[#22E5FF]"
                   >
-                    <Mail className="h-3.5 w-3.5" />
+                    <Mail className="h-3.5 w-3.5 text-[#22E5FF]" />
                     <span>CONTACT</span>
                   </a>
                 </div>
@@ -116,4 +116,3 @@ export default function OrganisedBy() {
     </section>
   );
 }
-

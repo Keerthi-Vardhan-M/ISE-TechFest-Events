@@ -55,21 +55,21 @@ export default function EventDetailsStrip() {
     {
       icon: IndianRupee,
       label: "REGISTRATION FEE",
-      value: `${EVENTS.automate.feeDisplay} • ${EVENTS.quant.feeDisplay}`,
+      value: "100% FREE",
     },
   ];
 
   return (
     <section
       ref={ref}
-      className="cream-dot-grid border-y border-[#D9D0B8] px-4 py-14 text-[#0A1B3D] sm:px-6"
+      className="dark-dot-grid border-y border-[#9EB3D6]/20 bg-[#06142E] px-4 py-14 text-[#F4F6FB] sm:px-6"
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-center font-pixel text-2xl font-bold tracking-wide text-[#0A1B3D] sm:text-3xl">
-          EVENT DETAILS <span className="text-[#C82333]">✦</span>
+        <h2 className="text-center font-pixel text-2xl font-bold tracking-wide text-[#F4F6FB] sm:text-3xl">
+          EVENT DETAILS <span className="text-[#22E5FF]">✦</span>
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 divide-y divide-[#D9D0B8] sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-5 lg:divide-x">
+        <div className="mt-10 grid grid-cols-1 divide-y divide-[#9EB3D6]/15 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-5 lg:divide-x">
           {items.map((item) => {
             const Icon = item.icon;
             return (
@@ -77,11 +77,11 @@ export default function EventDetailsStrip() {
                 key={item.label}
                 className="detail-col flex flex-col items-center px-4 py-5 text-center"
               >
-                <Icon className="h-6 w-6 text-[#0A1B3D]" strokeWidth={1.75} />
-                <span className="mt-3 font-mono text-[11px] font-bold tracking-[0.2em] text-[#4B5C7D]">
+                <Icon className="h-6 w-6 text-[#22E5FF]" strokeWidth={1.75} />
+                <span className="mt-3 font-mono text-[11px] font-bold tracking-[0.2em] text-[#9EB3D6]">
                   {item.label}
                 </span>
-                <p className="mt-1.5 text-sm font-semibold text-[#0A1B3D]">{item.value}</p>
+                <p className="mt-1.5 text-sm font-semibold text-[#F4F6FB]">{item.value}</p>
               </div>
             );
           })}
@@ -90,4 +90,3 @@ export default function EventDetailsStrip() {
     </section>
   );
 }
-
