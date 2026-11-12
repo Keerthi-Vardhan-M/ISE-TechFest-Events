@@ -146,9 +146,9 @@ export const EVENTS: Record<EventId, EventConfig> = {
     timeDisplay: "09:30 AM – 04:30 PM IST",
     venue: "Robotics Lab, Block A",
     teamSize: {
-      min: 1,
+      min: 3,
       max: 4,
-      label: "1–4 Members",
+      label: "3–4 Members (Compulsory)",
     },
     feeInr: 0,
     feeDisplay: "FREE",
@@ -190,7 +190,7 @@ export const EVENTS: Record<EventId, EventConfig> = {
       { time: "04:15 PM", milestone: "Results & Podium Ceremony" },
     ],
     rules: [
-      "Teams must consist of 1 to 4 members with valid college ID cards.",
+      "Teams must consist of strictly 3 to 4 members with valid college ID cards (compulsory).",
       "Pre-built commercial turnkey robots are not permitted; custom controllers, scripts, and modular kits are allowed.",
       "All autonomous runs must operate without remote manual override once the start signal is given.",
       "Standard 230V AC bench power is provided at Robotics Lab, Block A; bring your own microcontrollers and adapters.",
@@ -234,9 +234,9 @@ export const EVENTS: Record<EventId, EventConfig> = {
     timeDisplay: "09:30 AM – 04:30 PM IST",
     venue: "Trading Lab, Seminar Hall",
     teamSize: {
-      min: 1,
-      max: 3,
-      label: "1–3 Members",
+      min: 3,
+      max: 4,
+      label: "3–4 Members (Compulsory)",
     },
     feeInr: 0,
     feeDisplay: "FREE",
@@ -278,7 +278,7 @@ export const EVENTS: Record<EventId, EventConfig> = {
       { time: "04:15 PM", milestone: "P&L Audit & Awards" },
     ],
     rules: [
-      "Teams must consist of 1 to 3 members with valid college ID cards.",
+      "Teams must consist of strictly 3 to 4 members with valid college ID cards (compulsory).",
       "All trading is strictly simulated using virtual capital on the provided terminal environment.",
       "Look-ahead bias, data leakage, or external signal scraping during backtest rounds results in disqualification.",
       "Teams must bring at least one laptop per team with Python 3.10+ or spreadsheet tools pre-installed.",

@@ -45,7 +45,7 @@ export default function EventDetailsStrip() {
     {
       icon: Users,
       label: "TEAM SIZE",
-      value: "1–4 Members (Track Based)",
+      value: "3–4 Members Compulsory",
     },
     {
       icon: UserCheck,

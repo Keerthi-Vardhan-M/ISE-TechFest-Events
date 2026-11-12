@@ -390,10 +390,10 @@ export default function RegisterForm({
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <p className="font-heading text-sm font-semibold text-[#F4F6FB]">
-                      Additional Members ({fields.length}/{maxExtraMembers})
+                      Additional Members ({fields.length}/{maxExtraMembers}) — 3 to 4 Total Compulsory
                     </p>
-                    <p className="text-xs text-[#9EB3D6]">
-                      {activeEvent.teamSize.label} total including leader.
+                    <p className="text-xs text-[#A3F06D]">
+                      Compulsory: 1 Leader + 2 or 3 additional members (3–4 members total).
                     </p>
                   </div>
                   {fields.length < maxExtraMembers && (

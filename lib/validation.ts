@@ -50,7 +50,10 @@ export const registrationSchema = z
       .trim()
       .min(2, "Department & year is required (e.g. CSE 3rd Year)")
       .max(80, "Department & year is too long"),
-    members: z.array(memberSchema).max(3),
+    members: z
+      .array(memberSchema)
+      .min(2, "Team size must be 3–4 members (add at least 2 additional members)")
+      .max(3, "Maximum 4 members allowed per team (leader + 3 members)"),
     txnId: z
       .string()
       .trim()
