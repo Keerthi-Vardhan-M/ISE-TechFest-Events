@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+:root {
+  /* Base Tokens */
+  --bg-base: #07080b;
+  --bg-surface: #0f1218;
+  --bg-surface-elevated: #151a24;
+  --text-primary: #edeff5;
+  --text-muted: #8a90a2;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+
+  /* Scroll-linked section tint */
+  --section-bg-tint: #07080b;
+
+  /* Default Accent (Neutral / Hero) */
+  --accent-primary: #22e5ff;
+  --accent-secondary: #19f58a;
+  --accent-glow: rgba(34, 229, 255, 0.16);
+}
+
+/* Scoped Theme: Automate Boring Task */
+[data-theme="automate"] {
+  --theme-bg: #10141a;
+  --theme-surface: rgba(16, 20, 26, 0.86);
+  --accent-primary: #22e5ff;
+  --accent-secondary: #b6ff3b;
+  --accent-warning: #ff8a1f;
+  --accent-glow: rgba(34, 229, 255, 0.22);
+  --grid-line: rgba(34, 229, 255, 0.08);
+  --theme-border: rgba(34, 229, 255, 0.24);
+}
+
+/* Scoped Theme: QuantFinance */
+[data-theme="quant"] {
+  --theme-bg: #060b16;
+  --theme-surface: rgba(6, 11, 22, 0.88);
+  --accent-primary: #19f58a;
+  --accent-secondary: #f5c451;
+  --accent-danger: #ff3b5c;
+  --accent-glow: rgba(25, 245, 138, 0.22);
+  --grid-line: rgba(25, 245, 138, 0.07);
+  --theme-border: rgba(25, 245, 138, 0.24);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-bebas-neue), var(--font-space-grotesk), sans-serif;
+}
+
+html {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  scroll-behavior: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--section-bg-tint, var(--bg-base));
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100svh;
+  transition: background-color 0.45s ease;
+}
+
+/* Subtle 4% noise overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glass Surface */
+.glass-surface {
+  background: rgba(15, 18, 24, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Blueprint grid for Automate theme */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(34, 229, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Hazard stripe edge detail for Automate theme */
+.hazard-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ff8a1f,
+    #ff8a1f 8px,
+    #10141a 8px,
+    #10141a 16px
+  );
+}
+
+/* Quant subtle grid */
+.quant-grid {
+  background-image:
+    linear-gradient(to right, rgba(25, 245, 138, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 245, 138, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Focus rings for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+/* Marquee animation for Quant ticker */
+@keyframes ticker-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 18s linear infinite;
+}
+
+/* Gear rotation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow 32s linear infinite reverse;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-spin-slow,
+  .animate-spin-slow-reverse {
+    animation: none !important;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbars on horizontal snap carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
