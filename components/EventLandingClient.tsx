@@ -17,6 +17,7 @@ import Schedule from "./Schedule";
 import Prizes from "./Prizes";
 import RulesFaq from "./RulesFaq";
 import OrganisedBy from "./OrganisedBy";
+import Memories from "./Memories";
 import RegisterForm from "./RegisterForm";
 import StickyRegisterBar from "./StickyRegisterBar";
 import Footer from "./Footer";
@@ -103,6 +104,7 @@ export default function EventLandingClient() {
         <Prizes />
         <RulesFaq />
         <OrganisedBy />
+        <Memories />
         <RegisterForm
           selectedEvent={selectedEvent}
           onEventChange={setSelectedEvent}

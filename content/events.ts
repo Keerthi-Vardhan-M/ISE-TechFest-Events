@@ -312,6 +312,74 @@ export const EVENTS: Record<EventId, EventConfig> = {
 
 export const EVENT_LIST: EventConfig[] = [EVENTS.automate, EVENTS.quant];
 
+export interface MemoryPhoto {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+  aspect: "tall" | "wide" | "square";
+}
+
+// Replace `src` with your real photos placed in `public/images/memories/...`
+export const MEMORIES_GALLERY: MemoryPhoto[] = [
+  {
+    id: "m1",
+    src: "/images/campus-arena.jpg",
+    alt: "MSRIT engineering campus arena",
+    caption: "Campus Arena & Labs",
+    aspect: "wide",
+  },
+  {
+    id: "m2",
+    src: "/images/event-automate.jpg",
+    alt: "Robotics and automation sprint",
+    caption: "Robotics Build Sprint",
+    aspect: "tall",
+  },
+  {
+    id: "m3",
+    src: "/images/event-quant.jpg",
+    alt: "Quantitative finance trading floor",
+    caption: "Quant Trading Floor",
+    aspect: "square",
+  },
+  {
+    id: "m4",
+    src: "/images/hero-emblem.jpg",
+    alt: "Symposium opening keynote",
+    caption: "Opening Ceremony",
+    aspect: "wide",
+  },
+  {
+    id: "m5",
+    src: "/images/event-automate.jpg",
+    alt: "Hardware debugging session",
+    caption: "Hardware Debugging",
+    aspect: "square",
+  },
+  {
+    id: "m6",
+    src: "/images/campus-arena.jpg",
+    alt: "Teams collaborating in seminar hall",
+    caption: "Team Collaboration",
+    aspect: "tall",
+  },
+  {
+    id: "m7",
+    src: "/images/hero-emblem.jpg",
+    alt: "Jury evaluation and mentoring",
+    caption: "Jury & Mentors",
+    aspect: "square",
+  },
+  {
+    id: "m8",
+    src: "/images/event-quant.jpg",
+    alt: "Podium winners celebration",
+    caption: "Podium Winners",
+    aspect: "wide",
+  },
+];
+
 export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "Who can participate?",
