@@ -58,19 +58,19 @@ export interface EventConfig {
 }
 
 export const ORGANISER_INFO = {
-  clubName: "IEEE & Quant Club",
+  clubName: "Quant Club",
   collegeName: "MSRIT",
   city: "Bengaluru",
   logoText: "AUTO×QUANT",
   festName: "AUTOMATE × QUANT '26",
-  heroEyebrow: "IEEE & QUANT CLUB • MSRIT PRESENTS",
+  heroEyebrow: "QUANT CLUB • MSRIT PRESENTS",
   heroHeadline: "AUTOMATE × QUANT",
   heroSubline:
     "Two flagship arenas — Robotics Automation & Quantitative Finance. December 2026 • Main Campus.",
   contactEmail: "events@campusfest.edu",
   contactPhone: "+91 98765 43210",
   upiId: "techfest.club@okaxis",
-  upiPayeeName: "IEEE & Quant Club",
+  upiPayeeName: "Quant Club",
   siteUrl: "https://automate-quant-events.vercel.app",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
@@ -521,7 +521,6 @@ export const SPONSORS_DATA = {
         { name: "Zerodha Varsity", tier: "Quant Education Partner", logo: "zerodha", url: "https://zerodha.com/varsity" },
         { name: "JetBrains", tier: "Developer Tooling", logo: "jetbrains", url: "https://jetbrains.com" },
         { name: "Wolfram", tier: "Computational Science", logo: "wolfram", url: "https://wolfram.com" },
-        { name: "IEEE Bangalore", tier: "Technical Co-Sponsor", logo: "ieee", url: "https://ieeebangalore.org" },
       ],
     },
   ] as SponsorTier[],
