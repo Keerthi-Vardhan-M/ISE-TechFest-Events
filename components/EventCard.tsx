@@ -6,7 +6,7 @@ import type { EventConfig, EventId } from "@/content/events";
 
 interface EventCardProps {
   event: EventConfig;
-  seatsLeft: number;
+  seatsLeft?: number;
   onOpenDetails: (event: EventConfig) => void;
   onSelectRegister: (eventId: EventId) => void;
   onHoverTheme: (theme: EventId | null) => void;
@@ -14,13 +14,11 @@ interface EventCardProps {
 
 export default function EventCard({
   event,
-  seatsLeft,
   onOpenDetails,
   onSelectRegister,
   onHoverTheme,
 }: EventCardProps) {
   const isAutomate = event.id === "automate";
-  const pctLeft = Math.max(0, Math.min(100, Math.round((seatsLeft / event.seatCap) * 100)));
 
   return (
     <article
@@ -29,11 +27,11 @@ export default function EventCard({
       onMouseEnter={() => onHoverTheme(event.id)}
       onMouseLeave={() => onHoverTheme(null)}
       onClick={() => onOpenDetails(event)}
-      className="event-card group relative mx-auto mt-14 flex w-full max-w-[440px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/25 bg-[#0A1E46]/90 p-6 shadow-[0_10px_30px_rgba(4,15,36,0.6)] transition-colors duration-200 hover:border-[#22E5FF]/50 sm:p-7"
+      className="event-card group relative mx-auto mt-14 flex w-full max-w-[360px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/25 bg-[#0A1E46]/95 p-6 shadow-[0_12px_32px_rgba(4,15,36,0.65)] transition-colors duration-200 hover:border-[#22E5FF]/60 sm:max-w-[370px] sm:p-7"
     >
       <div>
-        {/* Top Row: Fixed 3D Mascot positioned above top edge + TEAM Badge */}
-        <div className="mb-2 flex items-start justify-between">
+        {/* Top Row: Mascot centered/popping above edge + TEAM badge */}
+        <div className="mb-3 flex items-start justify-between">
           <div className="relative -mt-20 h-28 w-32 sm:h-32 sm:w-36">
             <Image
               src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
@@ -44,17 +42,17 @@ export default function EventCard({
               }
               fill
               sizes="144px"
-              className="object-contain mix-blend-lighten drop-shadow-[0_10px_16px_rgba(0,0,0,0.5)]"
+              className="object-contain mix-blend-lighten drop-shadow-[0_10px_16px_rgba(0,0,0,0.55)]"
             />
           </div>
 
-          <span className="border border-[#9EB3D6]/30 bg-[#06142E]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#F4F6FB]">
+          <span className="border border-[#9EB3D6]/30 bg-[#06142E]/80 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-[#F4F6FB]">
             TEAM
           </span>
         </div>
 
-        {/* Title & Category matching reference card shape */}
-        <h3 className="font-pixel text-2xl font-bold tracking-tight text-[#F4F6FB] sm:text-[26px]">
+        {/* Title & Category matching reference screenshot */}
+        <h3 className="font-pixel text-2xl font-bold tracking-tight text-[#F4F6FB]">
           {event.name}
         </h3>
         <p
@@ -64,50 +62,15 @@ export default function EventCard({
           {event.categoryLabel}
         </p>
 
-        {/* Tagline & Description */}
-        <p className="mt-4 text-sm font-medium text-[#F4F6FB]/95">{event.tagline}</p>
-        <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-[#9EB3D6] sm:text-sm">
-          {event.description}
+        {/* Crisp Tagline */}
+        <p className="mt-4 text-sm leading-relaxed text-[#D8E3F5]">
+          {event.tagline}
         </p>
-
-        {/* Compact Meta Row with Eligibility & Live Seats */}
-        <div className="mt-5 space-y-2.5 border-t border-[#9EB3D6]/15 pt-4">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-[#D8E3F5]">
-            <span>{event.dateDisplay}</span>
-            <span className="text-[#9EB3D6]/50">•</span>
-            <span>{event.venue}</span>
-            <span className="text-[#9EB3D6]/50">•</span>
-            <span className="font-semibold text-[#A3F06D]">{event.teamSize.label}</span>
-            <span className="text-[#9EB3D6]/50">•</span>
-            <span className="font-bold text-[#22E5FF]">FREE REGISTRATION</span>
-          </div>
-          <p className="font-mono text-[10px] text-[#9EB3D6]">
-            Eligibility: All UG / PG College Students
-          </p>
-
-          <div>
-            <div className="mb-1 flex items-center justify-between font-mono text-[10px] text-[#9EB3D6]">
-              <span>SEATS LEFT</span>
-              <span>
-                {seatsLeft} / {event.seatCap}
-              </span>
-            </div>
-            <div className="h-1.5 w-full overflow-hidden bg-[#040F24]">
-              <div
-                className="h-full transition-all duration-500"
-                style={{
-                  width: `${pctLeft}%`,
-                  backgroundColor: seatsLeft <= 8 ? "#FF8A1F" : "var(--accent-primary)",
-                }}
-              />
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* Bottom Row: Prize Pool on left, Square Details + Register → buttons on right */}
+      {/* Bottom Row matching reference: Prize Pool on left, Square arrow button on right */}
       <div
-        className="mt-6 flex items-center justify-between gap-3 pt-2"
+        className="mt-8 flex items-center justify-between gap-3 border-t border-[#9EB3D6]/15 pt-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
@@ -121,7 +84,7 @@ export default function EventCard({
           <button
             type="button"
             onClick={() => onOpenDetails(event)}
-            className="inline-flex min-h-[40px] items-center justify-center border border-[#9EB3D6]/25 bg-[#06142E]/70 px-3 font-mono text-[11px] uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#9EB3D6]/60 hover:text-white"
+            className="inline-flex min-h-[38px] items-center justify-center border border-[#9EB3D6]/25 bg-[#06142E]/70 px-3 font-mono text-[11px] uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#9EB3D6]/60 hover:text-white"
           >
             Details
           </button>
@@ -129,7 +92,7 @@ export default function EventCard({
             type="button"
             onClick={() => onSelectRegister(event.id)}
             aria-label={`Register for ${event.name}`}
-            className="inline-flex h-10 w-10 items-center justify-center border border-[#9EB3D6]/35 bg-[#091D42] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
+            className="inline-flex h-9 w-9 items-center justify-center border border-[#9EB3D6]/35 bg-[#091D42] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
           >
             <ArrowRight className="h-4 w-4" />
           </button>
