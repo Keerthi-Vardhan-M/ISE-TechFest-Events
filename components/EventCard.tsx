@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
 
 interface EventCardProps {
   event: EventConfig;
   seatsLeft?: number;
-  onOpenDetails: (event: EventConfig) => void;
+  onOpenDetails?: (event: EventConfig) => void;
   onSelectRegister: (eventId: EventId) => void;
   onHoverTheme: (theme: EventId | null) => void;
 }
@@ -18,7 +20,12 @@ export default function EventCard({
   onSelectRegister,
   onHoverTheme,
 }: EventCardProps) {
+  const router = useRouter();
   const isAutomate = event.id === "automate";
+
+  const handleCardClick = () => {
+    router.push(`/events/${event.id}`);
+  };
 
   return (
     <article
@@ -26,7 +33,7 @@ export default function EventCard({
       data-cursor={event.theme}
       onMouseEnter={() => onHoverTheme(event.id)}
       onMouseLeave={() => onHoverTheme(null)}
-      onClick={() => onOpenDetails(event)}
+      onClick={handleCardClick}
       className="event-card group relative mx-auto mt-12 flex w-full max-w-[320px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/25 bg-[#0A1E46]/95 p-5 shadow-[0_10px_28px_rgba(4,15,36,0.6)] transition-all duration-200 hover:border-[#22E5FF]/60 sm:max-w-[340px] sm:p-6"
     >
       <div>
@@ -68,7 +75,7 @@ export default function EventCard({
         </p>
       </div>
 
-      {/* Bottom Row: Prize Pool on left, Square arrow buttons on right */}
+      {/* Bottom Row: Prize Pool on left, Details Link & Register Arrow on right */}
       <div
         className="mt-6 flex items-center justify-between gap-2 border-t border-[#9EB3D6]/15 pt-3.5"
         onClick={(e) => e.stopPropagation()}
@@ -83,13 +90,12 @@ export default function EventCard({
         </div>
 
         <div className="flex items-center gap-1.5">
-          <button
-            type="button"
-            onClick={() => onOpenDetails(event)}
-            className="inline-flex min-h-[34px] items-center justify-center border border-[#9EB3D6]/25 bg-[#06142E]/70 px-2.5 font-mono text-[10px] uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#9EB3D6]/60 hover:text-white"
+          <Link
+            href={`/events/${event.id}`}
+            className="inline-flex min-h-[34px] items-center justify-center border border-[#9EB3D6]/25 bg-[#06142E]/70 px-2.5 font-mono text-[10px] uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#22E5FF] hover:text-white"
           >
             Details
-          </button>
+          </Link>
           <button
             type="button"
             onClick={() => onSelectRegister(event.id)}

@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { EVENT_LIST, type EventConfig, type EventId } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 import EventCard from "./EventCard";
-import EventModal from "./EventModal";
 
 interface EventsProps {
   seats: Record<EventId, number>;
@@ -14,7 +13,6 @@ interface EventsProps {
 
 export default function Events({ seats, onSelectRegister }: EventsProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [selectedModalEvent, setSelectedModalEvent] = useState<EventConfig | null>(null);
   const [hoveredTheme, setHoveredTheme] = useState<EventId | null>(null);
 
   useEffect(() => {
@@ -103,19 +101,12 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
               key={ev.id}
               event={ev}
               seatsLeft={seats[ev.id]}
-              onOpenDetails={setSelectedModalEvent}
               onSelectRegister={onSelectRegister}
               onHoverTheme={setHoveredTheme}
             />
           ))}
         </div>
       </div>
-
-      <EventModal
-        event={selectedModalEvent}
-        onClose={() => setSelectedModalEvent(null)}
-        onRegister={onSelectRegister}
-      />
 
       {/* Pixel Checkerboard Divider into Cream Prizes Section */}
       <div className="pixel-checker-divider mt-20" aria-hidden="true" />
