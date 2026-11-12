@@ -9,34 +9,24 @@ const NAV_LINKS = [
   { id: "home", label: "HOME", href: "#home" },
   { id: "about", label: "ABOUT", href: "#about" },
   { id: "events", label: "EVENTS", href: "#events" },
-  { id: "schedule", label: "ROUNDS", href: "#schedule" },
   { id: "prizes", label: "PRIZES", href: "#prizes" },
   { id: "rules-faq", label: "FAQ", href: "#rules-faq" },
   { id: "contact", label: "CONTACT", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
-  const lastY = useRef(0);
   const magneticRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 40);
+      setScrolled(y > 20);
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? Math.min(100, (y / docHeight) * 100) : 0);
-
-      if (y > 110 && y > lastY.current + 6) {
-        setHidden(true);
-      } else if (y < lastY.current - 6 || y < 110) {
-        setHidden(false);
-      }
-      lastY.current = y;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -102,12 +92,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out ${
-          hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"
-        } ${
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
           scrolled
-            ? "border-b border-white/10 bg-[#040F24]/90 backdrop-blur-xl shadow-lg"
-            : "bg-gradient-to-b from-[#040F24]/70 to-transparent"
+            ? "border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg"
+            : "bg-[#040F24]/70 backdrop-blur-md"
         }`}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
@@ -123,24 +111,7 @@ export default function Navbar() {
           aria-label="Primary Navigation"
           className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"
         >
-          <a
-            href="#home"
-            onClick={(e) => scrollToTarget(e, "home")}
-            className="group flex min-h-[44px] items-center gap-2.5 text-left"
-          >
-            <span className="flex h-9 w-9 items-center justify-center transition-transform duration-300 group-hover:scale-105">
-              <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden="true">
-                <circle cx="16" cy="16" r="11" fill="none" stroke="#22E5FF" strokeWidth="1.8" strokeDasharray="4 2" />
-                <path d="M9 20 L14 14 L18 17 L24 10" fill="none" stroke="#A3F06D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="24" cy="10" r="2.2" fill="#A3F06D" />
-              </svg>
-            </span>
-            <span className="font-pixel text-sm font-bold tracking-wider text-[#A3F06D] drop-shadow-[0_2px_0_#040F24] sm:text-base">
-              {ORGANISER_INFO.logoText}
-            </span>
-          </a>
-
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center gap-2 md:flex lg:gap-3">
             {NAV_LINKS.map((link) => {
               const isActive = activeId === link.id;
               return (
@@ -148,7 +119,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToTarget(e, link.id)}
-                    className={`relative inline-flex min-h-[44px] items-center px-3 font-mono text-xs tracking-[0.16em] transition-colors ${
+                    className={`relative inline-flex min-h-[44px] items-center px-3.5 font-mono text-sm tracking-[0.16em] transition-colors ${
                       isActive
                         ? "font-bold text-[#A3F06D]"
                         : "text-[#D8E3F5]/85 hover:text-white"
@@ -156,7 +127,7 @@ export default function Navbar() {
                   >
                     {link.label}
                     <span
-                      className={`absolute inset-x-3 bottom-2 h-[2px] origin-left bg-[#A3F06D] transition-transform duration-300 ${
+                      className={`absolute inset-x-3.5 bottom-1.5 h-[2px] origin-left bg-[#A3F06D] transition-transform duration-300 ${
                         isActive ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
@@ -173,7 +144,7 @@ export default function Navbar() {
               onClick={(e) => scrollToTarget(e, "register")}
               onMouseMove={handleMagneticMove}
               onMouseLeave={resetMagnetic}
-              className="hidden min-h-[40px] items-center justify-center rounded-lg bg-[#1648A8] px-5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] md:inline-flex"
+              className="min-h-[42px] items-center justify-center rounded-lg bg-[#1648A8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] inline-flex"
             >
               REGISTER NOW
             </a>
@@ -183,7 +154,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 bg-[#040F24]/70 text-white lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 bg-[#040F24]/70 text-white md:hidden"
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>

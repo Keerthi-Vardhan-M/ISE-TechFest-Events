@@ -13,7 +13,6 @@ import Hero from "./Hero";
 import EventDetailsStrip from "./EventDetailsStrip";
 import About from "./About";
 import Events from "./Events";
-import Schedule from "./Schedule";
 import Prizes from "./Prizes";
 import RulesFaq from "./RulesFaq";
 import OrganisedBy from "./OrganisedBy";
@@ -100,7 +99,6 @@ export default function EventLandingClient() {
         <EventDetailsStrip />
         <About />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
-        <Schedule />
         <Prizes />
         <RulesFaq />
         <OrganisedBy />
