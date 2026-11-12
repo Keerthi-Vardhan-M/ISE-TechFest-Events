@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ScrollText } from "lucide-react";
-import { EVENTS, EVENT_LIST, GENERAL_FAQS, type EventId } from "@/content/events";
+import { EVENT_LIST, GENERAL_FAQS } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
 export default function RulesFaq() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeTab, setActiveTab] = useState<"general" | EventId>("general");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [showRulebook, setShowRulebook] = useState(false);
   const reduced = prefersReducedMotion();
@@ -35,8 +34,6 @@ export default function RulesFaq() {
 
     return () => ctx.revert();
   }, []);
-
-  const faqs = activeTab === "general" ? GENERAL_FAQS : EVENTS[activeTab].faqs;
 
   return (
     <section
@@ -131,52 +128,8 @@ export default function RulesFaq() {
             </p>
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <div
-              role="tablist"
-              aria-label="FAQ Filter"
-              className="no-scrollbar flex snap-x gap-2 overflow-x-auto"
-            >
-              <button
-                role="tab"
-                type="button"
-                aria-selected={activeTab === "general"}
-                onClick={() => {
-                  setActiveTab("general");
-                  setOpenFaqIndex(0);
-                }}
-                className={`min-h-[44px] whitespace-nowrap border-2 px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
-                  activeTab === "general"
-                    ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
-                    : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
-                }`}
-              >
-                General
-              </button>
-              {EVENT_LIST.map((ev) => (
-                <button
-                  key={ev.id}
-                  role="tab"
-                  type="button"
-                  aria-selected={activeTab === ev.id}
-                  onClick={() => {
-                    setActiveTab(ev.id);
-                    setOpenFaqIndex(0);
-                  }}
-                  className={`min-h-[44px] whitespace-nowrap border-2 px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
-                    activeTab === ev.id
-                      ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
-                      : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
-                  }`}
-                >
-                  {ev.shortName}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="mt-10 border-t border-[#D9D0B8]">
-            {faqs.map((faq, idx) => {
+            {GENERAL_FAQS.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
                 <div
