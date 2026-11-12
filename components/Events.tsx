@@ -87,22 +87,14 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
-              Events
-            </h2>
-            <p className="mt-2 max-w-xl text-sm text-[#9EB3D6] sm:text-base">
-              Two flagship arenas. Inspect the interactive preview, check live seat availability, and
-              lock your team slot.
-            </p>
-          </div>
-          <a
-            href="#register"
-            className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.2em] text-[#A3F06D] hover:underline"
-          >
-            REGISTER TEAM →
-          </a>
+        <div className="mb-12">
+          <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
+            Events
+          </h2>
+          <p className="mt-2 max-w-xl text-sm text-[#9EB3D6] sm:text-base">
+            Two flagship arenas. Inspect the interactive preview, check live seat availability, and
+            lock your team slot.
+          </p>
         </div>
 
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
