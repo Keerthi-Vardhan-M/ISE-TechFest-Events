@@ -163,9 +163,7 @@ export default function RegisterForm({
   };
 
   return (
-    <section id="register" className="bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6 lg:py-24">
-      <div className="pixel-checker-divider -mx-4 -mt-20 mb-16 sm:-mx-6 lg:-mt-24" aria-hidden="true" />
-
+    <div className="w-full text-[#F4F6FB]">
       {siteKey && (
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
@@ -175,19 +173,7 @@ export default function RegisterForm({
       )}
 
       <div className="mx-auto max-w-2xl">
-        <div className="mb-8 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#A3F06D]">
-            TEAM REGISTRATION
-          </p>
-          <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
-            Lock Your Slot
-          </h2>
-          <p className="mt-3 text-sm text-[#9EB3D6] sm:text-base">
-            Quick single-step registration. Seat caps are enforced automatically.
-          </p>
-        </div>
-
-        <div className="border border-[#9EB3D6]/30 bg-[#091D42]/90 p-5 shadow-[6px_6px_0_#030B1A] sm:p-8">
+        <div className="border border-[#9EB3D6]/30 bg-[#091D42]/95 p-5 shadow-[6px_6px_0_#030B1A] sm:p-7">
           {receipt ? (
             <div role="status" aria-live="polite" className="space-y-5 py-4 text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center bg-[#A3F06D]/20 text-[#A3F06D]">
@@ -541,6 +527,6 @@ export default function RegisterForm({
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -4,18 +4,11 @@ import { ArrowUp } from "lucide-react";
 import { ORGANISER_INFO } from "@/content/events";
 import { prefersReducedMotion } from "@/lib/motion";
 
-export default function Footer() {
-  const scrollToRegister = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const el = document.getElementById("register");
-    if (!el) return;
-    const lenis = (window as Window & { __lenis?: { scrollTo: (t: HTMLElement, opts?: object) => void } }).__lenis;
-    if (lenis && !prefersReducedMotion()) {
-      lenis.scrollTo(el, { offset: -20, duration: 1.05 });
-    } else {
-      el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
-    }
-  };
+interface FooterProps {
+  onOpenRegister: () => void;
+}
+
+export default function Footer({ onOpenRegister }: FooterProps) {
 
   return (
     <footer className="bg-[#030A18] text-[#F4F6FB]">
@@ -30,13 +23,13 @@ export default function Footer() {
             READY TO TAKE THE CHALLENGE?
           </h2>
           <div className="mt-8">
-            <a
-              href="#register"
-              onClick={scrollToRegister}
+            <button
+              type="button"
+              onClick={onOpenRegister}
               className="inline-flex min-h-[48px] items-center justify-center bg-[#1648A8] px-8 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white shadow-[0_6px_22px_rgba(22,72,168,0.55)] transition-all duration-200 hover:bg-[#1D5BC6]"
             >
               REGISTER NOW
-            </a>
+            </button>
           </div>
           <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.24em] text-[#9EB3D6]">
             SAME CIRCUITS. BIGGER DREAMS. SEE YOU IN THE ARENA.

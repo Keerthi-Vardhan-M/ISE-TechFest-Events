@@ -16,12 +16,13 @@ import Prizes from "./Prizes";
 import RulesFaq from "./RulesFaq";
 import OrganisedBy from "./OrganisedBy";
 import Memories from "./Memories";
-import RegisterForm from "./RegisterForm";
+import RegisterModal from "./RegisterModal";
 import StickyRegisterBar from "./StickyRegisterBar";
 import Footer from "./Footer";
 
 export default function EventLandingClient() {
   const [selectedEvent, setSelectedEvent] = useState<EventId>("automate");
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [seats, setSeats] = useState<Record<EventId, number>>({
     automate: EVENTS.automate.seatCap,
     quant: EVENTS.quant.seatCap,
@@ -74,14 +75,11 @@ export default function EventLandingClient() {
 
   const handleSelectRegister = useCallback((eventId: EventId) => {
     setSelectedEvent(eventId);
-    const el = document.getElementById("register");
-    if (!el) return;
-    const lenis = (window as Window & { __lenis?: Lenis }).__lenis;
-    if (lenis && !prefersReducedMotion()) {
-      lenis.scrollTo(el, { offset: -20, duration: 1.05 });
-    } else {
-      el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
-    }
+    setIsRegisterOpen(true);
+  }, []);
+
+  const handleOpenGeneralRegister = useCallback(() => {
+    setIsRegisterOpen(true);
   }, []);
 
   const handleRegistrationSuccess = useCallback((eventId: EventId, seatsLeft: number) => {
@@ -92,23 +90,26 @@ export default function EventLandingClient() {
     <>
       <Preloader />
       <Cursor />
-      <Navbar />
+      <Navbar onOpenRegister={handleOpenGeneralRegister} />
       <main>
-        <Hero />
+        <Hero onOpenRegister={handleOpenGeneralRegister} />
         <About />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
         <Prizes />
         <RulesFaq />
         <OrganisedBy />
         <Memories />
-        <RegisterForm
-          selectedEvent={selectedEvent}
-          onEventChange={setSelectedEvent}
-          onRegistrationSuccess={handleRegistrationSuccess}
-        />
       </main>
-      <Footer />
-      <StickyRegisterBar />
+      <Footer onOpenRegister={handleOpenGeneralRegister} />
+      <StickyRegisterBar onOpenRegister={handleOpenGeneralRegister} />
+
+      <RegisterModal
+        isOpen={isRegisterOpen}
+        selectedEvent={selectedEvent}
+        onClose={() => setIsRegisterOpen(false)}
+        onEventChange={setSelectedEvent}
+        onRegistrationSuccess={handleRegistrationSuccess}
+      />
     </>
   );
 }

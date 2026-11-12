@@ -14,7 +14,11 @@ const NAV_LINKS = [
   { id: "contact", label: "CONTACT", href: "#contact" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenRegister: () => void;
+}
+
+export default function Navbar({ onOpenRegister }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState("home");
@@ -138,16 +142,16 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <a
+            <button
               ref={magneticRef}
-              href="#register"
-              onClick={(e) => scrollToTarget(e, "register")}
+              type="button"
+              onClick={onOpenRegister}
               onMouseMove={handleMagneticMove}
               onMouseLeave={resetMagnetic}
               className="min-h-[42px] items-center justify-center rounded-lg bg-[#1648A8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] inline-flex"
             >
               REGISTER NOW
-            </a>
+            </button>
 
             <button
               type="button"
@@ -185,13 +189,16 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <a
-            href="#register"
-            onClick={(e) => scrollToTarget(e, "register")}
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen(false);
+              onOpenRegister();
+            }}
             className="flex min-h-[52px] w-full items-center justify-center rounded-lg bg-[#1648A8] font-mono text-sm font-bold uppercase tracking-wider text-white"
           >
             REGISTER NOW →
-          </a>
+          </button>
         </div>
       )}
     </>

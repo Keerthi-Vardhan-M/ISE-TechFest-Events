@@ -25,7 +25,11 @@ function computeTimeLeft(targetISO: string): TimeLeft {
   };
 }
 
-export default function Hero() {
+interface HeroProps {
+  onOpenRegister: () => void;
+}
+
+export default function Hero({ onOpenRegister }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -204,16 +208,16 @@ export default function Hero() {
 
           {/* Primary Buttons matching screenshot */}
           <div className="hero-reveal mt-6 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-            <a
+            <button
               ref={magneticBtnRef}
-              href="#register"
-              onClick={(e) => scrollToSection(e, "register")}
+              type="button"
+              onClick={onOpenRegister}
               onMouseMove={handleMagnetic}
               onMouseLeave={resetMagnetic}
               className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#1648A8] px-7 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white shadow-[0_6px_20px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] sm:w-auto"
             >
               REGISTER NOW
-            </a>
+            </button>
             <a
               href="#events"
               onClick={(e) => scrollToSection(e, "events")}
