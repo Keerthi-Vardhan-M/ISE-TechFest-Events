@@ -27,9 +27,7 @@ function computeTimeLeft(targetISO: string): TimeLeft {
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
-  const emblemRef = useRef<HTMLDivElement>(null);
-  const leftCurtainRef = useRef<HTMLDivElement>(null);
-  const rightCurtainRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const magneticBtnRef = useRef<HTMLAnchorElement>(null);
 
@@ -55,15 +53,15 @@ export default function Hero() {
         } else {
           gsap.fromTo(
             items,
-            { y: 24, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.75, stagger: 0.08, ease: MOTION_EASE }
+            { y: 26, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: MOTION_EASE }
           );
         }
       }
 
       if (prefersReducedMotion()) return;
 
-      // Scroll-scrubbed opening animation (crest scales/lifts, side wings part open)
+      // Scroll-scrubbed parallax opening: sky zooms gently while content lifts
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
@@ -73,22 +71,23 @@ export default function Hero() {
         },
       });
 
-      if (emblemRef.current) {
-        tl.to(emblemRef.current, { scale: 1.26, y: -48, opacity: 0.2, ease: "none" }, 0);
-      }
-      if (leftCurtainRef.current) {
-        tl.to(leftCurtainRef.current, { xPercent: -16, opacity: 0, ease: "none" }, 0);
-      }
-      if (rightCurtainRef.current) {
-        tl.to(rightCurtainRef.current, { xPercent: 16, opacity: 0, ease: "none" }, 0);
+      if (bgRef.current) {
+        tl.to(bgRef.current, { scale: 1.12, y: 45, ease: "none" }, 0);
       }
       if (contentRef.current) {
-        tl.to(contentRef.current, { y: -36, opacity: 0.15, ease: "none" }, 0);
+        tl.to(contentRef.current, { y: -42, opacity: 0.15, ease: "none" }, 0);
       }
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (isTouchDevice() || prefersReducedMotion() || !bgRef.current) return;
+    const dx = (e.clientX / window.innerWidth - 0.5) * -18;
+    const dy = (e.clientY / window.innerHeight - 0.5) * -12;
+    bgRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.04)`;
+  };
 
   const handleMagnetic = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticBtnRef.current) return;
@@ -104,112 +103,148 @@ export default function Hero() {
     }
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    const lenis = (window as Window & { __lenis?: { scrollTo: (t: HTMLElement, opts?: object) => void } }).__lenis;
+    if (lenis && !prefersReducedMotion()) {
+      lenis.scrollTo(el, { offset: -16, duration: 1.05 });
+    } else {
+      el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
+    }
+  };
+
   return (
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#06142E] px-4 pb-16 pt-28 sm:px-6"
+      onMouseMove={handleMouseMove}
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#06142E] px-4 pb-16 pt-24 sm:px-8"
     >
-      {/* Left & Right Architectural Curtain Wings that part open on scroll */}
+      {/* Full-bleed Widescreen Pixel/Voxel Floating Island Sky */}
       <div
-        ref={leftCurtainRef}
+        ref={bgRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#030B1B] via-[#041029]/60 to-transparent"
-      />
-      <div
-        ref={rightCurtainRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[#030B1B] via-[#041029]/60 to-transparent"
-      />
-
-      <HeroCanvas />
-
-      <div ref={contentRef} className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
-        {/* Custom Celestial-Engineering Crest */}
-        <div
-          ref={emblemRef}
-          className="hero-reveal relative mb-4 h-36 w-36 overflow-hidden rounded-full border border-[#22E5FF]/35 shadow-[0_0_60px_rgba(34,229,255,0.28)] sm:h-44 sm:w-44"
-        >
-          <Image
-            src="/images/hero-emblem.jpg"
-            alt="Automate and Quant celestial engineering crest"
-            fill
-            priority
-            sizes="(max-width: 640px) 144px, 176px"
-            className="object-cover"
-          />
-        </div>
-
-        <p className="hero-reveal font-mono text-[11px] uppercase tracking-[0.28em] text-[#9EB3D6] sm:text-xs">
-          {ORGANISER_INFO.heroEyebrow}
-        </p>
-
-        <h1
-          className="hero-reveal mt-2 font-pixel font-bold tracking-wide text-[#A3F06D] drop-shadow-[0_4px_0_#040F24]"
-          style={{ fontSize: "clamp(2.2rem, 7.6vw, 4.9rem)", lineHeight: 1.06 }}
-        >
-          {ORGANISER_INFO.heroHeadline}
-        </h1>
-
-        <p className="hero-reveal mt-2 font-mono text-xs uppercase tracking-[0.26em] text-[#F4F6FB] sm:text-sm">
-          ✦ REGISTRATION OPEN FOR DECEMBER 2026 ✦
-        </p>
-
-        <p className="hero-reveal mt-3 max-w-xl text-sm leading-relaxed text-[#D8E3F5] sm:text-base">
-          {ORGANISER_INFO.heroSubline}
-        </p>
-
-        {/* Countdown */}
-        <div
-          aria-label="Countdown to earliest event"
-          className="hero-reveal mt-6 grid grid-cols-4 gap-2 sm:gap-3"
-        >
-          {[
-            { label: "DAYS", value: timeLeft.days },
-            { label: "HRS", value: timeLeft.hours },
-            { label: "MIN", value: timeLeft.minutes },
-            { label: "SEC", value: timeLeft.seconds },
-          ].map((unit) => (
-            <div
-              key={unit.label}
-              className="flex min-w-[66px] flex-col items-center border border-[#9EB3D6]/30 bg-[#040F24]/80 px-3 py-2.5 backdrop-blur-sm sm:min-w-[82px]"
-            >
-              <span className="font-pixel text-xl font-bold tabular-nums text-[#F4F6FB] sm:text-2xl">
-                {String(unit.value).padStart(2, "0")}
-              </span>
-              <span className="mt-1 font-mono text-[10px] tracking-widest text-[#9EB3D6]">
-                {unit.label}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="hero-reveal mt-7 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-          <a
-            ref={magneticBtnRef}
-            href="#register"
-            onMouseMove={handleMagnetic}
-            onMouseLeave={resetMagnetic}
-            className="inline-flex min-h-[48px] w-full items-center justify-center bg-[#A3F06D] px-7 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[4px_4px_0_#040F24] transition-transform duration-200 hover:brightness-105 sm:w-auto"
-          >
-            REGISTER NOW
-          </a>
-          <a
-            href="#events"
-            className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 border border-[#9EB3D6]/45 bg-[#040F24]/70 px-7 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#F4F6FB] backdrop-blur-sm transition-colors hover:bg-[#091D42] sm:w-auto"
-          >
-            <span>EXPLORE EVENTS</span>
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
+        className="pointer-events-none absolute inset-0 scale-[1.03] transition-transform duration-300 ease-out"
+      >
+        <Image
+          src="/images/hero-sky-bg.jpg"
+          alt="Floating voxel island sky backdrop"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Readability vignette on right side & bottom horizon */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040F24]/25 via-[#040F24]/35 to-[#040F24]/75" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#06142E]/70 to-transparent" />
       </div>
 
-      {/* Bottom Horizon Seam */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F5EFE0]/15 to-transparent"
-      />
+      {/* Subtle animated stars & drifting clouds/vectors */}
+      <HeroCanvas />
+
+      {/* Right-aligned content block matching reference screenshot */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl justify-center lg:justify-end">
+        <div
+          ref={contentRef}
+          className="flex max-w-xl flex-col items-center text-center lg:mr-8 lg:w-[48%]"
+        >
+          <p className="hero-reveal font-mono text-[11px] uppercase tracking-[0.26em] text-[#D8E3F5] sm:text-xs">
+            {ORGANISER_INFO.heroEyebrow}
+          </p>
+
+          <h1
+            className="hero-reveal mt-2 font-pixel font-bold tracking-wide text-[#A3F06D] drop-shadow-[0_4px_0_#040F24]"
+            style={{ fontSize: "clamp(2.2rem, 6vw, 4.4rem)", lineHeight: 1.06 }}
+          >
+            {ORGANISER_INFO.heroHeadline}
+          </h1>
+
+          <div className="hero-reveal my-3 flex w-48 items-center gap-3">
+            <div className="h-px flex-1 bg-white/30" />
+            <span className="text-xs text-white" aria-hidden="true">
+              ❖
+            </span>
+            <div className="h-px flex-1 bg-white/30" />
+          </div>
+
+          <p className="hero-reveal font-mono text-xs uppercase tracking-[0.26em] text-white sm:text-sm">
+            ANNUAL TECH SYMPOSIUM 2026
+          </p>
+
+          <p className="hero-reveal mt-2 text-sm text-[#D8E3F5] sm:text-base">
+            December 2026 • {ORGANISER_INFO.collegeName}, {ORGANISER_INFO.city}
+          </p>
+
+          {/* Compact Countdown */}
+          <div
+            aria-label="Countdown to earliest event"
+            className="hero-reveal mt-5 grid grid-cols-4 gap-2"
+          >
+            {[
+              { label: "DAYS", value: timeLeft.days },
+              { label: "HRS", value: timeLeft.hours },
+              { label: "MIN", value: timeLeft.minutes },
+              { label: "SEC", value: timeLeft.seconds },
+            ].map((unit) => (
+              <div
+                key={unit.label}
+                className="flex min-w-[62px] flex-col items-center border border-white/25 bg-[#040F24]/70 px-2.5 py-2 backdrop-blur-md sm:min-w-[74px]"
+              >
+                <span className="font-pixel text-lg font-bold tabular-nums text-white sm:text-xl">
+                  {String(unit.value).padStart(2, "0")}
+                </span>
+                <span className="mt-0.5 font-mono text-[9px] tracking-widest text-[#9EB3D6]">
+                  {unit.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Primary Buttons matching screenshot */}
+          <div className="hero-reveal mt-6 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+            <a
+              ref={magneticBtnRef}
+              href="#register"
+              onClick={(e) => scrollToSection(e, "register")}
+              onMouseMove={handleMagnetic}
+              onMouseLeave={resetMagnetic}
+              className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#1648A8] px-7 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white shadow-[0_6px_20px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] sm:w-auto"
+            >
+              REGISTER NOW
+            </a>
+            <a
+              href="#events"
+              onClick={(e) => scrollToSection(e, "events")}
+              className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 border border-white/40 bg-[#040F24]/65 px-7 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm transition-colors hover:bg-[#091D42] sm:w-auto"
+            >
+              <span>EXPLORE EVENTS</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+
+          {/* Track Quick Pills matching DAY 0 -> DAY 1 -> */}
+          <div className="hero-reveal mt-3.5 flex flex-wrap items-center justify-center gap-2">
+            <a
+              href="#events"
+              onClick={(e) => scrollToSection(e, "events")}
+              className="inline-flex min-h-[36px] items-center gap-1.5 border border-white/25 bg-[#040F24]/60 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#22E5FF]"
+            >
+              <span>AUTOMATE</span>
+              <ArrowRight className="h-3 w-3 text-[#22E5FF]" />
+            </a>
+            <a
+              href="#events"
+              onClick={(e) => scrollToSection(e, "events")}
+              className="inline-flex min-h-[36px] items-center gap-1.5 border border-white/25 bg-[#040F24]/60 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#19F58A]"
+            >
+              <span>QUANTFINANCE</span>
+              <ArrowRight className="h-3 w-3 text-[#19F58A]" />
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
