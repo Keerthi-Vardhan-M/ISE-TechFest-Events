@@ -81,13 +81,13 @@ export default function Memories() {
   });
 
   const heightClass = (aspect: MemoryPhoto["aspect"]) =>
-    aspect === "tall" ? "h-64 sm:h-80" : aspect === "wide" ? "h-48 sm:h-56" : "h-56 sm:h-68";
+    aspect === "tall" ? "h-52 sm:h-64" : aspect === "wide" ? "h-36 sm:h-44" : "h-44 sm:h-52";
 
   return (
     <section
       id="memories"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#06142E] px-4 py-24 sm:px-6 lg:py-36"
+      className="relative overflow-hidden bg-[#06142E] px-4 py-12 sm:px-6 lg:py-16"
     >
       {/* Background radial atmosphere */}
       <div
@@ -98,7 +98,7 @@ export default function Memories() {
       <div className="relative mx-auto max-w-7xl">
         {/* Floating Memories Title: Card container removed, appears cleanly letter-by-letter on scroll */}
         <div className="pointer-events-none sticky top-1/2 z-30 -translate-y-1/2 text-center">
-          <h2 className="font-heading text-6xl font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] sm:text-8xl lg:text-9xl">
+          <h2 className="font-heading text-5xl font-black tracking-tight text-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-8xl">
             {titleLetters.map((char, i) => (
               <span
                 key={i}
@@ -111,11 +111,11 @@ export default function Memories() {
         </div>
 
         {/* Dynamic Moving Gallery Columns (Upward / Downward slow vertical motion) */}
-        <div className="relative z-10 -mt-20 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+        <div className="relative z-10 -mt-6 grid grid-cols-2 gap-3.5 sm:gap-4 md:grid-cols-4">
           {columns.map((col, colIdx) => (
             <div
               key={colIdx}
-              className={`flex flex-col gap-5 sm:gap-6 ${
+              className={`flex flex-col gap-3.5 sm:gap-4 ${
                 colIdx % 2 === 0 ? "memories-col-up" : "memories-col-down"
               }`}
             >

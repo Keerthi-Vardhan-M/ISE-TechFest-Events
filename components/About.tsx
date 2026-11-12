@@ -109,18 +109,20 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Campus Illustration: wide framed arena visual matching reference */}
-          <div className="about-right flex flex-col justify-between border-2 border-[#0A1B3D] bg-[#06142E] p-3.5 shadow-[6px_6px_0_#0A1B3D] lg:col-span-6">
-            <div className="relative h-72 w-full overflow-hidden sm:h-80 md:h-96 lg:h-full lg:min-h-[340px]">
-              <Image
-                src="/images/campus-arena.jpg"
-                alt="Isometric engineering and robotics campus arena at dusk"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 hover:scale-103"
-              />
+          {/* Right Campus Illustration: tightly framed to the image with zero wasted blue space */}
+          <div className="about-right flex flex-col justify-center lg:col-span-6">
+            <div className="overflow-hidden border-2 border-[#0A1B3D] shadow-[6px_6px_0_#0A1B3D]">
+              <div className="relative h-64 w-full sm:h-72 md:h-80">
+                <Image
+                  src="/images/campus-arena.jpg"
+                  alt="Isometric engineering and robotics campus arena at dusk"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-            <div className="mt-3 flex items-center justify-between px-1 font-mono text-xs uppercase tracking-widest text-[#9EB3D6]">
+            <div className="mt-2.5 flex items-center justify-between px-1 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
               <span>OUR NEW CAMPUS</span>
               <span>{ORGANISER_INFO.city.toUpperCase()}</span>
             </div>
