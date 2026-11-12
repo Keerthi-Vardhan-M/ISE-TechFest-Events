@@ -81,9 +81,17 @@ export default function EventModal({ event, onClose, onRegister }: EventModalPro
             <h2 id="event-modal-title" className="mt-1 font-heading text-2xl font-bold sm:text-3xl">
               {event.name}
             </h2>
-            <p className="mt-1 text-sm text-[#8A90A2]">
-              {event.dateDisplay} • {event.timeDisplay} • {event.venue}
-            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-[#8A90A2]">
+              <span>Date: <strong className="text-[#EDEFF5]">{event.dateDisplay}</strong> ({event.timeDisplay})</span>
+              <span>•</span>
+              <span>Venue: <strong className="text-[#EDEFF5]">{event.venue}</strong></span>
+              <span>•</span>
+              <span>Team: <strong className="text-[#A3F06D]">{event.teamSize.label}</strong></span>
+              <span>•</span>
+              <span>Eligibility: <strong className="text-[#EDEFF5]">All UG / PG Students</strong></span>
+              <span>•</span>
+              <span>Fee: <strong className="text-[#22E5FF]">FREE</strong></span>
+            </div>
           </div>
 
           <button

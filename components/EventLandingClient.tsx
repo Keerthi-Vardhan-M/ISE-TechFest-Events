@@ -10,7 +10,6 @@ import Preloader from "./Preloader";
 import Cursor from "./Cursor";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
-import EventDetailsStrip from "./EventDetailsStrip";
 import About from "./About";
 import Events from "./Events";
 import Prizes from "./Prizes";
@@ -96,7 +95,6 @@ export default function EventLandingClient() {
       <Navbar />
       <main>
         <Hero />
-        <EventDetailsStrip />
         <About />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
         <Prizes />

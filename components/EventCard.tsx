@@ -102,15 +102,20 @@ export default function EventCard({
           {event.description}
         </p>
 
-        {/* Compact 1-line Meta & Live Seats */}
+        {/* Compact Meta Row with Eligibility & Live Seats */}
         <div className="mt-5 space-y-2.5 border-t border-[#9EB3D6]/15 pt-4">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-[#D8E3F5]">
             <span>{event.dateDisplay}</span>
             <span className="text-[#9EB3D6]/50">•</span>
-            <span>{event.teamSize.label}</span>
+            <span>{event.venue}</span>
             <span className="text-[#9EB3D6]/50">•</span>
-            <span className="font-bold text-[#A3F06D]">{event.feeDisplay}</span>
+            <span className="font-semibold text-[#A3F06D]">{event.teamSize.label}</span>
+            <span className="text-[#9EB3D6]/50">•</span>
+            <span className="font-bold text-[#22E5FF]">FREE REGISTRATION</span>
           </div>
+          <p className="font-mono text-[10px] text-[#9EB3D6]">
+            Eligibility: All UG / PG College Students
+          </p>
 
           <div>
             <div className="mb-1 flex items-center justify-between font-mono text-[10px] text-[#9EB3D6]">
