@@ -38,13 +38,26 @@ export default function OrganisedBy() {
     { name: "Quant & Finance Society", sub: "Track Partner" },
   ];
 
-  const contacts = [EVENTS.automate.contact, EVENTS.quant.contact];
+  const contacts = [
+    {
+      name: "Aarav Sharma",
+      role: "Robotics Track Lead",
+      phone: "+91 98765 43211",
+      email: "automate@campusfest.edu",
+    },
+    {
+      name: "Diya Nair",
+      role: "Quant Track Lead",
+      phone: "+91 98765 43212",
+      email: "quant@campusfest.edu",
+    },
+  ];
 
   return (
     <section
       id="contact"
       ref={ref}
-      className="dark-dot-grid border-t border-[#9EB3D6]/20 bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6"
+      className="dark-dot-grid border-t border-[#9EB3D6]/20 bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6 lg:py-24"
     >
       <div className="mx-auto max-w-5xl text-center">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#9EB3D6]">
@@ -62,15 +75,15 @@ export default function OrganisedBy() {
           <div className="h-px flex-1 bg-white/15" />
         </div>
 
-        {/* 4 Partner / Club Logo Cards */}
+        {/* 4 Partner / Institution Cards */}
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {partners.map((p) => (
             <div
               key={p.name}
-              className="org-item navy-card flex min-h-[112px] flex-col items-center justify-center p-5 transition-transform duration-300 hover:-translate-y-1"
+              className="org-item navy-card flex min-h-[116px] flex-col items-center justify-center p-5 transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="font-heading text-sm font-bold text-[#F4F6FB]">{p.name}</span>
-              <span className="mt-1 font-mono text-[10px] uppercase tracking-widest text-[#9EB3D6]">
+              <span className="font-heading text-base font-bold text-[#F4F6FB]">{p.name}</span>
+              <span className="mt-1.5 font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
                 {p.sub}
               </span>
             </div>
@@ -78,33 +91,39 @@ export default function OrganisedBy() {
         </div>
 
         {/* Get In Touch */}
-        <div className="mt-16">
+        <div className="mt-16 sm:mt-20">
           <h3 className="font-pixel text-2xl font-bold text-[#F4F6FB] sm:text-3xl">
             GET IN TOUCH
           </h3>
-          <p className="mt-1.5 text-sm text-[#9EB3D6]">For queries and assistance</p>
+          <p className="mt-1.5 font-mono text-xs uppercase tracking-wider text-[#9EB3D6]">
+            For queries and assistance
+          </p>
 
-          <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
             {contacts.map((c) => (
               <div
                 key={c.name}
-                className="org-item navy-card border border-[#22E5FF]/30 p-6 text-[#F4F6FB] shadow-[0_10px_30px_rgba(34,229,255,0.12)]"
+                className="org-item navy-card border border-[#22E5FF]/25 p-6 text-center shadow-[0_8px_24px_rgba(4,15,36,0.6)]"
               >
-                <p className="font-heading text-lg font-bold tracking-wide uppercase">{c.name}</p>
-                <p className="mt-1 font-mono text-xs text-[#F5C451]">{c.role}</p>
-                <div className="mt-4 flex flex-col items-center gap-1.5 font-mono text-xs text-[#D8E3F5]">
+                <p className="font-heading text-lg font-bold tracking-wide uppercase text-[#F4F6FB]">
+                  {c.name}
+                </p>
+                <p className="mt-1 font-mono text-xs font-semibold text-[#F5C451]">{c.role}</p>
+
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
                   <a
                     href={`tel:${c.phone.replace(/\s+/g, "")}`}
-                    className="inline-flex min-h-[36px] items-center gap-1.5 hover:text-[#A3F06D]"
+                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded border border-[#9EB3D6]/20 bg-[#06142E]/70 px-3.5 py-1.5 text-[#D8E3F5] transition-colors hover:border-[#A3F06D] hover:text-[#A3F06D]"
                   >
                     <Phone className="h-3.5 w-3.5 text-[#A3F06D]" />
                     <span>{c.phone}</span>
                   </a>
+
                   <a
                     href={`mailto:${c.email}`}
-                    className="inline-flex min-h-[36px] items-center gap-1.5 border-b border-[#22E5FF]/40 pb-0.5 uppercase tracking-wider hover:text-[#22E5FF]"
+                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded bg-[#1648A8] px-3.5 py-1.5 font-bold uppercase tracking-wider text-white shadow transition-colors hover:bg-[#1D5BC6]"
                   >
-                    <Mail className="h-3.5 w-3.5 text-[#22E5FF]" />
+                    <Mail className="h-3.5 w-3.5" />
                     <span>CONTACT</span>
                   </a>
                 </div>

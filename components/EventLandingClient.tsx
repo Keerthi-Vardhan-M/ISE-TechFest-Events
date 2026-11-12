@@ -97,8 +97,8 @@ export default function EventLandingClient() {
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
         <Prizes />
         <RulesFaq />
-        <OrganisedBy />
         <Memories />
+        <OrganisedBy />
       </main>
       <Footer onOpenRegister={handleOpenGeneralRegister} />
       <StickyRegisterBar onOpenRegister={handleOpenGeneralRegister} />
