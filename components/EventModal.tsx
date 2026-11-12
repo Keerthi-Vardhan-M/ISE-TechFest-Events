@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import { X, Clock, Trophy, ShieldAlert, Phone } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
+import RobotArm from "./animations/RobotArm";
+import BullChart from "./animations/BullChart";
 
 interface EventModalProps {
   event: EventConfig | null;
@@ -96,6 +98,9 @@ export default function EventModal({ event, onClose, onRegister }: EventModalPro
         </div>
 
         <div className="mt-6 space-y-6 text-sm">
+          <div>
+            {event.id === "automate" ? <RobotArm active /> : <BullChart active />}
+          </div>
           <p className="leading-relaxed text-[#EDEFF5]/90">{event.description}</p>
 
           {/* Rounds */}

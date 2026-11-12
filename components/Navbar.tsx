@@ -128,9 +128,9 @@ export default function Navbar() {
             onClick={(e) => scrollToTarget(e, "home")}
             className="group flex min-h-[44px] items-center gap-2.5 text-left"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#22E5FF]/40 bg-[#06142E]/85 shadow-sm transition-transform duration-300 group-hover:scale-105">
-              <svg viewBox="0 0 32 32" className="h-5 w-5" aria-hidden="true">
-                <circle cx="16" cy="16" r="11" fill="none" stroke="#22E5FF" strokeWidth="1.6" strokeDasharray="4 2" />
+            <span className="flex h-9 w-9 items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden="true">
+                <circle cx="16" cy="16" r="11" fill="none" stroke="#22E5FF" strokeWidth="1.8" strokeDasharray="4 2" />
                 <path d="M9 20 L14 14 L18 17 L24 10" fill="none" stroke="#A3F06D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                 <circle cx="24" cy="10" r="2.2" fill="#A3F06D" />
               </svg>
