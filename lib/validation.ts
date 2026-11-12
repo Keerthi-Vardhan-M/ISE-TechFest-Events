@@ -55,8 +55,7 @@ export const registrationSchema = z
       .string()
       .trim()
       .max(50, "Transaction ID is too long")
-      .optional()
-      .default(""),
+      .optional(),
     consent: z.literal(true, {
       errorMap: () => ({ message: "You must accept the event rules & consent" }),
     }),
