@@ -12,8 +12,21 @@ export default function Footer({ onOpenRegister }: FooterProps) {
 
   return (
     <footer className="bg-[#030A18] text-[#F4F6FB]">
+      {/* Pixelated Dithering Checkerboard Divider matching uploaded reference screenshot */}
+      <div
+        aria-hidden="true"
+        className="h-12 w-full sm:h-16"
+        style={{
+          backgroundImage: "url('/images/footer-pixel-divider.png')",
+          backgroundRepeat: "repeat-x",
+          backgroundSize: "auto 100%",
+          backgroundPosition: "top center",
+          imageRendering: "pixelated",
+        }}
+      />
+
       {/* Ready To Take The Challenge CTA Banner matching uploaded screenshot */}
-      <div className="relative overflow-hidden border-y border-white/10 bg-gradient-to-b from-[#0B1528] via-[#050D1C] to-[#030A18] px-4 py-20 text-center sm:px-6">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#0B1528] via-[#050D1C] to-[#030A18] px-4 py-20 text-center sm:px-6">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(22,72,168,0.32),transparent_65%)]"
