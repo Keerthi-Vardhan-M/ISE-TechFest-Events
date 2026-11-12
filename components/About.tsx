@@ -129,16 +129,23 @@ export default function About() {
           </div>
         </div>
 
-        {/* Expansive 4-column metric bar spanning wide container */}
-        <div className="mt-16 grid grid-cols-2 divide-y divide-[#D9D0B8] border-y border-[#D9D0B8] sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+        {/* Clean 4-column metric bar with responsive non-overlapping borders */}
+        <div className="mt-14 grid grid-cols-2 border-y border-[#D9D0B8] sm:grid-cols-4">
           {ABOUT_SECTION.metrics.map((metric, idx) => (
-            <div key={metric.label} className="px-5 py-8 sm:px-8 sm:py-10">
-              <div className="font-pixel text-4xl font-bold tabular-nums text-[#0A1B3D] sm:text-5xl lg:text-6xl">
+            <div
+              key={metric.label}
+              className={`flex flex-col justify-center px-4 py-6 sm:px-6 sm:py-8 sm:border-r last:sm:border-r-0 sm:border-[#D9D0B8] ${
+                idx % 2 === 1 ? "border-l border-[#D9D0B8] sm:border-l-0" : ""
+              } ${
+                idx >= 2 ? "border-t border-[#D9D0B8] sm:border-t-0" : ""
+              }`}
+            >
+              <div className="font-pixel text-2xl font-bold tabular-nums text-[#0A1B3D] sm:text-3xl lg:text-4xl whitespace-nowrap">
                 {"prefix" in metric ? metric.prefix : ""}
                 {counts[idx].toLocaleString("en-IN")}
                 {metric.suffix}
               </div>
-              <p className="mt-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#4B5C7D] sm:text-sm">
+              <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4B5C7D] sm:text-xs">
                 {metric.label}
               </p>
             </div>
