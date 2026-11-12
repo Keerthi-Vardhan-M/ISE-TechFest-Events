@@ -13,6 +13,7 @@ import Hero from "./Hero";
 import About from "./About";
 import Events from "./Events";
 import Prizes from "./Prizes";
+import Sponsors from "./Sponsors";
 import RulesFaq from "./RulesFaq";
 import OrganisedBy from "./OrganisedBy";
 import Memories from "./Memories";
@@ -97,6 +98,7 @@ export default function EventLandingClient() {
         <Memories />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
         <Prizes />
+        <Sponsors />
         <RulesFaq />
         <OrganisedBy />
       </main>

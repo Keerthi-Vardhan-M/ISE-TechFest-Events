@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { id: "memories", label: "MEMORIES", href: "#memories" },
   { id: "events", label: "EVENTS", href: "#events" },
   { id: "prizes", label: "PRIZES", href: "#prizes" },
+  { id: "sponsors", label: "SPONSORS", href: "#sponsors" },
   { id: "rules-faq", label: "FAQ", href: "#rules-faq" },
   { id: "contact", label: "CONTACT", href: "#contact" },
 ];

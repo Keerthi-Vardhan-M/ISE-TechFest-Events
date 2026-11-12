@@ -121,6 +121,13 @@ export default function Footer({ onOpenRegister }: FooterProps) {
               </button>
               <button
                 type="button"
+                onClick={() => scrollTo("sponsors")}
+                className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
+              >
+                SPONSORS
+              </button>
+              <button
+                type="button"
                 onClick={() => scrollTo("rules-faq")}
                 className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
               >
