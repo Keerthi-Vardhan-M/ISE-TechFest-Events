@@ -59,11 +59,11 @@ export interface EventConfig {
 
 export const ORGANISER_INFO = {
   clubName: "IEEE & Quant Club",
-  collegeName: "School of Engineering & Technology",
+  collegeName: "MSRIT",
   city: "Bengaluru",
   logoText: "AUTO×QUANT",
   festName: "AUTOMATE × QUANT '26",
-  heroEyebrow: "IEEE & QUANT CLUB PRESENTS",
+  heroEyebrow: "IEEE & QUANT CLUB • MSRIT PRESENTS",
   heroHeadline: "AUTOMATE × QUANT",
   heroSubline:
     "Two flagship arenas — Robotics Automation & Quantitative Finance. December 2026 • Main Campus.",
@@ -150,8 +150,8 @@ export const EVENTS: Record<EventId, EventConfig> = {
       max: 4,
       label: "1–4 Members",
     },
-    feeInr: 299,
-    feeDisplay: "₹299 / team",
+    feeInr: 0,
+    feeDisplay: "FREE",
     seatCap: 60,
     prizePool: "₹25,000",
     podium: [
@@ -238,8 +238,8 @@ export const EVENTS: Record<EventId, EventConfig> = {
       max: 3,
       label: "1–3 Members",
     },
-    feeInr: 249,
-    feeDisplay: "₹249 / team",
+    feeInr: 0,
+    feeDisplay: "FREE",
     seatCap: 60,
     prizePool: "₹25,000",
     podium: [
@@ -326,12 +326,12 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "When and where is the fest?",
     answer:
-      "12–13 December 2026 at School of Engineering & Technology, Bengaluru (Block A Robotics Lab & Seminar Hall).",
+      "12–13 December 2026 at MSRIT, Bengaluru (Block A Robotics Lab & Seminar Hall).",
   },
   {
     question: "Is there a registration fee?",
     answer:
-      "Yes — ₹299 per team for Automate Boring Task and ₹249 per team for QuantFinance.",
+      "No! Registration is completely FREE for both Automate Boring Task and QuantFinance.",
   },
   {
     question: "Are there prizes?",

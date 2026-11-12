@@ -54,9 +54,9 @@ export const registrationSchema = z
     txnId: z
       .string()
       .trim()
-      .min(6, "Enter a valid UPI transaction / UTR ID")
       .max(50, "Transaction ID is too long")
-      .regex(/^[a-zA-Z0-9_-]+$/, "Transaction ID contains invalid characters"),
+      .optional()
+      .default(""),
     consent: z.literal(true, {
       errorMap: () => ({ message: "You must accept the event rules & consent" }),
     }),

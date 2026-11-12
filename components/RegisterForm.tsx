@@ -457,35 +457,37 @@ export default function RegisterForm({
                 )}
               </div>
 
-              {/* UPI Payment */}
-              <div className="border border-[#9EB3D6]/25 bg-[#040F24]/60 p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                  <span className="font-mono uppercase text-[#9EB3D6]">UPI PAYMENT</span>
-                  <span className="font-mono font-bold text-[#A3F06D]">
-                    {activeEvent.feeDisplay}
-                  </span>
-                </div>
-                <p className="mt-1.5 font-mono text-xs text-[#F4F6FB]">
-                  Pay to: <strong>{ORGANISER_INFO.upiId}</strong> ({ORGANISER_INFO.upiPayeeName})
-                </p>
+              {/* UPI Payment (shown only if event has a fee) */}
+              {activeEvent.feeInr > 0 && (
+                <div className="border border-[#9EB3D6]/25 bg-[#040F24]/60 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span className="font-mono uppercase text-[#9EB3D6]">UPI PAYMENT</span>
+                    <span className="font-mono font-bold text-[#A3F06D]">
+                      {activeEvent.feeDisplay}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-mono text-xs text-[#F4F6FB]">
+                    Pay to: <strong>{ORGANISER_INFO.upiId}</strong> ({ORGANISER_INFO.upiPayeeName})
+                  </p>
 
-                <label
-                  htmlFor="reg-txn"
-                  className="mb-1.5 mt-3 block font-mono text-xs uppercase tracking-wider text-[#9EB3D6]"
-                >
-                  UPI Transaction / UTR ID
-                </label>
-                <input
-                  id="reg-txn"
-                  type="text"
-                  placeholder="e.g. 431290812345"
-                  {...register("txnId")}
-                  className="min-h-[48px] w-full border border-[#9EB3D6]/30 bg-[#040F24] px-4 text-base text-[#F4F6FB] placeholder:text-[#9EB3D6]/40"
-                />
-                {errors.txnId && (
-                  <p className="mt-1 text-xs text-[#FF3B5C]">{errors.txnId.message}</p>
-                )}
-              </div>
+                  <label
+                    htmlFor="reg-txn"
+                    className="mb-1.5 mt-3 block font-mono text-xs uppercase tracking-wider text-[#9EB3D6]"
+                  >
+                    UPI Transaction / UTR ID
+                  </label>
+                  <input
+                    id="reg-txn"
+                    type="text"
+                    placeholder="e.g. 431290812345"
+                    {...register("txnId")}
+                    className="min-h-[48px] w-full border border-[#9EB3D6]/30 bg-[#040F24] px-4 text-base text-[#F4F6FB] placeholder:text-[#9EB3D6]/40"
+                  />
+                  {errors.txnId && (
+                    <p className="mt-1 text-xs text-[#FF3B5C]">{errors.txnId.message}</p>
+                  )}
+                </div>
+              )}
 
               {/* Consent */}
               <label className="flex min-h-[44px] cursor-pointer items-start gap-3 text-xs leading-relaxed text-[#9EB3D6]">
