@@ -10,11 +10,13 @@ import Preloader from "./Preloader";
 import Cursor from "./Cursor";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import EventDetailsStrip from "./EventDetailsStrip";
 import About from "./About";
 import Events from "./Events";
 import Schedule from "./Schedule";
 import Prizes from "./Prizes";
 import RulesFaq from "./RulesFaq";
+import OrganisedBy from "./OrganisedBy";
 import RegisterForm from "./RegisterForm";
 import StickyRegisterBar from "./StickyRegisterBar";
 import Footer from "./Footer";
@@ -74,7 +76,11 @@ export default function EventLandingClient() {
   const handleSelectRegister = useCallback((eventId: EventId) => {
     setSelectedEvent(eventId);
     const el = document.getElementById("register");
-    if (el) {
+    if (!el) return;
+    const lenis = (window as Window & { __lenis?: Lenis }).__lenis;
+    if (lenis && !prefersReducedMotion()) {
+      lenis.scrollTo(el, { offset: -20, duration: 1.05 });
+    } else {
       el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
     }
   }, []);
@@ -90,11 +96,13 @@ export default function EventLandingClient() {
       <Navbar />
       <main>
         <Hero />
+        <EventDetailsStrip />
         <About />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
         <Schedule />
         <Prizes />
         <RulesFaq />
+        <OrganisedBy />
         <RegisterForm
           selectedEvent={selectedEvent}
           onEventChange={setSelectedEvent}

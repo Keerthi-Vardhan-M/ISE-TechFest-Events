@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Award, Medal, Trophy } from "lucide-react";
-import { EVENT_LIST } from "@/content/events";
+import { Castle, Crown } from "lucide-react";
+import { EVENTS, EVENT_LIST, type EventId } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
 export default function Prizes() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeEvent, setActiveEvent] = useState<EventId>("automate");
 
   useEffect(() => {
     ensureGsapRegistered();
@@ -15,13 +16,13 @@ export default function Prizes() {
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".prize-card",
+        ".podium-card",
         { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.14,
+          duration: 0.75,
+          stagger: 0.12,
           ease: MOTION_EASE,
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }
@@ -31,94 +32,89 @@ export default function Prizes() {
     return () => ctx.revert();
   }, []);
 
+  const current = EVENTS[activeEvent];
+  const first = current.podium[0];
+  const second = current.podium[1];
+  const third = current.podium[2];
+
   return (
     <section
       id="prizes"
       ref={sectionRef}
-      className="bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6 lg:py-24"
+      className="cream-dot-grid px-4 py-20 text-[#0A1B3D] sm:px-6 lg:py-24"
     >
-      <div className="pixel-checker-divider -mx-4 -mt-20 mb-16 sm:-mx-6 lg:-mt-24" aria-hidden="true" />
+      <div className="mx-auto max-w-5xl text-center">
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+          PRIZES <span className="text-[#C82333]">&amp;</span> REWARDS
+        </h2>
+        <p className="mt-2 font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
+          IDEAS DESERVE RECOGNITION
+        </p>
 
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-10 max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#A3F06D]">
-            REWARDS & PODIUM
-          </p>
-          <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
-            Compete for the podium.
-          </h2>
-          <p className="mt-3 text-base text-[#9EB3D6]">
-            Dedicated prize pools for both tracks, plus finalist certificates and trophy honors.
-          </p>
-        </div>
-
-        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0">
+        {/* Event Track Switcher */}
+        <div className="mt-7 inline-flex border-2 border-[#0A1B3D] bg-[#FAF5E8] p-1">
           {EVENT_LIST.map((ev) => (
-            <div
+            <button
               key={ev.id}
-              data-theme={ev.theme}
-              className="prize-card w-[88vw] shrink-0 snap-center border border-[#9EB3D6]/30 bg-[#091D42]/90 p-6 shadow-[6px_6px_0_#030B1A] transition-transform duration-300 hover:-translate-y-1 sm:p-8 md:w-auto"
+              type="button"
+              onClick={() => setActiveEvent(ev.id)}
+              className={`min-h-[44px] px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+                activeEvent === ev.id
+                  ? "bg-[#0A1B3D] text-[#A3F06D]"
+                  : "text-[#4B5C7D] hover:text-[#0A1B3D]"
+              }`}
             >
-              <div className="flex items-center justify-between gap-4 border-b border-[#9EB3D6]/20 pb-5">
-                <div>
-                  <span
-                    className="font-mono text-xs font-semibold uppercase tracking-widest"
-                    style={{ color: "var(--accent-primary)" }}
-                  >
-                    {ev.categoryLabel}
-                  </span>
-                  <h3 className="mt-1 font-heading text-2xl font-bold text-[#F4F6FB]">
-                    {ev.name}
-                  </h3>
-                </div>
-                <div className="text-right">
-                  <span className="font-mono text-[11px] uppercase text-[#9EB3D6]">Total Pool</span>
-                  <p className="font-pixel text-2xl font-bold text-[#A3F06D] sm:text-3xl">
-                    {ev.prizePool}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-3">
-                {ev.podium.map((p, idx) => {
-                  const Icon = idx === 0 ? Trophy : idx === 1 ? Medal : Award;
-                  return (
-                    <div
-                      key={p.rank}
-                      className="flex items-center justify-between gap-3 border border-[#9EB3D6]/20 bg-[#040F24]/70 px-4 py-3.5"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="flex h-10 w-10 items-center justify-center border border-[#9EB3D6]/25 bg-[#091D42]"
-                          style={{ color: idx === 0 ? "var(--accent-primary)" : "#F4F6FB" }}
-                        >
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <span className="font-mono text-[11px] uppercase text-[#9EB3D6]">
-                            {p.rank} Place
-                          </span>
-                          <p className="font-heading text-base font-semibold text-[#F4F6FB]">
-                            {p.title}
-                          </p>
-                        </div>
-                      </div>
-                      <span
-                        className="font-mono text-sm font-semibold"
-                        style={{ color: "var(--accent-primary)" }}
-                      >
-                        {p.reward}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+              {ev.name}
+            </button>
           ))}
         </div>
-      </div>
 
-      <div className="pixel-checker-divider -mx-4 -mb-20 mt-20 sm:-mx-6 lg:-mb-24" aria-hidden="true" />
+        {/* Grand Reward Total */}
+        <div className="mt-8">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#4B5C7D]">
+            THE GRAND REWARD — {current.shortName.toUpperCase()}
+          </p>
+          <p className="mt-1 font-pixel text-4xl font-bold text-[#C82333] sm:text-5xl">
+            {current.prizePool}
+          </p>
+          <p className="mt-1 font-mono text-xs uppercase tracking-[0.22em] text-[#0A1B3D]">
+            TOTAL PRIZE POOL
+          </p>
+        </div>
+
+        {/* 3-Card Podium matching reference screenshot (2nd | elevated 1st | 3rd) */}
+        <div className="mt-10 grid grid-cols-1 items-end gap-5 sm:grid-cols-3">
+          {/* 2nd Prize */}
+          <div className="podium-card order-2 border border-[#D9D0B8] bg-[#FAF5E8] p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1.5 sm:order-1">
+            <Castle className="mx-auto h-9 w-9 text-[#0A1B3D]" />
+            <p className="mt-4 font-heading text-2xl font-bold text-[#0A1B3D]">2ND</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#4B5C7D]">PRIZE</p>
+            <div className="my-4 h-px bg-[#D9D0B8]" />
+            <p className="font-heading text-base font-bold text-[#0A1B3D]">{second.title}</p>
+            <p className="mt-1 font-mono text-sm font-semibold text-[#C82333]">{second.reward}</p>
+          </div>
+
+          {/* 1st Prize (Elevated Center) */}
+          <div className="podium-card order-1 border-2 border-[#C82333] bg-[#FAF5E8] p-9 shadow-[0_12px_30px_rgba(200,35,51,0.12)] transition-transform duration-300 hover:-translate-y-2 sm:order-2 sm:py-12">
+            <Crown className="mx-auto h-11 w-11 text-[#C82333]" />
+            <p className="mt-4 font-heading text-3xl font-bold text-[#C82333]">1ST</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#4B5C7D]">PRIZE</p>
+            <div className="my-4 h-px bg-[#D9D0B8]" />
+            <p className="font-heading text-lg font-bold text-[#0A1B3D]">{first.title}</p>
+            <p className="mt-1 font-mono text-base font-bold text-[#C82333]">{first.reward}</p>
+          </div>
+
+          {/* 3rd Prize */}
+          <div className="podium-card order-3 border border-[#D9D0B8] bg-[#FAF5E8] p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1.5">
+            <Castle className="mx-auto h-9 w-9 text-[#0A1B3D]" />
+            <p className="mt-4 font-heading text-2xl font-bold text-[#0A1B3D]">3RD</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#4B5C7D]">PRIZE</p>
+            <div className="my-4 h-px bg-[#D9D0B8]" />
+            <p className="font-heading text-base font-bold text-[#0A1B3D]">{third.title}</p>
+            <p className="mt-1 font-mono text-sm font-semibold text-[#C82333]">{third.reward}</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
