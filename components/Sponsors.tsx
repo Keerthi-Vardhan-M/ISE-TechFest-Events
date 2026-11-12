@@ -62,14 +62,14 @@ export default function Sponsors() {
     <section
       id="sponsors"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6 lg:py-28"
+      className="cream-dot-grid relative px-3 py-16 text-[#F4F6FB] sm:px-6 sm:py-20 lg:py-24"
     >
-      {/* Curved Header Container styled for our cyber-pixel theme */}
-      <div className="relative mx-auto max-w-6xl rounded-t-[36px] border-t-4 border-[#22E5FF] bg-[#071738] p-8 shadow-[0_20px_60px_rgba(3,10,24,0.7)] sm:rounded-t-[48px] sm:p-12 md:p-16">
-        {/* Subtle dot grid overlay */}
+      {/* Curved Dark Container directly replicating the reference design */}
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] border-t-4 border-b-4 border-[#FF6B35] bg-[#0A1329] p-7 shadow-[0_24px_70px_rgba(6,20,46,0.35)] sm:rounded-[52px] sm:p-12 md:p-16">
+        {/* Subtle grid pattern inside dark container */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-15"
+          className="pointer-events-none absolute inset-0 opacity-12"
           style={{
             backgroundImage: "radial-gradient(#22E5FF 1px, transparent 1px)",
             backgroundSize: "24px 24px",
@@ -77,12 +77,13 @@ export default function Sponsors() {
         />
 
         <div className="relative z-10 text-center">
-          {/* Top Bar Accent */}
-          <div className="mx-auto mb-3 h-1 w-14 rounded-full bg-[#22E5FF]" />
+          {/* Top Bar Accent Pill from reference */}
+          <div className="mx-auto mb-4 h-1.5 w-16 rounded-full bg-[#FF6B35]" />
 
+          {/* Bold Retro Sponsors Heading */}
           <h2
-            className="font-pixel text-4xl font-bold tracking-wider text-white sm:text-6xl md:text-7xl"
-            style={{ textShadow: "0 0 16px rgba(34,229,255,0.35)" }}
+            className="font-pixel text-4xl font-bold tracking-wider text-[#FAF5E8] sm:text-6xl md:text-7xl"
+            style={{ textShadow: "0 4px 20px rgba(255,107,53,0.35)" }}
           >
             {SPONSORS_DATA.title}
           </h2>
@@ -90,16 +91,16 @@ export default function Sponsors() {
             {SPONSORS_DATA.subtitle}
           </p>
 
-          {/* Title Sponsor Divider Line */}
-          <div className="mx-auto my-12 flex max-w-2xl items-center gap-4">
-            <div className="h-px flex-1 bg-white/20" />
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-[#22E5FF]">
+          {/* Title Sponsor Divider Line matching reference */}
+          <div className="mx-auto my-10 flex max-w-2xl items-center gap-4 sm:my-14">
+            <div className="h-px flex-1 bg-[#FF6B35]/40" />
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-[#FF6B35]">
               {titleTier.name}
             </span>
-            <div className="h-px flex-1 bg-white/20" />
+            <div className="h-px flex-1 bg-[#FF6B35]/40" />
           </div>
 
-          {/* Giant Title Sponsor Card matching reference screenshot */}
+          {/* Giant GitHub Title Sponsor Card matching reference screenshot */}
           <div className="sponsor-card mx-auto max-w-3xl">
             {titleTier.sponsors.map((sp) => (
               <a
@@ -107,11 +108,11 @@ export default function Sponsors() {
                 href={sp.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-2xl border-2 border-[#1648A8] bg-[#0A1E46]/95 p-10 shadow-[0_12px_40px_rgba(4,15,36,0.85)] transition-all duration-300 hover:border-[#22E5FF] hover:shadow-[0_16px_50px_rgba(34,229,255,0.25)] sm:p-14"
+                className="group relative block overflow-hidden rounded-2xl border-2 border-[#1648A8] bg-[#06142E]/90 p-8 shadow-[0_12px_40px_rgba(4,15,36,0.85)] transition-all duration-300 hover:border-[#FF6B35] hover:shadow-[0_16px_50px_rgba(255,107,53,0.25)] sm:p-14"
               >
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(circle,_rgba(34,229,255,0.18)_0%,_transparent_70%)]"
+                  className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[radial-gradient(circle,_rgba(255,107,53,0.12)_0%,_transparent_70%)]"
                 />
 
                 <GitHubLogo />
@@ -122,7 +123,7 @@ export default function Sponsors() {
                   </p>
                 )}
 
-                <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-[#22E5FF] group-hover:underline">
+                <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-[#FF6B35] group-hover:underline">
                   <span>Visit GitHub</span>
                   <ExternalLink className="h-3.5 w-3.5" />
                 </div>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { MEMORIES_GALLERY, type MemoryPhoto } from "@/content/events";
-import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
+import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
 
 export default function Memories() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -21,31 +21,30 @@ export default function Memories() {
       }
 
       // Hide initially so it never appears beforehand
-      gsap.set(".memory-char", { opacity: 0, y: 50, scale: 0.85, filter: "blur(12px)" });
+      gsap.set(".memory-char", { opacity: 0, y: 40, scale: 0.85, filter: "blur(10px)" });
 
-      // Letter-by-letter reveal tied to scrolling through the images
-      // Only starts when the user scrolls deeply into the photo section
+      // Letter-by-letter reveal tied to scrolling deep inside the images
       gsap.to(".memory-char", {
         opacity: 1,
         y: 0,
         scale: 1,
         filter: "blur(0px)",
-        stagger: 0.14,
+        stagger: 0.12,
         ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 30%", // triggers only once photos are actively in view
-          end: "top 5%",
+          start: "top 25%", // reveals only once images are deeply in view
+          end: "center 45%",
           scrub: 1.2,
         },
       });
 
-      // Alternating columns moving vertically upward & downward slowly with scroll scrub
+      // Gentle alternating parallax drift that stays strictly contained
       gsap.fromTo(
         ".memories-col-up",
-        { y: 70 },
+        { y: 25 },
         {
-          y: -140,
+          y: -30,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -58,9 +57,9 @@ export default function Memories() {
 
       gsap.fromTo(
         ".memories-col-down",
-        { y: -70 },
+        { y: -25 },
         {
-          y: 140,
+          y: 30,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -75,25 +74,35 @@ export default function Memories() {
     return () => ctx.revert();
   }, []);
 
-  // Split photos into 4 balanced columns for the staggered masonry layout
+  // Split photos into 4 balanced columns for the masonry layout
   const columns: MemoryPhoto[][] = [[], [], [], []];
   MEMORIES_GALLERY.forEach((photo, idx) => {
     columns[idx % 4].push(photo);
   });
 
   const heightClass = (aspect: MemoryPhoto["aspect"]) =>
-    aspect === "tall" ? "h-52 sm:h-64" : aspect === "wide" ? "h-36 sm:h-44" : "h-44 sm:h-52";
+    aspect === "tall" ? "h-48 sm:h-56" : aspect === "wide" ? "h-36 sm:h-42" : "h-40 sm:h-48";
 
   return (
     <section
       id="memories"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#06142E] px-4 py-12 sm:px-6 lg:py-16"
+      className="relative overflow-hidden bg-[#06142E] px-4 pt-16 pb-32 sm:px-6 sm:pt-20 sm:pb-40 lg:pb-44"
     >
       {/* Background radial atmosphere */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,229,255,0.06)_0%,_transparent_70%)]"
+      />
+
+      {/* Top and Bottom soft fade masks to ensure zero clipping and zero spill into next section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 right-0 z-20 h-24 bg-gradient-to-b from-[#06142E] to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-36 bg-gradient-to-t from-[#06142E] via-[#06142E]/85 to-transparent"
       />
 
       <div className="relative mx-auto max-w-7xl">
@@ -112,8 +121,8 @@ export default function Memories() {
           </h2>
         </div>
 
-        {/* Dynamic Moving Gallery Columns (Upward / Downward slow vertical motion) */}
-        <div className="relative z-10 -mt-6 grid grid-cols-2 gap-3.5 sm:gap-4 md:grid-cols-4">
+        {/* Dynamic Moving Gallery Columns */}
+        <div className="relative z-10 grid grid-cols-2 gap-3.5 sm:gap-4 md:grid-cols-4">
           {columns.map((col, colIdx) => (
             <div
               key={colIdx}

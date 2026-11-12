@@ -70,7 +70,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
     <section
       id="events"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#06142E] px-4 py-20 transition-colors duration-500 sm:px-6 lg:py-28"
+      className="relative scroll-mt-20 overflow-hidden bg-[#06142E] px-4 pt-28 pb-24 transition-colors duration-500 sm:px-6 sm:pt-36 sm:pb-32 lg:pt-40 lg:pb-36"
       style={{
         backgroundColor:
           hoveredTheme === "automate"
@@ -83,7 +83,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
       {/* Night Sky Moon & Clouds matching reference Events screenshot */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-[18%] top-10 h-32 w-32 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:h-40 sm:w-40"
+        className="pointer-events-none absolute right-[12%] top-20 h-28 w-28 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:right-[18%] sm:top-24 sm:h-36 sm:w-36"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
