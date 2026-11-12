@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ABOUT_SECTION } from "@/content/events";
+import { ABOUT_SECTION, ORGANISER_INFO } from "@/content/events";
 import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
 
 export default function About() {
@@ -30,7 +30,7 @@ export default function About() {
           const obj = { val: 0 };
           gsap.to(obj, {
             val: metric.value,
-            duration: 1.1,
+            duration: 1.0,
             ease: "power3.out",
             onUpdate: () => {
               setCounts((prev) => {
@@ -48,53 +48,88 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-[#19F58A]">
-            {ABOUT_SECTION.eyebrow}
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold tracking-tight text-[#EDEFF5] sm:text-5xl">
-            {ABOUT_SECTION.title}
-          </h2>
-          <p className="mt-3 text-base text-[#8A90A2]">{ABOUT_SECTION.subtitle}</p>
+    <section
+      id="about"
+      ref={sectionRef}
+      className="cream-dot-grid relative text-[#0A1B3D]"
+    >
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+          {ABOUT_SECTION.titlePrefix}{" "}
+          <span className="text-[#1D5BC6]">{ABOUT_SECTION.titleHighlight}</span>
+        </h2>
+
+        <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+          {/* Left Quest Card with hard retro shadow */}
+          <div className="quest-shadow border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 sm:p-8 lg:col-span-6">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-[#0A1B3D] bg-[#A3F06D] font-pixel text-lg font-bold text-[#0A1B3D]">
+                01
+              </div>
+              <div>
+                <p className="font-mono text-xs font-bold tracking-[0.18em] text-[#1D5BC6]">
+                  {ABOUT_SECTION.questRole}
+                </p>
+                <p className="text-sm text-[#4B5C7D]">{ABOUT_SECTION.questSubtitle}</p>
+              </div>
+            </div>
+
+            <p className="mt-5 text-base leading-relaxed text-[#0A1B3D]/90 sm:text-lg">
+              {ABOUT_SECTION.questDescription}
+            </p>
+          </div>
+
+          {/* Right Framed Tech Campus / Arena Illustration */}
+          <div className="lg:col-span-6">
+            <div className="overflow-hidden border-2 border-[#0A1B3D] bg-[#06142E] p-3 shadow-[6px_6px_0_#0A1B3D]">
+              <div className="relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-br from-[#06142E] via-[#0C2A5A] to-[#123D7A] p-6">
+                {/* Architectural pixel-grid campus graphic */}
+                <svg
+                  viewBox="0 0 360 160"
+                  className="h-full w-full"
+                  role="img"
+                  aria-label="Campus Arena Blueprint Graphic"
+                >
+                  <rect x="20" y="75" width="70" height="60" fill="#FAF5E8" stroke="#0A1B3D" strokeWidth="2" />
+                  <rect x="32" y="90" width="14" height="14" fill="#22E5FF" />
+                  <rect x="58" y="90" width="14" height="14" fill="#22E5FF" />
+                  <rect x="115" y="45" width="125" height="90" fill="#F5EFE0" stroke="#0A1B3D" strokeWidth="2" />
+                  <rect x="135" y="65" width="22" height="22" fill="#A3F06D" />
+                  <rect x="168" y="65" width="22" height="22" fill="#A3F06D" />
+                  <rect x="201" y="65" width="22" height="22" fill="#A3F06D" />
+                  <rect x="260" y="65" width="80" height="70" fill="#FAF5E8" stroke="#0A1B3D" strokeWidth="2" />
+                  <rect x="275" y="82" width="18" height="18" fill="#19F58A" />
+                  <rect x="304" y="82" width="18" height="18" fill="#19F58A" />
+                  <rect x="0" y="135" width="360" height="25" fill="#19F58A" fillOpacity="0.22" />
+                </svg>
+              </div>
+              <div className="mt-2 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-[#9EB3D6]">
+                <span>{ORGANISER_INFO.collegeName}</span>
+                <span>{ORGANISER_INFO.city}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Animated Counters */}
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        {/* Clean 4-column metric bar with vertical dividers */}
+        <div className="mt-14 grid grid-cols-2 divide-y divide-[#D9D0B8] border-y border-[#D9D0B8] sm:grid-cols-4 sm:divide-x sm:divide-y-0">
           {ABOUT_SECTION.metrics.map((metric, idx) => (
-            <div
-              key={metric.label}
-              className="glass-surface rounded-2xl p-5 sm:p-6"
-            >
-              <div className="font-heading text-3xl font-bold tabular-nums text-[#EDEFF5] sm:text-4xl">
+            <div key={metric.label} className="px-4 py-6 sm:px-6">
+              <div className="font-pixel text-3xl font-bold tabular-nums text-[#0A1B3D] sm:text-4xl">
                 {"prefix" in metric ? metric.prefix : ""}
                 {counts[idx].toLocaleString("en-IN")}
                 {metric.suffix}
               </div>
-              <p className="mt-1.5 text-sm font-medium text-[#EDEFF5]">{metric.label}</p>
-              <p className="mt-0.5 font-mono text-[11px] text-[#8A90A2]">{metric.note}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* 4 Value Points */}
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {ABOUT_SECTION.highlights.map((item, idx) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-white/8 bg-[#0F1218]/60 p-6 transition-colors hover:border-white/15"
-            >
-              <span className="font-mono text-xs text-[#22E5FF]">0{idx + 1}</span>
-              <h3 className="mt-2 font-heading text-xl font-semibold text-[#EDEFF5]">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#8A90A2]">{item.description}</p>
+              <p className="mt-1.5 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
+                {metric.label}
+              </p>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Pixel Checkerboard Divider into Navy Events Section */}
+      <div className="pixel-checker-divider" aria-hidden="true" />
     </section>
   );
 }
-

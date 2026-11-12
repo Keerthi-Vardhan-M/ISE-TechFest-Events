@@ -36,3 +36,4 @@ export function checkRateLimit(ip: string): {
   existing.count += 1;
   return { allowed: true, retryAfterSeconds: 0 };
 }
+

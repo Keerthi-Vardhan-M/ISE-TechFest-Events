@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight, Calendar, MapPin, Users, Wallet } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Users, Wallet } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
 import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 import RobotArm from "./animations/RobotArm";
@@ -33,7 +33,7 @@ export default function EventCard({
     const rect = cardRef.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-    const rotateY = px * 8; // max 8 deg
+    const rotateY = px * 8;
     const rotateX = -py * 8;
     cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(
       2
@@ -68,86 +68,76 @@ export default function EventCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleTapCard}
-      className={`event-card relative flex flex-col justify-between overflow-hidden rounded-[22px] border p-5 transition-shadow duration-300 sm:p-7 ${
+      className={`event-card relative flex flex-col justify-between overflow-hidden border p-5 transition-shadow duration-300 sm:p-7 ${
         isAutomate
-          ? "blueprint-grid border-[#22E5FF]/25 bg-[#10141A]/90 hover:shadow-[0_0_45px_rgba(34,229,255,0.18)]"
-          : "quant-grid border-[#19F58A]/25 bg-[#060B16]/92 hover:shadow-[0_0_45px_rgba(25,245,138,0.18)]"
+          ? "blueprint-grid border-[#22E5FF]/35 bg-[#091D42]/90 hover:shadow-[0_0_45px_rgba(34,229,255,0.22)]"
+          : "quant-grid border-[#19F58A]/35 bg-[#081A3B]/92 hover:shadow-[0_0_45px_rgba(25,245,138,0.22)]"
       }`}
       style={{
         transition: "transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease",
       }}
     >
-      {/* Hazard stripe edge detail for Automate */}
       {isAutomate && (
-        <div
-          aria-hidden="true"
-          className="hazard-stripe absolute inset-y-0 left-0 w-2 opacity-80"
-        />
+        <div aria-hidden="true" className="hazard-stripe absolute inset-y-0 left-0 w-2 opacity-85" />
       )}
 
       <div className={isAutomate ? "pl-2.5" : ""}>
-        {/* Category & Seat Badge */}
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        {/* Top Row: Category & TEAM Badge matching reference */}
+        <div className="mb-3 flex items-center justify-between gap-2">
           <span
-            className="inline-flex items-center rounded-full border px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider"
-            style={{
-              borderColor: "var(--theme-border)",
-              color: "var(--accent-primary)",
-              backgroundColor: "rgba(255,255,255,0.03)",
-            }}
+            className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em]"
+            style={{ color: "var(--accent-primary)" }}
           >
             {event.categoryLabel}
           </span>
-          <span className="font-mono text-xs text-[#8A90A2]">
-            Prize Pool: <strong className="text-[#EDEFF5]">{event.prizePool}</strong>
+          <span className="border border-[#9EB3D6]/30 bg-[#040F24]/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-[#F4F6FB]">
+            TEAM
           </span>
         </div>
 
         {/* Title & Tagline */}
         <h3
-          className={`text-3xl font-bold tracking-tight text-[#EDEFF5] sm:text-4xl ${
-            isAutomate ? "font-heading" : "font-display tracking-wide text-4xl sm:text-5xl"
+          className={`text-2xl font-bold tracking-tight text-[#F4F6FB] sm:text-3xl ${
+            isAutomate ? "font-heading" : "font-display tracking-wide text-3xl sm:text-4xl"
           }`}
         >
           {event.name}
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-[#8A90A2] sm:text-base">
-          {event.tagline}
-        </p>
+        <p className="mt-2 text-sm leading-relaxed text-[#9EB3D6]">{event.tagline}</p>
 
-        {/* Theme Illustration Area */}
+        {/* Interactive Animation Area */}
         <div className="mt-5">
           {isAutomate ? <RobotArm active={active} /> : <BullChart active={active} />}
         </div>
 
-        {/* Key Metadata Grid */}
-        <dl className="mt-5 grid grid-cols-2 gap-3 rounded-2xl border border-white/8 bg-white/[0.02] p-3.5 text-xs sm:text-sm">
+        {/* Metadata */}
+        <dl className="mt-5 grid grid-cols-2 gap-3 border border-[#9EB3D6]/20 bg-[#040F24]/60 p-3.5 text-xs sm:text-sm">
           <div className="flex items-start gap-2">
             <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-primary)]" />
             <div>
-              <dt className="font-mono text-[10px] uppercase text-[#8A90A2]">Date</dt>
-              <dd className="font-medium text-[#EDEFF5]">{event.dateDisplay}</dd>
+              <dt className="font-mono text-[10px] uppercase text-[#9EB3D6]">Date</dt>
+              <dd className="font-medium text-[#F4F6FB]">{event.dateDisplay}</dd>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-primary)]" />
             <div>
-              <dt className="font-mono text-[10px] uppercase text-[#8A90A2]">Venue</dt>
-              <dd className="font-medium text-[#EDEFF5] line-clamp-1">{event.venue}</dd>
+              <dt className="font-mono text-[10px] uppercase text-[#9EB3D6]">Venue</dt>
+              <dd className="font-medium text-[#F4F6FB] line-clamp-1">{event.venue}</dd>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <Users className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-primary)]" />
             <div>
-              <dt className="font-mono text-[10px] uppercase text-[#8A90A2]">Team Size</dt>
-              <dd className="font-medium text-[#EDEFF5]">{event.teamSize.label}</dd>
+              <dt className="font-mono text-[10px] uppercase text-[#9EB3D6]">Team</dt>
+              <dd className="font-medium text-[#F4F6FB]">{event.teamSize.label}</dd>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <Wallet className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-primary)]" />
             <div>
-              <dt className="font-mono text-[10px] uppercase text-[#8A90A2]">Entry Fee</dt>
-              <dd className="font-medium text-[#EDEFF5]">{event.feeDisplay}</dd>
+              <dt className="font-mono text-[10px] uppercase text-[#9EB3D6]">Fee</dt>
+              <dd className="font-medium text-[#F4F6FB]">{event.feeDisplay}</dd>
             </div>
           </div>
         </dl>
@@ -155,47 +145,56 @@ export default function EventCard({
         {/* Live Seats Bar */}
         <div className="mt-4">
           <div className="mb-1.5 flex items-center justify-between font-mono text-xs">
-            <span className="text-[#8A90A2]">LIVE SEATS REMAINING</span>
-            <span className="font-semibold text-[#EDEFF5]">
+            <span className="text-[#9EB3D6]">SEATS LEFT</span>
+            <span className="font-semibold text-[#F4F6FB]">
               {seatsLeft} / {event.seatCap}
             </span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+          <div className="h-2 w-full overflow-hidden bg-[#040F24]">
             <div
-              className="h-full rounded-full transition-all duration-500"
+              className="h-full transition-all duration-500"
               style={{
                 width: `${pctLeft}%`,
-                backgroundColor:
-                  seatsLeft <= 8 ? "#FF8A1F" : "var(--accent-primary)",
+                backgroundColor: seatsLeft <= 8 ? "#FF8A1F" : "var(--accent-primary)",
               }}
             />
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Bottom Row matching reference: Prize Pool on left, Details + Register square arrow on right */}
       <div
-        className={`mt-6 flex flex-col gap-3 sm:flex-row ${isAutomate ? "pl-2.5" : ""}`}
+        className={`mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#9EB3D6]/20 pt-4 ${
+          isAutomate ? "pl-2.5" : ""
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          type="button"
-          onClick={() => onOpenDetails(event)}
-          className="inline-flex min-h-[46px] flex-1 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] px-4 font-heading text-sm font-semibold text-[#EDEFF5] transition-colors hover:bg-white/[0.1]"
-        >
-          Details & Rules
-        </button>
-        <button
-          type="button"
-          onClick={() => onSelectRegister(event.id)}
-          className="inline-flex min-h-[46px] flex-1 items-center justify-center gap-1.5 rounded-xl px-4 font-heading text-sm font-bold text-[#07080B] transition-transform hover:brightness-110 active:scale-[0.98]"
-          style={{ backgroundColor: "var(--accent-primary)" }}
-        >
-          <span>Register</span>
-          <ArrowUpRight className="h-4 w-4" />
-        </button>
+        <div>
+          <span className="font-pixel text-lg font-bold text-[#A3F06D]">{event.prizePool}</span>
+          <span className="ml-2 font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
+            IN PRIZES
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => onOpenDetails(event)}
+            className="inline-flex min-h-[44px] items-center justify-center border border-[#9EB3D6]/35 bg-[#040F24]/70 px-4 font-mono text-xs font-semibold uppercase tracking-wider text-[#F4F6FB] transition-colors hover:bg-[#040F24]"
+          >
+            Details
+          </button>
+          <button
+            type="button"
+            onClick={() => onSelectRegister(event.id)}
+            aria-label={`Register for ${event.name}`}
+            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#040F24] transition-transform hover:brightness-105 active:scale-[0.98]"
+          >
+            <span>Register</span>
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </article>
   );
 }
-

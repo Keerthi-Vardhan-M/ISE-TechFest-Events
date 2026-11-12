@@ -75,3 +75,4 @@ export const registrationSchema = z
   });
 
 export type RegistrationInput = z.infer<typeof registrationSchema>;
+

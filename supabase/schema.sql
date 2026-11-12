@@ -137,3 +137,4 @@ as $$
   where status <> 'cancelled'
   group by event;
 $$;
+

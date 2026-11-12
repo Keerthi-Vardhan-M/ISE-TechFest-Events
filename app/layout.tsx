@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Bebas_Neue, Inter, JetBrains_Mono, Silkscreen, Space_Grotesk } from "next/font/google";
 import { EVENT_LIST, ORGANISER_INFO } from "@/content/events";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const silkscreen = Silkscreen({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-silkscreen",
+  display: "swap",
+});
+
 const bebasNeue = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
@@ -28,10 +35,8 @@ const bebasNeue = Bebas_Neue({
   display: "swap",
 });
 
-const cleanUrl = ORGANISER_INFO.siteUrl.replace(/[\[\]]/g, "");
-
 export const metadata: Metadata = {
-  metadataBase: new URL(cleanUrl.startsWith("http") ? cleanUrl : "https://events.example.edu"),
+  metadataBase: new URL(ORGANISER_INFO.siteUrl),
   title: `${ORGANISER_INFO.festName} | Automate Boring Task & QuantFinance`,
   description: ORGANISER_INFO.heroSubline,
   openGraph: {
@@ -48,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07080B",
+  themeColor: "#06142E",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -71,7 +76,7 @@ export default function RootLayout({
       location: {
         "@type": "Place",
         name: ev.venue,
-        address: ORGANISER_INFO.collegeName,
+        address: `${ORGANISER_INFO.collegeName}, ${ORGANISER_INFO.city}`,
       },
       organizer: {
         "@type": "Organization",
@@ -90,10 +95,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${bebasNeue.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${silkscreen.variable} ${bebasNeue.variable}`}
     >
-      <body className="antialiased selection:bg-[#22E5FF]/25 selection:text-white">
-        <div className="noise-overlay" aria-hidden="true" />
+      <body className="antialiased selection:bg-[#A3F06D]/30 selection:text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -103,4 +107,3 @@ export default function RootLayout({
     </html>
   );
 }
-

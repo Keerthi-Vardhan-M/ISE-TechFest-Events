@@ -70,31 +70,42 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
     <section
       id="events"
       ref={sectionRef}
-      className="relative overflow-hidden px-4 py-20 transition-colors duration-500 sm:px-6 lg:py-28"
+      className="relative overflow-hidden bg-[#06142E] px-4 py-20 transition-colors duration-500 sm:px-6 lg:py-28"
       style={{
         backgroundColor:
           hoveredTheme === "automate"
-            ? "rgba(16, 28, 36, 0.35)"
+            ? "#081D3D"
             : hoveredTheme === "quant"
-              ? "rgba(6, 22, 18, 0.35)"
-              : "transparent",
+              ? "#051B36"
+              : "#06142E",
       }}
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-[#22E5FF]">
-            THE TWO TRACKS
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold tracking-tight text-[#EDEFF5] sm:text-5xl">
-            Choose your arena.
-          </h2>
-          <p className="mt-3 text-base text-[#8A90A2]">
-            Two distinct engineering & quantitative showdowns. Inspect the rounds, watch live seat
-            availability, and lock your team slot before the cap hits.
-          </p>
+      {/* Night Sky Moon & Clouds matching reference Events screenshot */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[18%] top-10 h-32 w-32 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:h-40 sm:w-40"
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
+              Events
+            </h2>
+            <p className="mt-2 max-w-xl text-sm text-[#9EB3D6] sm:text-base">
+              Two flagship arenas. Inspect the interactive preview, check live seat availability, and
+              lock your team slot.
+            </p>
+          </div>
+          <a
+            href="#register"
+            className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.2em] text-[#A3F06D] hover:underline"
+          >
+            REGISTER TEAM →
+          </a>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {EVENT_LIST.map((ev) => (
             <EventCard
               key={ev.id}
@@ -116,4 +127,3 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
     </section>
   );
 }
-

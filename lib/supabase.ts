@@ -21,3 +21,4 @@ export function getSupabaseAdmin(): SupabaseClient | null {
 
   return cachedAdminClient;
 }
+

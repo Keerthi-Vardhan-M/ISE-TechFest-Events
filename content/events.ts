@@ -58,61 +58,78 @@ export interface EventConfig {
 }
 
 export const ORGANISER_INFO = {
-  clubName: "[CLUB / BRANCH NAME]",
-  collegeName: "[COLLEGE]",
-  logoText: "[LOGO]",
-  festName: "[SYMPOSIUM / FEST NAME 2026]",
-  heroEyebrow: "[CLUB / BRANCH NAME] • [COLLEGE]",
-  heroHeadline: "Build the Autonomous. Trade the Algorithmic.",
+  clubName: "IEEE & Quant Club",
+  collegeName: "School of Engineering & Technology",
+  city: "Bengaluru",
+  logoText: "TECHFEST",
+  festName: "YUGAANTAR TECH '26",
+  heroEyebrow: "IEEE & QUANT CLUB PRESENTS",
+  heroHeadline: "YUGAANTAR",
   heroSubline:
-    "Two flagship engineering & quantitative challenges hosted by [CLUB / BRANCH NAME] at [COLLEGE]. Precision robotics meets high-frequency market strategy.",
-  contactEmail: "[events@college-placeholder.edu]",
-  contactPhone: "[+91 90000 00000]",
-  upiId: "[club-upi-placeholder@bank]",
-  upiPayeeName: "[CLUB / BRANCH NAME]",
-  siteUrl: "https://[events-domain-placeholder.vercel.app]",
+    "Two flagship arenas — Robotics Automation & Quantitative Finance. December 2026 • Main Campus.",
+  contactEmail: "events@campusfest.edu",
+  contactPhone: "+91 98765 43210",
+  upiId: "techfest.club@okaxis",
+  upiPayeeName: "IEEE & Quant Club",
+  siteUrl: "https://yugaantar-tech.vercel.app",
   socials: [
-    { label: "Instagram", href: "https://instagram.com/[club-handle-placeholder]" },
-    { label: "LinkedIn", href: "https://linkedin.com/company/[club-handle-placeholder]" },
-    { label: "GitHub", href: "https://github.com/[club-handle-placeholder]" },
-    { label: "X / Twitter", href: "https://x.com/[club-handle-placeholder]" },
+    { label: "Instagram", href: "https://instagram.com" },
+    { label: "LinkedIn", href: "https://linkedin.com" },
+    { label: "GitHub", href: "https://github.com" },
+    { label: "Email", href: "mailto:events@campusfest.edu" },
   ],
 } as const;
 
 export const ABOUT_SECTION = {
-  eyebrow: "WHY PARTICIPATE",
-  title: "Engineered for builders and quants.",
-  subtitle:
-    "A single-day arena designed to test real-world automation, systems thinking, and quantitative edge under live constraints.",
+  eyebrow: "CAMPUS QUEST",
+  titlePrefix: "TechFest is back in",
+  titleHighlight: "December 2026.",
+  questRole: "EVENT GUIDE",
+  questSubtitle: "Your first quest starts here.",
+  questDescription:
+    "From autonomous robotic pipelines and hardware sprints to live simulated trading floors and alpha backtesting — two high-stakes arenas built for builders and quants.",
   metrics: [
-    { label: "Team Slots", value: 120, suffix: "+", note: "[PLACEHOLDER_METRIC]" },
-    { label: "Competitive Rounds", value: 6, suffix: "", note: "Across both tracks" },
-    { label: "Prize Pool", value: 50000, prefix: "₹", suffix: "+", note: "[PLACEHOLDER_PRIZE_TOTAL]" },
-    { label: "Expected Builders", value: 400, suffix: "+", note: "[PLACEHOLDER_PARTICIPANTS]" },
-  ],
-  highlights: [
-    {
-      title: "Production-Grade Challenges",
-      description:
-        "No toy trivia. Automate Boring Task tests physical/software pipeline reliability; QuantFinance tests risk-adjusted alpha.",
-    },
-    {
-      title: "Live Telemetry & Leaderboards",
-      description:
-        "Real-time round scoring, strict rule enforcement, and transparent evaluation rubrics published before kickoff.",
-    },
-    {
-      title: "Industry & Faculty Jury",
-      description:
-        "Direct feedback from [MENTOR / JURY PLACEHOLDER] across robotics, embedded systems, and algorithmic trading.",
-    },
-    {
-      title: "Certificates & Fast Payouts",
-      description:
-        "Verified participation credentials for all finalists and same-week prize disbursement for podium finishers.",
-    },
+    { label: "DAYS", value: 2, suffix: "" },
+    { label: "FLAGSHIP EVENTS", value: 2, suffix: "" },
+    { label: "PRIZE POOL", value: 50000, prefix: "₹", suffix: "+" },
+    { label: "EXPECTED BUILDERS", value: 400, suffix: "+" },
   ],
 } as const;
+
+export const SCHEDULE_STAGES = [
+  {
+    day: "ROUND 01",
+    title: "Blueprint & Aptitude",
+    description:
+      "Architecture pitch for Automate Boring Task and quantitative probability & market microstructure sprint for QuantFinance.",
+    sessions: "MORNING SESSION",
+    iconType: "forge" as const,
+  },
+  {
+    day: "ROUND 02",
+    title: "Live Build & Backtest",
+    description:
+      "Teams deploy autonomous workflows on the test track or backtest systematic trading signals on historical tick data.",
+    sessions: "MIDDAY ARENA",
+    iconType: "ignite" as const,
+  },
+  {
+    day: "ROUND 03",
+    title: "The Battlefield",
+    description:
+      "Fault-injection stress tests for robotics and live simulated order-book shocks with real-time P&L leaderboards.",
+    sessions: "AFTERNOON FINALS",
+    iconType: "arena" as const,
+  },
+  {
+    day: "FINALE",
+    title: "The Grand Podium",
+    description:
+      "Jury evaluation, P&L & throughput audit, trophy presentation, and prize pool disbursement.",
+    sessions: "CLOSING CEREMONY",
+    iconType: "trophy" as const,
+  },
+] as const;
 
 export const EVENTS: Record<EventId, EventConfig> = {
   automate: {
@@ -123,24 +140,24 @@ export const EVENTS: Record<EventId, EventConfig> = {
     shortName: "Automate",
     tagline: "Design, program, and deploy an automated pipeline that eliminates repetitive human effort.",
     description:
-      "Teams engineer a robotic, embedded, or hybrid workflow system capable of sorting, picking, or automating a multi-step industrial/campus task under strict cycle-time and accuracy constraints.",
+      "Teams engineer a robotic, embedded, or hybrid workflow system capable of sorting, picking, or automating a multi-step industrial or campus task under strict cycle-time and accuracy constraints.",
     dateISO: "2026-12-12T09:30:00+05:30",
-    dateDisplay: "[12 DEC 2026]",
-    timeDisplay: "[09:30 AM – 04:30 PM IST]",
-    venue: "[ROBOTICS LAB / AUDITORIUM BLOCK A, COLLEGE]",
+    dateDisplay: "12 Dec 2026",
+    timeDisplay: "09:30 AM – 04:30 PM IST",
+    venue: "Robotics Lab, Block A",
     teamSize: {
       min: 1,
       max: 4,
       label: "1–4 Members",
     },
     feeInr: 299,
-    feeDisplay: "₹[299] / team",
+    feeDisplay: "₹299 / team",
     seatCap: 60,
-    prizePool: "₹[25,000]",
+    prizePool: "₹25,000",
     podium: [
-      { rank: "1st", title: "Grand Automator", reward: "₹[12,500] + Trophy" },
-      { rank: "2nd", title: "Runner Up", reward: "₹[7,500] + Certificate" },
-      { rank: "3rd", title: "Precision Award", reward: "₹[5,000] + Certificate" },
+      { rank: "1st", title: "Grand Automator", reward: "₹12,500 + Trophy" },
+      { rank: "2nd", title: "Runner Up", reward: "₹7,500 + Certificate" },
+      { rank: "3rd", title: "Precision Award", reward: "₹5,000 + Certificate" },
     ],
     rounds: [
       {
@@ -166,41 +183,41 @@ export const EVENTS: Record<EventId, EventConfig> = {
       },
     ],
     timeline: [
-      { time: "[09:00 AM]", milestone: "Check-in & Hardware Inspection" },
-      { time: "[10:00 AM]", milestone: "Round 01: Blueprint Review" },
-      { time: "[11:30 AM]", milestone: "Round 02: Live Automation Sprint" },
-      { time: "[02:30 PM]", milestone: "Round 03: Edge-Case Stress Test" },
-      { time: "[04:15 PM]", milestone: "Results & Podium Ceremony" },
+      { time: "09:00 AM", milestone: "Check-in & Hardware Inspection" },
+      { time: "10:00 AM", milestone: "Round 01: Blueprint Review" },
+      { time: "11:30 AM", milestone: "Round 02: Live Automation Sprint" },
+      { time: "02:30 PM", milestone: "Round 03: Edge-Case Stress Test" },
+      { time: "04:15 PM", milestone: "Results & Podium Ceremony" },
     ],
     rules: [
-      "Teams must consist of 1 to 4 members from a recognised college/university.",
+      "Teams must consist of 1 to 4 members with valid college ID cards.",
       "Pre-built commercial turnkey robots are not permitted; custom controllers, scripts, and modular kits are allowed.",
       "All autonomous runs must operate without remote manual override once the start signal is given.",
-      "Power supply (230V AC / standard bench) will be provided at [VENUE PLACEHOLDER]; teams must bring their own adapters and microcontrollers.",
+      "Standard 230V AC bench power is provided at Robotics Lab, Block A; bring your own microcontrollers and adapters.",
       "Judges' decisions on cycle-time penalties and safety compliance are final.",
     ],
     faqs: [
       {
+        question: "Who can participate?",
+        answer:
+          "Any undergraduate or postgraduate student with a valid college ID can participate. Cross-department and cross-year teams are welcome.",
+      },
+      {
         question: "Is this hardware-only or can we use software/RPA?",
         answer:
-          "[PLACEHOLDER ANSWER: Both physical robotics/embedded prototypes and hybrid hardware-software automation pipelines are welcome; check the Round 02 rubric for exact track scoring.]",
+          "Both physical robotics/embedded prototypes and hybrid hardware-software automation pipelines are welcome and scored on the same autonomous throughput rubric.",
       },
       {
         question: "Do we need to bring our own components?",
         answer:
-          "[PLACEHOLDER ANSWER: Yes, teams bring their own laptops, microcontrollers, sensors, and actuators. Standard power strips and test crates are provided on-site.]",
-      },
-      {
-        question: "Can a team have members from different departments or years?",
-        answer:
-          "Yes, cross-department and cross-year teams within [COLLEGE] or visiting colleges are allowed.",
+          "Yes, teams bring their own laptops, microcontrollers, sensors, and actuators. Standard power strips and test crates are provided on-site.",
       },
     ],
     contact: {
-      name: "[COORDINATOR NAME 1]",
+      name: "Aarav Sharma",
       role: "Robotics Track Lead",
-      phone: "[+91 90000 00001]",
-      email: "[automate-lead@college-placeholder.edu]",
+      phone: "+91 98765 43211",
+      email: "automate@campusfest.edu",
     },
   },
   quant: {
@@ -213,22 +230,22 @@ export const EVENTS: Record<EventId, EventConfig> = {
     description:
       "A high-intensity quantitative finance and simulated trading competition. Participants build systematic strategies, manage drawdown, and execute under simulated order-book shocks.",
     dateISO: "2026-12-13T09:30:00+05:30",
-    dateDisplay: "[13 DEC 2026]",
-    timeDisplay: "[09:30 AM – 04:30 PM IST]",
-    venue: "[SEMINAR HALL / TRADING LAB, COLLEGE]",
+    dateDisplay: "13 Dec 2026",
+    timeDisplay: "09:30 AM – 04:30 PM IST",
+    venue: "Trading Lab, Seminar Hall",
     teamSize: {
       min: 1,
       max: 3,
       label: "1–3 Members",
     },
     feeInr: 249,
-    feeDisplay: "₹[249] / team",
+    feeDisplay: "₹249 / team",
     seatCap: 60,
-    prizePool: "₹[25,000]",
+    prizePool: "₹25,000",
     podium: [
-      { rank: "1st", title: "Alpha Architect", reward: "₹[12,500] + Trophy" },
-      { rank: "2nd", title: "Quant Strategist", reward: "₹[7,500] + Certificate" },
-      { rank: "3rd", title: "Risk Master", reward: "₹[5,000] + Certificate" },
+      { rank: "1st", title: "Alpha Architect", reward: "₹12,500 + Trophy" },
+      { rank: "2nd", title: "Quant Strategist", reward: "₹7,500 + Certificate" },
+      { rank: "3rd", title: "Risk Master", reward: "₹5,000 + Certificate" },
     ],
     rounds: [
       {
@@ -254,24 +271,24 @@ export const EVENTS: Record<EventId, EventConfig> = {
       },
     ],
     timeline: [
-      { time: "[09:00 AM]", milestone: "Desk Allocation & Terminal Setup" },
-      { time: "[09:45 AM]", milestone: "Round 01: Quant Aptitude" },
-      { time: "[11:00 AM]", milestone: "Round 02: Strategy Backtest" },
-      { time: "[02:00 PM]", milestone: "Round 03: Live Simulated Floor" },
-      { time: "[04:15 PM]", milestone: "P&L Audit & Awards" },
+      { time: "09:00 AM", milestone: "Desk Allocation & Terminal Setup" },
+      { time: "09:45 AM", milestone: "Round 01: Quant Aptitude" },
+      { time: "11:00 AM", milestone: "Round 02: Strategy Backtest" },
+      { time: "02:00 PM", milestone: "Round 03: Live Simulated Floor" },
+      { time: "04:15 PM", milestone: "P&L Audit & Awards" },
     ],
     rules: [
       "Teams must consist of 1 to 3 members with valid college ID cards.",
-      "All trading is strictly simulated using virtual capital on the provided terminal/environment.",
-      "Look-ahead bias, data leakage, or external signal scraping during backtest rounds results in immediate disqualification.",
-      "Teams must bring at least one laptop per team with Python 3.10+ (or spreadsheet tools) pre-installed.",
+      "All trading is strictly simulated using virtual capital on the provided terminal environment.",
+      "Look-ahead bias, data leakage, or external signal scraping during backtest rounds results in disqualification.",
+      "Teams must bring at least one laptop per team with Python 3.10+ or spreadsheet tools pre-installed.",
       "Final rankings combine risk-adjusted return (Sharpe/Calmar) and compliance with position limits.",
     ],
     faqs: [
       {
         question: "Do we need prior algorithmic trading experience?",
         answer:
-          "[PLACEHOLDER ANSWER: Basic probability, Python/Excel familiarity, and market fundamentals are enough to start; Round 02 & 03 reward disciplined risk management.]",
+          "Basic probability, Python or Excel familiarity, and market fundamentals are enough to start. Round 02 and 03 reward disciplined risk management.",
       },
       {
         question: "Is real money involved?",
@@ -279,21 +296,49 @@ export const EVENTS: Record<EventId, EventConfig> = {
           "No. 100% of trading rounds run on virtual simulated capital and historical/synthetic market feeds.",
       },
       {
-        question: "Can one person register for both Automate Boring Task and QuantFinance?",
+        question: "Can one person register for both events?",
         answer:
-          "Yes! The events are scheduled on separate days ([12 DEC] and [13 DEC]), so you can register for both individually.",
+          "Yes! Automate Boring Task is on 12 Dec and QuantFinance is on 13 Dec, so you can register for both individually.",
       },
     ],
     contact: {
-      name: "[COORDINATOR NAME 2]",
+      name: "Diya Nair",
       role: "Quant Track Lead",
-      phone: "[+91 90000 00002]",
-      email: "[quant-lead@college-placeholder.edu]",
+      phone: "+91 98765 43212",
+      email: "quant@campusfest.edu",
     },
   },
 };
 
 export const EVENT_LIST: EventConfig[] = [EVENTS.automate, EVENTS.quant];
+
+export const GENERAL_FAQS: EventFaqItem[] = [
+  {
+    question: "Who can participate?",
+    answer:
+      "All college students with a valid institution ID card can register for either or both events.",
+  },
+  {
+    question: "How do I register?",
+    answer:
+      "Scroll to the Registration section below, select your event, enter your team details and UPI transaction ID, and submit to receive an instant Reference ID.",
+  },
+  {
+    question: "When and where is the fest?",
+    answer:
+      "12–13 December 2026 at School of Engineering & Technology, Bengaluru (Block A Robotics Lab & Seminar Hall).",
+  },
+  {
+    question: "Is there a registration fee?",
+    answer:
+      "Yes — ₹299 per team for Automate Boring Task and ₹249 per team for QuantFinance.",
+  },
+  {
+    question: "Are there prizes?",
+    answer:
+      "Yes! ₹50,000+ total prize pool split across both events (1st, 2nd, 3rd place), plus trophies and verified finalist certificates.",
+  },
+];
 
 export function getEarliestEventDateISO(): string {
   return EVENT_LIST.reduce((earliest, current) =>

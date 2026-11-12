@@ -1,125 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  /* Base Tokens */
-  --bg-base: #07080b;
-  --bg-surface: #0f1218;
-  --bg-surface-elevated: #151a24;
-  --text-primary: #edeff5;
-  --text-muted: #8a90a2;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --radius-card: 20px;
-  --radius-pill: 9999px;
+  /* Yugaantar-inspired Night Sky & Cream Parchment Palette */
+  --bg-base: #06142e;
+  --bg-navy-deep: #040f24;
+  --bg-navy-card: #091d42;
+  --bg-cream: #f5efe0;
+  --bg-cream-card: #faf5e8;
+  --text-light: #f4f6fb;
+  --text-light-muted: #9eb3d6;
+  --text-dark: #0a1b3d;
+  --text-dark-muted: #4b5c7d;
+  --accent-lime: #a3f06d;
+  --border-navy: rgba(158, 179, 214, 0.22);
+  --border-cream: #d9d0b8;
 
-  /* Scroll-linked section tint */
-  --section-bg-tint: #07080b;
-
-  /* Default Accent (Neutral / Hero) */
+  /* Scoped event accents */
   --accent-primary: #22e5ff;
-  --accent-secondary: #19f58a;
-  --accent-glow: rgba(34, 229, 255, 0.16);
+  --accent-secondary: #a3f06d;
+  --accent-glow: rgba(34, 229, 255, 0.2);
 }
 
-/* Scoped Theme: Automate Boring Task */
 [data-theme="automate"] {
-  --theme-bg: #10141a;
-  --theme-surface: rgba(16, 20, 26, 0.86);
   --accent-primary: #22e5ff;
-  --accent-secondary: #b6ff3b;
+  --accent-secondary: #a3f06d;
   --accent-warning: #ff8a1f;
-  --accent-glow: rgba(34, 229, 255, 0.22);
-  --grid-line: rgba(34, 229, 255, 0.08);
-  --theme-border: rgba(34, 229, 255, 0.24);
+  --accent-glow: rgba(34, 229, 255, 0.25);
+  --theme-border: rgba(34, 229, 255, 0.35);
 }
 
-/* Scoped Theme: QuantFinance */
 [data-theme="quant"] {
-  --theme-bg: #060b16;
-  --theme-surface: rgba(6, 11, 22, 0.88);
   --accent-primary: #19f58a;
   --accent-secondary: #f5c451;
   --accent-danger: #ff3b5c;
-  --accent-glow: rgba(25, 245, 138, 0.22);
-  --grid-line: rgba(25, 245, 138, 0.07);
-  --theme-border: rgba(25, 245, 138, 0.24);
+  --accent-glow: rgba(25, 245, 138, 0.25);
+  --theme-border: rgba(25, 245, 138, 0.35);
 }
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-silkscreen), var(--font-space-grotesk), monospace;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
   --font-display: var(--font-bebas-neue), var(--font-space-grotesk), sans-serif;
 }
 
 html {
   background-color: var(--bg-base);
-  color: var(--text-primary);
+  color: var(--text-light);
   scroll-behavior: auto;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: var(--section-bg-tint, var(--bg-base));
-  color: var(--text-primary);
+  background-color: var(--bg-base);
+  color: var(--text-light);
   font-family: var(--font-sans);
   overflow-x: hidden;
   min-height: 100svh;
-  transition: background-color 0.45s ease;
 }
 
-/* Subtle 4% noise overlay */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 40;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Pixelated checkerboard divider between cream and navy sections */
+.pixel-checker-divider {
+  height: 24px;
+  width: 100%;
+  background-color: var(--bg-base);
+  background-image:
+    linear-gradient(45deg, var(--bg-cream) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--bg-cream) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--bg-cream) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--bg-cream) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
 }
 
-/* Glass Surface */
-.glass-surface {
-  background: rgba(15, 18, 24, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
+/* Subtle dot-grid on cream parchment sections */
+.cream-dot-grid {
+  background-color: var(--bg-cream);
+  background-image: radial-gradient(rgba(10, 27, 61, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-/* Blueprint grid for Automate theme */
+/* Retro hard drop-shadow for cream quest cards */
+.quest-shadow {
+  box-shadow: 5px 5px 0px #0a1b3d;
+}
+
+/* Blueprint grid for Automate card */
 .blueprint-grid {
   background-image:
     linear-gradient(to right, rgba(34, 229, 255, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(34, 229, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 26px 26px;
 }
 
-/* Hazard stripe edge detail for Automate theme */
 .hazard-stripe {
   background: repeating-linear-gradient(
     -45deg,
     #ff8a1f,
     #ff8a1f 8px,
-    #10141a 8px,
-    #10141a 16px
+    #091d42 8px,
+    #091d42 16px
   );
 }
 
-/* Quant subtle grid */
 .quant-grid {
   background-image:
-    linear-gradient(to right, rgba(25, 245, 138, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(25, 245, 138, 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(to right, rgba(25, 245, 138, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 245, 138, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* Focus rings for accessibility */
 :focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--accent-lime);
   outline-offset: 3px;
 }
 
-/* Marquee animation for Quant ticker */
 @keyframes ticker-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -133,7 +129,6 @@ body {
   animation: ticker-scroll 18s linear infinite;
 }
 
-/* Gear rotation */
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);
@@ -151,11 +146,25 @@ body {
   animation: spin-slow 32s linear infinite reverse;
 }
 
-/* Respect prefers-reduced-motion */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-ticker,
   .animate-spin-slow,
-  .animate-spin-slow-reverse {
+  .animate-spin-slow-reverse,
+  .animate-float-slow {
     animation: none !important;
   }
   * {
@@ -163,7 +172,6 @@ body {
   }
 }
 
-/* Hide scrollbars on horizontal snap carousels */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -171,4 +179,3 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ArrowDownRight, Calendar, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getEarliestEventDateISO, ORGANISER_INFO } from "@/content/events";
 import { ensureGsapRegistered, isTouchDevice, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 import HeroCanvas from "./animations/HeroCanvas";
@@ -42,22 +42,16 @@ export default function Hero() {
     if (!heroRef.current) return;
 
     const ctx = gsap.context(() => {
-      const words = heroRef.current?.querySelectorAll(".hero-word");
-      if (!words?.length) return;
+      const items = heroRef.current?.querySelectorAll(".hero-reveal");
+      if (!items?.length) return;
 
       if (prefersReducedMotion()) {
-        gsap.fromTo(words, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+        gsap.fromTo(items, { opacity: 0 }, { opacity: 1, duration: 0.35 });
       } else {
         gsap.fromTo(
-          words,
-          { y: 28, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.75,
-            stagger: 0.06,
-            ease: MOTION_EASE,
-          }
+          items,
+          { y: 24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.75, stagger: 0.08, ease: MOTION_EASE }
         );
       }
     }, heroRef);
@@ -68,8 +62,8 @@ export default function Hero() {
   const handleMagnetic = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticBtnRef.current) return;
     const rect = magneticBtnRef.current.getBoundingClientRect();
-    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.2;
-    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.2;
+    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.18;
+    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.18;
     magneticBtnRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
   };
 
@@ -79,47 +73,55 @@ export default function Hero() {
     }
   };
 
-  const words = ORGANISER_INFO.heroHeadline.split(" ");
-
   return (
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 pb-16 pt-28 sm:px-6"
+      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-gradient-to-b from-[#041029] via-[#09214D] to-[#0D2E66] px-4 pb-16 pt-24 sm:px-6"
     >
-      {/* Ambient radial glow */}
+      {/* Glowing Moon & Starry Pixel Sky Backdrop */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(34,229,255,0.09),transparent_55%),radial-gradient(circle_at_75%_65%,rgba(25,245,138,0.07),transparent_50%)]"
+        className="pointer-events-none absolute left-1/2 top-[22%] h-56 w-56 -translate-x-1/2 rounded-full bg-[#F2F7C9]/90 shadow-[0_0_120px_35px_rgba(242,247,201,0.35)] sm:h-72 sm:w-72"
+      />
+
+      {/* Floating Pixel Clouds */}
+      <div
+        aria-hidden="true"
+        className="animate-float-slow pointer-events-none absolute left-[8%] top-[28%] hidden h-8 w-24 bg-white/85 shadow-[8px_8px_0_rgba(158,179,214,0.35)] sm:block"
+      />
+      <div
+        aria-hidden="true"
+        className="animate-float-slow pointer-events-none absolute right-[10%] top-[34%] hidden h-7 w-20 bg-white/80 shadow-[8px_8px_0_rgba(158,179,214,0.35)] sm:block"
+        style={{ animationDelay: "1.5s" }}
       />
 
       <HeroCanvas />
 
-      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-[#8A90A2] backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-[#22E5FF]" />
-          <span>{ORGANISER_INFO.heroEyebrow}</span>
-        </div>
+      <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+        <p className="hero-reveal font-mono text-[11px] uppercase tracking-[0.28em] text-[#9EB3D6] sm:text-xs">
+          {ORGANISER_INFO.heroEyebrow}
+        </p>
 
         <h1
-          className="font-heading font-bold tracking-tight text-[#EDEFF5]"
-          style={{ fontSize: "clamp(2.4rem, 8.2vw, 5.5rem)", lineHeight: 1.03 }}
+          className="hero-reveal mt-3 font-pixel font-bold tracking-wide text-[#A3F06D] drop-shadow-[0_4px_0_#040F24]"
+          style={{ fontSize: "clamp(2.5rem, 8.5vw, 5.4rem)", lineHeight: 1.05 }}
         >
-          {words.map((word, idx) => (
-            <span key={`${word}-${idx}`} className="hero-word inline-block mr-[0.26em] last:mr-0">
-              {word}
-            </span>
-          ))}
+          {ORGANISER_INFO.heroHeadline}
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#8A90A2] sm:text-lg">
+        <p className="hero-reveal mt-2 font-mono text-xs uppercase tracking-[0.3em] text-[#F4F6FB] sm:text-sm">
+          ANNUAL TECH SYMPOSIUM 2026
+        </p>
+
+        <p className="hero-reveal mt-4 max-w-xl text-sm leading-relaxed text-[#D8E3F5] sm:text-base">
           {ORGANISER_INFO.heroSubline}
         </p>
 
-        {/* Countdown */}
+        {/* Crisp Countdown */}
         <div
           aria-label="Countdown to earliest event"
-          className="mt-8 grid grid-cols-4 gap-2.5 sm:gap-4"
+          className="hero-reveal mt-7 grid grid-cols-4 gap-2 sm:gap-3"
         >
           {[
             { label: "DAYS", value: timeLeft.days },
@@ -129,39 +131,62 @@ export default function Hero() {
           ].map((unit) => (
             <div
               key={unit.label}
-              className="glass-surface flex min-w-[68px] flex-col items-center rounded-2xl px-3 py-3 sm:min-w-[88px] sm:px-5"
+              className="flex min-w-[66px] flex-col items-center border border-[#9EB3D6]/30 bg-[#040F24]/75 px-3 py-2.5 backdrop-blur-sm sm:min-w-[82px]"
             >
-              <span className="font-mono text-2xl font-bold tabular-nums text-[#EDEFF5] sm:text-3xl">
+              <span className="font-pixel text-xl font-bold tabular-nums text-[#F4F6FB] sm:text-2xl">
                 {String(unit.value).padStart(2, "0")}
               </span>
-              <span className="mt-1 font-mono text-[10px] tracking-widest text-[#8A90A2]">
+              <span className="mt-1 font-mono text-[10px] tracking-widest text-[#9EB3D6]">
                 {unit.label}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+        {/* Action Buttons matching reference */}
+        <div className="hero-reveal mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
           <a
             ref={magneticBtnRef}
             href="#register"
             onMouseMove={handleMagnetic}
             onMouseLeave={resetMagnetic}
-            className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#22E5FF] to-[#19F58A] px-7 font-heading text-base font-bold text-[#07080B] shadow-[0_0_30px_rgba(34,229,255,0.22)] transition-transform duration-200 hover:brightness-110 sm:w-auto"
+            className="inline-flex min-h-[48px] w-full items-center justify-center bg-[#A3F06D] px-7 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[4px_4px_0_#040F24] transition-transform duration-200 hover:brightness-105 sm:w-auto"
           >
-            <span>Register Now</span>
-            <ArrowDownRight className="h-4 w-4" />
+            REGISTER NOW
           </a>
           <a
             href="#events"
-            className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/[0.03] px-7 font-heading text-base font-medium text-[#EDEFF5] transition-colors hover:bg-white/[0.08] sm:w-auto"
+            className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 border border-[#9EB3D6]/45 bg-[#040F24]/65 px-7 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#F4F6FB] backdrop-blur-sm transition-colors hover:bg-[#091D42] sm:w-auto"
           >
-            <Calendar className="h-4 w-4 text-[#8A90A2]" />
-            <span>Explore Events</span>
+            <span>EXPLORE EVENTS</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
+        {/* Track Quick Pills matching DAY 0 -> DAY 1 -> style */}
+        <div className="hero-reveal mt-4 flex flex-wrap items-center justify-center gap-2">
+          <a
+            href="#events"
+            className="inline-flex min-h-[38px] items-center gap-1.5 border border-[#9EB3D6]/30 bg-[#040F24]/55 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] hover:border-[#22E5FF]"
+          >
+            <span>TRACK 01: AUTOMATE</span>
+            <ArrowRight className="h-3 w-3 text-[#22E5FF]" />
+          </a>
+          <a
+            href="#events"
+            className="inline-flex min-h-[38px] items-center gap-1.5 border border-[#9EB3D6]/30 bg-[#040F24]/55 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] hover:border-[#19F58A]"
+          >
+            <span>TRACK 02: QUANTFINANCE</span>
+            <ArrowRight className="h-3 w-3 text-[#19F58A]" />
           </a>
         </div>
       </div>
+
+      {/* Bottom Horizon Water Reflection Strip */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#06142E] to-transparent"
+      />
     </section>
   );
 }
-

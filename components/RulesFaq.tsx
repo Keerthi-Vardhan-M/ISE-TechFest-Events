@@ -3,134 +3,132 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { EVENTS, EVENT_LIST, type EventId } from "@/content/events";
+import { EVENTS, EVENT_LIST, GENERAL_FAQS, type EventId } from "@/content/events";
 import { prefersReducedMotion } from "@/lib/motion";
 
 export default function RulesFaq() {
-  const [activeTab, setActiveTab] = useState<EventId>("automate");
+  const [activeTab, setActiveTab] = useState<"general" | EventId>("general");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const currentEvent = EVENTS[activeTab];
   const reduced = prefersReducedMotion();
 
-  return (
-    <section id="rules-faq" className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-8 text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-[#22E5FF]">
-            RULES & FAQ
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold tracking-tight text-[#EDEFF5] sm:text-5xl">
-            Everything you need to know.
-          </h2>
-        </div>
+  const faqs = activeTab === "general" ? GENERAL_FAQS : EVENTS[activeTab].faqs;
+  const rules = activeTab === "general" ? null : EVENTS[activeTab].rules;
 
-        {/* Event Tabs (scroll-snap on narrow viewports) */}
-        <div
-          role="tablist"
-          aria-label="Event Rules and FAQ Tabs"
-          className="no-scrollbar mb-8 flex snap-x gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-[#0F1218] p-1.5"
-        >
-          {EVENT_LIST.map((ev) => {
-            const selected = ev.id === activeTab;
-            return (
+  return (
+    <section id="rules-faq" className="cream-dot-grid px-4 py-20 text-[#0A1B3D] sm:px-6 lg:py-24">
+      <div className="mx-auto max-w-4xl">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+            Questions
+          </h2>
+
+          {/* Filter Tabs */}
+          <div
+            role="tablist"
+            aria-label="FAQ and Rules Filter"
+            className="no-scrollbar flex snap-x gap-2 overflow-x-auto"
+          >
+            <button
+              role="tab"
+              type="button"
+              aria-selected={activeTab === "general"}
+              onClick={() => {
+                setActiveTab("general");
+                setOpenFaqIndex(0);
+              }}
+              className={`min-h-[44px] whitespace-nowrap border-2 px-4 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+                activeTab === "general"
+                  ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
+                  : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
+              }`}
+            >
+              General
+            </button>
+            {EVENT_LIST.map((ev) => (
               <button
                 key={ev.id}
                 role="tab"
                 type="button"
-                aria-selected={selected}
-                data-theme={ev.theme}
+                aria-selected={activeTab === ev.id}
                 onClick={() => {
                   setActiveTab(ev.id);
                   setOpenFaqIndex(0);
                 }}
-                className={`min-h-[44px] flex-1 snap-center whitespace-nowrap rounded-xl px-4 font-heading text-sm font-semibold transition-colors ${
-                  selected
-                    ? "bg-white/10 text-[#EDEFF5]"
-                    : "text-[#8A90A2] hover:text-[#EDEFF5]"
+                className={`min-h-[44px] whitespace-nowrap border-2 px-4 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+                  activeTab === ev.id
+                    ? "border-[#0A1B3D] bg-[#A3F06D] text-[#0A1B3D]"
+                    : "border-[#D9D0B8] bg-[#FAF5E8] text-[#4B5C7D] hover:border-[#0A1B3D]"
                 }`}
-                style={
-                  selected
-                    ? {
-                        boxShadow: "inset 0 0 0 1px var(--theme-border)",
-                        color: "var(--accent-primary)",
-                      }
-                    : undefined
-                }
               >
-                {ev.name}
+                {ev.shortName}
               </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Numbered Hairline FAQ Rows matching screenshot */}
+        <div className="mt-10 border-t border-[#D9D0B8]">
+          {faqs.map((faq, idx) => {
+            const isOpen = openFaqIndex === idx;
+            return (
+              <div key={faq.question} className="border-b border-[#D9D0B8]">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                  className="flex min-h-[64px] w-full items-center justify-between gap-4 py-4 text-left"
+                >
+                  <div className="flex items-baseline gap-5">
+                    <span className="font-mono text-xs font-semibold text-[#4B5C7D]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-heading text-base font-bold text-[#0A1B3D] sm:text-xl">
+                      {faq.question}
+                    </span>
+                  </div>
+                  <ChevronDown
+                    className={`h-5 w-5 shrink-0 text-[#4B5C7D] transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-[#0A1B3D]" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                      animate={reduced ? { opacity: 1 } : { height: "auto", opacity: 1 }}
+                      exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-5 pl-10 pr-6 text-sm leading-relaxed text-[#4B5C7D] sm:text-base">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             );
           })}
         </div>
 
-        <div data-theme={currentEvent.theme} className="space-y-8">
-          {/* Rules */}
-          <div className="rounded-2xl border border-white/10 bg-[#0F1218]/80 p-6">
-            <h3 className="font-heading text-lg font-semibold text-[#EDEFF5]">
-              Official Rules — {currentEvent.name}
+        {/* Event-specific rules when an event tab is selected */}
+        {rules && (
+          <div className="quest-shadow mt-8 border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6">
+            <h3 className="font-heading text-lg font-bold text-[#0A1B3D]">
+              Official Rules — {EVENTS[activeTab as EventId].name}
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-[#8A90A2]">
-              {currentEvent.rules.map((rule, i) => (
-                <li key={rule} className="flex gap-3">
-                  <span
-                    className="font-mono text-xs font-semibold pt-0.5"
-                    style={{ color: "var(--accent-primary)" }}
-                  >
-                    0{i + 1}
-                  </span>
-                  <span>{rule}</span>
+            <ul className="mt-4 space-y-2 text-sm text-[#4B5C7D]">
+              {rules.map((r, i) => (
+                <li key={r} className="flex gap-3">
+                  <span className="font-mono text-xs font-bold text-[#1D5BC6]">0{i + 1}</span>
+                  <span>{r}</span>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Accordion FAQ */}
-          <div className="space-y-3">
-            <h3 className="font-heading text-lg font-semibold text-[#EDEFF5]">
-              Frequently Asked Questions
-            </h3>
-            {currentEvent.faqs.map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div
-                  key={faq.question}
-                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#0F1218]/80"
-                >
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="flex min-h-[52px] w-full items-center justify-between gap-4 px-5 py-3.5 text-left font-heading text-sm font-semibold text-[#EDEFF5] sm:text-base"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown
-                      className={`h-4 w-4 shrink-0 text-[#8A90A2] transition-transform duration-200 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                        animate={reduced ? { opacity: 1 } : { height: "auto", opacity: 1 }}
-                        exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="overflow-hidden"
-                      >
-                        <p className="border-t border-white/5 px-5 py-4 text-sm leading-relaxed text-[#8A90A2]">
-                          {faq.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
 }
-
