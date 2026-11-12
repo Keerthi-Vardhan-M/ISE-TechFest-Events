@@ -139,9 +139,16 @@ export default function Hero({ onOpenRegister }: HeroProps) {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Readability vignette on right side & bottom horizon */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#040F24]/25 via-[#040F24]/35 to-[#040F24]/75" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#06142E]/70 to-transparent" />
+        {/* Readability vignette on right side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040F24]/20 via-[#040F24]/30 to-[#040F24]/70" />
+        {/* Soft misty cloud sky-to-cream gradient transition into the About section matching reference screenshot */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-44 sm:h-56 md:h-64"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(188, 214, 238, 0.35) 28%, rgba(205, 225, 242, 0.75) 58%, rgba(235, 242, 248, 0.94) 82%, #FAF5E8 100%)",
+          }}
+        />
       </div>
 
       {/* Right-aligned content block matching reference screenshot */}
