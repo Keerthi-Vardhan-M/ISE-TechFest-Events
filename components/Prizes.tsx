@@ -44,7 +44,7 @@ export default function Prizes() {
       className="cream-dot-grid px-4 py-20 text-[#0A1B3D] sm:px-6 lg:py-24"
     >
       <div className="mx-auto max-w-5xl text-center">
-        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
           PRIZES <span className="text-[#1648A8]">&amp;</span> REWARDS
         </h2>
         <p className="mt-2 font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">

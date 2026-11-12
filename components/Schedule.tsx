@@ -77,7 +77,7 @@ export default function Schedule() {
       <div className="pixel-checker-divider" aria-hidden="true" />
 
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
           Round 01 to Finale
         </h2>
 

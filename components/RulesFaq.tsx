@@ -113,7 +113,7 @@ export default function RulesFaq() {
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
               EVERYTHING YOU NEED TO KNOW
             </p>
-            <h3 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+            <h3 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
               FREQUENTLY ASKED <span className="text-[#1648A8]">QUESTIONS</span>
             </h3>
             <div className="mx-auto my-4 flex max-w-xs items-center gap-3">

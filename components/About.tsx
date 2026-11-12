@@ -65,9 +65,9 @@ export default function About() {
       className="cream-dot-grid relative text-[#0A1B3D]"
     >
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+        <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
           {ABOUT_SECTION.titlePrefix}{" "}
-          <span className="text-[#1D5BC6]">{ABOUT_SECTION.titleHighlight}</span>
+          <span className="text-[#1D5BC6]" style={{ textShadow: "0 0 10px rgba(29,91,198,0.24)" }}>{ABOUT_SECTION.titleHighlight}</span>
         </h2>
 
         <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-12">

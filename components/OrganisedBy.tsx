@@ -50,7 +50,7 @@ export default function OrganisedBy() {
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
           THE MINDS BEHIND THE EVENT
         </p>
-        <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
+        <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}>
           ORGANISED <span className="text-[#C82333]">BY</span>
         </h2>
 
