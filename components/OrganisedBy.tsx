@@ -57,22 +57,25 @@ export default function OrganisedBy() {
     <section
       id="contact"
       ref={ref}
-      className="dark-dot-grid border-t border-[#9EB3D6]/20 bg-[#06142E] px-4 py-20 text-[#F4F6FB] sm:px-6 lg:py-24"
+      className="cream-dot-grid border-t border-[#D9D0B8] px-4 py-20 text-[#0A1B3D] sm:px-6 lg:py-24"
     >
       <div className="mx-auto max-w-5xl text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#9EB3D6]">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#4B5C7D]">
           THE MINDS BEHIND THE EVENT
         </p>
-        <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
-          ORGANISED <span className="text-[#A3F06D]">BY</span>
+        <h2
+          className="mt-2 font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl"
+          style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
+        >
+          ORGANISED <span className="text-[#C82333]">BY</span>
         </h2>
 
         <div className="mx-auto my-6 flex max-w-md items-center gap-3">
-          <div className="h-px flex-1 bg-white/15" />
-          <span className="text-xs text-[#A3F06D]" aria-hidden="true">
+          <div className="h-px flex-1 bg-[#D9D0B8]" />
+          <span className="text-xs text-[#C82333]" aria-hidden="true">
             ◆
           </span>
-          <div className="h-px flex-1 bg-white/15" />
+          <div className="h-px flex-1 bg-[#D9D0B8]" />
         </div>
 
         {/* 4 Partner / Institution Cards */}
@@ -80,10 +83,10 @@ export default function OrganisedBy() {
           {partners.map((p) => (
             <div
               key={p.name}
-              className="org-item navy-card flex min-h-[116px] flex-col items-center justify-center p-5 transition-transform duration-300 hover:-translate-y-1"
+              className="org-item flex min-h-[116px] flex-col items-center justify-center border border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="font-heading text-base font-bold text-[#F4F6FB]">{p.name}</span>
-              <span className="mt-1.5 font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
+              <span className="font-heading text-base font-bold text-[#0A1B3D]">{p.name}</span>
+              <span className="mt-1.5 font-mono text-[11px] uppercase tracking-wider text-[#4B5C7D]">
                 {p.sub}
               </span>
             </div>
@@ -92,10 +95,10 @@ export default function OrganisedBy() {
 
         {/* Get In Touch */}
         <div className="mt-16 sm:mt-20">
-          <h3 className="font-pixel text-2xl font-bold text-[#F4F6FB] sm:text-3xl">
+          <h3 className="font-pixel text-2xl font-bold text-[#0A1B3D] sm:text-3xl">
             GET IN TOUCH
           </h3>
-          <p className="mt-1.5 font-mono text-xs uppercase tracking-wider text-[#9EB3D6]">
+          <p className="mt-1.5 font-mono text-xs uppercase tracking-wider text-[#4B5C7D]">
             For queries and assistance
           </p>
 
@@ -103,9 +106,9 @@ export default function OrganisedBy() {
             {contacts.map((c) => (
               <div
                 key={c.name}
-                className="org-item navy-card border border-[#22E5FF]/25 p-6 text-center shadow-[0_8px_24px_rgba(4,15,36,0.6)]"
+                className="org-item border-2 border-[#0A1B3D] bg-[#0B1220] p-6 text-center text-[#FAF5E8] shadow-[5px_5px_0_#C82333]"
               >
-                <p className="font-heading text-lg font-bold tracking-wide uppercase text-[#F4F6FB]">
+                <p className="font-heading text-lg font-bold tracking-wide uppercase text-[#FAF5E8]">
                   {c.name}
                 </p>
                 <p className="mt-1 font-mono text-xs font-semibold text-[#F5C451]">{c.role}</p>
