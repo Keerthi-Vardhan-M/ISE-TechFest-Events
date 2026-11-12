@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 import { getEarliestEventDateISO, ORGANISER_INFO } from "@/content/events";
 import { ensureGsapRegistered, isTouchDevice, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
-import HeroCanvas from "./animations/HeroCanvas";
 
 interface TimeLeft {
   days: number;
@@ -144,9 +143,6 @@ export default function Hero({ onOpenRegister }: HeroProps) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#040F24]/25 via-[#040F24]/35 to-[#040F24]/75" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#06142E]/70 to-transparent" />
       </div>
-
-      {/* Subtle animated stars & drifting clouds/vectors */}
-      <HeroCanvas />
 
       {/* Right-aligned content block matching reference screenshot */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl justify-center lg:justify-end">
