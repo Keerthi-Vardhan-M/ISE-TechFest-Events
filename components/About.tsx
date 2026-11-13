@@ -255,7 +255,7 @@ export default function About() {
       {/* Pixelated Dithering Divider into Navy Events Section */}
       <div
         aria-hidden="true"
-        className="h-12 w-full sm:h-16"
+        className="h-8 w-full sm:h-10"
         style={{
           backgroundImage: "url('/images/footer-pixel-divider.png')",
           backgroundRepeat: "repeat-x",
