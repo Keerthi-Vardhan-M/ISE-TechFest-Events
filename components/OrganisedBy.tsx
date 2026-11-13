@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { Mail, Phone } from "lucide-react";
 import { ORGANISER_INFO } from "@/content/events";
@@ -33,10 +34,31 @@ export default function OrganisedBy() {
   }, []);
 
   const partners = [
-    { name: ORGANISER_INFO.collegeName, sub: "Host Institution" },
-    { name: ORGANISER_INFO.clubName, sub: "Student Organiser" },
-    { name: "Robotics & Automation Cell", sub: "Track Partner" },
-    { name: "Quant & Finance Society", sub: "Track Partner" },
+    {
+      name: ORGANISER_INFO.collegeName,
+      sub: "Host Institution",
+      logo: "/images/msrit-logo.png",
+    },
+    {
+      name: ORGANISER_INFO.clubName,
+      sub: "Student Organiser",
+      isVoice: true,
+    },
+  ];
+
+  const facultyCoordinators = [
+    {
+      name: "Dr. Faculty Coordinator 1",
+      department: "Department of ISE, MSRIT",
+      role: "Faculty Advisor",
+      accent: "#22E5FF",
+    },
+    {
+      name: "Prof. Faculty Coordinator 2",
+      department: "Department of ISE, MSRIT",
+      role: "Faculty Advisor",
+      accent: "#A3F06D",
+    },
   ];
 
   const contacts = [
@@ -77,19 +99,70 @@ export default function OrganisedBy() {
 
         <div className="mx-auto my-6 h-px max-w-md bg-[#D9D0B8]" />
 
-        {/* 4 Partner / Institution Cards */}
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Organiser / Institution Cards matching the billboard blue theme */}
+        <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
           {partners.map((p) => (
             <div
               key={p.name}
-              className="org-item flex min-h-[116px] flex-col items-center justify-center border border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1"
+              className="org-item flex min-h-[140px] flex-col items-center justify-between rounded-xl border border-[#2B548A] bg-[#163463] p-6 text-white shadow-[4px_4px_0_#06142E] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1A3D73]"
             >
-              <span className="font-heading text-base font-bold text-[#0A1B3D]">{p.name}</span>
-              <span className="mt-1.5 font-mono text-[11px] uppercase tracking-wider text-[#4B5C7D]">
+              <div className="flex flex-1 items-center justify-center">
+                {p.logo ? (
+                  <div className="relative h-14 w-48 sm:h-16 sm:w-56">
+                    <Image
+                      src={p.logo}
+                      alt={p.name}
+                      fill
+                      unoptimized
+                      sizes="224px"
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <span className="font-pixel text-2xl font-bold tracking-wider text-[#A3F06D] sm:text-3xl">
+                    {p.name}
+                  </span>
+                )}
+              </div>
+              <span className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9EB3D6]">
                 {p.sub}
               </span>
             </div>
           ))}
+        </div>
+
+        {/* Faculty Coordinators Section */}
+        <div className="mt-12 sm:mt-14">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-[#1648A8]">
+            ACADEMIC MENTORSHIP
+          </p>
+          <h3 className="mt-1 font-pixel text-xl font-bold tracking-tight text-[#0A1B3D] sm:text-2xl">
+            FACULTY COORDINATORS
+          </h3>
+
+          <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+            {facultyCoordinators.map((fac) => (
+              <div
+                key={fac.name}
+                className="org-item flex flex-col justify-between rounded-xl border border-[#2B548A] bg-[#163463] p-6 text-left text-white shadow-[4px_4px_0_#06142E] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1A3D73]"
+              >
+                <div>
+                  <span
+                    className="font-mono text-[10px] font-bold uppercase tracking-widest"
+                    style={{ color: fac.accent }}
+                  >
+                    {fac.role}
+                  </span>
+                  <h4 className="mt-1.5 font-heading text-lg font-bold text-white">
+                    {fac.name}
+                  </h4>
+                  <p className="mt-1 font-mono text-xs text-[#9EB3D6]">
+                    {fac.department}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Get In Touch */}

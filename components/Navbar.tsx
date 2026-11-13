@@ -3,14 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { ORGANISER_INFO } from "@/content/events";
 import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 
 const NAV_LINKS = [
-  { id: "home", label: "HOME", href: "#home" },
-  { id: "about", label: "ABOUT", href: "#about" },
-  { id: "events", label: "EVENTS", href: "#events" },
-  { id: "prizes", label: "PRIZES", href: "#prizes" },
+  { id: "events", label: "Events", href: "#events" },
+  { id: "about", label: "About", href: "#about" },
+  { id: "prizes", label: "Prizes", href: "#prizes" },
   { id: "rules-faq", label: "FAQ", href: "#rules-faq" },
 ];
 
@@ -23,12 +21,10 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
-  const magneticRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      // Show background and progress bar when scrolled down
       setScrolled(y > 30);
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? Math.min(100, (y / docHeight) * 100) : 0);
@@ -84,24 +80,10 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
     }
   };
 
-  const handleMagneticMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isTouchDevice() || prefersReducedMotion() || !magneticRef.current) return;
-    const rect = magneticRef.current.getBoundingClientRect();
-    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.18;
-    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.18;
-    magneticRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-  };
-
-  const resetMagnetic = () => {
-    if (magneticRef.current) {
-      magneticRef.current.style.transform = "translate3d(0, 0, 0)";
-    }
-  };
-
   return (
     <>
       <header
-        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg transition-colors duration-200"
+        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#040F24]/95 backdrop-blur-md shadow-lg"
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
         {/* Top scroll progress strip */}
@@ -114,9 +96,21 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
 
         <nav
           aria-label="Primary Navigation"
-          className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"
+          className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-16 sm:px-6"
         >
-          <ul className="hidden items-center gap-2 md:flex lg:gap-3">
+          {/* Brand Logo strictly styled like reference screenshot */}
+          <Link
+            href="/"
+            className="shrink-0 font-pixel text-lg font-bold tracking-wider text-[#A3F06D] sm:text-2xl"
+            style={{
+              textShadow: "0 2px 0 #072513, 0 4px 12px rgba(163,240,109,0.35)",
+            }}
+          >
+            AUTO×QUANT
+          </Link>
+
+          {/* Desktop Nav Links */}
+          <ul className="hidden flex-1 items-center justify-center gap-2 md:flex lg:gap-4">
             {NAV_LINKS.map((link) => {
               const isActive = activeId === link.id;
               return (
@@ -124,7 +118,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToTarget(e, link.id)}
-                    className={`relative inline-flex min-h-[44px] items-center px-3.5 font-mono text-sm tracking-[0.16em] transition-colors ${
+                    className={`relative inline-flex min-h-[44px] items-center px-3.5 font-mono text-sm tracking-[0.16em] uppercase transition-colors ${
                       isActive
                         ? "font-bold text-[#A3F06D]"
                         : "text-[#D8E3F5]/85 hover:text-white"
@@ -142,20 +136,23 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
             })}
           </ul>
 
-          <div className="flex items-center gap-2">
+          {/* Right Action buttons */}
+          <div className="flex shrink-0 items-center gap-2">
+            {/* Desktop Register Button */}
             <Link
               href="/register"
-              className="min-h-[42px] items-center justify-center rounded-lg bg-[#1648A8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] inline-flex"
+              className="hidden sm:inline-flex min-h-[38px] items-center justify-center rounded-[3px] bg-[#1648A8] px-5 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6]"
             >
-              REGISTER NOW
+              REGISTER
             </Link>
 
+            {/* Mobile Hamburger strictly matching reference screenshot (square dark blue button with white border) */}
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 bg-[#040F24]/70 text-white md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-white/30 bg-[#091D42] text-white transition-colors hover:border-white hover:bg-[#0E2C63] md:hidden"
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -163,36 +160,80 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
         </nav>
       </header>
 
-      {/* Mobile Full-screen Overlay Menu */}
+      {/* Mobile Drawer Menu strictly matching the reference screenshot */}
       {menuOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation"
-          className="fixed inset-0 z-40 flex flex-col justify-between bg-[#040F24]/98 px-6 pb-10 pt-24 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 z-50 flex flex-col justify-between overflow-hidden bg-[#040F24] px-5 pb-8 pt-4 text-white md:hidden"
         >
-          <ul className="flex flex-col gap-2">
-            {NAV_LINKS.map((link, idx) => (
-              <li key={link.id}>
-                <a
-                  href={link.href}
-                  onClick={(e) => scrollToTarget(e, link.id)}
-                  className="flex min-h-[50px] items-center justify-between border border-white/15 bg-[#091D42]/60 px-5 font-pixel text-base text-[#F4F6FB] active:bg-[#091D42]"
-                >
-                  <span>{link.label}</span>
-                  <span className="font-mono text-xs text-[#A3F06D]">0{idx + 1}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Background image covering the ENTIRE drawer just like main page */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hero-sky-bg.jpg"
+              alt="Floating island backdrop"
+              className="h-full w-full object-cover object-center opacity-30"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#040F24]/95 via-[#040F24]/85 to-[#040F24]/98" />
+          </div>
 
-          <Link
-            href="/register"
-            onClick={() => setMenuOpen(false)}
-            className="flex min-h-[52px] w-full items-center justify-center rounded-lg bg-[#1648A8] font-mono text-sm font-bold uppercase tracking-wider text-white"
-          >
-            REGISTER NOW →
-          </Link>
+          <div className="relative z-10">
+            {/* Drawer Header: Brand on left, Close button on right matching screenshot */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <span
+                className="font-pixel text-xl font-bold tracking-wider text-[#A3F06D]"
+                style={{
+                  textShadow: "0 2px 0 #072513, 0 4px 12px rgba(163,240,109,0.35)",
+                }}
+              >
+                AUTO×QUANT
+              </span>
+              <button
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close navigation menu"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-white/30 bg-[#091D42] text-white hover:bg-[#0E2C63]"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Subheading: SELECT YOUR DESTINATION */}
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#9EB3D6]">
+              SELECT YOUR DESTINATION
+            </p>
+
+            {/* Numbered Menu Links with dividers strictly matching reference screenshot */}
+            <ul className="mt-4 flex flex-col divide-y divide-white/10">
+              {NAV_LINKS.map((link, idx) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => scrollToTarget(e, link.id)}
+                    className="flex min-h-[52px] items-center gap-4 py-2 font-pixel text-lg text-white transition-colors hover:text-[#A3F06D]"
+                  >
+                    <span className="font-mono text-xs font-semibold text-[#22E5FF]">
+                      0{idx + 1}
+                    </span>
+                    <span>{link.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Solid Lime REGISTER button strictly matching screenshot */}
+            <div className="mt-6">
+              <Link
+                href="/register"
+                onClick={() => setMenuOpen(false)}
+                className="flex min-h-[46px] w-full items-center justify-center rounded-[3px] bg-[#A3F06D] font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)]"
+              >
+                REGISTER
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </>

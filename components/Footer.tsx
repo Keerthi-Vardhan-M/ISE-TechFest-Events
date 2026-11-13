@@ -66,7 +66,7 @@ export default function Footer({ onOpenRegister }: FooterProps) {
               SAME CIRCUITS. BIGGER DREAMS.
             </p>
             <p className="mt-1 font-mono text-xs tracking-wider text-[#9EB3D6]">
-              {ORGANISER_INFO.collegeName}, {ORGANISER_INFO.city}. December 2026.
+              {ORGANISER_INFO.collegeName}, {ORGANISER_INFO.city}. 25 November 2026.
             </p>
           </div>
 

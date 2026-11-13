@@ -36,6 +36,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
         return;
       }
 
+      // Cards with pinned mascots smoothly fade & rise as one solid unit
       gsap.fromTo(
         cards,
         { y: 36, opacity: 0, scale: 0.96 },

@@ -163,27 +163,9 @@ export default function RegisterPage() {
         />
       )}
 
-      {/* Top Navbar Header */}
-      <header className="sticky top-0 z-40 border-b border-[#0A1B3D]/15 bg-[#040F24] text-white shadow-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3.5 sm:px-6">
-          <Link
-            href="/#events"
-            className="group inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[#D8E3F5] transition-colors hover:text-[#A3F06D]"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to Events</span>
-          </Link>
-
-          <div className="flex items-center gap-2 font-pixel text-xs text-[#A3F06D]">
-            <span className="inline-block h-2 w-2 rounded-full bg-[#A3F06D] animate-pulse" />
-            <span>AUTO×QUANT &apos;26</span>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Banner with Theme Floating Islands Backdrop */}
-      <div className="relative overflow-hidden border-b-2 border-[#0A1B3D] bg-[#020b1f] px-4 py-12 text-white sm:px-6 sm:py-16">
-        <div className="pointer-events-none absolute inset-0 opacity-40">
+      <div className="relative overflow-hidden bg-[#0a2558] px-4 pt-10 pb-20 text-white sm:px-6 sm:pt-14 sm:pb-28">
+        <div className="pointer-events-none absolute inset-0 opacity-50">
           <Image
             src="/images/hero-sky-bg.jpg"
             alt="Floating voxel arena banner"
@@ -193,25 +175,41 @@ export default function RegisterPage() {
             className="object-cover object-center"
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020b1f] via-[#020b1f]/60 to-transparent" />
+
+        {/* Smooth sky-to-cream gradient fade strictly matching reference screenshot */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44 md:h-52"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(135, 180, 230, 0.25) 30%, rgba(195, 218, 240, 0.65) 60%, rgba(240, 238, 225, 0.95) 88%, #FAF5E8 100%)",
+          }}
+        />
+
+        {/* Top Floating Back Link */}
+        <div className="relative z-20 mx-auto max-w-5xl mb-6">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-white/80 transition-colors hover:text-[#A3F06D]"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 text-[#A3F06D]" />
+            <span>HOMEPAGE</span>
+          </Link>
+        </div>
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 border border-[#A3F06D]/40 bg-[#0A1B3D]/80 px-3.5 py-1 font-mono text-xs uppercase tracking-widest text-[#A3F06D] shadow-sm backdrop-blur-md">
-            <span>OFFICIAL PORTAL</span>
-            <span>•</span>
-            <span className="font-bold text-white">FREE ENTRY</span>
-            <span>•</span>
-            <span className="text-[#22E5FF]">₹36,000+ PRIZE POOL</span>
-          </div>
-
           <h1
-            className="mt-4 font-pixel text-3xl font-extrabold uppercase tracking-wide text-[#FAF5E8] sm:text-5xl md:text-6xl"
-            style={{ textShadow: "0 3px 0 #040F24, 0 0 20px rgba(163,240,109,0.3)" }}
+            className="font-pixel text-3xl font-extrabold uppercase tracking-wide text-[#FAF5E8] sm:text-5xl md:text-6xl"
+            style={{
+              textShadow: "0 4px 0 #040F24, 0 8px 24px rgba(0,0,0,0.9), 0 0 30px rgba(163,240,109,0.25)",
+            }}
           >
             TEAM REGISTRATION
           </h1>
 
-          <p className="mx-auto mt-3 max-w-2xl font-mono text-xs text-[#D8E3F5] sm:text-sm">
+          <p
+            className="mx-auto mt-3 max-w-2xl font-mono text-xs text-[#D8E3F5] sm:text-sm"
+            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}
+          >
             Register your engineering squad for the flagship Robotics Automation &amp; QuantFinance tournaments. Open to all college students.
           </p>
         </div>
@@ -359,10 +357,11 @@ export default function RegisterPage() {
                       <div className="flex items-start justify-between">
                         <div className="relative h-16 w-16 overflow-hidden rounded border border-[#D9D0B8] bg-[#FAF5E8] p-1 shadow-sm">
                           <Image
-                            src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
+                            src={isAutomate ? "/images/event-automate.png" : "/images/event-quant.png"}
                             alt={ev.name}
                             fill
                             sizes="64px"
+                            unoptimized
                             className="object-contain"
                           />
                         </div>

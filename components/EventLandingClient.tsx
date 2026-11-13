@@ -89,7 +89,6 @@ export default function EventLandingClient() {
         <OrganisedBy />
       </main>
       <Footer />
-      <StickyRegisterBar />
     </>
   );
 }

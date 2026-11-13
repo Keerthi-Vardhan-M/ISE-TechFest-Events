@@ -58,19 +58,19 @@ export interface EventConfig {
 }
 
 export const ORGANISER_INFO = {
-  clubName: "Quant Club",
-  collegeName: "MSRIT",
+  clubName: "Voice Club",
+  collegeName: "MSRIT ISE",
   city: "Bengaluru",
   logoText: "AUTO×QUANT",
   festName: "AUTOMATE × QUANT '26",
-  heroEyebrow: "QUANT CLUB • MSRIT PRESENTS",
+  heroEyebrow: "VOICE CLUB • MSRIT ISE PRESENTS",
   heroHeadline: "AUTOMATE × QUANT",
   heroSubline:
-    "Two flagship arenas — Robotics Automation & Quantitative Finance. December 2026 • Main Campus.",
+    "Two flagship arenas — Robotics Automation & Quantitative Finance. 25 November 2026 • Main Campus.",
   contactEmail: "events@campusfest.edu",
   contactPhone: "+91 98765 43210",
   upiId: "techfest.club@okaxis",
-  upiPayeeName: "Quant Club",
+  upiPayeeName: "Voice Club",
   siteUrl: "https://automate-quant-events.vercel.app",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
@@ -82,16 +82,16 @@ export const ORGANISER_INFO = {
 
 export const ABOUT_SECTION = {
   eyebrow: "CAMPUS QUEST",
-  titlePrefix: "Engineering Arena",
-  titleHighlight: "December 2026.",
+  titlePrefix: "TechFest back in",
+  titleHighlight: "November 2026.",
   questRole: "EVENT GUIDE",
   questSubtitle: "Your first quest starts here.",
   questDescription:
     "From autonomous robotic pipelines and hardware sprints to live simulated trading floors and alpha backtesting — two high-stakes arenas built for builders and quants.",
   metrics: [
-    { label: "DAYS", value: 2, suffix: "" },
+    { label: "DAYS", value: 1, suffix: "" },
     { label: "FLAGSHIP EVENTS", value: 2, suffix: "" },
-    { label: "PRIZE POOL", value: 50000, prefix: "₹", suffix: "+" },
+    { label: "PRIZE POOL", value: 20000, prefix: "₹", suffix: "+" },
     { label: "EXPECTED BUILDERS", value: 400, suffix: "+" },
   ],
 } as const;
@@ -106,9 +106,9 @@ export const EVENTS: Record<EventId, EventConfig> = {
     tagline: "Design, program, and deploy an automated pipeline that eliminates repetitive human effort.",
     description:
       "Teams engineer a robotic, embedded, or hybrid workflow system capable of sorting, picking, or automating a multi-step industrial or campus task under strict cycle-time and accuracy constraints.",
-    dateISO: "2026-12-12T09:30:00+05:30",
-    dateDisplay: "12 Dec 2026",
-    timeDisplay: "09:30 AM – 04:30 PM IST",
+    dateISO: "2026-11-25T09:00:00+05:30",
+    dateDisplay: "25 Nov 2026",
+    timeDisplay: "09:00 AM – 05:00 PM IST",
     venue: "Robotics Lab, Block A",
     teamSize: {
       min: 3,
@@ -118,11 +118,11 @@ export const EVENTS: Record<EventId, EventConfig> = {
     feeInr: 0,
     feeDisplay: "FREE",
     seatCap: 60,
-    prizePool: "₹18,000",
+    prizePool: "₹10,000",
     podium: [
-      { rank: "1st", title: "Grand Automator", reward: "₹10,000 + Trophy" },
-      { rank: "2nd", title: "Runner Up", reward: "₹5,000 + Certificate" },
-      { rank: "3rd", title: "Precision Award", reward: "₹3,000 + Certificate" },
+      { rank: "1st", title: "Grand Automator", reward: "₹5,000 + Trophy" },
+      { rank: "2nd", title: "Runner Up", reward: "₹3,000 + Certificate" },
+      { rank: "3rd", title: "Precision Award", reward: "₹2,000 + Certificate" },
     ],
     rounds: [
       {
@@ -194,9 +194,9 @@ export const EVENTS: Record<EventId, EventConfig> = {
     tagline: "Decode market microstructure, backtest alpha, and out-trade the floor under live volatility.",
     description:
       "A high-intensity quantitative finance and simulated trading competition. Participants build systematic strategies, manage drawdown, and execute under simulated order-book shocks.",
-    dateISO: "2026-12-13T09:30:00+05:30",
-    dateDisplay: "13 Dec 2026",
-    timeDisplay: "09:30 AM – 04:30 PM IST",
+    dateISO: "2026-11-25T09:00:00+05:30",
+    dateDisplay: "25 Nov 2026",
+    timeDisplay: "09:00 AM – 05:00 PM IST",
     venue: "Trading Lab, Seminar Hall",
     teamSize: {
       min: 3,
@@ -206,11 +206,11 @@ export const EVENTS: Record<EventId, EventConfig> = {
     feeInr: 0,
     feeDisplay: "FREE",
     seatCap: 60,
-    prizePool: "₹18,000",
+    prizePool: "₹10,000",
     podium: [
-      { rank: "1st", title: "Alpha Architect", reward: "₹10,000 + Trophy" },
-      { rank: "2nd", title: "Quant Strategist", reward: "₹5,000 + Certificate" },
-      { rank: "3rd", title: "Risk Master", reward: "₹3,000 + Certificate" },
+      { rank: "1st", title: "Alpha Architect", reward: "₹5,000 + Trophy" },
+      { rank: "2nd", title: "Quant Strategist", reward: "₹3,000 + Certificate" },
+      { rank: "3rd", title: "Risk Master", reward: "₹2,000 + Certificate" },
     ],
     rounds: [
       {
@@ -263,7 +263,7 @@ export const EVENTS: Record<EventId, EventConfig> = {
       {
         question: "Can one person register for both events?",
         answer:
-          "Yes! Automate Boring Task is on 12 Dec and QuantFinance is on 13 Dec, so you can register for both individually.",
+          "Yes! Both events take place on 25 November 2026 with staggered stages, so your team can register for both tracks individually.",
       },
     ],
     contact: {
@@ -425,12 +425,12 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "When and where are the competitions hosted?",
     answer:
-      "12–13 December 2026 at MSRIT, Bengaluru (Robotics Lab Block A for Automate Boring Task and Seminar Hall for QuantFinance).",
+      "25 November 2026 (09:00 AM – 05:00 PM IST) at MSRIT, Bengaluru (Robotics Lab Block A for Automate Boring Task and Seminar Hall for QuantFinance).",
   },
   {
     question: "Can our team participate in both events?",
     answer:
-      "Yes! Automate Boring Task takes place on 12 December and QuantFinance on 13 December, so your team can register for both tracks individually.",
+      "Yes! Automate Boring Task and QuantFinance are scheduled on 25 November 2026, and teams can register for both tracks individually.",
   },
   {
     question: "What hardware or software do we need to bring?",
@@ -450,7 +450,7 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "What prizes and certificates will participants receive?",
     answer:
-      "₹36,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹10,000, 2nd: ₹5,000, 3rd: ₹3,000), plus championship trophies and verified participation certificates for all registered teams.",
+      "₹20,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹5,000, 2nd: ₹3,000, 3rd: ₹2,000 for each event), plus championship trophies and verified participation certificates for all registered teams.",
   },
   {
     question: "Will food, Wi-Fi, and accommodation be provided?",
@@ -487,20 +487,34 @@ export interface SponsorTier {
 }
 
 export const SPONSORS_DATA = {
-  eyebrow: "BACKED BY INDUSTRY LEADERS",
+  eyebrow: "BACKED BY INDUSTRY LEADERS & INSTITUTIONS",
   title: "SPONSORS",
   subtitle: "POWERING THE NEXT GENERATION OF BUILDERS & QUANTS",
   tiers: [
     {
-      name: "TITLE SPONSOR",
-      accent: "#FF6B35",
+      name: "OFFICIAL SPONSORS",
+      accent: "#22E5FF",
       sponsors: [
         {
-          name: "GitHub",
-          tier: "Title Sponsor",
-          logo: "github",
-          url: "https://github.com",
-          desc: "The world's leading developer and innovation platform",
+          name: "Google Developer Groups",
+          tier: "Sponsor",
+          logo: "gdg",
+          url: "https://developers.google.com/community/gdg",
+          desc: "Global community of developers powered by Google technology",
+        },
+        {
+          name: "Voice Club",
+          tier: "Sponsor",
+          logo: "voice",
+          url: "#",
+          desc: "Premier tech & public speaking community at MSRIT",
+        },
+        {
+          name: "MSRIT",
+          tier: "Sponsor",
+          logo: "msrit",
+          url: "https://msrit.edu",
+          desc: "Ramaiah Institute of Technology, Bengaluru",
         },
       ],
     },

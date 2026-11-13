@@ -63,26 +63,13 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
     <div className="min-h-screen cream-dot-grid text-[#0A1B3D]">
       {/* Top Header / Breadcrumbs Bar */}
       <header className="sticky top-0 z-40 border-b border-[#D9D0B8] bg-[#FAF5E8]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-end px-4 py-3 sm:px-6">
           <Link
-            href="/#events"
-            className="group inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[#4B5C7D] transition-colors hover:text-[#0A1B3D]"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to All Events</span>
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <span className="hidden font-pixel text-xs text-[#4B5C7D] sm:inline-block">
-              AUTO×QUANT &apos;26
-            </span>
-            <Link
               href={`/register?event=${event.id}`}
               className="inline-flex min-h-[36px] items-center rounded-lg border border-[#0A1B3D] bg-[#0A1B3D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8]"
             >
               <span>Register Now</span>
             </Link>
-          </div>
         </div>
       </header>
 
@@ -140,10 +127,11 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
               <div className="relative overflow-hidden border-2 border-[#0A1B3D] bg-[#FAF5E8] p-8 shadow-[6px_6px_0_#0A1B3D]">
                 <div className="animate-float-slow relative mx-auto h-56 w-56 sm:h-72 sm:w-72">
                   <Image
-                    src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
+                    src={isAutomate ? "/images/event-automate.png" : "/images/event-quant.png"}
                     alt={event.name}
                     fill
                     priority
+                    unoptimized
                     sizes="(max-width: 768px) 256px, 320px"
                     className="object-contain drop-shadow-[0_12px_24px_rgba(10,27,61,0.2)]"
                   />

@@ -49,14 +49,14 @@ export default function Prizes() {
           id: "silver",
           rank: "2ND",
           label: "1ST RUNNER UP",
-          amount: "₹5,000",
+          amount: "₹3,000",
           sizeClass: "w-44 h-52 sm:w-56 sm:h-64",
         },
         {
           id: "gold",
           rank: "1ST",
           label: "CHAMPION",
-          amount: "₹10,000",
+          amount: "₹5,000",
           sizeClass: "w-52 h-64 sm:w-64 sm:h-76 -translate-y-3",
           isGrand: true,
         },
@@ -64,7 +64,7 @@ export default function Prizes() {
           id: "bronze",
           rank: "3RD",
           label: "2ND RUNNER UP",
-          amount: "₹3,000",
+          amount: "₹2,000",
           sizeClass: "w-40 h-48 sm:w-52 sm:h-60",
         },
       ];
@@ -114,7 +114,7 @@ export default function Prizes() {
           PRIZES
         </h2>
         <p className="mt-2 font-mono text-xs uppercase tracking-[0.28em] text-[#4B5C7D]">
-          TOTAL POOL • ₹36,000+ IN CASH &amp; CRYSTAL TROPHIES
+          TOTAL POOL • ₹20,000+ IN CASH &amp; CRYSTAL TROPHIES
         </p>
 
         {/* Clean Cream/Navy Track Filter */}

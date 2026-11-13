@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { getEarliestEventDateISO, ORGANISER_INFO } from "@/content/events";
-import { ensureGsapRegistered, isTouchDevice, prefersReducedMotion } from "@/lib/motion";
+import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
 
 interface TimeLeft {
   days: number;
@@ -15,7 +15,22 @@ interface TimeLeft {
 }
 
 function computeTimeLeft(targetISO: string): TimeLeft {
-  const diff = Math.max(0, new Date(targetISO).getTime() - Date.now());
+  const targetTime = new Date(targetISO).getTime();
+  const now = Date.now();
+  let diff = targetTime - now;
+
+  // Fallback: If device clock is set past target date or has discrepancy, show countdown to 25 Nov
+  if (isNaN(diff) || diff <= 0) {
+    const targetDate = new Date(targetISO);
+    const currentDate = new Date();
+    // Compute remaining to Nov 25 using current year or next
+    let nextTarget = new Date(currentDate.getFullYear(), 10, 25, 9, 0, 0);
+    if (nextTarget.getTime() <= now) {
+      nextTarget = new Date(currentDate.getFullYear() + 1, 10, 25, 9, 0, 0);
+    }
+    diff = Math.max(0, nextTarget.getTime() - now);
+  }
+
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
     hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
@@ -33,11 +48,9 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const targetISO = getEarliestEventDateISO();
-  const [mounted, setMounted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => computeTimeLeft(targetISO));
 
   useEffect(() => {
-    setMounted(true);
     setTimeLeft(computeTimeLeft(targetISO));
     const id = setInterval(() => {
       setTimeLeft(computeTimeLeft(targetISO));
@@ -57,33 +70,16 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         } else {
           gsap.fromTo(
             items,
-            { y: 32, opacity: 0, scale: 0.97 },
+            { y: 24, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
-              duration: 1.05,
+              duration: 0.9,
               stagger: 0.08,
-              ease: "power4.out",
+              ease: "power3.out",
             }
           );
         }
-      }
-
-      if (prefersReducedMotion()) return;
-
-      // Clean subtle content entrance on scroll - background stays completely fixed and static
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
-
-      if (contentRef.current) {
-        tl.to(contentRef.current, { y: -36, opacity: 0.12, ease: "none" }, 0);
       }
     }, heroRef);
 
@@ -106,78 +102,89 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#020b1f] px-4 pb-14 pt-20 sm:px-8"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#020b1f] px-0 pt-16 pb-12 text-white sm:pt-24 sm:pb-16"
     >
-      {/* Entire 16:9 Artwork permanently fixed without any zoom, cropping, or shifting */}
+      {/* Background artwork: mobile gets the portrait bull artwork, desktop gets the 2K panoramic sky */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#020b1f]"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
-        <Image
-          src="/images/hero-sky-bg.jpg"
-          alt="Floating voxel island sky backdrop"
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="object-contain object-center"
-        />
+        <picture className="block h-full w-full">
+          <source media="(max-width: 767px)" srcSet="/images/hero-bull-mobile.jpg" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-sky-bg.jpg"
+            alt="Floating voxel island sky backdrop"
+            className="h-full w-full object-cover object-[22%_top] md:object-center"
+            style={{
+              imageRendering: "crisp-edges",
+              filter: "contrast(1.06) saturate(1.08) brightness(1.02)",
+            }}
+          />
+        </picture>
 
-        {/* Soft atmospheric gradient shade on the right half to guarantee 100% crisp text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#020b1f]/25 to-[#020b1f]/70" />
+        {/* Mobile atmospheric contrast wash so text is readable over bull */}
+        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-[#020b1f]/35 via-transparent to-[#020b1f]/65" />
 
-        {/* Soft misty cloud sky-to-cream gradient transition into the About section at the very bottom */}
+        {/* Desktop-only subtle right-side gradient so text is crisp without dimming the bull/bear/clouds */}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-[#020b1f]/15 to-[#020b1f]/70" />
+
+        {/* Smooth bluish and sand shade transition melting seamlessly into the section below */}
         <div
-          className="absolute inset-x-0 bottom-0 h-16 sm:h-20"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-40 md:h-48"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 0%, rgba(205, 225, 242, 0.25) 50%, rgba(235, 242, 248, 0.8) 85%, #FAF5E8 100%)",
+              "linear-gradient(to bottom, transparent 0%, rgba(68, 128, 186, 0.25) 28%, rgba(132, 172, 210, 0.52) 55%, rgba(216, 212, 192, 0.8) 82%, #FAF5E8 100%)",
           }}
         />
       </div>
 
-      {/* Right-aligned content block strictly matching the reference screenshot design */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl justify-center lg:justify-end">
-        <div
-          ref={contentRef}
-          className="flex max-w-xl flex-col items-center text-center rounded-xl p-4 sm:p-6 lg:mr-6 lg:w-[50%] lg:p-0"
-        >
-          {/* Eyebrow: QUANT CLUB • MSRIT PRESENTS */}
-          <p className="hero-reveal font-mono text-[11px] uppercase tracking-[0.28em] text-[#D8E3F5] sm:text-xs">
-            {ORGANISER_INFO.heroEyebrow}
+      {/* Hero Content — strictly centered layout on mobile, right-aligned on desktop matching reference */}
+      <div
+        ref={contentRef}
+        className="relative z-10 mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center px-4 text-center lg:mr-8 lg:max-w-2xl lg:items-end lg:text-right"
+      >
+        <div className="flex w-full flex-col items-center text-center lg:items-end lg:text-right">
+          {/* Eyebrow: VOICE CLUB • MSRIT ISE PRESENTS with MSRIT ISE highlighted */}
+          <p className="hero-reveal font-mono text-[10px] uppercase tracking-[0.28em] text-[#D8E3F5] sm:text-xs">
+            VOICE CLUB •{" "}
+            <span className="font-bold text-[#A3F06D] drop-shadow-[0_0_8px_rgba(163,240,109,0.6)]">
+              MSRIT ISE
+            </span>{" "}
+            PRESENTS
           </p>
 
           {/* Event Title: AUTOMATE × QUANT */}
           <h1
-            className="hero-reveal mt-2 font-pixel text-4xl font-extrabold tracking-wide text-[#A3F06D] sm:text-5xl md:text-6xl lg:text-7xl"
+            className="hero-reveal mt-2 font-pixel text-4xl font-extrabold tracking-tight text-[#A3F06D] sm:text-6xl md:text-7xl"
             style={{
-              textShadow: "0 4px 0 #072513, 0 8px 0 #040F24, 0 12px 24px rgba(0,0,0,0.8)",
+              textShadow: "0 3px 0 #072513, 0 6px 0 #040F24, 0 10px 24px rgba(0,0,0,0.8)",
             }}
           >
             {ORGANISER_INFO.heroHeadline}
           </h1>
 
-          {/* Refined Diamond Star Divider */}
-          <div className="hero-reveal my-3 flex w-52 items-center justify-center gap-2.5 text-white/40">
+          {/* Star Divider matching reference screenshot */}
+          <div className="hero-reveal my-2.5 flex w-44 items-center justify-center gap-2 text-white/40 sm:my-3 sm:w-56">
             <div className="h-px flex-1 bg-white/30" />
             <span className="text-xs text-[#A3F06D]">✦</span>
             <div className="h-px flex-1 bg-white/30" />
           </div>
 
-          {/* Fest Name & Edition */}
-          <p className="hero-reveal font-mono text-xs uppercase tracking-[0.26em] text-white sm:text-sm">
+          {/* Subtitle: CHANGE OF ERA / ANNUAL FEST 2026 */}
+          <p className="hero-reveal font-mono text-xs uppercase tracking-[0.24em] text-white sm:text-sm">
             ANNUAL TECH SYMPOSIUM 2026
           </p>
 
-          {/* Date & Venue */}
-          <p className="hero-reveal mt-1.5 text-sm text-[#D8E3F5] sm:text-base">
-            December 2026 • {ORGANISER_INFO.collegeName}, {ORGANISER_INFO.city}
+          {/* Date & Location: "25 November 2026 • Bengaluru" */}
+          <p className="hero-reveal mt-1 text-xs text-[#D8E3F5] sm:text-sm">
+            25 November 2026 • {ORGANISER_INFO.city}
           </p>
 
-          {/* Compact Countdown matching older 4-box layout */}
+          {/* Countdown timer */}
           <div
             aria-label="Countdown to earliest event"
-            className="hero-reveal mt-5 grid grid-cols-4 gap-2"
+            className="hero-reveal mt-4 grid grid-cols-4 gap-1.5 sm:mt-5 sm:gap-2.5"
           >
             {[
               { label: "DAYS", value: timeLeft.days },
@@ -187,59 +194,51 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             ].map((unit) => (
               <div
                 key={unit.label}
-                className="flex min-w-[62px] flex-col items-center border border-white/25 bg-[#040F24]/80 px-2.5 py-2 backdrop-blur-md shadow-md sm:min-w-[74px]"
+                className="flex min-w-[56px] flex-col items-center border border-white/25 bg-[#040F24]/80 px-2 py-1.5 backdrop-blur-md shadow-md sm:min-w-[70px] sm:py-2"
               >
                 <span
                   suppressHydrationWarning
-                  className="font-pixel text-lg font-bold tabular-nums text-white sm:text-xl"
+                  className="font-pixel text-base font-bold tabular-nums text-white sm:text-xl"
                 >
-                  {mounted ? String(unit.value).padStart(2, "0") : "00"}
+                  {String(unit.value).padStart(2, "0")}
                 </span>
-                <span className="mt-0.5 font-mono text-[9px] tracking-widest text-[#9EB3D6]">
+                <span className="font-mono text-[8px] tracking-widest text-[#9EB3D6] sm:text-[9px]">
                   {unit.label}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Two Action Buttons strictly matching reference screenshot */}
-          <div className="hero-reveal mt-6 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-            {/* Left Button: Crisp Solid Lime-Green REGISTER button */}
+          {/* Two Hero Action Buttons strictly matching reference screenshot (Slide 3) */}
+          <div className="hero-reveal mt-5 flex w-full max-w-sm flex-row items-center justify-center gap-2.5 sm:mt-6 sm:max-w-none sm:gap-3">
+            {/* Left: Solid Lime REGISTER button */}
             <Link
               href="/register"
-              className="inline-flex min-h-[46px] w-full items-center justify-center rounded-[3px] bg-[#A3F06D] px-8 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.4)] transition-all duration-200 hover:bg-[#B8F588] hover:shadow-[0_6px_22px_rgba(163,240,109,0.6)] sm:w-auto"
+              className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[3px] bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)] transition-all hover:bg-[#B8F588] sm:min-h-[46px] sm:flex-initial sm:px-8"
             >
               REGISTER
             </Link>
 
-            {/* Right Button: Dark Navy EXPLORE EVENTS button with light border */}
+            {/* Right: Dark Navy EXPLORE EVENTS button */}
             <a
               href="#events"
               onClick={(e) => scrollToSection(e, "events")}
-              className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-[3px] border border-white/35 bg-[#0B214A]/90 px-7 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-md backdrop-blur-sm transition-all duration-200 hover:bg-[#0E2C63] hover:border-white sm:w-auto"
+              className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-[3px] border border-white/35 bg-[#0B214A]/90 px-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-md backdrop-blur-sm transition-all hover:bg-[#0E2C63] hover:border-white sm:min-h-[46px] sm:flex-initial sm:px-7"
             >
               <span>EXPLORE EVENTS</span>
               <span className="text-[#A3F06D]">→</span>
             </a>
           </div>
 
-          {/* Track Quick Pills matching DAY 0 -> DAY 1 -> */}
-          <div className="hero-reveal mt-4 flex flex-wrap items-center justify-center gap-2">
+          {/* Track Quick Links matching reference "SCHEDULE, DAY 0 TO DAY 3 →" */}
+          <div className="hero-reveal mt-4">
             <a
               href="#events"
               onClick={(e) => scrollToSection(e, "events")}
-              className="inline-flex min-h-[34px] items-center gap-1.5 border border-white/25 bg-[#040F24]/75 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#22E5FF]"
+              className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-white/90 underline decoration-[#A3F06D]/60 decoration-1 underline-offset-4 transition-colors hover:text-[#A3F06D]"
             >
-              <span>AUTOMATE</span>
-              <span className="text-[#22E5FF]">→</span>
-            </a>
-            <a
-              href="#events"
-              onClick={(e) => scrollToSection(e, "events")}
-              className="inline-flex min-h-[34px] items-center gap-1.5 border border-white/25 bg-[#040F24]/75 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#19F58A]"
-            >
-              <span>QUANTFINANCE</span>
-              <span className="text-[#19F58A]">→</span>
+              <span>EXPLORE SCHEDULE &amp; ARENAS</span>
+              <span className="text-[#A3F06D] transition-transform group-hover:translate-x-1">→</span>
             </a>
           </div>
         </div>

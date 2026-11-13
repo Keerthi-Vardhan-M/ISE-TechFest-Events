@@ -118,7 +118,8 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="cream-dot-grid relative text-[#0A1B3D]"
+      className="relative text-[#0A1B3D]"
+      style={{ background: "linear-gradient(135deg, #E8DCC8 0%, #F0E6D2 40%, #EDE3CF 100%)" }}
     >
       {/* Expansive wide container exactly matching reference screenshot */}
       <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-24">
@@ -154,8 +155,8 @@ export default function About() {
 
         {/* Two-column layout strictly matching reference screenshot with dialogue box & chamfered campus card */}
         <div className="mt-10 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
-          {/* Left Quest Dialog Box with Campus Guide avatar */}
-          <div className="about-left flex flex-col justify-between border-2 border-[#C4B79B] bg-[#FAF5E8] p-6 shadow-[4px_4px_0_#0A1B3D] sm:p-7 md:p-8 lg:col-span-6">
+          {/* Left Quest Dialog Box with Campus Guide avatar — restored to clean light whitish cream */}
+          <div className="about-left flex flex-col justify-between border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 shadow-[4px_4px_0_#0A1B3D] sm:p-7 md:p-8 lg:col-span-6">
             <div>
               <div className="flex items-center gap-4 sm:gap-5">
                 <div className="relative h-14 w-14 shrink-0 overflow-hidden border border-[#C4B79B] bg-[#F5EFE0] p-1 shadow-sm sm:h-16 sm:w-16">
@@ -208,8 +209,7 @@ export default function About() {
                 />
               </div>
             </div>
-            <div className="mt-2.5 flex items-center justify-between px-1 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
-              <span>OUR NEW CAMPUS</span>
+            <div className="mt-2.5 flex items-center justify-end px-1 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
               <span>{ORGANISER_INFO.city.toUpperCase()}</span>
             </div>
           </div>

@@ -34,22 +34,23 @@ export default function EventCard({
       onMouseEnter={() => onHoverTheme(event.id)}
       onMouseLeave={() => onHoverTheme(null)}
       onClick={handleCardClick}
-      className="event-card group relative mx-auto mt-10 flex w-full max-w-[360px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/30 bg-[#0A1E46]/95 p-5 shadow-[0_12px_32px_rgba(4,15,36,0.65)] transition-all duration-200 hover:border-[#22E5FF]/70 sm:max-w-[390px] sm:p-6 lg:max-w-[400px]"
+      className="event-card group relative mx-auto mt-20 flex w-full max-w-[370px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/30 bg-[#0A1E46]/95 p-5 shadow-[0_12px_32px_rgba(4,15,36,0.65)] transition-all duration-200 hover:border-[#22E5FF]/70 sm:max-w-[400px] sm:p-6 lg:max-w-[420px]"
     >
       <div>
-        {/* Top Row: 3D Mascot popping slightly above top edge + TEAM badge */}
-        <div className="mb-2.5 flex items-start justify-between">
-          <div className="relative -mt-16 h-24 w-28 sm:-mt-18 sm:h-28 sm:w-32 md:h-30 md:w-34">
+        {/* Top Row: Mascot pinned solidly overlapping card top edge + TEAM badge */}
+        <div className="mb-3 flex items-start justify-between">
+          <div className="relative -mt-24 h-40 w-44 sm:-mt-28 sm:h-48 sm:w-52 md:h-52 md:w-56 pointer-events-none">
             <Image
-              src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
+              src={isAutomate ? "/images/event-automate.png" : "/images/event-quant.png"}
               alt={
                 isAutomate
                   ? "3D tech builder and robotic arm mascot"
                   : "3D golden charging bull and candlestick mascot"
               }
               fill
-              sizes="140px"
-              className="object-contain mix-blend-lighten drop-shadow-[0_10px_18px_rgba(0,0,0,0.55)]"
+              sizes="240px"
+              unoptimized
+              className="object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.75)]"
             />
           </div>
 
