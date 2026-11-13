@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { EVENTS, type EventId } from "@/content/events";
 import { ensureGsapRegistered, isTouchDevice, prefersReducedMotion } from "@/lib/motion";
-import Preloader from "./Preloader";
 import Cursor from "./Cursor";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
@@ -77,7 +76,6 @@ export default function EventLandingClient() {
 
   return (
     <>
-      <Preloader />
       <Cursor />
       <Navbar />
       <main>
