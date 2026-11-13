@@ -1,52 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import gsap from "gsap";
-import { EVENT_LIST, type EventId } from "@/content/events";
-import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
+import { EVENT_LIST, EVENTS, type EventId } from "@/content/events";
+import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
+import TrophySvg from "./TrophySvg";
 
 interface PrizeTier {
-  id: string;
+  id: "gold" | "silver" | "bronze";
   rank: string;
   label: string;
   amount: string;
-  image: string;
-  alt: string;
   sizeClass: string;
   isGrand?: boolean;
 }
-
-const THREE_PRIZES: PrizeTier[] = [
-  {
-    id: "silver",
-    rank: "2ND",
-    label: "1ST RUNNER UP",
-    amount: "₹5,000",
-    image: "/images/trophy-silver.jpg",
-    alt: "1st Runner Up Luxury Silver Crystal Trophy",
-    sizeClass: "h-48 w-48 sm:h-56 sm:w-56",
-  },
-  {
-    id: "gold",
-    rank: "1ST",
-    label: "WINNER",
-    amount: "₹10,000",
-    image: "/images/trophy-gold.jpg",
-    alt: "Grand Champion Luxury Gold Crystal Trophy",
-    sizeClass: "h-60 w-60 sm:h-72 sm:w-72 -translate-y-3",
-    isGrand: true,
-  },
-  {
-    id: "bronze",
-    rank: "3RD",
-    label: "2ND RUNNER UP",
-    amount: "₹3,000",
-    image: "/images/trophy-bronze.jpg",
-    alt: "2nd Runner Up Luxury Bronze Crystal Trophy",
-    sizeClass: "h-44 w-44 sm:h-52 sm:w-52",
-  },
-];
 
 export default function Prizes() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,6 +41,63 @@ export default function Prizes() {
 
     return () => ctx.revert();
   }, []);
+
+  const getTiers = (): PrizeTier[] => {
+    if (activeTrack === "championship") {
+      return [
+        {
+          id: "silver",
+          rank: "2ND",
+          label: "1ST RUNNER UP",
+          amount: "₹5,000",
+          sizeClass: "w-44 h-52 sm:w-56 sm:h-64",
+        },
+        {
+          id: "gold",
+          rank: "1ST",
+          label: "CHAMPION",
+          amount: "₹10,000",
+          sizeClass: "w-52 h-64 sm:w-64 sm:h-76 -translate-y-3",
+          isGrand: true,
+        },
+        {
+          id: "bronze",
+          rank: "3RD",
+          label: "2ND RUNNER UP",
+          amount: "₹3,000",
+          sizeClass: "w-40 h-48 sm:w-52 sm:h-60",
+        },
+      ];
+    }
+
+    const ev = EVENTS[activeTrack];
+    return [
+      {
+        id: "silver",
+        rank: "2ND",
+        label: ev.podium[1]?.title || "RUNNER UP",
+        amount: ev.podium[1]?.reward.split("+")[0].trim() || "₹5,000",
+        sizeClass: "w-44 h-52 sm:w-56 sm:h-64",
+      },
+      {
+        id: "gold",
+        rank: "1ST",
+        label: ev.podium[0]?.title || "CHAMPION",
+        amount: ev.podium[0]?.reward.split("+")[0].trim() || "₹10,000",
+        sizeClass: "w-52 h-64 sm:w-64 sm:h-76 -translate-y-3",
+        isGrand: true,
+      },
+      {
+        id: "bronze",
+        rank: "3RD",
+        label: ev.podium[2]?.title || "PRECISION AWARD",
+        amount: ev.podium[2]?.reward.split("+")[0].trim() || "₹3,000",
+        sizeClass: "w-40 h-48 sm:w-52 sm:h-60",
+      },
+    ];
+  };
+
+  const prizeTiers = getTiers();
 
   return (
     <section
@@ -122,30 +146,33 @@ export default function Prizes() {
           ))}
         </div>
 
-        {/* 3 Trophy Cups Podium: Silver, Gold (Center Elevated), Bronze */}
+        {/* 3 Trophy Cups Podium: Silver (Left), Gold (Center Elevated), Bronze (Right) */}
+        {/* Pure SVG trophy with transparent background - fixed directly to webpage */}
         <div className="mt-14 grid grid-cols-1 items-end justify-items-center gap-y-12 sm:grid-cols-3 sm:gap-x-8">
-          {THREE_PRIZES.map((tier) => (
+          {prizeTiers.map((tier) => (
             <div
               key={tier.id}
               className={`trophy-column group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2 ${
-                tier.isGrand ? "order-1 sm:order-2 scale-105 sm:scale-110" : tier.id === "silver" ? "order-2 sm:order-1" : "order-3"
+                tier.isGrand
+                  ? "order-1 sm:order-2 scale-105 sm:scale-110"
+                  : tier.id === "silver"
+                  ? "order-2 sm:order-1"
+                  : "order-3"
               }`}
             >
-              {/* Photorealistic Trophy Cup blending seamlessly into warm cream background */}
+              {/* Pure SVG Trophy Cup fixed seamlessly to cream background without rectangular boxes */}
               <div
-                className={`relative mx-auto ${tier.sizeClass} animate-float-slow transition-transform duration-500 ease-out group-hover:scale-108`}
+                className={`relative mx-auto flex items-center justify-center animate-float-slow transition-transform duration-500 ease-out group-hover:scale-105`}
               >
-                <Image
-                  src={tier.image}
-                  alt={tier.alt}
-                  fill
-                  sizes="(max-width: 640px) 220px, 280px"
-                  className="object-contain drop-shadow-[0_14px_24px_rgba(10,27,61,0.18)]"
+                <TrophySvg
+                  tier={tier.id}
+                  badgeText={tier.rank}
+                  className={`${tier.sizeClass} drop-shadow-[0_12px_24px_rgba(10,27,61,0.14)]`}
                 />
               </div>
 
               {/* Glowing Prize Amount & Rank Label */}
-              <div className="mt-5">
+              <div className="mt-4">
                 <p
                   className="font-heading text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
                   style={{

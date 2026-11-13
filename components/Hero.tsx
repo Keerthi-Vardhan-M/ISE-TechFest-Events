@@ -57,14 +57,13 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         } else {
           gsap.fromTo(
             items,
-            { y: 38, opacity: 0, filter: "blur(10px)", scale: 0.96 },
+            { y: 38, opacity: 0, scale: 0.96 },
             {
               y: 0,
               opacity: 1,
-              filter: "blur(0px)",
               scale: 1,
-              duration: 1.25,
-              stagger: 0.11,
+              duration: 1.15,
+              stagger: 0.09,
               ease: "power4.out",
             }
           );
@@ -73,21 +72,21 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
 
       if (prefersReducedMotion()) return;
 
-      // Scroll-scrubbed butter parallax: sky zooms smoothly while content melts upward
+      // Scroll-scrubbed butter parallax: sky zooms smoothly while content melts upward without repaint-heavy blur filters
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: 1.6,
+          scrub: 1.2,
         },
       });
 
       if (bgRef.current) {
-        tl.to(bgRef.current, { scale: 1.15, y: 55, ease: "none" }, 0);
+        tl.to(bgRef.current, { scale: 1.12, y: 45, ease: "none" }, 0);
       }
       if (contentRef.current) {
-        tl.to(contentRef.current, { y: -48, opacity: 0.08, filter: "blur(6px)", ease: "none" }, 0);
+        tl.to(contentRef.current, { y: -40, opacity: 0.1, ease: "none" }, 0);
       }
     }, heroRef);
 
