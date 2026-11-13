@@ -36,11 +36,11 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
     if (isTouchDevice() || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      duration: 1.8,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.82,
-      touchMultiplier: 1.2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
       infinite: false,
     });
 
@@ -49,7 +49,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       gsap.ticker.remove(tickerCallback);
@@ -513,9 +513,6 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
           </Link>
         </div>
       </div>
-
-      {/* Pixel Checkerboard Divider at bottom */}
-      <div className="pixel-checker-divider" aria-hidden="true" />
     </div>
   );
 }

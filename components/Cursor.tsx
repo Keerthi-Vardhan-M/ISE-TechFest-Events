@@ -48,9 +48,9 @@ export default function Cursor() {
       const target = e.target as HTMLElement | null;
       const scoped = target?.closest("[data-cursor]")?.getAttribute("data-cursor");
       if (scoped === "automate" || scoped === "quant") {
-        setVariant(scoped);
+        setVariant((prev) => (prev !== scoped ? scoped : prev));
       } else {
-        setVariant("default");
+        setVariant((prev) => (prev !== "default" ? "default" : prev));
       }
     };
 

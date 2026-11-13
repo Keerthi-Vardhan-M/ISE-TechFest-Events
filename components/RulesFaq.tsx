@@ -19,14 +19,13 @@ export default function RulesFaq() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".faq-reveal",
-        { y: 38, opacity: 0, filter: "blur(8px)" },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.15,
-          stagger: 0.1,
-          ease: "power4.out",
+          duration: 0.8,
+          stagger: 0.08,
+          ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
         }
       );

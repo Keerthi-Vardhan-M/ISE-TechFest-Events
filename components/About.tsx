@@ -17,24 +17,22 @@ export default function About() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Butter-melting staggered entrance for "ENGINEERING ARENA DECEMBER 2026."
+      // Smooth staggered entrance for "ENGINEERING ARENA DECEMBER 2026."
       if (!prefersReducedMotion()) {
         gsap.fromTo(
           ".about-title-word",
           {
-            y: 38,
+            y: 28,
             opacity: 0,
-            filter: "blur(12px)",
-            scale: 0.94,
+            scale: 0.96,
           },
           {
             y: 0,
             opacity: 1,
-            filter: "blur(0px)",
             scale: 1,
-            duration: 1.2,
-            stagger: 0.09,
-            ease: "power4.out",
+            duration: 0.9,
+            stagger: 0.06,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 85%",
@@ -47,14 +45,13 @@ export default function About() {
       // About text & image entrance (cascades right after title)
       gsap.fromTo(
         ".about-left",
-        { y: 32, opacity: 0, filter: "blur(8px)" },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.1,
-          delay: 0.18,
-          ease: "power4.out",
+          duration: 0.85,
+          delay: 0.12,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 78%",
@@ -65,14 +62,13 @@ export default function About() {
 
       gsap.fromTo(
         ".about-right",
-        { y: 32, opacity: 0, filter: "blur(8px)" },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.1,
-          delay: 0.28,
-          ease: "power4.out",
+          duration: 0.85,
+          delay: 0.2,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 78%",
@@ -256,8 +252,18 @@ export default function About() {
         </div>
       </div>
 
-      {/* Pixel Checkerboard Divider into Navy Events Section */}
-      <div className="pixel-checker-divider" aria-hidden="true" />
+      {/* Pixelated Dithering Divider into Navy Events Section */}
+      <div
+        aria-hidden="true"
+        className="h-12 w-full sm:h-16"
+        style={{
+          backgroundImage: "url('/images/footer-pixel-divider.png')",
+          backgroundRepeat: "repeat-x",
+          backgroundSize: "auto 100%",
+          backgroundPosition: "top center",
+          imageRendering: "pixelated",
+        }}
+      />
     </section>
   );
 }

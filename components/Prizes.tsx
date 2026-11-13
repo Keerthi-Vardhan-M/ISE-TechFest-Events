@@ -59,15 +59,14 @@ export default function Prizes() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".trophy-column",
-        { y: 65, opacity: 0, filter: "blur(12px)", scale: 0.92 },
+        { y: 36, opacity: 0, scale: 0.95 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
           scale: 1,
-          duration: 1.3,
-          stagger: 0.16,
-          ease: "power4.out",
+          duration: 0.85,
+          stagger: 0.12,
+          ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }
       );

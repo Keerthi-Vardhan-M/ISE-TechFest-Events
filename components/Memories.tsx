@@ -25,17 +25,15 @@ export default function Memories() {
         ".memory-char",
         {
           opacity: 0,
-          y: 28,
-          scale: 0.85,
-          filter: "blur(10px)",
+          y: 20,
+          scale: 0.9,
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          filter: "blur(0px)",
-          duration: 1.0,
-          stagger: 0.06,
+          duration: 0.8,
+          stagger: 0.05,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,

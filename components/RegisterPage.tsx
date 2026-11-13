@@ -636,8 +636,6 @@ export default function RegisterPage() {
           </div>
         )}
       </main>
-
-      <div className="pixel-checker-divider mt-12" aria-hidden="true" />
     </div>
   );
 }
