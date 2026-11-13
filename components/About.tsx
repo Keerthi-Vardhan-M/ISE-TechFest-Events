@@ -17,7 +17,34 @@ export default function About() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // About text & image entrance
+      // Butter-melting staggered entrance for "ENGINEERING ARENA DECEMBER 2026."
+      if (!prefersReducedMotion()) {
+        gsap.fromTo(
+          ".about-title-word",
+          {
+            y: 38,
+            opacity: 0,
+            filter: "blur(12px)",
+            scale: 0.94,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            scale: 1,
+            duration: 1.2,
+            stagger: 0.09,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      // About text & image entrance (cascades right after title)
       gsap.fromTo(
         ".about-left",
         { y: 32, opacity: 0, filter: "blur(8px)" },
@@ -26,6 +53,7 @@ export default function About() {
           opacity: 1,
           filter: "blur(0px)",
           duration: 1.1,
+          delay: 0.18,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -43,7 +71,7 @@ export default function About() {
           opacity: 1,
           filter: "blur(0px)",
           duration: 1.1,
-          delay: 0.1,
+          delay: 0.28,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -98,17 +126,33 @@ export default function About() {
     >
       {/* Expansive wide container exactly matching reference screenshot */}
       <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-24">
-        {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue */}
+        {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue with butter melting entrance */}
         <h2
-          className="font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-5xl md:text-6xl"
+          className="font-pixel text-3xl font-bold uppercase tracking-tight sm:text-5xl md:text-6xl"
           style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
         >
-          {ABOUT_SECTION.titlePrefix}{" "}
+          <span className="text-[#0A1B3D]">
+            {ABOUT_SECTION.titlePrefix.split(" ").map((word, i) => (
+              <span
+                key={i}
+                className="about-title-word inline-block mr-[0.3em] transition-transform duration-300 hover:-translate-y-1"
+              >
+                {word}
+              </span>
+            ))}
+          </span>
           <span
-            className="text-[#1648A8]"
+            className="text-[#1648A8] inline-block"
             style={{ textShadow: "0 0 16px rgba(22,72,168,0.28)" }}
           >
-            {ABOUT_SECTION.titleHighlight}
+            {ABOUT_SECTION.titleHighlight.split(" ").map((word, i) => (
+              <span
+                key={i}
+                className="about-title-word inline-block mr-[0.25em] last:mr-0 transition-transform duration-300 hover:-translate-y-1"
+              >
+                {word}
+              </span>
+            ))}
           </span>
         </h2>
 
