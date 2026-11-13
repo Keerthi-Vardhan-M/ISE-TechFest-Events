@@ -144,17 +144,18 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           alt="Floating voxel island sky backdrop"
           fill
           priority
+          unoptimized
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Readability vignette on right side */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#040F24]/20 via-[#040F24]/30 to-[#040F24]/70" />
-        {/* Soft misty cloud sky-to-cream gradient transition into the About section matching reference screenshot */}
+        {/* Subtle localized text readability vignette - preserves 100% original image clarity and colors */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#040F24]/10 to-[#040F24]/45" />
+        {/* Soft misty cloud sky-to-cream gradient transition into the About section */}
         <div
-          className="absolute inset-x-0 bottom-0 h-44 sm:h-56 md:h-64"
+          className="absolute inset-x-0 bottom-0 h-32 sm:h-44 md:h-52"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 0%, rgba(188, 214, 238, 0.35) 28%, rgba(205, 225, 242, 0.75) 58%, rgba(235, 242, 248, 0.94) 82%, #FAF5E8 100%)",
+              "linear-gradient(to bottom, transparent 0%, rgba(205, 225, 242, 0.3) 45%, rgba(235, 242, 248, 0.8) 80%, #FAF5E8 100%)",
           }}
         />
       </div>
