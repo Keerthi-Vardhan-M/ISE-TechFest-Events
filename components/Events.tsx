@@ -86,7 +86,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2">
           {EVENT_LIST.map((ev) => (
             <EventCard
               key={ev.id}
@@ -98,6 +98,19 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
           ))}
         </div>
       </div>
+
+      {/* Pixelated Dithering Divider transitioning from Navy Events into Light Cream Images Section */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 inset-x-0 h-12 w-full rotate-180 sm:h-16"
+        style={{
+          backgroundImage: "url('/images/footer-pixel-divider.png')",
+          backgroundRepeat: "repeat-x",
+          backgroundSize: "auto 100%",
+          backgroundPosition: "bottom center",
+          imageRendering: "pixelated",
+        }}
+      />
     </section>
   );
 }

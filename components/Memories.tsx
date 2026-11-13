@@ -66,27 +66,27 @@ export default function Memories() {
     <section
       id="memories"
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#06142E] px-2 py-4 sm:px-3 sm:py-6 md:px-4 md:py-8"
+      className="cream-dot-grid relative w-full overflow-hidden bg-[#FAF5E8] px-2 py-4 sm:px-3 sm:py-6 md:px-4 md:py-8"
     >
       {/* Background ambient radial atmosphere */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,229,255,0.06)_0%,_transparent_75%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(10,27,61,0.04)_0%,_transparent_75%)]"
       />
 
-      {/* Top and Bottom soft gradient blend masks */}
+      {/* Top and Bottom soft gradient blend masks matching light parchment theme */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 inset-x-0 z-20 h-28 bg-gradient-to-b from-[#06142E] via-[#06142E]/85 to-transparent"
+        className="pointer-events-none absolute top-0 inset-x-0 z-20 h-28 bg-gradient-to-b from-[#FAF5E8] via-[#FAF5E8]/85 to-transparent"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 inset-x-0 z-20 h-32 bg-gradient-to-t from-[#06142E] via-[#06142E]/85 to-transparent"
+        className="pointer-events-none absolute bottom-0 inset-x-0 z-20 h-32 bg-gradient-to-t from-[#FAF5E8] via-[#FAF5E8]/85 to-transparent"
       />
 
-      {/* Centered Memories Title: clean text without card box */}
+      {/* Centered Memories Title: clean text in dark navy without card box */}
       <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-        <h2 className="font-heading text-2xl font-bold uppercase tracking-[0.22em] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)] sm:text-3xl md:text-4xl">
+        <h2 className="font-heading text-2xl font-bold uppercase tracking-[0.22em] text-[#0A1B3D] drop-shadow-[0_4px_16px_rgba(250,245,232,0.95)] sm:text-3xl md:text-4xl">
           {titleLetters.map((char, i) => (
             <span
               key={i}
@@ -115,7 +115,7 @@ export default function Memories() {
                     {col.map((photo, pIdx) => (
                       <figure
                         key={`set1-${photo.id}-${pIdx}`}
-                        className="group relative h-48 w-full shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#0A1E46]/70 shadow-[0_8px_24px_rgba(4,15,36,0.6)] transition-all duration-300 ease-out hover:border-[#22E5FF]/70 hover:shadow-[0_16px_40px_rgba(34,229,255,0.2)] sm:h-56 sm:rounded-2xl md:h-60 lg:h-64"
+                        className="group relative h-48 w-full shrink-0 overflow-hidden rounded-xl border-2 border-[#D9D0B8] bg-[#FAF5E8] shadow-[0_6px_20px_rgba(10,27,61,0.08)] transition-all duration-300 ease-out hover:border-[#0A1B3D] hover:shadow-[0_12px_28px_rgba(10,27,61,0.15)] sm:h-56 sm:rounded-2xl md:h-60 lg:h-64"
                       >
                         <Image
                           src={photo.src}
@@ -124,12 +124,12 @@ export default function Memories() {
                           sizes="(max-width: 768px) 50vw, 25vw"
                           className="object-cover transition-transform duration-700 ease-out group-hover:scale-106"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#06142E]/85 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1B3D]/80 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
                         <figcaption className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-white sm:bottom-3 sm:left-3.5 sm:right-3.5">
-                          <span className="font-medium text-[#D8E3F5] drop-shadow-sm">
+                          <span className="font-medium text-[#FAF5E8] drop-shadow-sm">
                             {photo.caption}
                           </span>
-                          <span className="rounded bg-[#06142E]/80 px-1.5 py-0.5 text-[9px] text-[#A3F06D]">
+                          <span className="border border-white/20 bg-[#0A1B3D]/80 px-1.5 py-0.5 text-[9px] font-bold text-[#A3F06D]">
                             2025
                           </span>
                         </figcaption>
@@ -145,7 +145,7 @@ export default function Memories() {
                     {col.map((photo, pIdx) => (
                       <figure
                         key={`set2-${photo.id}-${pIdx}`}
-                        className="group relative h-48 w-full shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#0A1E46]/70 shadow-[0_8px_24px_rgba(4,15,36,0.6)] transition-all duration-300 ease-out hover:border-[#22E5FF]/70 hover:shadow-[0_16px_40px_rgba(34,229,255,0.2)] sm:h-56 sm:rounded-2xl md:h-60 lg:h-64"
+                        className="group relative h-48 w-full shrink-0 overflow-hidden rounded-xl border-2 border-[#D9D0B8] bg-[#FAF5E8] shadow-[0_6px_20px_rgba(10,27,61,0.08)] transition-all duration-300 ease-out hover:border-[#0A1B3D] hover:shadow-[0_12px_28px_rgba(10,27,61,0.15)] sm:h-56 sm:rounded-2xl md:h-60 lg:h-64"
                       >
                         <Image
                           src={photo.src}
@@ -154,12 +154,12 @@ export default function Memories() {
                           sizes="(max-width: 768px) 50vw, 25vw"
                           className="object-cover transition-transform duration-700 ease-out group-hover:scale-106"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#06142E]/85 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1B3D]/80 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
                         <figcaption className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-white sm:bottom-3 sm:left-3.5 sm:right-3.5">
-                          <span className="font-medium text-[#D8E3F5] drop-shadow-sm">
+                          <span className="font-medium text-[#FAF5E8] drop-shadow-sm">
                             {photo.caption}
                           </span>
-                          <span className="rounded bg-[#06142E]/80 px-1.5 py-0.5 text-[9px] text-[#A3F06D]">
+                          <span className="border border-white/20 bg-[#0A1B3D]/80 px-1.5 py-0.5 text-[9px] font-bold text-[#A3F06D]">
                             2025
                           </span>
                         </figcaption>
@@ -173,8 +173,8 @@ export default function Memories() {
         </div>
       </div>
 
-      {/* Pixel Checkerboard Divider into Cream Prizes Section */}
-      <div className="pixel-checker-divider mt-8" aria-hidden="true" />
+      {/* Clean border dividing into Prizes */}
+      <div className="border-b border-[#D9D0B8] mt-6" aria-hidden="true" />
     </section>
   );
 }
