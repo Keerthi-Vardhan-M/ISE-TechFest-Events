@@ -35,9 +35,12 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
   const magneticBtnRef = useRef<HTMLButtonElement>(null);
 
   const targetISO = getEarliestEventDateISO();
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => computeTimeLeft(targetISO));
+  const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
+    setMounted(true);
+    setTimeLeft(computeTimeLeft(targetISO));
     const id = setInterval(() => {
       setTimeLeft(computeTimeLeft(targetISO));
     }, 1000);
@@ -187,8 +190,11 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
                 key={unit.label}
                 className="flex min-w-[62px] flex-col items-center border border-white/25 bg-[#040F24]/70 px-2.5 py-2 backdrop-blur-md sm:min-w-[74px]"
               >
-                <span className="font-pixel text-lg font-bold tabular-nums text-white sm:text-xl">
-                  {String(unit.value).padStart(2, "0")}
+                <span
+                  suppressHydrationWarning
+                  className="font-pixel text-lg font-bold tabular-nums text-white sm:text-xl"
+                >
+                  {mounted ? String(unit.value).padStart(2, "0") : "00"}
                 </span>
                 <span className="mt-0.5 font-mono text-[9px] tracking-widest text-[#9EB3D6]">
                   {unit.label}
