@@ -84,21 +84,19 @@ export default function Memories() {
         className="pointer-events-none absolute bottom-0 inset-x-0 z-20 h-32 bg-gradient-to-t from-[#06142E] via-[#06142E]/85 to-transparent"
       />
 
-      {/* Centered Memories Title: refined smaller size, appears when scrolling to this stage */}
+      {/* Centered Memories Title: clean text without card box */}
       <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-        <div className="rounded-2xl border border-white/20 bg-[#06142E]/80 px-6 py-3 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
-          <h2 className="font-heading text-2xl font-bold uppercase tracking-[0.22em] text-white drop-shadow-[0_4px_16px_rgba(34,229,255,0.4)] sm:text-3xl md:text-4xl">
-            {titleLetters.map((char, i) => (
-              <span
-                key={i}
-                className="memory-char inline-block will-change-transform"
-                style={{ opacity: 0 }}
-              >
-                {char}
-              </span>
-            ))}
-          </h2>
-        </div>
+        <h2 className="font-heading text-2xl font-bold uppercase tracking-[0.22em] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)] sm:text-3xl md:text-4xl">
+          {titleLetters.map((char, i) => (
+            <span
+              key={i}
+              className="memory-char inline-block will-change-transform"
+              style={{ opacity: 0 }}
+            >
+              {char}
+            </span>
+          ))}
+        </h2>
       </div>
 
       {/* Edge-to-Edge Continuous Downward Vertical Moving Gallery - Never Pauses */}
