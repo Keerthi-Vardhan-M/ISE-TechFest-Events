@@ -91,7 +91,7 @@ export const ABOUT_SECTION = {
   metrics: [
     { label: "DAYS", value: 2, suffix: "" },
     { label: "FLAGSHIP EVENTS", value: 2, suffix: "" },
-    { label: "PRIZE POOL", value: 36000, prefix: "₹", suffix: "+" },
+    { label: "PRIZE POOL", value: 50000, prefix: "₹", suffix: "+" },
     { label: "EXPECTED BUILDERS", value: 400, suffix: "+" },
   ],
 } as const;
