@@ -98,9 +98,6 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
           ))}
         </div>
       </div>
-
-      {/* Pixel Checkerboard Divider into Cream Prizes Section */}
-      <div className="pixel-checker-divider mt-20" aria-hidden="true" />
     </section>
   );
 }

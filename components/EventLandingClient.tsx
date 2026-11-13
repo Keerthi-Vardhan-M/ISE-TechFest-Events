@@ -99,8 +99,8 @@ export default function EventLandingClient() {
       <main>
         <Hero onOpenRegister={handleOpenGeneralRegister} />
         <About />
-        <Memories />
         <Events seats={seats} onSelectRegister={handleSelectRegister} />
+        <Memories />
         <Prizes />
         <Sponsors />
         <RulesFaq />
