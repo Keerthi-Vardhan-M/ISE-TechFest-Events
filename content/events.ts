@@ -493,7 +493,7 @@ export const SPONSORS_DATA = {
   tiers: [
     {
       name: "TITLE SPONSOR",
-      accent: "#22E5FF",
+      accent: "#FF6B35",
       sponsors: [
         {
           name: "GitHub",
@@ -502,25 +502,6 @@ export const SPONSORS_DATA = {
           url: "https://github.com",
           desc: "The world's leading developer and innovation platform",
         },
-      ],
-    },
-    {
-      name: "PLATFORM & CLOUD PARTNERS",
-      accent: "#A3F06D",
-      sponsors: [
-        { name: "Google Cloud", tier: "Cloud Partner", logo: "gcloud", url: "https://cloud.google.com" },
-        { name: "TradingView", tier: "Market Data Partner", logo: "tradingview", url: "https://tradingview.com" },
-        { name: "Postman", tier: "API Partner", logo: "postman", url: "https://postman.com" },
-        { name: "Vercel", tier: "Deployment Partner", logo: "vercel", url: "https://vercel.com" },
-      ],
-    },
-    {
-      name: "TRACK & COMMUNITY PARTNERS",
-      accent: "#F5C451",
-      sponsors: [
-        { name: "Zerodha Varsity", tier: "Quant Education Partner", logo: "zerodha", url: "https://zerodha.com/varsity" },
-        { name: "JetBrains", tier: "Developer Tooling", logo: "jetbrains", url: "https://jetbrains.com" },
-        { name: "Wolfram", tier: "Computational Science", logo: "wolfram", url: "https://wolfram.com" },
       ],
     },
   ] as SponsorTier[],

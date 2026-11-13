@@ -14,10 +14,13 @@ export function ensureGsapRegistered() {
 }
 
 export const MOTION_EASE = "power3.out";
+export const BUTTER_EASE = "power4.out";
+export const BUTTER_BEZIER = "cubic-bezier(0.16, 1, 0.3, 1)";
 export const MOTION_DURATION = {
-  fast: 0.3,
-  normal: 0.7,
-  reveal: 0.9,
+  fast: 0.35,
+  normal: 0.85,
+  reveal: 1.2,
+  butter: 1.5,
 } as const;
 
 export function prefersReducedMotion(): boolean {

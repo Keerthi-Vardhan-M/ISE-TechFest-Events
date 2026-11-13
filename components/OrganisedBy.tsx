@@ -16,13 +16,15 @@ export default function OrganisedBy() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".org-item",
-        { y: 30, opacity: 0 },
+        { y: 48, opacity: 0, filter: "blur(10px)", scale: 0.95 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.09,
-          ease: MOTION_EASE,
+          filter: "blur(0px)",
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.12,
+          ease: "power4.out",
           scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
         }
       );

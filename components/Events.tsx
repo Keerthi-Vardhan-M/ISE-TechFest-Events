@@ -37,25 +37,16 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
       }
 
       gsap.fromTo(
-        cards[0],
-        { x: -60, opacity: 0 },
+        cards,
+        { y: 55, opacity: 0, filter: "blur(12px)", scale: 0.94 },
         {
-          x: 0,
+          y: 0,
           opacity: 1,
-          duration: 0.9,
-          ease: MOTION_EASE,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
-        }
-      );
-
-      gsap.fromTo(
-        cards[1],
-        { x: 60, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: MOTION_EASE,
+          filter: "blur(0px)",
+          scale: 1,
+          duration: 1.25,
+          stagger: 0.16,
+          ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }
       );
@@ -68,7 +59,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
     <section
       id="events"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-hidden bg-[#06142E] px-4 pt-28 pb-24 transition-colors duration-500 sm:px-6 sm:pt-36 sm:pb-32 lg:pt-40 lg:pb-36"
+      className="relative scroll-mt-20 overflow-hidden bg-[#06142E] px-4 pt-28 pb-24 transition-colors duration-700 sm:px-6 sm:pt-36 sm:pb-32 lg:pt-40 lg:pb-36"
       style={{
         backgroundColor:
           hoveredTheme === "automate"
@@ -78,10 +69,10 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
               : "#06142E",
       }}
     >
-      {/* Night Sky Moon & Clouds matching reference Events screenshot */}
+      {/* Night Sky Moon with gentle ambient float */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-[12%] top-20 h-28 w-28 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:right-[18%] sm:top-24 sm:h-36 sm:w-36"
+        className="animate-float-slow pointer-events-none absolute right-[12%] top-20 h-28 w-28 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:right-[18%] sm:top-24 sm:h-36 sm:w-36"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">

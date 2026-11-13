@@ -29,19 +29,19 @@ export default function About() {
       onEnter: () => {
         gsap.fromTo(
           ".about-left",
-          { x: -50, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.85, ease: "power3.out" }
+          { y: 36, opacity: 0, filter: "blur(8px)" },
+          { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2, ease: "power4.out" }
         );
         gsap.fromTo(
           ".about-right",
-          { x: 50, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.85, ease: "power3.out" }
+          { y: 36, opacity: 0, filter: "blur(8px)" },
+          { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2, delay: 0.1, ease: "power4.out" }
         );
         ABOUT_SECTION.metrics.forEach((metric, idx) => {
           const obj = { val: 0 };
           gsap.to(obj, {
             val: metric.value,
-            duration: 1.1,
+            duration: 1.6,
             ease: "power3.out",
             onUpdate: () => {
               setCounts((prev) => {

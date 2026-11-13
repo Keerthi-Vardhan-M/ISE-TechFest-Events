@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import Lenis from "lenis";
 import {
   ArrowLeft,
   Calendar,
@@ -18,6 +20,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
+import { ensureGsapRegistered, isTouchDevice, prefersReducedMotion } from "@/lib/motion";
 import RegisterModal from "./RegisterModal";
 
 interface EventDetailPageProps {
@@ -30,6 +33,32 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const isAutomate = event.id === "automate";
   const accentColor = isAutomate ? "#22E5FF" : "#A3F06D";
+
+  useEffect(() => {
+    ensureGsapRegistered();
+    if (isTouchDevice() || prefersReducedMotion()) return;
+
+    const lenis = new Lenis({
+      duration: 1.8,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.82,
+      touchMultiplier: 1.2,
+      infinite: false,
+    });
+
+    const tickerCallback = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickerCallback);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(tickerCallback);
+      lenis.destroy();
+    };
+  }, []);
 
   const otherEvent = allEvents.find((e) => e.id !== event.id);
 
@@ -116,7 +145,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
             {/* Right Column: 3D Mascot Showcase Card */}
             <div className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#0A1E46]/80 p-8 shadow-[0_20px_60px_rgba(3,10,24,0.7)]">
-                <div className="relative mx-auto h-56 w-56 sm:h-72 sm:w-72">
+                <div className="animate-float-slow relative mx-auto h-56 w-56 sm:h-72 sm:w-72">
                   <Image
                     src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
                     alt={event.name}

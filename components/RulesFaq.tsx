@@ -19,13 +19,14 @@ export default function RulesFaq() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".faq-reveal",
-        { y: 28, opacity: 0 },
+        { y: 38, opacity: 0, filter: "blur(8px)" },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          filter: "blur(0px)",
+          duration: 1.15,
           stagger: 0.1,
-          ease: MOTION_EASE,
+          ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
         }
       );
@@ -97,7 +98,7 @@ export default function RulesFaq() {
                         initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
                         animate={reduced ? { opacity: 1 } : { height: "auto", opacity: 1 }}
                         exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
                         <p className="pb-6 pl-12 pr-6 text-base leading-relaxed text-[#4B5C7D] sm:pl-14 sm:text-lg">

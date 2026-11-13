@@ -29,28 +29,28 @@ export default function Memories() {
         y: 0,
         scale: 1,
         filter: "blur(0px)",
-        stagger: 0.08,
-        ease: "power2.out",
+        stagger: 0.09,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 65%",
           end: "center 50%",
-          scrub: 1.2,
+          scrub: 1.6,
         },
       });
 
-      // Smooth alternating vertical parallax columns matching reference
+      // Smooth alternating vertical parallax columns with butter scroll
       gsap.fromTo(
         ".memories-col-up",
         { y: 35 },
         {
-          y: -40,
+          y: -42,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.4,
+            scrub: 1.8,
           },
         }
       );
@@ -59,13 +59,13 @@ export default function Memories() {
         ".memories-col-down",
         { y: -35 },
         {
-          y: 40,
+          y: 42,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.4,
+            scrub: 1.8,
           },
         }
       );

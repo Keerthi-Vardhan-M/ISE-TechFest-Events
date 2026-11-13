@@ -59,13 +59,15 @@ export default function Prizes() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".trophy-column",
-        { y: 45, opacity: 0 },
+        { y: 65, opacity: 0, filter: "blur(12px)", scale: 0.92 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
-          stagger: 0.12,
-          ease: MOTION_EASE,
+          filter: "blur(0px)",
+          scale: 1,
+          duration: 1.3,
+          stagger: 0.16,
+          ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }
       );
@@ -132,7 +134,7 @@ export default function Prizes() {
             >
               {/* Photorealistic Trophy Cup blending seamlessly into warm cream background */}
               <div
-                className={`relative mx-auto ${tier.sizeClass} transition-transform duration-300 group-hover:scale-106`}
+                className={`relative mx-auto ${tier.sizeClass} animate-float-slow transition-transform duration-500 ease-out group-hover:scale-108`}
               >
                 <Image
                   src={tier.image}

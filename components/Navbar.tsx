@@ -74,7 +74,11 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
 
     const lenis = (window as Window & { __lenis?: { scrollTo: (t: HTMLElement, opts?: object) => void } }).__lenis;
     if (lenis && !prefersReducedMotion()) {
-      lenis.scrollTo(el, { offset: -16, duration: 1.05 });
+      lenis.scrollTo(el, {
+        offset: -16,
+        duration: 1.6,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
     } else {
       el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
     }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ExternalLink, Handshake } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { SPONSORS_DATA } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
@@ -39,13 +39,14 @@ export default function Sponsors() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".sponsor-card",
-        { y: 35, opacity: 0 },
+        { y: 55, opacity: 0, filter: "blur(12px)", scale: 0.94 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          stagger: 0.08,
-          ease: MOTION_EASE,
+          filter: "blur(0px)",
+          scale: 1,
+          duration: 1.25,
+          ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }
       );
@@ -55,8 +56,6 @@ export default function Sponsors() {
   }, []);
 
   const titleTier = SPONSORS_DATA.tiers[0];
-  const platformTier = SPONSORS_DATA.tiers[1];
-  const trackTier = SPONSORS_DATA.tiers[2];
 
   return (
     <section
@@ -129,76 +128,6 @@ export default function Sponsors() {
                 </div>
               </a>
             ))}
-          </div>
-
-          {/* Platform & Cloud Partners Tier */}
-          <div className="mx-auto my-14 flex max-w-2xl items-center gap-4">
-            <div className="h-px flex-1 bg-white/20" />
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-[#A3F06D]">
-              {platformTier.name}
-            </span>
-            <div className="h-px flex-1 bg-white/20" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-            {platformTier.sponsors.map((sp) => (
-              <a
-                key={sp.name}
-                href={sp.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sponsor-card group flex min-h-[110px] flex-col items-center justify-center rounded-xl border border-[#9EB3D6]/20 bg-[#091D42]/85 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#A3F06D] hover:shadow-[0_8px_24px_rgba(163,240,109,0.15)]"
-              >
-                <span className="font-heading text-lg font-bold text-white transition-colors group-hover:text-[#A3F06D]">
-                  {sp.name}
-                </span>
-                <span className="mt-1 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                  {sp.tier}
-                </span>
-              </a>
-            ))}
-          </div>
-
-          {/* Track & Ecosystem Partners Tier */}
-          <div className="mx-auto my-14 flex max-w-2xl items-center gap-4">
-            <div className="h-px flex-1 bg-white/20" />
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-[#F5C451]">
-              {trackTier.name}
-            </span>
-            <div className="h-px flex-1 bg-white/20" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-            {trackTier.sponsors.map((sp) => (
-              <a
-                key={sp.name}
-                href={sp.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sponsor-card group flex min-h-[110px] flex-col items-center justify-center rounded-xl border border-[#9EB3D6]/20 bg-[#091D42]/85 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#F5C451] hover:shadow-[0_8px_24px_rgba(245,196,81,0.15)]"
-              >
-                <span className="font-heading text-base font-bold text-white transition-colors group-hover:text-[#F5C451]">
-                  {sp.name}
-                </span>
-                <span className="mt-1 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                  {sp.tier}
-                </span>
-              </a>
-            ))}
-          </div>
-
-          {/* Partner CTA */}
-          <div className="mt-16 flex flex-col items-center justify-center border-t border-white/10 pt-10 text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#9EB3D6]">
-              INTERESTED IN PARTNERING WITH AUTO×QUANT &apos;26?
-            </p>
-            <a
-              href="mailto:sponsor@campusfest.edu"
-              className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-[#1648A8] px-7 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_16px_rgba(22,72,168,0.4)] transition-all duration-200 hover:bg-[#1D5BC6] hover:scale-103"
-            >
-              <Handshake className="h-4 w-4" />
-              <span>BECOME A SPONSOR</span>
-            </a>
           </div>
         </div>
       </div>

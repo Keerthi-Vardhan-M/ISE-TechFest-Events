@@ -52,8 +52,12 @@ export default function EventLandingClient() {
     if (isTouchDevice() || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      lerp: 0.09,
+      duration: 1.8,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silky exponential butter-melt deceleration
       smoothWheel: true,
+      wheelMultiplier: 0.82,
+      touchMultiplier: 1.2,
+      infinite: false,
     });
 
     (window as Window & { __lenis?: Lenis }).__lenis = lenis;
