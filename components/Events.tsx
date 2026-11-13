@@ -8,7 +8,7 @@ import EventCard from "./EventCard";
 
 interface EventsProps {
   seats: Record<EventId, number>;
-  onSelectRegister: (eventId: EventId) => void;
+  onSelectRegister?: (eventId: EventId) => void;
 }
 
 export default function Events({ seats, onSelectRegister }: EventsProps) {

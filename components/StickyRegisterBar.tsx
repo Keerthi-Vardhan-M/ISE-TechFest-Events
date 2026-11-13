@@ -1,26 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-interface StickyRegisterBarProps {
-  onOpenRegister: () => void;
-}
-
-export default function StickyRegisterBar({ onOpenRegister }: StickyRegisterBarProps) {
+export default function StickyRegisterBar() {
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#07080B]/90 px-4 py-3 backdrop-blur-xl md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D9D0B8] bg-[#FAF5E8]/95 px-4 py-3 backdrop-blur-xl md:hidden"
       style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
     >
-      <button
-        type="button"
-        onClick={onOpenRegister}
-        className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#22E5FF] to-[#19F58A] font-heading text-sm font-bold text-[#07080B]"
+      <Link
+        href="/register"
+        className="flex min-h-[48px] w-full items-center justify-center gap-2 border-2 border-[#0A1B3D] bg-[#0A1B3D] font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8]"
       >
         <span>Register Now</span>
-        <ArrowUpRight className="h-4 w-4" />
-      </button>
+        <ArrowUpRight className="h-4 w-4 text-[#A3F06D]" />
+      </Link>
     </div>
   );
 }

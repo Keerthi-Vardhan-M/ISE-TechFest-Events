@@ -16,12 +16,10 @@ import {
   CheckCircle2,
   Phone,
   Mail,
-  Sparkles,
   ChevronDown,
 } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
 import { ensureGsapRegistered, isTouchDevice, prefersReducedMotion } from "@/lib/motion";
-import RegisterModal from "./RegisterModal";
 
 interface EventDetailPageProps {
   event: EventConfig;
@@ -29,7 +27,6 @@ interface EventDetailPageProps {
 }
 
 export default function EventDetailPage({ event, allEvents }: EventDetailPageProps) {
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const isAutomate = event.id === "automate";
   const accentColor = isAutomate ? "#22E5FF" : "#A3F06D";
@@ -79,14 +76,12 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
             <span className="hidden font-pixel text-xs text-[#4B5C7D] sm:inline-block">
               AUTO×QUANT &apos;26
             </span>
-            <button
-              type="button"
-              onClick={() => setIsRegisterOpen(true)}
-              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-[#0A1B3D] bg-[#0A1B3D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8] hover:scale-102"
+            <Link
+              href={`/register?event=${event.id}`}
+              className="inline-flex min-h-[36px] items-center rounded-lg border border-[#0A1B3D] bg-[#0A1B3D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8]"
             >
-              <Sparkles className="h-3.5 w-3.5 text-[#A3F06D]" />
               <span>Register Now</span>
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -124,14 +119,12 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
               {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setIsRegisterOpen(true)}
-                  className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border-2 border-[#0A1B3D] bg-[#0A1B3D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[4px_4px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8] hover:scale-102"
+                <Link
+                  href={`/register?event=${event.id}`}
+                  className="inline-flex min-h-[46px] items-center rounded-xl border-2 border-[#0A1B3D] bg-[#0A1B3D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[4px_4px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8]"
                 >
-                  <Sparkles className="h-4 w-4 text-[#A3F06D]" />
                   <span>REGISTER TEAM FOR FREE</span>
-                </button>
+                </Link>
 
                 <a
                   href="#rounds"
@@ -357,14 +350,12 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 <p className="mt-1 font-mono text-xs text-[#4B5C7D]">
                   Seats are capped at {event.seatCap} teams. Free entry for all college students.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setIsRegisterOpen(true)}
-                  className="mt-4 inline-flex min-h-[42px] items-center gap-2 border-2 border-[#0A1B3D] bg-[#0A1B3D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8] transition-transform hover:scale-103"
+                <Link
+                  href={`/register?event=${event.id}`}
+                  className="mt-4 inline-flex min-h-[42px] items-center border-2 border-[#0A1B3D] bg-[#0A1B3D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8] transition-all hover:bg-[#1648A8]"
                 >
-                  <Sparkles className="h-4 w-4 text-[#A3F06D]" />
                   <span>CLAIM YOUR TEAM SPOT</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -514,27 +505,17 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
               {event.dateDisplay} • FREE
             </span>
           </div>
-          <button
-            type="button"
-            onClick={() => setIsRegisterOpen(true)}
+          <Link
+            href={`/register?event=${event.id}`}
             className="border border-[#0A1B3D] bg-[#0A1B3D] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8]"
           >
             Register Now
-          </button>
+          </Link>
         </div>
       </div>
 
       {/* Pixel Checkerboard Divider at bottom */}
       <div className="pixel-checker-divider" aria-hidden="true" />
-
-      {/* Register Modal for Instant Submission */}
-      <RegisterModal
-        isOpen={isRegisterOpen}
-        selectedEvent={event.id}
-        onClose={() => setIsRegisterOpen(false)}
-        onEventChange={() => {}}
-        onRegistrationSuccess={() => {}}
-      />
     </div>
   );
 }

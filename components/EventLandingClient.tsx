@@ -17,13 +17,10 @@ import Sponsors from "./Sponsors";
 import RulesFaq from "./RulesFaq";
 import OrganisedBy from "./OrganisedBy";
 import Memories from "./Memories";
-import RegisterModal from "./RegisterModal";
 import StickyRegisterBar from "./StickyRegisterBar";
 import Footer from "./Footer";
 
 export default function EventLandingClient() {
-  const [selectedEvent, setSelectedEvent] = useState<EventId>("automate");
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [seats, setSeats] = useState<Record<EventId, number>>({
     automate: EVENTS.automate.seatCap,
     quant: EVENTS.quant.seatCap,
@@ -78,44 +75,23 @@ export default function EventLandingClient() {
     };
   }, []);
 
-  const handleSelectRegister = useCallback((eventId: EventId) => {
-    setSelectedEvent(eventId);
-    setIsRegisterOpen(true);
-  }, []);
-
-  const handleOpenGeneralRegister = useCallback(() => {
-    setIsRegisterOpen(true);
-  }, []);
-
-  const handleRegistrationSuccess = useCallback((eventId: EventId, seatsLeft: number) => {
-    setSeats((prev) => ({ ...prev, [eventId]: seatsLeft }));
-  }, []);
-
   return (
     <>
       <Preloader />
       <Cursor />
-      <Navbar onOpenRegister={handleOpenGeneralRegister} />
+      <Navbar />
       <main>
-        <Hero onOpenRegister={handleOpenGeneralRegister} />
+        <Hero />
         <About />
-        <Events seats={seats} onSelectRegister={handleSelectRegister} />
+        <Events seats={seats} onSelectRegister={() => {}} />
         <Memories />
         <Prizes />
         <Sponsors />
         <RulesFaq />
         <OrganisedBy />
       </main>
-      <Footer onOpenRegister={handleOpenGeneralRegister} />
-      <StickyRegisterBar onOpenRegister={handleOpenGeneralRegister} />
-
-      <RegisterModal
-        isOpen={isRegisterOpen}
-        selectedEvent={selectedEvent}
-        onClose={() => setIsRegisterOpen(false)}
-        onEventChange={setSelectedEvent}
-        onRegistrationSuccess={handleRegistrationSuccess}
-      />
+      <Footer />
+      <StickyRegisterBar />
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { ORGANISER_INFO } from "@/content/events";
 import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
@@ -16,7 +17,7 @@ const NAV_LINKS = [
 ];
 
 interface NavbarProps {
-  onOpenRegister: () => void;
+  onOpenRegister?: () => void;
 }
 
 export default function Navbar({ onOpenRegister }: NavbarProps) {
@@ -147,16 +148,12 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
           </ul>
 
           <div className="flex items-center gap-2">
-            <button
-              ref={magneticRef}
-              type="button"
-              onClick={onOpenRegister}
-              onMouseMove={handleMagneticMove}
-              onMouseLeave={resetMagnetic}
+            <Link
+              href="/register"
               className="min-h-[42px] items-center justify-center rounded-lg bg-[#1648A8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6] inline-flex"
             >
               REGISTER NOW
-            </button>
+            </Link>
 
             <button
               type="button"
@@ -194,16 +191,13 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
             ))}
           </ul>
 
-          <button
-            type="button"
-            onClick={() => {
-              setMenuOpen(false);
-              onOpenRegister();
-            }}
+          <Link
+            href="/register"
+            onClick={() => setMenuOpen(false)}
             className="flex min-h-[52px] w-full items-center justify-center rounded-lg bg-[#1648A8] font-mono text-sm font-bold uppercase tracking-wider text-white"
           >
             REGISTER NOW →
-          </button>
+          </Link>
         </div>
       )}
     </>

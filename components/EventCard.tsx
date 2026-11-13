@@ -10,7 +10,7 @@ interface EventCardProps {
   event: EventConfig;
   seatsLeft?: number;
   onOpenDetails?: (event: EventConfig) => void;
-  onSelectRegister: (eventId: EventId) => void;
+  onSelectRegister?: (eventId: EventId) => void;
   onHoverTheme: (theme: EventId | null) => void;
 }
 
@@ -96,14 +96,13 @@ export default function EventCard({
           >
             Details
           </Link>
-          <button
-            type="button"
-            onClick={() => onSelectRegister(event.id)}
+          <Link
+            href={`/register?event=${event.id}`}
             aria-label={`Register for ${event.name}`}
             className="inline-flex h-8 w-8 items-center justify-center border border-[#9EB3D6]/35 bg-[#091D42] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
           >
             <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+          </Link>
         </div>
       </div>
     </article>

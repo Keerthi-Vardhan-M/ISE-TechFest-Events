@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { ORGANISER_INFO } from "@/content/events";
 import { prefersReducedMotion } from "@/lib/motion";
 
 interface FooterProps {
-  onOpenRegister: () => void;
+  onOpenRegister?: () => void;
 }
 
 export default function Footer({ onOpenRegister }: FooterProps) {
@@ -72,13 +73,12 @@ export default function Footer({ onOpenRegister }: FooterProps) {
 
           {/* Right Action: Light-Green Rectangular REGISTER Button matching screenshot */}
           <div>
-            <button
-              type="button"
-              onClick={onOpenRegister}
+            <Link
+              href="/register"
               className="inline-flex min-h-[48px] items-center justify-center bg-[#A3F06D] px-9 font-pixel text-xs font-bold uppercase tracking-widest text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.4)] transition-all duration-200 hover:bg-[#B6F586] hover:scale-103"
             >
               REGISTER
-            </button>
+            </Link>
           </div>
         </div>
 

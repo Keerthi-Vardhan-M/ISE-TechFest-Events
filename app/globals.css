@@ -46,11 +46,11 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-pixel: var(--font-silkscreen), var(--font-space-grotesk), monospace;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-display: var(--font-bebas-neue), var(--font-space-grotesk), sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: 'Silkscreen', 'Space Grotesk', monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-display: 'Bebas Neue', 'Space Grotesk', sans-serif;
 }
 
 html {
