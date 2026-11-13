@@ -30,7 +30,8 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 20);
+      // Show navbar only after scrolling down past the top hero banner
+      setScrolled(y > 80);
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? Math.min(100, (y / docHeight) * 100) : 0);
     };
@@ -102,10 +103,10 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out ${
           scrolled
-            ? "border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg"
-            : "bg-[#040F24]/70 backdrop-blur-md"
+            ? "translate-y-0 opacity-100 border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg pointer-events-auto"
+            : "-translate-y-full opacity-0 pointer-events-none"
         }`}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
@@ -123,7 +124,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
         >
           <ul className="hidden items-center gap-2 md:flex lg:gap-3">
             {NAV_LINKS.map((link) => {
-              const isActive = activeId === link.id;
+              const isActive = scrolled && activeId === link.id && link.id !== "home";
               return (
                 <li key={link.id}>
                   <a
