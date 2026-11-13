@@ -260,7 +260,7 @@ body {
   animation: butter-drift 6.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
-/* Continuous Vertical Downward Gallery Marquee */
+/* Continuous Vertical Downward Gallery Marquee - Always moving continuously */
 @keyframes vertical-marquee-down {
   0% {
     transform: translate3d(0, -50%, 0);
@@ -271,24 +271,21 @@ body {
 }
 
 .animate-vertical-down-1 {
-  animation: vertical-marquee-down 32s linear infinite;
+  animation: vertical-marquee-down 26s linear infinite !important;
+  animation-play-state: running !important;
 }
 
 .animate-vertical-down-2 {
-  animation: vertical-marquee-down 38s linear infinite;
+  animation: vertical-marquee-down 32s linear infinite !important;
+  animation-play-state: running !important;
 }
 
 .animate-vertical-down-3 {
-  animation: vertical-marquee-down 27s linear infinite;
+  animation: vertical-marquee-down 22s linear infinite !important;
+  animation-play-state: running !important;
 }
 
 .animate-vertical-down-4 {
-  animation: vertical-marquee-down 34s linear infinite;
-}
-
-.pause-hover:hover .animate-vertical-down-1,
-.pause-hover:hover .animate-vertical-down-2,
-.pause-hover:hover .animate-vertical-down-3,
-.pause-hover:hover .animate-vertical-down-4 {
-  animation-play-state: paused;
+  animation: vertical-marquee-down 29s linear infinite !important;
+  animation-play-state: running !important;
 }
