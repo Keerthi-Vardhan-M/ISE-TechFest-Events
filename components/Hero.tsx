@@ -31,7 +31,6 @@ interface HeroProps {
 
 export default function Hero({ onOpenRegister }: HeroProps = {}) {
   const heroRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const magneticBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -72,7 +71,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
 
       if (prefersReducedMotion()) return;
 
-      // Scroll-scrubbed butter parallax: sky zooms smoothly while content melts upward without repaint-heavy blur filters
+      // Clean subtle content entrance on scroll - background stays completely fixed and static
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
@@ -82,9 +81,6 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         },
       });
 
-      if (bgRef.current) {
-        tl.to(bgRef.current, { scale: 1.12, y: 45, ease: "none" }, 0);
-      }
       if (contentRef.current) {
         tl.to(contentRef.current, { y: -40, opacity: 0.1, ease: "none" }, 0);
       }
@@ -92,13 +88,6 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
 
     return () => ctx.revert();
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (isTouchDevice() || prefersReducedMotion() || !bgRef.current) return;
-    const dx = (e.clientX / window.innerWidth - 0.5) * -18;
-    const dy = (e.clientY / window.innerHeight - 0.5) * -12;
-    bgRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.04)`;
-  };
 
   const handleMagnetic = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isTouchDevice() || prefersReducedMotion() || !magneticBtnRef.current) return;
@@ -130,14 +119,12 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
     <section
       id="home"
       ref={heroRef}
-      onMouseMove={handleMouseMove}
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#06142E] px-4 pb-16 pt-24 sm:px-8"
     >
-      {/* Full-bleed Widescreen Pixel/Voxel Floating Island Sky */}
+      {/* Full-bleed Widescreen Artwork permanently fixed without dancing or mouse parallax */}
       <div
-        ref={bgRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 scale-[1.03] transition-transform duration-300 ease-out"
+        className="pointer-events-none absolute inset-0"
       >
         <Image
           src="/images/hero-sky-bg.jpg"
