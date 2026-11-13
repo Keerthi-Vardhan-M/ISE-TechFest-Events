@@ -103,15 +103,11 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out ${
-          scrolled
-            ? "border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg"
-            : "border-b border-transparent bg-transparent backdrop-blur-none shadow-none"
-        }`}
+        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg transition-colors duration-200"
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
-        {/* Top scroll progress strip - only visible when scrolled */}
-        <div className={`h-[2px] w-full transition-opacity duration-300 ${scrolled ? "bg-white/5 opacity-100" : "opacity-0"}`}>
+        {/* Top scroll progress strip */}
+        <div className="h-[2px] w-full bg-white/5">
           <div
             className="h-full bg-gradient-to-r from-[#22E5FF] via-[#A3F06D] to-[#1648A8] transition-[width] duration-75"
             style={{ width: `${scrollProgress}%` }}
@@ -124,7 +120,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
         >
           <ul className="hidden items-center gap-2 md:flex lg:gap-3">
             {NAV_LINKS.map((link) => {
-              const isActive = scrolled && activeId === link.id && link.id !== "home";
+              const isActive = activeId === link.id;
               return (
                 <li key={link.id}>
                   <a
