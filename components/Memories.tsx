@@ -20,7 +20,7 @@ export default function Memories() {
   return (
     <section
       id="memories"
-      className="cream-dot-grid relative w-full overflow-hidden bg-[#FAF5E8] px-1 py-2 sm:px-2 sm:py-3"
+      className="cream-dot-grid relative w-full overflow-hidden bg-[#FAF5E8] px-1 pt-1 pb-0 sm:px-2"
     >
       {/* Background ambient radial atmosphere */}
       <div
@@ -28,14 +28,10 @@ export default function Memories() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(10,27,61,0.03)_0%,_transparent_75%)]"
       />
 
-      {/* Top and Bottom gentle gradient blend masks matching light theme */}
+      {/* Top gentle blend mask */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 inset-x-0 z-20 h-16 bg-gradient-to-b from-[#FAF5E8] to-transparent sm:h-20"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 inset-x-0 z-20 h-16 bg-gradient-to-t from-[#FAF5E8] to-transparent sm:h-20"
+        className="pointer-events-none absolute top-0 inset-x-0 z-20 h-12 bg-gradient-to-b from-[#FAF5E8] to-transparent sm:h-16"
       />
 
       {/* Edge-to-Edge Continuous Downward Vertical Moving Gallery with minimal gap */}
@@ -92,10 +88,40 @@ export default function Memories() {
             );
           })}
         </div>
+
+        {/* Shaded Zigzag Sawtooth Border sitting directly over the bottom of the moving images */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 inset-x-0 z-20 flex flex-col justify-end"
+        >
+          {/* Atmospheric dark gradient shade over the images */}
+          <div className="h-14 w-full bg-gradient-to-t from-[#0A1B3D]/30 via-[#0A1B3D]/10 to-transparent sm:h-18" />
+
+          {/* Crisp Zigzag Teeth Border cutting into images with upward drop shadow */}
+          <div
+            className="h-4 w-full sm:h-5"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' width='24' height='12'%3E%3Cpath d='M0 12 L12 0 L24 12 Z' fill='%23FAF5E8' stroke='%230A1B3D' stroke-width='1.2' stroke-opacity='0.3'/%3E%3C/svg%3E")`,
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "bottom center",
+              filter: "drop-shadow(0 -4px 6px rgba(10,27,61,0.22))",
+            }}
+          />
+        </div>
       </div>
 
-      {/* Clean border dividing into Prizes */}
-      <div className="border-b border-[#D9D0B8] mt-3" aria-hidden="true" />
+      {/* Pixelated Dithering Divider matching the footer/events style transitioning into Prizes */}
+      <div
+        aria-hidden="true"
+        className="relative z-20 h-10 w-full sm:h-12"
+        style={{
+          backgroundImage: "url('/images/footer-pixel-divider.png')",
+          backgroundRepeat: "repeat-x",
+          backgroundSize: "auto 100%",
+          backgroundPosition: "top center",
+          imageRendering: "pixelated",
+        }}
+      />
     </section>
   );
 }
