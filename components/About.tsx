@@ -156,20 +156,53 @@ export default function About() {
           </span>
         </h2>
 
-        {/* Two-column layout: left clean statement, right campus card exactly as screenshot */}
-        <div className="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          <div className="about-left space-y-4 lg:col-span-7">
-            <p className="text-base font-normal leading-relaxed text-[#0A1B3D] sm:text-lg lg:text-xl">
-              {ABOUT_SECTION.questDescription}
-            </p>
-            <p className="text-xs font-normal text-[#4B5C7D] sm:text-sm">
-              {ABOUT_SECTION.questSubtitle}
-            </p>
+        {/* Two-column layout strictly matching reference screenshot with dialogue box & chamfered campus card */}
+        <div className="mt-10 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+          {/* Left Quest Dialog Box with Campus Guide avatar */}
+          <div className="about-left flex flex-col justify-between border-2 border-[#C4B79B] bg-[#FAF5E8] p-6 shadow-[4px_4px_0_#0A1B3D] sm:p-7 md:p-8 lg:col-span-6">
+            <div>
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden border border-[#C4B79B] bg-[#F5EFE0] p-1 shadow-sm sm:h-16 sm:w-16">
+                  <Image
+                    src="/images/campus-guide-avatar.png"
+                    alt="Campus Guide Avatar"
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0A1B3D]">
+                    {ABOUT_SECTION.questRole}
+                  </p>
+                  <p className="mt-1 text-xs text-[#4B5C7D] sm:text-sm">
+                    {ABOUT_SECTION.questSubtitle}
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-6 text-sm leading-relaxed text-[#0A1B3D] sm:text-base lg:text-lg">
+                {ABOUT_SECTION.questDescription}
+              </p>
+            </div>
           </div>
 
-          <div className="about-right lg:col-span-5">
-            <div className="overflow-hidden border border-[#D9D0B8] bg-[#FAF5E8] p-2.5 shadow-[0_12px_36px_rgba(10,27,61,0.08)]">
-              <div className="relative h-64 w-full sm:h-72 md:h-80">
+          {/* Right Chamfered Campus Box matching reference screenshot */}
+          <div className="about-right flex flex-col justify-between lg:col-span-6">
+            <div
+              className="relative p-[2.5px] bg-[#0A1B3D] shadow-[4px_4px_0_rgba(10,27,61,0.18)] transition-transform duration-300 hover:scale-[1.01]"
+              style={{
+                clipPath:
+                  "polygon(28px 0%, 100% 0%, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0% 100%, 0% 28px)",
+              }}
+            >
+              <div
+                className="relative h-64 w-full sm:h-72 md:h-80 overflow-hidden"
+                style={{
+                  clipPath:
+                    "polygon(26px 0%, 100% 0%, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0% 100%, 0% 26px)",
+                }}
+              >
                 <Image
                   src="/images/campus-arena.jpg"
                   alt="Isometric engineering and robotics campus arena at dusk"
