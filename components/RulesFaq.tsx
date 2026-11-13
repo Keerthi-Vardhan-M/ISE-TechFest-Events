@@ -46,7 +46,7 @@ export default function RulesFaq() {
           <div className="text-center">
             <h2
               className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl"
-              style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
+              style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
             >
               FREQUENTLY ASKED <span className="text-[#1648A8]">QUESTIONS</span>
             </h2>

@@ -34,12 +34,12 @@ export default function EventCard({
       onMouseEnter={() => onHoverTheme(event.id)}
       onMouseLeave={() => onHoverTheme(null)}
       onClick={handleCardClick}
-      className="event-card group relative mx-auto mt-10 flex w-full max-w-[360px] cursor-pointer flex-col justify-between border border-[#1F478E] bg-[#112A60] p-6 shadow-[0_12px_28px_rgba(4,15,36,0.45)] transition-all duration-200 hover:border-[#22E5FF]/70 hover:shadow-[0_16px_36px_rgba(34,229,255,0.18)] sm:max-w-[400px] sm:p-7 lg:max-w-[420px] lg:p-8"
+      className="event-card group relative mx-auto mt-14 flex w-full max-w-[360px] cursor-pointer flex-col justify-between border border-[#9EB3D6]/30 bg-[#0A1E46]/95 p-6 shadow-[0_12px_32px_rgba(4,15,36,0.65)] transition-all duration-200 hover:border-[#22E5FF]/70 sm:max-w-[400px] sm:p-7 lg:max-w-[420px] lg:p-8"
     >
       <div>
         {/* Top Row: 3D Mascot popping slightly above top edge + TEAM badge */}
         <div className="mb-3 flex items-start justify-between">
-          <div className="relative -mt-16 h-28 w-32 sm:-mt-18 sm:h-32 sm:w-36 md:h-34 md:w-38">
+          <div className="relative -mt-20 h-28 w-32 sm:-mt-22 sm:h-32 sm:w-36 md:h-36 md:w-40">
             <Image
               src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
               alt={
@@ -53,7 +53,7 @@ export default function EventCard({
             />
           </div>
 
-          <span className="border border-[#26539E] bg-[#0C1F4A] px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-[#F4F6FB]">
+          <span className="border border-[#9EB3D6]/35 bg-[#06142E]/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-[#F4F6FB]">
             TEAM
           </span>
         </div>
@@ -70,14 +70,14 @@ export default function EventCard({
         </p>
 
         {/* Tagline */}
-        <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#D8E3F5] sm:text-sm">
+        <p className="mt-3.5 line-clamp-2 text-xs leading-relaxed text-[#D8E3F5] sm:text-sm">
           {event.tagline}
         </p>
       </div>
 
       {/* Bottom Row: Prize Pool on left, Details Link & Register Arrow on right */}
       <div
-        className="mt-7 flex items-center justify-between gap-2 border-t border-[#1F478E]/60 pt-4"
+        className="mt-8 flex items-center justify-between gap-2 border-t border-[#9EB3D6]/20 pt-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
@@ -85,21 +85,21 @@ export default function EventCard({
             {event.prizePool}
           </span>
           <span className="ml-1.5 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-            IN PRIZES
+            PRIZES
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <Link
             href={`/events/${event.id}`}
-            className="inline-flex min-h-[34px] items-center justify-center border border-[#26539E] bg-[#0E2657] px-3.5 font-mono text-xs uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#22E5FF] hover:text-white"
+            className="inline-flex min-h-[36px] items-center justify-center border border-[#9EB3D6]/30 bg-[#06142E]/80 px-3.5 font-mono text-xs uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#22E5FF] hover:text-white"
           >
             Details
           </Link>
           <Link
             href={`/register?event=${event.id}`}
             aria-label={`Register for ${event.name}`}
-            className="inline-flex h-8.5 w-8.5 items-center justify-center border border-[#26539E] bg-[#173571] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
+            className="inline-flex h-9 w-9 items-center justify-center border border-[#9EB3D6]/40 bg-[#091D42] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
           >
             <ArrowRight className="h-4 w-4" />
           </Link>

@@ -125,7 +125,7 @@ export default function About() {
         {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue with butter melting entrance */}
         <h2
           className="font-pixel text-3xl font-bold uppercase tracking-tight sm:text-5xl md:text-6xl"
-          style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
+          style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
         >
           <span className="text-[#0A1B3D]">
             {ABOUT_SECTION.titlePrefix.split(" ").map((word, i) => (
@@ -139,7 +139,7 @@ export default function About() {
           </span>
           <span
             className="text-[#1648A8] inline-block"
-            style={{ textShadow: "0 0 16px rgba(22,72,168,0.28)" }}
+            style={{ textShadow: "0 0 4px rgba(22,72,168,0.18)" }}
           >
             {ABOUT_SECTION.titleHighlight.split(" ").map((word, i) => (
               <span

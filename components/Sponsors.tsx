@@ -81,7 +81,7 @@ export default function Sponsors() {
           {/* Bold Retro Sponsors Heading */}
           <h2
             className="font-pixel text-4xl font-bold tracking-wider text-[#FAF5E8] sm:text-6xl md:text-7xl"
-            style={{ textShadow: "0 4px 20px rgba(255,107,53,0.35)" }}
+            style={{ textShadow: "0 2px 6px rgba(255,107,53,0.18)" }}
           >
             {SPONSORS_DATA.title}
           </h2>

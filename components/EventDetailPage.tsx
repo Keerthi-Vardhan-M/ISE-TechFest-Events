@@ -105,7 +105,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 <span className="text-[#0A1B3D] font-bold">FREE ENTRY</span>
               </div>
 
-              <h1 className="mt-4 font-pixel text-4xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-5xl lg:text-6xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.18)" }}>
+              <h1 className="mt-4 font-pixel text-4xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-5xl lg:text-6xl" style={{ textShadow: "0 0 3px rgba(10,27,61,0.08)" }}>
                 {event.name}
               </h1>
 

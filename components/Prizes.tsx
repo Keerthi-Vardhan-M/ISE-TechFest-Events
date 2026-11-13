@@ -109,7 +109,7 @@ export default function Prizes() {
         {/* Section Header with warm retro styling */}
         <h2
           className="font-pixel text-4xl font-bold tracking-tight text-[#0A1B3D] sm:text-6xl md:text-7xl"
-          style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
+          style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
         >
           PRIZES
         </h2>
@@ -178,8 +178,8 @@ export default function Prizes() {
                   style={{
                     color: tier.isGrand ? "#C94A00" : "#0A1B3D",
                     textShadow: tier.isGrand
-                      ? "0 0 16px rgba(255, 110, 20, 0.45)"
-                      : "0 0 12px rgba(10, 27, 61, 0.15)",
+                      ? "0 0 4px rgba(255, 110, 20, 0.22)"
+                      : "0 0 3px rgba(10, 27, 61, 0.10)",
                   }}
                 >
                   {tier.amount}

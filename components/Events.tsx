@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { EVENT_LIST, type EventConfig, type EventId } from "@/content/events";
-import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
+import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 import EventCard from "./EventCard";
 
 interface EventsProps {
@@ -40,7 +38,7 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
 
       gsap.fromTo(
         cards,
-        { y: 32, opacity: 0, scale: 0.96 },
+        { y: 36, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
@@ -60,49 +58,34 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
     <section
       id="events"
       ref={sectionRef}
-      className="relative scroll-mt-16 overflow-hidden px-4 pt-12 pb-14 sm:px-6 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-18"
+      className="relative scroll-mt-20 overflow-hidden bg-[#06142E] px-4 pt-28 pb-24 transition-colors duration-700 sm:px-6 sm:pt-36 sm:pb-32 lg:pt-40 lg:pb-36"
       style={{
-        background: "linear-gradient(180deg, #09183B 0%, #0C2556 32%, #0E2F68 68%, #12397B 100%)",
+        backgroundColor:
+          hoveredTheme === "automate"
+            ? "#081D3D"
+            : hoveredTheme === "quant"
+              ? "#051B36"
+              : "#06142E",
       }}
     >
-      {/* Night Sky Glowing Moon matching reference screenshot */}
+      {/* Night Sky Moon with gentle ambient float */}
       <div
         aria-hidden="true"
-        className="animate-float-slow pointer-events-none absolute right-[18%] top-5 h-20 w-20 rounded-full bg-[#FFFDD0] shadow-[0_0_80px_22px_rgba(255,253,208,0.28)] sm:right-[22%] sm:top-6 sm:h-24 sm:w-24"
+        className="animate-float-slow pointer-events-none absolute right-[12%] top-20 h-28 w-28 rounded-full bg-[#F2F7C9]/85 shadow-[0_0_90px_24px_rgba(242,247,201,0.28)] sm:right-[18%] sm:top-24 sm:h-36 sm:w-36"
       />
 
-      {/* Scattered Pixel Stars */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <span className="absolute left-[8%] top-[18%] font-pixel text-[10px] text-white/50 animate-pulse">✦</span>
-        <span className="absolute left-[34%] top-[12%] font-pixel text-[8px] text-[#A3F06D]/70">✦</span>
-        <span className="absolute left-[54%] top-[24%] font-pixel text-[11px] text-white/60 animate-pulse">✦</span>
-        <span className="absolute right-[12%] top-[38%] font-pixel text-[9px] text-[#22E5FF]/70">✦</span>
-        <span className="absolute right-[32%] top-[16%] font-pixel text-[8px] text-white/40">✦</span>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-5xl">
-        {/* Header row: Events on left, ALL EVENTS -> on right matching screenshot */}
-        <div className="mb-8 flex items-center justify-between sm:mb-10">
-          <div>
-            <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
-              Events
-            </h2>
-            <p className="mt-1 text-xs text-[#9EB3D6] sm:text-sm">
-              Two flagship arenas. Check live seat availability and lock your team slot.
-            </p>
-          </div>
-
-          <Link
-            href="#events"
-            className="hidden items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-[#D8E3F5] transition-colors hover:text-[#22E5FF] sm:inline-flex"
-          >
-            <span>ALL EVENTS</span>
-            <span aria-hidden="true">→</span>
-          </Link>
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="mb-12">
+          <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#F4F6FB] sm:text-5xl">
+            Events
+          </h2>
+          <p className="mt-2 max-w-xl text-sm text-[#9EB3D6] sm:text-base">
+            Two flagship arenas. Inspect the interactive preview, check live seat availability, and
+            lock your team slot.
+          </p>
         </div>
 
-        {/* 2-Card Grid with compact spacing */}
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2">
           {EVENT_LIST.map((ev) => (
             <EventCard
               key={ev.id}
@@ -113,18 +96,12 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
             />
           ))}
         </div>
-
-        {/* Bottom Horizontal Track Progress Indicator matching reference screenshot */}
-        <div className="mx-auto mt-8 flex max-w-4xl items-center gap-3 px-1 sm:mt-10">
-          <div className="h-1 flex-1 bg-[#22E5FF] shadow-[0_0_8px_rgba(34,229,255,0.6)]" />
-          <div className="h-1 flex-1 bg-[#13356E] border border-[#1E4B94]/60" />
-        </div>
       </div>
 
-      {/* Pixelated Dithering Divider transitioning from Blue Events into Light Cream Images Section */}
+      {/* Pixelated Dithering Divider transitioning from Navy Events into Light Cream Images Section */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 inset-x-0 h-10 w-full rotate-180 sm:h-12"
+        className="absolute bottom-0 inset-x-0 h-12 w-full rotate-180 sm:h-16"
         style={{
           backgroundImage: "url('/images/footer-pixel-divider.png')",
           backgroundRepeat: "repeat-x",
