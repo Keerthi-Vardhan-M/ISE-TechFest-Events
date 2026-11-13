@@ -147,23 +147,18 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             {ORGANISER_INFO.heroEyebrow}
           </p>
 
-          {/* 3D Extruded Retro Title: YUGANTAR matching reference typography */}
+          {/* Event Title: AUTOMATE × QUANT */}
           <h1
-            className="hero-reveal mt-2 font-pixel text-5xl font-extrabold tracking-wide text-[#A3F06D] sm:text-6xl md:text-7xl lg:text-8xl"
+            className="hero-reveal mt-2 font-pixel text-4xl font-extrabold tracking-wide text-[#A3F06D] sm:text-5xl md:text-6xl lg:text-7xl"
             style={{
               textShadow: "0 4px 0 #072513, 0 8px 0 #040F24, 0 12px 24px rgba(0,0,0,0.8)",
             }}
           >
-            YUGANTAR
+            {ORGANISER_INFO.heroHeadline}
           </h1>
 
-          {/* Subtitle: AUTOMATE × QUANT */}
-          <p className="hero-reveal mt-2 font-mono text-xs uppercase tracking-[0.26em] text-[#F4F6FB] sm:text-sm">
-            {ORGANISER_INFO.heroHeadline}
-          </p>
-
-          {/* Refined Diamond Star Divider matching reference */}
-          <div className="hero-reveal my-3.5 flex w-52 items-center justify-center gap-2.5 text-white/40">
+          {/* Refined Diamond Star Divider */}
+          <div className="hero-reveal my-3 flex w-52 items-center justify-center gap-2.5 text-white/40">
             <div className="h-px flex-1 bg-white/30" />
             <span className="text-xs text-[#A3F06D]">✦</span>
             <div className="h-px flex-1 bg-white/30" />
@@ -179,25 +174,36 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             December 2026 • {ORGANISER_INFO.collegeName}, {ORGANISER_INFO.city}
           </p>
 
-          {/* Sleek Compact Live Countdown Bar */}
+          {/* Compact Countdown matching older 4-box layout */}
           <div
             aria-label="Countdown to earliest event"
-            className="hero-reveal mt-4 inline-flex items-center gap-2.5 rounded border border-white/25 bg-[#040F24]/80 px-4 py-1.5 backdrop-blur-md shadow-md"
+            className="hero-reveal mt-5 grid grid-cols-4 gap-2"
           >
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#A3F06D]">STARTS IN</span>
-            <span className="h-3 w-px bg-white/20" />
-            <span
-              suppressHydrationWarning
-              className="font-pixel text-xs sm:text-sm font-bold tracking-wider text-white"
-            >
-              {mounted
-                ? `${String(timeLeft.days).padStart(2, "0")}D : ${String(timeLeft.hours).padStart(2, "0")}H : ${String(timeLeft.minutes).padStart(2, "0")}M : ${String(timeLeft.seconds).padStart(2, "0")}S`
-                : "00D : 00H : 00M : 00S"}
-            </span>
+            {[
+              { label: "DAYS", value: timeLeft.days },
+              { label: "HRS", value: timeLeft.hours },
+              { label: "MIN", value: timeLeft.minutes },
+              { label: "SEC", value: timeLeft.seconds },
+            ].map((unit) => (
+              <div
+                key={unit.label}
+                className="flex min-w-[62px] flex-col items-center border border-white/25 bg-[#040F24]/80 px-2.5 py-2 backdrop-blur-md shadow-md sm:min-w-[74px]"
+              >
+                <span
+                  suppressHydrationWarning
+                  className="font-pixel text-lg font-bold tabular-nums text-white sm:text-xl"
+                >
+                  {mounted ? String(unit.value).padStart(2, "0") : "00"}
+                </span>
+                <span className="mt-0.5 font-mono text-[9px] tracking-widest text-[#9EB3D6]">
+                  {unit.label}
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* Two Action Buttons strictly matching reference screenshot */}
-          <div className="hero-reveal mt-6 flex w-full flex-col items-center justify-center gap-3.5 sm:w-auto sm:flex-row">
+          <div className="hero-reveal mt-6 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
             {/* Left Button: Crisp Solid Lime-Green REGISTER button */}
             <Link
               href="/register"
@@ -217,17 +223,23 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             </a>
           </div>
 
-          {/* Underlined Track Link matching SCHEDULE, DAY 0 TO DAY 3 in reference */}
-          <div className="hero-reveal mt-4">
+          {/* Track Quick Pills matching DAY 0 -> DAY 1 -> */}
+          <div className="hero-reveal mt-4 flex flex-wrap items-center justify-center gap-2">
             <a
               href="#events"
               onClick={(e) => scrollToSection(e, "events")}
-              className="inline-flex items-center gap-1.5 font-mono text-xs tracking-widest text-[#D8E3F5] transition-colors hover:text-white"
+              className="inline-flex min-h-[34px] items-center gap-1.5 border border-white/25 bg-[#040F24]/75 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#22E5FF]"
             >
-              <span className="underline underline-offset-4 decoration-white/40 hover:decoration-[#A3F06D]">
-                AUTOMATE &amp; QUANT TRACKS
-              </span>
-              <span className="text-[#A3F06D]">→</span>
+              <span>AUTOMATE</span>
+              <span className="text-[#22E5FF]">→</span>
+            </a>
+            <a
+              href="#events"
+              onClick={(e) => scrollToSection(e, "events")}
+              className="inline-flex min-h-[34px] items-center gap-1.5 border border-white/25 bg-[#040F24]/75 px-3.5 font-mono text-[11px] tracking-wider text-[#D8E3F5] backdrop-blur-sm hover:border-[#19F58A]"
+            >
+              <span>QUANTFINANCE</span>
+              <span className="text-[#19F58A]">→</span>
             </a>
           </div>
         </div>
