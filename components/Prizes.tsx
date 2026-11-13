@@ -22,7 +22,7 @@ const THREE_PRIZES: PrizeTier[] = [
     id: "silver",
     rank: "2ND",
     label: "1ST RUNNER UP",
-    amount: "₹50,000",
+    amount: "₹5,000",
     image: "/images/trophy-silver.jpg",
     alt: "1st Runner Up Luxury Silver Crystal Trophy",
     sizeClass: "h-48 w-48 sm:h-56 sm:w-56",
@@ -31,7 +31,7 @@ const THREE_PRIZES: PrizeTier[] = [
     id: "gold",
     rank: "1ST",
     label: "WINNER",
-    amount: "₹100,000",
+    amount: "₹10,000",
     image: "/images/trophy-gold.jpg",
     alt: "Grand Champion Luxury Gold Crystal Trophy",
     sizeClass: "h-60 w-60 sm:h-72 sm:w-72 -translate-y-3",
@@ -41,7 +41,7 @@ const THREE_PRIZES: PrizeTier[] = [
     id: "bronze",
     rank: "3RD",
     label: "2ND RUNNER UP",
-    amount: "₹25,000",
+    amount: "₹3,000",
     image: "/images/trophy-bronze.jpg",
     alt: "2nd Runner Up Luxury Bronze Crystal Trophy",
     sizeClass: "h-44 w-44 sm:h-52 sm:w-52",
@@ -91,7 +91,7 @@ export default function Prizes() {
           PRIZES
         </h2>
         <p className="mt-2 font-mono text-xs uppercase tracking-[0.28em] text-[#4B5C7D]">
-          TOTAL POOL • ₹1,75,000+ IN CASH &amp; CRYSTAL TROPHIES
+          TOTAL POOL • ₹36,000+ IN CASH &amp; CRYSTAL TROPHIES
         </p>
 
         {/* Clean Cream/Navy Track Filter */}

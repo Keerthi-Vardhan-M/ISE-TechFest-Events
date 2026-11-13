@@ -91,7 +91,7 @@ export const ABOUT_SECTION = {
   metrics: [
     { label: "DAYS", value: 2, suffix: "" },
     { label: "FLAGSHIP EVENTS", value: 2, suffix: "" },
-    { label: "PRIZE POOL", value: 50000, prefix: "₹", suffix: "+" },
+    { label: "PRIZE POOL", value: 36000, prefix: "₹", suffix: "+" },
     { label: "EXPECTED BUILDERS", value: 400, suffix: "+" },
   ],
 } as const;
@@ -118,11 +118,11 @@ export const EVENTS: Record<EventId, EventConfig> = {
     feeInr: 0,
     feeDisplay: "FREE",
     seatCap: 60,
-    prizePool: "₹25,000",
+    prizePool: "₹18,000",
     podium: [
-      { rank: "1st", title: "Grand Automator", reward: "₹12,500 + Trophy" },
-      { rank: "2nd", title: "Runner Up", reward: "₹7,500 + Certificate" },
-      { rank: "3rd", title: "Precision Award", reward: "₹5,000 + Certificate" },
+      { rank: "1st", title: "Grand Automator", reward: "₹10,000 + Trophy" },
+      { rank: "2nd", title: "Runner Up", reward: "₹5,000 + Certificate" },
+      { rank: "3rd", title: "Precision Award", reward: "₹3,000 + Certificate" },
     ],
     rounds: [
       {
@@ -206,11 +206,11 @@ export const EVENTS: Record<EventId, EventConfig> = {
     feeInr: 0,
     feeDisplay: "FREE",
     seatCap: 60,
-    prizePool: "₹25,000",
+    prizePool: "₹18,000",
     podium: [
-      { rank: "1st", title: "Alpha Architect", reward: "₹12,500 + Trophy" },
-      { rank: "2nd", title: "Quant Strategist", reward: "₹7,500 + Certificate" },
-      { rank: "3rd", title: "Risk Master", reward: "₹5,000 + Certificate" },
+      { rank: "1st", title: "Alpha Architect", reward: "₹10,000 + Trophy" },
+      { rank: "2nd", title: "Quant Strategist", reward: "₹5,000 + Certificate" },
+      { rank: "3rd", title: "Risk Master", reward: "₹3,000 + Certificate" },
     ],
     rounds: [
       {
@@ -450,7 +450,7 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "What prizes and certificates will participants receive?",
     answer:
-      "₹50,000+ total cash prize pool split across podium finishers in both tracks, plus championship trophies and verified participation certificates for all registered teams.",
+      "₹36,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹10,000, 2nd: ₹5,000, 3rd: ₹3,000), plus championship trophies and verified participation certificates for all registered teams.",
   },
   {
     question: "Will food, Wi-Fi, and accommodation be provided?",
