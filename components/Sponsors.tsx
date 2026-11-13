@@ -39,13 +39,12 @@ export default function Sponsors() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".sponsor-card",
-        { y: 55, opacity: 0, filter: "blur(12px)", scale: 0.94 },
+        { y: 44, opacity: 0, scale: 0.95 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
           scale: 1,
-          duration: 1.25,
+          duration: 1.1,
           ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }

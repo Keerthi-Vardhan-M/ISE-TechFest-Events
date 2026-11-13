@@ -52,11 +52,11 @@ export default function EventLandingClient() {
     if (isTouchDevice() || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      duration: 1.8,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silky exponential butter-melt deceleration
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Instant, 120fps buttery smooth inertia with zero lag
       smoothWheel: true,
-      wheelMultiplier: 0.82,
-      touchMultiplier: 1.2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
       infinite: false,
     });
 
@@ -69,7 +69,7 @@ export default function EventLandingClient() {
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       delete (window as Window & { __lenis?: Lenis }).__lenis;
