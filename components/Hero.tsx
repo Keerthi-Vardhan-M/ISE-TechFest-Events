@@ -119,12 +119,12 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#06142E] px-4 pb-16 pt-24 sm:px-8"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#020b1f] px-4 pb-12 pt-20 sm:px-8"
     >
-      {/* Full-bleed Widescreen Artwork permanently fixed without dancing or mouse parallax */}
+      {/* Entire 16:9 Artwork permanently fixed without any zoom or cropping */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#020b1f]"
       >
         <Image
           src="/images/hero-sky-bg.jpg"
@@ -133,16 +133,14 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           priority
           unoptimized
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-contain object-center"
         />
-        {/* Subtle localized text readability vignette - preserves 100% original image clarity and colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#040F24]/10 to-[#040F24]/45" />
-        {/* Soft misty cloud sky-to-cream gradient transition into the About section */}
+        {/* Soft misty cloud sky-to-cream gradient transition into the About section at the very bottom */}
         <div
-          className="absolute inset-x-0 bottom-0 h-32 sm:h-44 md:h-52"
+          className="absolute inset-x-0 bottom-0 h-16 sm:h-20"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 0%, rgba(205, 225, 242, 0.3) 45%, rgba(235, 242, 248, 0.8) 80%, #FAF5E8 100%)",
+              "linear-gradient(to bottom, transparent 0%, rgba(205, 225, 242, 0.25) 50%, rgba(235, 242, 248, 0.8) 85%, #FAF5E8 100%)",
           }}
         />
       </div>
@@ -151,7 +149,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
       <div className="relative z-10 mx-auto flex w-full max-w-7xl justify-center lg:justify-end">
         <div
           ref={contentRef}
-          className="flex max-w-xl flex-col items-center text-center lg:mr-8 lg:w-[48%]"
+          className="flex max-w-xl flex-col items-center text-center rounded-xl border border-white/10 bg-[#040F24]/70 p-5 backdrop-blur-md shadow-2xl sm:p-7 lg:mr-8 lg:w-[48%] lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none lg:shadow-none"
         >
           <p className="hero-reveal font-mono text-[11px] uppercase tracking-[0.26em] text-[#D8E3F5] sm:text-xs">
             {ORGANISER_INFO.heroEyebrow}
