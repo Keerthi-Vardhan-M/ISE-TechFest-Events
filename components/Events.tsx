@@ -38,13 +38,14 @@ export default function Events({ seats, onSelectRegister }: EventsProps) {
 
       gsap.fromTo(
         cards,
-        { y: 44, opacity: 0, scale: 0.95 },
+        { y: 55, opacity: 0, filter: "blur(12px)", scale: 0.94 },
         {
           y: 0,
           opacity: 1,
+          filter: "blur(0px)",
           scale: 1,
-          duration: 1.1,
-          stagger: 0.14,
+          duration: 1.25,
+          stagger: 0.16,
           ease: "power4.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
         }

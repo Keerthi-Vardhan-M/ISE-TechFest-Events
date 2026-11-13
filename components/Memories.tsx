@@ -5,13 +5,9 @@ import Image from "next/image";
 import gsap from "gsap";
 import { MEMORIES_GALLERY, type MemoryPhoto } from "@/content/events";
 import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
-import HeraldicCrest from "./HeraldicCrest";
 
 export default function Memories() {
   const sectionRef = useRef<HTMLElement>(null);
-  const leftCurtainRef = useRef<HTMLDivElement>(null);
-  const rightCurtainRef = useRef<HTMLDivElement>(null);
-  const crestRef = useRef<HTMLDivElement>(null);
   const titleLetters = "Memories".split("");
 
   useEffect(() => {
@@ -20,51 +16,8 @@ export default function Memories() {
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion()) {
-        gsap.set(".memory-char", { opacity: 1, y: 0, scale: 1 });
+        gsap.set(".memory-char", { opacity: 1, y: 0, scale: 1, filter: "none" });
         return;
-      }
-
-      // Memories bridge: arch curtains part slowly as the user scrolls
-      if (leftCurtainRef.current && rightCurtainRef.current) {
-        const bridgeTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 92%",
-            end: "top 22%",
-            scrub: 1.2,
-          },
-        });
-
-        bridgeTl.to(
-          leftCurtainRef.current,
-          {
-            xPercent: -105,
-            ease: "power1.inOut",
-          },
-          0
-        );
-
-        bridgeTl.to(
-          rightCurtainRef.current,
-          {
-            xPercent: 105,
-            ease: "power1.inOut",
-          },
-          0
-        );
-
-        if (crestRef.current) {
-          bridgeTl.to(
-            crestRef.current,
-            {
-              y: -22,
-              scale: 0.94,
-              opacity: 0.92,
-              ease: "power1.inOut",
-            },
-            0
-          );
-        }
       }
 
       // Memories text appears when user reaches this stage
@@ -74,17 +27,19 @@ export default function Memories() {
           opacity: 0,
           y: 28,
           scale: 0.85,
+          filter: "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
+          filter: "blur(0px)",
           duration: 1.0,
           stagger: 0.06,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 68%",
+            start: "top 72%",
             once: true,
           },
         }
@@ -111,7 +66,7 @@ export default function Memories() {
     <section
       id="memories"
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#06142E] px-2 pt-16 pb-6 sm:px-3 sm:pt-20 sm:pb-8 md:px-4 md:pt-24 md:pb-10"
+      className="relative w-full overflow-hidden bg-[#06142E] px-2 py-4 sm:px-3 sm:py-6 md:px-4 md:py-8"
     >
       {/* Background ambient radial atmosphere */}
       <div
@@ -122,51 +77,14 @@ export default function Memories() {
       {/* Top and Bottom soft gradient blend masks */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 inset-x-0 z-15 h-28 bg-gradient-to-b from-[#06142E] via-[#06142E]/85 to-transparent"
+        className="pointer-events-none absolute top-0 inset-x-0 z-20 h-28 bg-gradient-to-b from-[#06142E] via-[#06142E]/85 to-transparent"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 inset-x-0 z-15 h-32 bg-gradient-to-t from-[#06142E] via-[#06142E]/85 to-transparent"
+        className="pointer-events-none absolute bottom-0 inset-x-0 z-20 h-32 bg-gradient-to-t from-[#06142E] via-[#06142E]/85 to-transparent"
       />
 
-      {/* ================= ARCH BRIDGE CURTAINS THAT PART ON SCROLL ================= */}
-      {/* Left Curtain */}
-      <div
-        ref={leftCurtainRef}
-        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[53%] bg-[#06142E] will-change-transform"
-      >
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute top-0 right-0 h-full w-24 sm:w-36 md:w-52 translate-x-[99%] fill-[#06142E]"
-        >
-          <path d="M0,0 L65,0 C78,28 42,68 8,100 L0,100 Z" />
-        </svg>
-      </div>
-
-      {/* Right Curtain */}
-      <div
-        ref={rightCurtainRef}
-        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[53%] bg-[#06142E] will-change-transform"
-      >
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute top-0 left-0 h-full w-24 sm:w-36 md:w-52 -translate-x-[99%] fill-[#06142E]"
-        >
-          <path d="M100,0 L35,0 C22,28 58,68 92,100 L100,100 Z" />
-        </svg>
-      </div>
-
-      {/* Center Heraldic Crest bridging Events and Memories */}
-      <div
-        ref={crestRef}
-        className="pointer-events-none absolute top-1 sm:top-2 md:top-3 left-1/2 -translate-x-1/2 z-25 w-full max-w-[540px] sm:max-w-[700px] md:max-w-[840px] px-3 will-change-transform"
-      >
-        <HeraldicCrest />
-      </div>
-
-      {/* Centered Memories Title: refined size, appears when reaching this stage */}
+      {/* Centered Memories Title: refined smaller size, appears when scrolling to this stage */}
       <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
         <div className="rounded-2xl border border-white/20 bg-[#06142E]/80 px-6 py-3 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
           <h2 className="font-heading text-2xl font-bold uppercase tracking-[0.22em] text-white drop-shadow-[0_4px_16px_rgba(34,229,255,0.4)] sm:text-3xl md:text-4xl">
