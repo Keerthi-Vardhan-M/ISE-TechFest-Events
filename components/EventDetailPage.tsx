@@ -63,28 +63,28 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
   const otherEvent = allEvents.find((e) => e.id !== event.id);
 
   return (
-    <div className="min-h-screen bg-[#06142E] text-[#EDEFF5]">
+    <div className="min-h-screen cream-dot-grid text-[#0A1B3D]">
       {/* Top Header / Breadcrumbs Bar */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#06142E]/90 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-[#D9D0B8] bg-[#FAF5E8]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <Link
             href="/#events"
-            className="group inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[#9EB3D6] transition-colors hover:text-white"
+            className="group inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[#4B5C7D] transition-colors hover:text-[#0A1B3D]"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to All Events</span>
           </Link>
 
           <div className="flex items-center gap-3">
-            <span className="hidden font-pixel text-xs text-[#9EB3D6] sm:inline-block">
+            <span className="hidden font-pixel text-xs text-[#4B5C7D] sm:inline-block">
               AUTO×QUANT &apos;26
             </span>
             <button
               type="button"
               onClick={() => setIsRegisterOpen(true)}
-              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#06142E] shadow-[0_0_16px_rgba(163,240,109,0.3)] transition-all duration-200 hover:bg-[#bbf690] hover:scale-103"
+              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-[#0A1B3D] bg-[#0A1B3D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8] hover:scale-102"
             >
-              <Sparkles className="h-3.5 w-3.5" />
+              <Sparkles className="h-3.5 w-3.5 text-[#A3F06D]" />
               <span>Register Now</span>
             </button>
           </div>
@@ -92,11 +92,11 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-white/10 px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-24">
+      <section className="relative overflow-hidden border-b border-[#D9D0B8] px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-24">
         {/* Ambient atmospheric radial glow */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full opacity-20 blur-3xl"
+          className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full opacity-10 blur-3xl"
           style={{ backgroundColor: accentColor }}
         />
 
@@ -104,21 +104,21 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
             {/* Left Column: Event details */}
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#22E5FF]">
-                <span>{event.categoryLabel}</span>
+              <div className="inline-flex items-center gap-2 border border-[#D9D0B8] bg-[#F5EFE0] px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#1648A8]">
+                <span className="font-bold">{event.categoryLabel}</span>
                 <span>•</span>
-                <span className="text-[#A3F06D]">FREE ENTRY</span>
+                <span className="text-[#0A1B3D] font-bold">FREE ENTRY</span>
               </div>
 
-              <h1 className="mt-4 font-pixel text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 font-pixel text-4xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-5xl lg:text-6xl" style={{ textShadow: "0 0 10px rgba(10,27,61,0.18)" }}>
                 {event.name}
               </h1>
 
-              <p className="mt-4 text-base font-medium leading-relaxed text-[#D8E3F5] sm:text-lg">
+              <p className="mt-4 text-base font-medium leading-relaxed text-[#1648A8] sm:text-lg">
                 {event.tagline}
               </p>
 
-              <p className="mt-3 text-sm leading-relaxed text-[#9EB3D6]">
+              <p className="mt-3 text-sm leading-relaxed text-[#4B5C7D]">
                 {event.description}
               </p>
 
@@ -127,15 +127,15 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 <button
                   type="button"
                   onClick={() => setIsRegisterOpen(true)}
-                  className="inline-flex min-h-[46px] items-center gap-2 rounded-xl bg-[#A3F06D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#06142E] shadow-[0_8px_24px_rgba(163,240,109,0.3)] transition-all duration-200 hover:bg-[#bbf690] hover:scale-103"
+                  className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border-2 border-[#0A1B3D] bg-[#0A1B3D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[4px_4px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8] hover:scale-102"
                 >
-                  <Sparkles className="h-4 w-4" />
+                  <Sparkles className="h-4 w-4 text-[#A3F06D]" />
                   <span>REGISTER TEAM FOR FREE</span>
                 </button>
 
                 <a
                   href="#rounds"
-                  className="inline-flex min-h-[46px] items-center border border-white/20 bg-white/5 px-6 font-mono text-xs uppercase tracking-wider text-[#EDEFF5] transition-colors hover:border-white/50 hover:bg-white/10"
+                  className="inline-flex min-h-[46px] items-center border-2 border-[#0A1B3D] bg-[#FAF5E8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#0A1B3D] shadow-[3px_3px_0_rgba(10,27,61,0.12)] transition-colors hover:bg-[#F5EFE0]"
                 >
                   View Rounds &amp; Rules
                 </a>
@@ -144,7 +144,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
             {/* Right Column: 3D Mascot Showcase Card */}
             <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#0A1E46]/80 p-8 shadow-[0_20px_60px_rgba(3,10,24,0.7)]">
+              <div className="relative overflow-hidden border-2 border-[#0A1B3D] bg-[#FAF5E8] p-8 shadow-[6px_6px_0_#0A1B3D]">
                 <div className="animate-float-slow relative mx-auto h-56 w-56 sm:h-72 sm:w-72">
                   <Image
                     src={isAutomate ? "/images/event-automate.jpg" : "/images/event-quant.jpg"}
@@ -152,15 +152,15 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                     fill
                     priority
                     sizes="(max-width: 768px) 256px, 320px"
-                    className="object-contain drop-shadow-[0_16px_30px_rgba(0,0,0,0.6)]"
+                    className="object-contain drop-shadow-[0_12px_24px_rgba(10,27,61,0.2)]"
                   />
                 </div>
 
-                <div className="mt-4 border-t border-white/10 pt-4 text-center">
-                  <span className="font-pixel text-2xl font-bold text-[#A3F06D]">
+                <div className="mt-4 border-t border-[#D9D0B8] pt-4 text-center">
+                  <span className="font-pixel text-2xl font-bold text-[#1648A8]">
                     {event.prizePool}
                   </span>
-                  <span className="ml-2 font-mono text-xs uppercase tracking-widest text-[#9EB3D6]">
+                  <span className="ml-2 font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
                     TOTAL CASH PRIZE POOL
                   </span>
                 </div>
@@ -170,62 +170,62 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
           {/* Quick Event Metadata Grid */}
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <Calendar className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <Calendar className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Date</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-white sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
                 {event.dateDisplay}
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <Clock className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <Clock className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Timing</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-white sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
                 {event.timeDisplay}
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <MapPin className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <MapPin className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Venue</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-white sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
                 {event.venue}
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <Users className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <Users className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Team Size</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-[#A3F06D] sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
                 3–4 Members
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Eligibility</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-white sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
                 UG / PG Students
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#9EB3D6]">
-                <Trophy className="h-3.5 w-3.5 text-[#22E5FF]" />
+            <div className="border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[#4B5C7D]">
+                <Trophy className="h-3.5 w-3.5 text-[#1648A8]" />
                 <span>Entry Fee</span>
               </div>
-              <p className="mt-1 font-mono text-xs font-bold text-[#22E5FF] sm:text-sm">
+              <p className="mt-1 font-mono text-xs font-bold text-[#1648A8] sm:text-sm">
                 FREE (₹0)
               </p>
             </div>
@@ -237,13 +237,13 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       <section id="rounds" className="px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#22E5FF]">
+            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
               STRUCTURE &amp; EVALUATION
             </span>
-            <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
               COMPETITION ROUNDS
             </h2>
-            <p className="mt-2 text-sm text-[#9EB3D6]">
+            <p className="mt-2 text-sm text-[#4B5C7D]">
               All rounds are conducted on campus. Teams advance based on score benchmarks.
             </p>
           </div>
@@ -252,29 +252,29 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
             {event.rounds.map((round) => (
               <div
                 key={round.number}
-                className="group relative flex flex-col justify-between rounded-2xl border border-white/15 bg-[#0A1E46]/70 p-6 shadow-lg transition-all duration-300 hover:border-[#22E5FF]/60 hover:bg-[#0A1E46]"
+                className="group relative flex flex-col justify-between border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 shadow-sm transition-all duration-300 hover:border-[#0A1B3D] hover:shadow-[4px_4px_0_#0A1B3D]"
               >
                 <div>
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="font-pixel text-2xl font-bold text-[#22E5FF]">
+                  <div className="flex items-center justify-between border-b border-[#D9D0B8] pb-3">
+                    <span className="font-pixel text-2xl font-bold text-[#1648A8]">
                       ROUND {round.number}
                     </span>
-                    <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[11px] text-[#A3F06D]">
+                    <span className="border border-[#0A1B3D] bg-[#0A1B3D] px-2 py-0.5 font-mono text-[11px] font-bold text-[#FAF5E8]">
                       {round.duration}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 font-heading text-lg font-bold text-white">
+                  <h3 className="mt-4 font-heading text-lg font-bold text-[#0A1B3D]">
                     {round.title}
                   </h3>
 
-                  <p className="mt-2.5 text-xs leading-relaxed text-[#9EB3D6]">
+                  <p className="mt-2.5 text-xs leading-relaxed text-[#4B5C7D]">
                     {round.summary}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-1.5 font-mono text-[10px] text-[#9EB3D6]">
-                  <CheckCircle2 className="h-3 w-3 text-[#A3F06D]" />
+                <div className="mt-6 flex items-center gap-1.5 font-mono text-[10px] text-[#4B5C7D]">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#1648A8]" />
                   <span>Judged by Industry &amp; Faculty Panel</span>
                 </div>
               </div>
@@ -284,15 +284,15 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       </section>
 
       {/* Schedule Timeline & Cash Rewards */}
-      <section className="border-t border-white/10 bg-[#040E22] px-4 py-16 sm:px-6 lg:py-20">
+      <section className="border-t border-[#D9D0B8] bg-[#F5EFE0]/70 px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Timeline */}
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#22E5FF]">
+              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
                 DAY SCHEDULE
               </span>
-              <h2 className="mt-2 font-pixel text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="mt-2 font-pixel text-2xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-3xl">
                 EVENT TIMELINE
               </h2>
 
@@ -300,12 +300,12 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 {event.timeline.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-4 rounded-xl border border-white/10 bg-[#0A1E46]/50 p-4 transition-colors hover:border-white/20"
+                    className="flex items-start gap-4 border border-[#D9D0B8] bg-[#FAF5E8] p-4 shadow-sm transition-colors hover:border-[#0A1B3D]"
                   >
-                    <span className="min-w-[85px] rounded bg-[#1648A8]/60 px-2.5 py-1 text-center font-mono text-xs font-bold text-[#22E5FF]">
+                    <span className="min-w-[85px] border border-[#0A1B3D] bg-[#0A1B3D] px-2.5 py-1 text-center font-mono text-xs font-bold text-[#FAF5E8]">
                       {item.time}
                     </span>
-                    <span className="font-mono text-xs text-[#EDEFF5] sm:text-sm">
+                    <span className="font-mono text-xs text-[#0A1B3D] sm:text-sm">
                       {item.milestone}
                     </span>
                   </div>
@@ -315,10 +315,10 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
             {/* Podium Prizes */}
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#A3F06D]">
+              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
                 PODIUM AWARDS
               </span>
-              <h2 className="mt-2 font-pixel text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="mt-2 font-pixel text-2xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-3xl">
                 CASH REWARDS &amp; RECOGNITION
               </h2>
 
@@ -326,23 +326,23 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 {event.podium.map((pod) => (
                   <div
                     key={pod.rank}
-                    className="flex items-center justify-between rounded-xl border border-white/15 bg-[#0A1E46]/80 p-5 shadow-sm transition-all hover:border-[#A3F06D]"
+                    className="flex items-center justify-between border-2 border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-all hover:border-[#0A1B3D] hover:shadow-[3px_3px_0_#0A1B3D]"
                   >
                     <div className="flex items-center gap-3.5">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#06142E] font-pixel text-lg font-bold text-[#F5C451]">
+                      <div className="flex h-11 w-11 items-center justify-center border border-[#0A1B3D] bg-[#0A1B3D] font-pixel text-lg font-bold text-[#F5C451]">
                         {pod.rank}
                       </div>
                       <div>
-                        <h4 className="font-heading text-sm font-bold text-white sm:text-base">
+                        <h4 className="font-heading text-sm font-bold text-[#0A1B3D] sm:text-base">
                           {pod.title}
                         </h4>
-                        <span className="font-mono text-[11px] text-[#9EB3D6]">
+                        <span className="font-mono text-[11px] text-[#4B5C7D]">
                           Official Podium Finish
                         </span>
                       </div>
                     </div>
 
-                    <span className="font-pixel text-base font-bold text-[#A3F06D] sm:text-lg">
+                    <span className="font-pixel text-base font-bold text-[#1648A8] sm:text-lg">
                       {pod.reward}
                     </span>
                   </div>
@@ -350,19 +350,19 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
               </div>
 
               {/* Instant Registration Callout Card */}
-              <div className="mt-8 rounded-2xl border border-[#22E5FF]/40 bg-[#071D44] p-6 text-center shadow-[0_10px_30px_rgba(34,229,255,0.15)]">
-                <h3 className="font-pixel text-lg font-bold text-white">
+              <div className="mt-8 border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 text-center shadow-[5px_5px_0_#0A1B3D]">
+                <h3 className="font-pixel text-lg font-bold uppercase tracking-tight text-[#0A1B3D]">
                   READY TO COMPETE?
                 </h3>
-                <p className="mt-1 font-mono text-xs text-[#D8E3F5]">
+                <p className="mt-1 font-mono text-xs text-[#4B5C7D]">
                   Seats are capped at {event.seatCap} teams. Free entry for all college students.
                 </p>
                 <button
                   type="button"
                   onClick={() => setIsRegisterOpen(true)}
-                  className="mt-4 inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#A3F06D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#06142E] transition-transform hover:scale-103"
+                  className="mt-4 inline-flex min-h-[42px] items-center gap-2 border-2 border-[#0A1B3D] bg-[#0A1B3D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8] transition-transform hover:scale-103"
                 >
-                  <Sparkles className="h-4 w-4" />
+                  <Sparkles className="h-4 w-4 text-[#A3F06D]" />
                   <span>CLAIM YOUR TEAM SPOT</span>
                 </button>
               </div>
@@ -375,22 +375,22 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       <section className="px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#FF6B35]">
+            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#C82333]">
               RULES &amp; CODE OF CONDUCT
             </span>
-            <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
               OFFICIAL GUIDELINES
             </h2>
           </div>
 
-          <div className="rounded-2xl border border-white/15 bg-[#0A1E46]/60 p-6 sm:p-8">
+          <div className="border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 sm:p-8 shadow-sm">
             <ul className="space-y-4">
               {event.rules.map((rule, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1648A8] font-mono text-[10px] font-bold text-white">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center border border-[#0A1B3D] bg-[#0A1B3D] font-mono text-[10px] font-bold text-white">
                     {idx + 1}
                   </span>
-                  <p className="text-xs leading-relaxed text-[#D8E3F5] sm:text-sm">
+                  <p className="text-xs leading-relaxed text-[#0A1B3D] sm:text-sm">
                     {rule}
                   </p>
                 </li>
@@ -401,13 +401,13 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       </section>
 
       {/* FAQs */}
-      <section className="border-t border-white/10 bg-[#040E22] px-4 py-16 sm:px-6 lg:py-20">
+      <section className="border-t border-[#D9D0B8] bg-[#F5EFE0]/60 px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#22E5FF]">
+            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
               COMMON INQUIRIES
             </span>
-            <h2 className="mt-2 font-pixel text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
               FREQUENTLY ASKED QUESTIONS
             </h2>
           </div>
@@ -418,22 +418,22 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
               return (
                 <div
                   key={idx}
-                  className="rounded-xl border border-white/10 bg-[#0A1E46]/60 overflow-hidden"
+                  className="border border-[#D9D0B8] bg-[#FAF5E8] shadow-sm overflow-hidden"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="flex w-full items-center justify-between p-4 text-left font-heading text-sm font-bold text-white transition-colors hover:text-[#22E5FF] sm:p-5 sm:text-base"
+                    className="flex w-full items-center justify-between p-4 text-left font-heading text-sm font-bold text-[#0A1B3D] transition-colors hover:text-[#1648A8] sm:p-5 sm:text-base"
                   >
                     <span>{faq.question}</span>
                     <ChevronDown
-                      className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 text-[#22E5FF]" : "text-[#9EB3D6]"
+                      className={`h-4 w-4 shrink-0 text-[#4B5C7D] transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-[#1648A8]" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="border-t border-white/5 p-4 pt-2 text-xs leading-relaxed text-[#9EB3D6] sm:p-5 sm:pt-2 sm:text-sm">
+                    <div className="border-t border-[#D9D0B8] p-4 pt-2 text-xs leading-relaxed text-[#4B5C7D] sm:p-5 sm:pt-2 sm:text-sm">
                       {faq.answer}
                     </div>
                   )}
@@ -445,32 +445,32 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       </section>
 
       {/* Coordinator Contact & Other Track Switcher */}
-      <section className="border-t border-white/10 px-4 py-16 sm:px-6 lg:py-20">
+      <section className="border-t border-[#D9D0B8] px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
             {/* Coordinator Card */}
-            <div className="rounded-2xl border border-white/15 bg-[#0A1E46]/80 p-6 sm:p-8">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#A3F06D]">
+            <div className="border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 shadow-[5px_5px_0_#0A1B3D] sm:p-8">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#1648A8]">
                 TRACK COORDINATOR
               </span>
-              <h3 className="mt-2 font-heading text-xl font-bold text-white">
+              <h3 className="mt-2 font-heading text-xl font-bold text-[#0A1B3D]">
                 {event.contact.name}
               </h3>
-              <p className="font-mono text-xs text-[#9EB3D6]">
+              <p className="font-mono text-xs text-[#4B5C7D]">
                 {event.contact.role}
               </p>
 
               <div className="mt-6 flex flex-col gap-3 font-mono text-xs">
                 <a
                   href={`tel:${event.contact.phone.replace(/\s+/g, "")}`}
-                  className="inline-flex items-center gap-2 text-[#22E5FF] hover:underline"
+                  className="inline-flex items-center gap-2 font-bold text-[#1648A8] hover:underline"
                 >
                   <Phone className="h-4 w-4" />
                   <span>{event.contact.phone}</span>
                 </a>
                 <a
                   href={`mailto:${event.contact.email}`}
-                  className="inline-flex items-center gap-2 text-[#22E5FF] hover:underline"
+                  className="inline-flex items-center gap-2 font-bold text-[#1648A8] hover:underline"
                 >
                   <Mail className="h-4 w-4" />
                   <span>{event.contact.email}</span>
@@ -480,22 +480,22 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
             {/* Switch to Other Track */}
             {otherEvent && (
-              <div className="rounded-2xl border border-white/15 bg-[#0A1E46]/50 p-6 text-center sm:p-8">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#9EB3D6]">
+              <div className="border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 text-center shadow-sm sm:p-8 hover:border-[#0A1B3D] transition-colors">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#4B5C7D]">
                   ALSO EXPLORE
                 </span>
-                <h3 className="mt-2 font-heading text-xl font-bold text-white">
+                <h3 className="mt-2 font-heading text-xl font-bold text-[#0A1B3D]">
                   {otherEvent.name}
                 </h3>
-                <p className="mt-1 font-mono text-xs text-[#A3F06D]">
+                <p className="mt-1 font-mono text-xs font-semibold text-[#1648A8]">
                   {otherEvent.categoryLabel} • {otherEvent.dateDisplay}
                 </p>
-                <p className="mt-3 text-xs text-[#9EB3D6]">
+                <p className="mt-3 text-xs text-[#4B5C7D]">
                   {otherEvent.tagline}
                 </p>
                 <Link
                   href={`/events/${otherEvent.id}`}
-                  className="mt-6 inline-flex min-h-[40px] items-center border border-white/20 bg-white/5 px-6 font-mono text-xs uppercase tracking-wider text-white transition-colors hover:border-[#22E5FF] hover:text-[#22E5FF]"
+                  className="mt-6 inline-flex min-h-[40px] items-center border-2 border-[#0A1B3D] bg-[#0A1B3D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8] transition-colors hover:bg-[#1648A8]"
                 >
                   View {otherEvent.shortName} Details →
                 </Link>
@@ -506,23 +506,26 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       </section>
 
       {/* Floating Bottom Sticky Register Bar for mobile/tablet */}
-      <div className="sticky bottom-0 z-30 border-t border-white/10 bg-[#06142E]/95 p-3.5 backdrop-blur-md sm:hidden">
+      <div className="sticky bottom-0 z-30 border-t border-[#D9D0B8] bg-[#FAF5E8]/95 p-3.5 backdrop-blur-md sm:hidden">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <span className="font-pixel text-xs text-[#A3F06D]">{event.prizePool}</span>
-            <span className="block font-mono text-[9px] uppercase tracking-wider text-[#9EB3D6]">
+            <span className="font-pixel text-xs text-[#1648A8]">{event.prizePool}</span>
+            <span className="block font-mono text-[9px] uppercase tracking-wider text-[#4B5C7D]">
               {event.dateDisplay} • FREE
             </span>
           </div>
           <button
             type="button"
             onClick={() => setIsRegisterOpen(true)}
-            className="rounded-lg bg-[#A3F06D] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#06142E]"
+            className="border border-[#0A1B3D] bg-[#0A1B3D] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8]"
           >
             Register Now
           </button>
         </div>
       </div>
+
+      {/* Pixel Checkerboard Divider at bottom */}
+      <div className="pixel-checker-divider" aria-hidden="true" />
 
       {/* Register Modal for Instant Submission */}
       <RegisterModal
