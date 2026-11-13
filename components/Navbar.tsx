@@ -30,8 +30,8 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      // Show navbar only after scrolling down past the top hero banner
-      setScrolled(y > 80);
+      // Show background and progress bar when scrolled down
+      setScrolled(y > 30);
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? Math.min(100, (y / docHeight) * 100) : 0);
     };
@@ -105,13 +105,13 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out ${
           scrolled
-            ? "translate-y-0 opacity-100 border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg pointer-events-auto"
-            : "-translate-y-full opacity-0 pointer-events-none"
+            ? "border-b border-white/10 bg-[#040F24]/95 backdrop-blur-xl shadow-lg"
+            : "border-b border-transparent bg-transparent backdrop-blur-none shadow-none"
         }`}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
-        {/* Top scroll progress strip */}
-        <div className="h-[2px] w-full bg-white/5">
+        {/* Top scroll progress strip - only visible when scrolled */}
+        <div className={`h-[2px] w-full transition-opacity duration-300 ${scrolled ? "bg-white/5 opacity-100" : "opacity-0"}`}>
           <div
             className="h-full bg-gradient-to-r from-[#22E5FF] via-[#A3F06D] to-[#1648A8] transition-[width] duration-75"
             style={{ width: `${scrollProgress}%` }}
