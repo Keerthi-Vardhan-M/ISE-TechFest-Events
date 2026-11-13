@@ -20,12 +20,12 @@ export default function About() {
       // About text & image entrance
       gsap.fromTo(
         ".about-left",
-        { y: 36, opacity: 0, filter: "blur(8px)" },
+        { y: 32, opacity: 0, filter: "blur(8px)" },
         {
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
-          duration: 1.2,
+          duration: 1.1,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -37,13 +37,13 @@ export default function About() {
 
       gsap.fromTo(
         ".about-right",
-        { y: 36, opacity: 0, filter: "blur(8px)" },
+        { y: 32, opacity: 0, filter: "blur(8px)" },
         {
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
-          duration: 1.2,
-          delay: 0.12,
+          duration: 1.1,
+          delay: 0.1,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -53,25 +53,13 @@ export default function About() {
         }
       );
 
-      // Dedicated ScrollTrigger directly on the metrics bar so count-up happens right in front of user
-      if (metricsBarRef.current) {
-        if (prefersReducedMotion()) {
-          ABOUT_SECTION.metrics.forEach((metric, idx) => {
-            const el = numberRefs.current[idx];
-            if (el) {
-              const prefix = "prefix" in metric ? metric.prefix : "";
-              el.textContent = `${prefix}${metric.value.toLocaleString("en-IN")}${metric.suffix}`;
-            }
-          });
-          return;
-        }
-
+      // Dedicated ScrollTrigger on the metrics bar: rolls numbers up from 0 when in view
+      if (metricsBarRef.current && !prefersReducedMotion()) {
         ScrollTrigger.create({
           trigger: metricsBarRef.current,
-          start: "top 85%",
+          start: "top 88%",
           once: true,
           onEnter: () => {
-            // Live 60-120fps animated count-up with frame-by-frame text updates
             ABOUT_SECTION.metrics.forEach((metric, idx) => {
               const el = numberRefs.current[idx];
               if (!el) return;
@@ -79,7 +67,7 @@ export default function About() {
               const obj = { val: 0 };
               const prefix = "prefix" in metric ? metric.prefix : "";
               const suffix = metric.suffix ?? "";
-              const duration = metric.value > 1000 ? 2.2 : metric.value > 10 ? 1.8 : 1.3;
+              const duration = metric.value > 1000 ? 1.9 : metric.value > 10 ? 1.4 : 1.0;
 
               gsap.to(obj, {
                 val: metric.value,
@@ -94,20 +82,6 @@ export default function About() {
                 },
               });
             });
-
-            // Smooth entrance for metric items
-            gsap.fromTo(
-              ".about-stat-card",
-              { y: 24, opacity: 0, scale: 0.96 },
-              {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 0.85,
-                stagger: 0.1,
-                ease: "power3.out",
-              }
-            );
           },
         });
       }
@@ -122,11 +96,11 @@ export default function About() {
       ref={sectionRef}
       className="cream-dot-grid relative text-[#0A1B3D]"
     >
-      {/* Expansive wide container matching reference screenshot */}
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-28">
-        {/* Large pixel heading with soft blur/glow */}
+      {/* Expansive wide container exactly matching reference screenshot */}
+      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-24">
+        {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue */}
         <h2
-          className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl md:text-6xl"
+          className="font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-5xl md:text-6xl"
           style={{ textShadow: "0 0 10px rgba(10,27,61,0.22)" }}
         >
           {ABOUT_SECTION.titlePrefix}{" "}
@@ -138,13 +112,13 @@ export default function About() {
           </span>
         </h2>
 
-        {/* Two-column layout: left statement, right campus card */}
+        {/* Two-column layout: left clean statement, right campus card exactly as screenshot */}
         <div className="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          <div className="about-left space-y-6 lg:col-span-7">
-            <p className="text-xl font-medium leading-relaxed text-[#0A1B3D] sm:text-2xl md:text-3xl">
+          <div className="about-left space-y-4 lg:col-span-7">
+            <p className="text-base font-normal leading-relaxed text-[#0A1B3D] sm:text-lg lg:text-xl">
               {ABOUT_SECTION.questDescription}
             </p>
-            <p className="text-sm leading-relaxed text-[#4B5C7D] sm:text-base md:text-lg">
+            <p className="text-xs font-normal text-[#4B5C7D] sm:text-sm">
               {ABOUT_SECTION.questSubtitle}
             </p>
           </div>
@@ -168,7 +142,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Clean 4-column metric bar with live rolling count-up animations */}
+        {/* 4-column metric bar exactly matching screenshot with increasing count animation */}
         <div
           ref={metricsBarRef}
           className="mt-14 grid grid-cols-2 border-y border-[#D9D0B8] sm:grid-cols-4"
@@ -179,7 +153,7 @@ export default function About() {
             return (
               <div
                 key={metric.label}
-                className={`about-stat-card flex flex-col justify-center px-4 py-6 sm:px-6 sm:py-8 sm:border-r last:sm:border-r-0 sm:border-[#D9D0B8] ${
+                className={`flex flex-col justify-center px-4 py-6 sm:px-6 sm:py-8 sm:border-r last:sm:border-r-0 sm:border-[#D9D0B8] ${
                   idx % 2 === 1 ? "border-l border-[#D9D0B8] sm:border-l-0" : ""
                 } ${
                   idx >= 2 ? "border-t border-[#D9D0B8] sm:border-t-0" : ""
@@ -191,7 +165,9 @@ export default function About() {
                       numberRefs.current[idx] = el;
                     }}
                   >
-                    {prefix}0{suffix}
+                    {prefix}
+                    {metric.value.toLocaleString("en-IN")}
+                    {suffix}
                   </span>
                 </div>
                 <p className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4B5C7D] sm:text-xs">
