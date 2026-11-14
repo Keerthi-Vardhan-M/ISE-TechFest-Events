@@ -292,3 +292,51 @@ body {
   animation: vertical-marquee-down 29s linear infinite !important;
   animation-play-state: running !important;
 }
+
+/* Hero Parallax Idle Floating Bobbing */
+@keyframes hero-bull-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0) rotate(-0.6deg);
+  }
+}
+
+@keyframes hero-bear-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0) rotate(0.5deg);
+  }
+}
+
+@keyframes hero-island-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+.animate-hero-bull-float {
+  animation: hero-bull-float 5.8s ease-in-out infinite;
+}
+
+.animate-hero-bear-float {
+  animation: hero-bear-float 6.4s ease-in-out infinite 0.7s;
+}
+
+.animate-hero-island-float {
+  animation: hero-island-float 7.8s ease-in-out infinite 1.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-bull-float,
+  .animate-hero-bear-float,
+  .animate-hero-island-float {
+    animation: none !important;
+  }
+}

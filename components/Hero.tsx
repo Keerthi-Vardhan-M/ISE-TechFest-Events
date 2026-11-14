@@ -47,6 +47,14 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Parallax layer refs
+  const skyRef = useRef<HTMLDivElement>(null);
+  const islandsRef = useRef<HTMLDivElement>(null);
+  const bearRef = useRef<HTMLDivElement>(null);
+  const bullRef = useRef<HTMLDivElement>(null);
+  const fgRef = useRef<HTMLDivElement>(null);
+  const mobileBgRef = useRef<HTMLDivElement>(null);
+
   const targetISO = getEarliestEventDateISO();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => computeTimeLeft(targetISO));
 
@@ -63,6 +71,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
     if (!heroRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Intro entrance reveal
       const items = heroRef.current?.querySelectorAll(".hero-reveal");
       if (items?.length) {
         if (prefersReducedMotion()) {
@@ -79,6 +88,106 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
               ease: "power3.out",
             }
           );
+        }
+      }
+
+      // Parallax scroll animation
+      if (!prefersReducedMotion() && heroRef.current) {
+        const isDesktop = window.innerWidth >= 768;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+        if (isDesktop) {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.4,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // 1. Green Bull: Moves slightly upward and towards the left (30–50px)
+          if (bullRef.current) {
+            tl.to(
+              bullRef.current,
+              {
+                x: isTablet ? -24 : -44,
+                y: isTablet ? -28 : -48,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
+
+          // 2. Red Bear: Moves slightly upward and towards the right (25–45px), independent of bull
+          if (bearRef.current) {
+            tl.to(
+              bearRef.current,
+              {
+                x: isTablet ? 20 : 38,
+                y: isTablet ? -22 : -40,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
+
+          // 3. Floating Islands: Move at slower speed (10–25px) for depth
+          if (islandsRef.current) {
+            tl.to(
+              islandsRef.current,
+              {
+                y: isTablet ? -10 : -18,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
+
+          // 4. Foreground: Moves slightly faster (15–30px) to enhance depth
+          if (fgRef.current) {
+            tl.to(
+              fgRef.current,
+              {
+                y: isTablet ? -14 : -28,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
+
+          // 5. Background sky: Remains mostly stationary (8–12px)
+          if (skyRef.current) {
+            tl.to(
+              skyRef.current,
+              {
+                y: isTablet ? 6 : 10,
+                ease: "none",
+                force3D: true,
+              },
+              0
+            );
+          }
+        } else {
+          // Mobile subtle vertical parallax with zero horizontal overflow
+          if (mobileBgRef.current) {
+            gsap.to(mobileBgRef.current, {
+              y: -20,
+              ease: "none",
+              force3D: true,
+              scrollTrigger: {
+                trigger: heroRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.4,
+              },
+            });
+          }
         }
       }
     }, heroRef);
@@ -104,23 +213,121 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
       ref={heroRef}
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#020b1f] px-0 pt-16 pb-12 text-white sm:pt-24 sm:pb-16"
     >
-      {/* Background artwork: mobile gets the portrait bull artwork, desktop gets the 2K panoramic sky */}
+      {/* Background artwork: multi-layer cinematic parallax on desktop/tablet, high-res portrait bull on mobile */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
-        <picture className="block h-full w-full">
-          <source media="(max-width: 767px)" srcSet="/images/hero-bull-mobile.jpg" />
+        {/* Desktop & Tablet Multi-Layer Parallax Background */}
+        <div className="hidden md:block absolute inset-0 h-full w-full overflow-hidden">
+          {/* Layer 1: Background Sky & Clouds (mostly stationary) */}
+          <div
+            ref={skyRef}
+            className="absolute inset-0 h-full w-full will-change-transform"
+            style={{ transform: "translate3d(0, 0, 0)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hero-layer-sky.webp"
+              alt=""
+              className="h-full w-full object-cover object-center"
+              style={{
+                filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
+              }}
+            />
+          </div>
+
+          {/* Layer 2: Floating Islands & Waterfall (depth layer) */}
+          <div
+            ref={islandsRef}
+            className="absolute inset-0 h-full w-full will-change-transform"
+            style={{ transform: "translate3d(0, 0, 0)" }}
+          >
+            <div className="h-full w-full animate-hero-island-float">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/hero-layer-islands.webp"
+                alt=""
+                className="h-full w-full object-cover object-center"
+                style={{
+                  filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Layer 3: Red Bear & Candlesticks (moves upward and right + subtle idle float) */}
+          <div
+            ref={bearRef}
+            className="absolute inset-0 h-full w-full will-change-transform"
+            style={{ transform: "translate3d(0, 0, 0)" }}
+          >
+            <div className="h-full w-full animate-hero-bear-float">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/hero-layer-bear.webp"
+                alt=""
+                className="h-full w-full object-cover object-center"
+                style={{
+                  filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Layer 4: Green Bull & Candlestick Arc (moves upward and left + subtle floating tilt) */}
+          <div
+            ref={bullRef}
+            className="absolute inset-0 h-full w-full will-change-transform"
+            style={{ transform: "translate3d(0, 0, 0)" }}
+          >
+            <div className="h-full w-full animate-hero-bull-float">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/hero-layer-bull.webp"
+                alt=""
+                className="h-full w-full object-cover object-center"
+                style={{
+                  filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Layer 5: Foreground (Cherry tree, cliff, boy, cat, lantern) */}
+          <div
+            ref={fgRef}
+            className="absolute inset-0 h-full w-full will-change-transform"
+            style={{ transform: "translate3d(0, 0, 0)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hero-layer-foreground.webp"
+              alt=""
+              className="h-full w-full object-cover object-center"
+              style={{
+                filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Mobile Background with subtle vertical parallax and verified portrait bull */}
+        <div
+          ref={mobileBgRef}
+          className="block md:hidden absolute inset-0 h-full w-full will-change-transform"
+          style={{ transform: "translate3d(0, 0, 0)" }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero-sky-bg.jpg"
+            src="/images/hero-bull-mobile.jpg"
             alt="Floating voxel island sky backdrop"
             className="h-full w-full object-cover object-center"
             style={{
               filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
             }}
           />
-        </picture>
+        </div>
 
         {/* Mobile atmospheric contrast wash so text is readable over bull */}
         <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-[#020b1f]/15 via-transparent to-[#020b1f]/35" />
