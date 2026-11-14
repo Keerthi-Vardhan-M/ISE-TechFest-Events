@@ -5,37 +5,6 @@ import { checkRateLimit } from "@/lib/rateLimit";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { registrationSchema } from "@/lib/validation";
 
-async function verifyTurnstile(token: string | undefined, ip: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    // Allow local development without Turnstile secret; enforce in production when key is set
-    return process.env.NODE_ENV !== "production";
-  }
-
-  if (!token) return false;
-
-  try {
-    const formData = new URLSearchParams();
-    formData.append("secret", secret);
-    formData.append("response", token);
-    if (ip && ip !== "unknown") {
-      formData.append("remoteip", ip);
-    }
-
-    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formData.toString(),
-    });
-
-    if (!res.ok) return false;
-    const data = (await res.json()) as { success?: boolean };
-    return Boolean(data.success);
-  } catch {
-    return false;
-  }
-}
-
 export async function POST(req: NextRequest) {
   const forwardedFor = req.headers.get("x-forwarded-for");
   const ip = forwardedFor?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
@@ -77,16 +46,6 @@ export async function POST(req: NextRequest) {
   }
 
   const data = parsed.data;
-  const turnstileOk = await verifyTurnstile(data.turnstileToken, ip);
-  if (!turnstileOk) {
-    return NextResponse.json(
-      {
-        status: "CAPTCHA_FAILED",
-        message: "Bot verification failed. Please complete the Cloudflare Turnstile check.",
-      },
-      { status: 403 }
-    );
-  }
 
   const supabase = getSupabaseAdmin();
   if (!supabase) {

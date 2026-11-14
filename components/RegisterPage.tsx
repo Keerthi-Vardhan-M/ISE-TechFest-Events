@@ -49,8 +49,6 @@ export default function RegisterPage() {
 
   const [serverError, setServerError] = useState<string | null>(null);
   const [receipt, setReceipt] = useState<SuccessReceipt | null>(null);
-  const [turnstileReady, setTurnstileReady] = useState(false);
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   const {
     register,
@@ -94,28 +92,6 @@ export default function RegisterPage() {
       setValue("event", eventParam);
     }
   }, [eventParam, setValue]);
-
-  useEffect(() => {
-    if (!siteKey || !turnstileReady || !window.turnstile) return;
-    const container = document.getElementById("turnstile-widget");
-    if (!container) return;
-    container.innerHTML = "";
-
-    try {
-      window.turnstile.render(container, {
-        sitekey: siteKey,
-        theme: "light",
-        callback: (token: string) => {
-          setValue("turnstileToken", token, { shouldValidate: true });
-        },
-        "expired-callback": () => {
-          setValue("turnstileToken", "", { shouldValidate: true });
-        },
-      });
-    } catch {
-      // Ignored if re-rendered
-    }
-  }, [siteKey, turnstileReady, setValue]);
 
   const onSubmit = async (data: RegistrationInput) => {
     setServerError(null);
@@ -167,14 +143,6 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen cream-dot-grid bg-[#FAF5E8] text-[#0A1B3D]">
-      {siteKey && (
-        <Script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-          strategy="afterInteractive"
-          onLoad={() => setTurnstileReady(true)}
-        />
-      )}
-
       {/* Hero Banner with Theme Floating Islands Backdrop */}
       <div className="relative overflow-hidden bg-[#0a2558] px-4 pt-10 pb-20 text-white sm:px-6 sm:pt-14 sm:pb-28">
         <div className="pointer-events-none absolute inset-0 opacity-50">
@@ -689,13 +657,6 @@ export default function RegisterPage() {
               </div>
 
               <div className="mt-6 space-y-5">
-                {/* Turnstile verification widget */}
-                {siteKey && (
-                  <div className="rounded border border-[#D9D0B8] bg-white p-3 inline-block shadow-sm">
-                    <div id="turnstile-widget" />
-                  </div>
-                )}
-
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"

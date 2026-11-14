@@ -46,8 +46,6 @@ export default function RegisterForm({
   const [serverError, setServerError] = useState<string | null>(null);
   const [isWaitlist, setIsWaitlist] = useState(false);
   const [receipt, setReceipt] = useState<SuccessReceipt | null>(null);
-  const [turnstileReady, setTurnstileReady] = useState(false);
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   const {
     register,
@@ -94,19 +92,6 @@ export default function RegisterForm({
       }
     }
   }, [fields.length, maxExtraMembers, remove]);
-
-  useEffect(() => {
-    if (!siteKey || !turnstileReady || !window.turnstile) return;
-    const container = document.getElementById("turnstile-widget");
-    if (!container || container.childElementCount > 0) return;
-
-    window.turnstile.render(container, {
-      sitekey: siteKey,
-      theme: "dark",
-      callback: (token: string) => setValue("turnstileToken", token),
-      "expired-callback": () => setValue("turnstileToken", ""),
-    });
-  }, [siteKey, turnstileReady, setValue]);
 
   const onSubmit = async (values: RegistrationInput) => {
     setServerError(null);
@@ -164,14 +149,6 @@ export default function RegisterForm({
 
   return (
     <div className="w-full text-[#F4F6FB]">
-      {siteKey && (
-        <Script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-          strategy="lazyOnload"
-          onLoad={() => setTurnstileReady(true)}
-        />
-      )}
-
       <div className="mx-auto max-w-2xl">
         <div className="border border-[#9EB3D6]/30 bg-[#091D42]/95 p-5 shadow-[6px_6px_0_#030B1A] sm:p-7">
           {receipt ? (
@@ -490,8 +467,6 @@ export default function RegisterForm({
               {errors.consent && (
                 <p className="text-xs text-[#FF3B5C]">{errors.consent.message}</p>
               )}
-
-              {siteKey && <div id="turnstile-widget" className="min-h-[65px]" />}
 
               <div aria-live="polite">
                 {serverError && (
