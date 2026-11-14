@@ -115,7 +115,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           <img
             src="/images/hero-sky-bg.jpg"
             alt="Floating voxel island sky backdrop"
-            className="h-full w-full object-cover object-[22%_top] md:object-center"
+            className="h-full w-full object-cover object-center"
             style={{
               imageRendering: "crisp-edges",
               filter: "contrast(1.06) saturate(1.08) brightness(1.02)",
