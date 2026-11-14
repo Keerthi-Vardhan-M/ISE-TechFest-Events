@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EVENTS } from "@/content/events";
+import { sendRegistrationConfirmationEmail } from "@/lib/email";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { registrationSchema } from "@/lib/validation";
@@ -170,6 +171,22 @@ export async function POST(req: NextRequest) {
     0,
     (result.seat_cap ?? eventConfig.seatCap) - (result.seats_taken ?? 0)
   );
+
+  // Send branded confirmation ticket email via Resend
+  if (result.id) {
+    sendRegistrationConfirmationEmail({
+      to: data.email,
+      leaderName: data.leaderName,
+      teamName: data.teamName,
+      event: data.event,
+      eventName: eventConfig.name,
+      referenceId: result.id,
+      college: data.college,
+      members: data.members ?? [],
+    }).catch((emailErr) => {
+      console.error("[register email error]", emailErr);
+    });
+  }
 
   return NextResponse.json(
     {
