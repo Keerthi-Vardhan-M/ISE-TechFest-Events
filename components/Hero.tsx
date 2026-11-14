@@ -306,7 +306,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-28 sm:h-36 md:h-44"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 0%, rgba(22, 72, 168, 0.12) 30%, rgba(10, 37, 88, 0.55) 65%, #020b1f 100%)",
+              "linear-gradient(to bottom, transparent 0%, rgba(22, 72, 168, 0.15) 30%, rgba(10, 37, 88, 0.6) 65%, #0a2558 100%)",
           }}
         />
       </div>

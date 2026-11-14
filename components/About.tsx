@@ -121,6 +121,14 @@ export default function About() {
       className="relative text-[#0A1B3D]"
       style={{ background: "linear-gradient(135deg, #E8DCC8 0%, #F0E6D2 40%, #EDE3CF 100%)" }}
     >
+      {/* Atmospheric blue shade seamlessly cascading from the hero section above */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-20 sm:h-28 z-10"
+        style={{
+          background:
+            "linear-gradient(to bottom, #0a2558 0%, rgba(10, 37, 88, 0.65) 30%, rgba(22, 72, 168, 0.25) 65%, transparent 100%)",
+        }}
+      />
       {/* Expansive wide container exactly matching reference screenshot */}
       <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-24">
         {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue with butter melting entrance */}
