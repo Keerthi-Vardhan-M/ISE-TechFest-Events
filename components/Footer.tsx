@@ -152,9 +152,9 @@ export default function Footer({ onOpenRegister }: FooterProps) {
               <span>•</span>
               <span>Privacy</span>
               <span>•</span>
-              <span>Refunds</span>
-              <span>•</span>
-              <span>Contact</span>
+              <Link href="/admin" className="text-[#A3F06D]/75 hover:text-[#A3F06D] transition-colors">
+                Organizer Portal
+              </Link>
             </div>
           </div>
 
