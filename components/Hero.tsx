@@ -91,7 +91,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         }
       }
 
-      // Parallax scroll animation across all viewports
+      // Parallax scroll animation across all viewports with cinematic slow-scroll pinning
       if (!prefersReducedMotion() && heroRef.current) {
         const isMobile = window.innerWidth < 768;
         const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
@@ -100,33 +100,35 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top top",
-            end: "bottom top",
-            scrub: 0.4,
+            end: isMobile ? "+=70%" : "+=90%",
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.8, // Slow, buttery scrub so users clearly witness the bull deviating
             invalidateOnRefresh: true,
           },
         });
 
-        // 1. Green Bull: Moves upward and towards the left
+        // 1. Green Bull: Slides noticeably to the RIGHT and upwards
         if (bullRef.current) {
           tl.to(
             bullRef.current,
             {
-              x: isMobile ? -18 : isTablet ? -24 : -44,
-              y: isMobile ? -26 : isTablet ? -28 : -48,
-              ease: "none",
+              x: isMobile ? 36 : isTablet ? 58 : 88,
+              y: isMobile ? -24 : isTablet ? -32 : -46,
+              ease: "power1.out",
               force3D: true,
             },
             0
           );
         }
 
-        // 2. Red Bear: Moves upward and towards the right
+        // 2. Red Bear: Moves upward and right
         if (bearRef.current) {
           tl.to(
             bearRef.current,
             {
-              x: isMobile ? 18 : isTablet ? 20 : 38,
-              y: isMobile ? -20 : isTablet ? -22 : -40,
+              x: isMobile ? 18 : isTablet ? 24 : 40,
+              y: isMobile ? -20 : isTablet ? -24 : -42,
               ease: "none",
               force3D: true,
             },
@@ -139,7 +141,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           tl.to(
             islandsRef.current,
             {
-              y: isMobile ? -10 : isTablet ? -10 : -18,
+              y: isMobile ? -10 : isTablet ? -12 : -20,
               ease: "none",
               force3D: true,
             },
@@ -152,7 +154,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           tl.to(
             fgRef.current,
             {
-              y: isMobile ? -16 : isTablet ? -14 : -28,
+              y: isMobile ? -16 : isTablet ? -18 : -30,
               ease: "none",
               force3D: true,
             },
