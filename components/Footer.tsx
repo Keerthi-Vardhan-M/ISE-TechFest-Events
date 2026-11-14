@@ -57,7 +57,7 @@ export default function Footer({ onOpenRegister }: FooterProps) {
             <h3
               className="font-pixel text-4xl font-extrabold tracking-wide text-[#A3F06D] sm:text-5xl lg:text-6xl"
               style={{
-                textShadow: "0 3px 0 #040F24, 0 0 6px rgba(163, 240, 109, 0.22)",
+                textShadow: "0 2px 0 #040F24",
               }}
             >
               {ORGANISER_INFO.heroHeadline}

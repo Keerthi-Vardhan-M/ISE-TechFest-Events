@@ -103,7 +103,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
             href="/"
             className="shrink-0 font-pixel text-lg font-bold tracking-wider text-[#A3F06D] sm:text-2xl"
             style={{
-              textShadow: "0 2px 0 #072513, 0 4px 12px rgba(163,240,109,0.35)",
+              textShadow: "0 2px 0 #072513",
             }}
           >
             AUTO×QUANT
@@ -185,7 +185,7 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
               <span
                 className="font-pixel text-xl font-bold tracking-wider text-[#A3F06D]"
                 style={{
-                  textShadow: "0 2px 0 #072513, 0 4px 12px rgba(163,240,109,0.35)",
+                  textShadow: "0 2px 0 #072513",
                 }}
               >
                 AUTO×QUANT

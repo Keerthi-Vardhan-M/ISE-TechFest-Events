@@ -1,9 +1,33 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { MEMORIES_GALLERY, type MemoryPhoto } from "@/content/events";
 
 export default function Memories() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.01, rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   // Split photos into 4 balanced columns, duplicating for seamless continuous vertical loop
   const columns: MemoryPhoto[][] = [[], [], [], []];
   MEMORIES_GALLERY.forEach((photo, idx) => {
@@ -20,6 +44,8 @@ export default function Memories() {
   return (
     <section
       id="memories"
+      ref={sectionRef}
+      style={{ contentVisibility: "auto", containIntrinsicSize: "700px" }}
       className="cream-dot-grid relative w-full overflow-hidden bg-[#FAF5E8] px-1 pt-1 pb-0 sm:px-2"
     >
       {/* Background ambient radial atmosphere */}
@@ -43,6 +69,7 @@ export default function Memories() {
             return (
               <div key={colIdx} className="relative h-full overflow-hidden">
                 <div
+                  style={{ animationPlayState: isVisible ? "running" : "paused" }}
                   className={`flex flex-col h-max will-change-transform ${animClass}`}
                 >
                   {/* Set 1 */}

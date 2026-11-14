@@ -58,6 +58,9 @@ html {
   color: var(--text-light);
   scroll-behavior: auto;
   -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {

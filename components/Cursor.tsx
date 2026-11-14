@@ -37,6 +37,7 @@ export default function Cursor() {
     let ringX = -100;
     let ringY = -100;
     let rafId = 0;
+    let lastCheck = 0;
 
     const onMove = (e: MouseEvent) => {
       mouseX = e.clientX;
@@ -45,12 +46,13 @@ export default function Cursor() {
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
       }
 
-      const target = e.target as HTMLElement | null;
-      const scoped = target?.closest("[data-cursor]")?.getAttribute("data-cursor");
-      if (scoped === "automate" || scoped === "quant") {
-        setVariant((prev) => (prev !== scoped ? scoped : prev));
-      } else {
-        setVariant((prev) => (prev !== "default" ? "default" : prev));
+      const now = performance.now();
+      if (now - lastCheck > 120) {
+        lastCheck = now;
+        const target = e.target as HTMLElement | null;
+        const scoped = target?.closest("[data-cursor]")?.getAttribute("data-cursor");
+        const nextVariant = scoped === "automate" || scoped === "quant" ? scoped : "default";
+        setVariant((prev) => (prev !== nextVariant ? nextVariant : prev));
       }
     };
 

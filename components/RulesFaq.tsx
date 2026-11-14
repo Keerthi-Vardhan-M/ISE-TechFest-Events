@@ -44,10 +44,7 @@ export default function RulesFaq() {
         {/* Questions Accordion */}
         <div className="faq-reveal">
           <div className="text-center">
-            <h2
-              className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl"
-              style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
-            >
+            <h2 className="font-pixel text-3xl font-bold tracking-tight text-[#0A1B3D] sm:text-5xl">
               FREQUENTLY ASKED <span className="text-[#1648A8]">QUESTIONS</span>
             </h2>
             <div className="mx-auto my-4 h-px max-w-xs bg-[#D9D0B8]" />

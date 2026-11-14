@@ -107,10 +107,7 @@ export default function Prizes() {
     >
       <div className="relative z-10 mx-auto max-w-5xl text-center">
         {/* Section Header with warm retro styling */}
-        <h2
-          className="font-pixel text-4xl font-bold tracking-tight text-[#0A1B3D] sm:text-6xl md:text-7xl"
-          style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
-        >
+        <h2 className="font-pixel text-4xl font-bold tracking-tight text-[#0A1B3D] sm:text-6xl md:text-7xl">
           PRIZES
         </h2>
         <p className="mt-2 font-mono text-xs uppercase tracking-[0.28em] text-[#4B5C7D]">
@@ -171,15 +168,12 @@ export default function Prizes() {
                 />
               </div>
 
-              {/* Glowing Prize Amount & Rank Label */}
+              {/* Clean Crisp Prize Amount & Rank Label */}
               <div className="mt-4">
                 <p
                   className="font-heading text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
                   style={{
                     color: tier.isGrand ? "#C94A00" : "#0A1B3D",
-                    textShadow: tier.isGrand
-                      ? "0 0 4px rgba(255, 110, 20, 0.22)"
-                      : "0 0 3px rgba(10, 27, 61, 0.10)",
                   }}
                 >
                   {tier.amount}

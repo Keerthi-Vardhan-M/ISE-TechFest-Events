@@ -124,10 +124,7 @@ export default function About() {
       {/* Expansive wide container exactly matching reference screenshot */}
       <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:px-12 lg:px-16 lg:py-24">
         {/* Large pixel heading matching screenshot: ENGINEERING ARENA in dark, DECEMBER 2026. in blue with butter melting entrance */}
-        <h2
-          className="font-pixel text-3xl font-bold uppercase tracking-tight sm:text-5xl md:text-6xl"
-          style={{ textShadow: "0 0 3px rgba(10,27,61,0.10)" }}
-        >
+        <h2 className="font-pixel text-3xl font-bold uppercase tracking-tight sm:text-5xl md:text-6xl">
           <span className="text-[#0A1B3D]">
             {ABOUT_SECTION.titlePrefix.split(" ").map((word, i) => (
               <span
@@ -138,10 +135,7 @@ export default function About() {
               </span>
             ))}
           </span>
-          <span
-            className="text-[#1648A8] inline-block"
-            style={{ textShadow: "0 0 4px rgba(22,72,168,0.18)" }}
-          >
+          <span className="text-[#1648A8] inline-block">
             {ABOUT_SECTION.titleHighlight.split(" ").map((word, i) => (
               <span
                 key={i}

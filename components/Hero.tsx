@@ -148,7 +148,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           {/* Eyebrow: VOICE CLUB • MSRIT ISE PRESENTS with MSRIT ISE highlighted */}
           <p className="hero-reveal font-mono text-[10px] uppercase tracking-[0.28em] text-[#D8E3F5] sm:text-xs">
             VOICE CLUB •{" "}
-            <span className="font-bold text-[#A3F06D] drop-shadow-[0_0_8px_rgba(163,240,109,0.6)]">
+            <span className="font-bold text-[#A3F06D]">
               MSRIT ISE
             </span>{" "}
             PRESENTS
@@ -158,7 +158,7 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
           <h1
             className="hero-reveal mt-2 font-pixel text-4xl font-extrabold tracking-tight text-[#A3F06D] sm:text-6xl md:text-7xl"
             style={{
-              textShadow: "0 3px 0 #072513, 0 6px 0 #040F24, 0 10px 24px rgba(0,0,0,0.8)",
+              textShadow: "0 3px 0 #072513, 0 5px 0 #040F24",
             }}
           >
             {ORGANISER_INFO.heroHeadline}

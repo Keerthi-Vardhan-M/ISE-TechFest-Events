@@ -122,10 +122,7 @@ export default function Sponsors() {
         <div className="relative z-10 text-center">
           <div className="mx-auto mb-4 h-1.5 w-16 rounded-full bg-[#22E5FF]" />
 
-          <h2
-            className="font-pixel text-4xl font-bold tracking-wider text-[#FAF5E8] sm:text-6xl md:text-7xl"
-            style={{ textShadow: "0 2px 6px rgba(34,229,255,0.18)" }}
-          >
+          <h2 className="font-pixel text-4xl font-bold tracking-wider text-[#FAF5E8] sm:text-6xl md:text-7xl">
             {SPONSORS_DATA.title}
           </h2>
           <p className="mt-2 font-mono text-xs uppercase tracking-[0.28em] text-[#9EB3D6]">
