@@ -117,14 +117,13 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             alt="Floating voxel island sky backdrop"
             className="h-full w-full object-cover object-center"
             style={{
-              imageRendering: "crisp-edges",
-              filter: "contrast(1.06) saturate(1.08) brightness(1.02)",
+              filter: "contrast(1.05) saturate(1.08) brightness(1.02)",
             }}
           />
         </picture>
 
         {/* Mobile atmospheric contrast wash so text is readable over bull */}
-        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-[#020b1f]/35 via-transparent to-[#020b1f]/65" />
+        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-[#020b1f]/15 via-transparent to-[#020b1f]/35" />
 
         {/* Desktop-only subtle right-side gradient so text is crisp without dimming the bull/bear/clouds */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-[#020b1f]/15 to-[#020b1f]/70" />
@@ -164,82 +163,85 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
             {ORGANISER_INFO.heroHeadline}
           </h1>
 
-          {/* Star Divider matching reference screenshot */}
-          <div className="hero-reveal my-2.5 flex w-44 items-center justify-center gap-2 text-white/40 sm:my-3 sm:w-56">
-            <div className="h-px flex-1 bg-white/30" />
-            <span className="text-xs text-[#A3F06D]">✦</span>
-            <div className="h-px flex-1 bg-white/30" />
-          </div>
+          {/* Info, Timer & Buttons — shifted a little left in desktop web view per user request */}
+          <div className="flex w-full flex-col items-center lg:items-end lg:-translate-x-12 xl:-translate-x-16">
+            {/* Star Divider matching reference screenshot */}
+            <div className="hero-reveal my-2.5 flex w-44 items-center justify-center gap-2 text-white/40 sm:my-3 sm:w-56">
+              <div className="h-px flex-1 bg-white/30" />
+              <span className="text-xs text-[#A3F06D]">✦</span>
+              <div className="h-px flex-1 bg-white/30" />
+            </div>
 
-          {/* Subtitle: CHANGE OF ERA / ANNUAL FEST 2026 */}
-          <p className="hero-reveal font-mono text-xs uppercase tracking-[0.24em] text-white sm:text-sm">
-            ANNUAL TECH SYMPOSIUM 2026
-          </p>
+            {/* Subtitle: CHANGE OF ERA / ANNUAL FEST 2026 */}
+            <p className="hero-reveal font-mono text-xs uppercase tracking-[0.24em] text-white sm:text-sm">
+              ANNUAL TECH SYMPOSIUM 2026
+            </p>
 
-          {/* Date & Location: "25 November 2026 • Bengaluru" */}
-          <p className="hero-reveal mt-1 text-xs text-[#D8E3F5] sm:text-sm">
-            25 November 2026 • {ORGANISER_INFO.city}
-          </p>
+            {/* Date & Location: "25 November 2026 • Bengaluru" */}
+            <p className="hero-reveal mt-1 text-xs text-[#D8E3F5] sm:text-sm">
+              25 November 2026 • {ORGANISER_INFO.city}
+            </p>
 
-          {/* Countdown timer */}
-          <div
-            aria-label="Countdown to earliest event"
-            className="hero-reveal mt-4 grid grid-cols-4 gap-1.5 sm:mt-5 sm:gap-2.5"
-          >
-            {[
-              { label: "DAYS", value: timeLeft.days },
-              { label: "HRS", value: timeLeft.hours },
-              { label: "MIN", value: timeLeft.minutes },
-              { label: "SEC", value: timeLeft.seconds },
-            ].map((unit) => (
-              <div
-                key={unit.label}
-                className="flex min-w-[56px] flex-col items-center border border-white/25 bg-[#040F24]/80 px-2 py-1.5 backdrop-blur-md shadow-md sm:min-w-[70px] sm:py-2"
-              >
-                <span
-                  suppressHydrationWarning
-                  className="font-pixel text-base font-bold tabular-nums text-white sm:text-xl"
+            {/* Countdown timer */}
+            <div
+              aria-label="Countdown to earliest event"
+              className="hero-reveal mt-4 grid grid-cols-4 gap-1.5 sm:mt-5 sm:gap-2.5"
+            >
+              {[
+                { label: "DAYS", value: timeLeft.days },
+                { label: "HRS", value: timeLeft.hours },
+                { label: "MIN", value: timeLeft.minutes },
+                { label: "SEC", value: timeLeft.seconds },
+              ].map((unit) => (
+                <div
+                  key={unit.label}
+                  className="flex min-w-[56px] flex-col items-center border border-white/25 bg-[#040F24]/80 px-2 py-1.5 backdrop-blur-md shadow-md sm:min-w-[70px] sm:py-2"
                 >
-                  {String(unit.value).padStart(2, "0")}
-                </span>
-                <span className="font-mono text-[8px] tracking-widest text-[#9EB3D6] sm:text-[9px]">
-                  {unit.label}
-                </span>
-              </div>
-            ))}
-          </div>
+                  <span
+                    suppressHydrationWarning
+                    className="font-pixel text-base font-bold tabular-nums text-white sm:text-xl"
+                  >
+                    {String(unit.value).padStart(2, "0")}
+                  </span>
+                  <span className="font-mono text-[8px] tracking-widest text-[#9EB3D6] sm:text-[9px]">
+                    {unit.label}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-          {/* Two Hero Action Buttons strictly matching reference screenshot (Slide 3) */}
-          <div className="hero-reveal mt-5 flex w-full max-w-sm flex-row items-center justify-center gap-2.5 sm:mt-6 sm:max-w-none sm:gap-3">
-            {/* Left: Solid Lime REGISTER button */}
-            <Link
-              href="/register"
-              className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[3px] bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)] transition-all hover:bg-[#B8F588] sm:min-h-[46px] sm:flex-initial sm:px-8"
-            >
-              REGISTER
-            </Link>
+            {/* Two Hero Action Buttons strictly matching reference screenshot (Slide 3) */}
+            <div className="hero-reveal mt-5 flex w-full max-w-sm flex-row items-center justify-center gap-2.5 sm:mt-6 sm:max-w-none sm:gap-3">
+              {/* Left: Solid Lime REGISTER button */}
+              <Link
+                href="/register"
+                className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[3px] bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)] transition-all hover:bg-[#B8F588] sm:min-h-[46px] sm:flex-initial sm:px-8"
+              >
+                REGISTER
+              </Link>
 
-            {/* Right: Dark Navy EXPLORE EVENTS button */}
-            <a
-              href="#events"
-              onClick={(e) => scrollToSection(e, "events")}
-              className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-[3px] border border-white/35 bg-[#0B214A]/90 px-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-md backdrop-blur-sm transition-all hover:bg-[#0E2C63] hover:border-white sm:min-h-[46px] sm:flex-initial sm:px-7"
-            >
-              <span>EXPLORE EVENTS</span>
-              <span className="text-[#A3F06D]">→</span>
-            </a>
-          </div>
+              {/* Right: Dark Navy EXPLORE EVENTS button */}
+              <a
+                href="#events"
+                onClick={(e) => scrollToSection(e, "events")}
+                className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-[3px] border border-white/35 bg-[#0B214A]/90 px-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-md backdrop-blur-sm transition-all hover:bg-[#0E2C63] hover:border-white sm:min-h-[46px] sm:flex-initial sm:px-7"
+              >
+                <span>EXPLORE EVENTS</span>
+                <span className="text-[#A3F06D]">→</span>
+              </a>
+            </div>
 
-          {/* Track Quick Links matching reference "SCHEDULE, DAY 0 TO DAY 3 →" */}
-          <div className="hero-reveal mt-4">
-            <a
-              href="#events"
-              onClick={(e) => scrollToSection(e, "events")}
-              className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-white/90 underline decoration-[#A3F06D]/60 decoration-1 underline-offset-4 transition-colors hover:text-[#A3F06D]"
-            >
-              <span>EXPLORE SCHEDULE &amp; ARENAS</span>
-              <span className="text-[#A3F06D] transition-transform group-hover:translate-x-1">→</span>
-            </a>
+            {/* Track Quick Links matching reference "SCHEDULE, DAY 0 TO DAY 3 →" */}
+            <div className="hero-reveal mt-4">
+              <a
+                href="#events"
+                onClick={(e) => scrollToSection(e, "events")}
+                className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-white/90 underline decoration-[#A3F06D]/60 decoration-1 underline-offset-4 transition-colors hover:text-[#A3F06D]"
+              >
+                <span>EXPLORE SCHEDULE &amp; ARENAS</span>
+                <span className="text-[#A3F06D] transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
