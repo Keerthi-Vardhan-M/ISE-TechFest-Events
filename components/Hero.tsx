@@ -335,12 +335,12 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         {/* Desktop-only subtle right-side gradient so text is crisp without dimming the bull/bear/clouds */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-[#020b1f]/15 to-[#020b1f]/70" />
 
-        {/* Smooth bluish and sand shade transition melting seamlessly into the section below */}
+        {/* Smooth atmospheric blue shade transition melting into the deep blue base */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-40 md:h-48"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 sm:h-36 md:h-44"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 0%, rgba(68, 128, 186, 0.25) 28%, rgba(132, 172, 210, 0.52) 55%, rgba(216, 212, 192, 0.8) 82%, #FAF5E8 100%)",
+              "linear-gradient(to bottom, transparent 0%, rgba(22, 72, 168, 0.12) 30%, rgba(10, 37, 88, 0.55) 65%, #020b1f 100%)",
           }}
         />
       </div>
