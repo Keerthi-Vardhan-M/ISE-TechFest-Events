@@ -17,11 +17,11 @@ function GDGLogo() {
           height={36}
           className="h-8 w-auto object-contain"
         />
-        <span className="font-heading text-xl font-extrabold tracking-tight text-[#071B3D]">
+        <span className="font-heading text-xl font-extrabold tracking-tight text-white">
           GDG
         </span>
       </div>
-      <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1652A8]">
+      <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#A3F06D]">
         Google Developer Groups
       </span>
     </div>
@@ -31,10 +31,10 @@ function GDGLogo() {
 function VoiceClubLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-1.5">
-      <span className="font-pixel text-2xl font-bold tracking-wider text-[#071B3D] sm:text-3xl">
+      <span className="font-pixel text-2xl font-bold tracking-wider text-white sm:text-3xl">
         VOICE CLUB
       </span>
-      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#0E7A3E]">
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#A3F06D]">
         TECH &amp; ORATION
       </span>
     </div>
@@ -45,13 +45,13 @@ function MsritLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-1.5">
       <Image
-        src="/images/msrit-logo-dark.png"
+        src="/images/msrit-logo.png"
         alt="Ramaiah Institute of Technology"
         width={180}
-        height={48}
-        className="h-9 w-auto object-contain"
+        height={46}
+        className="h-9 w-auto object-contain brightness-110"
       />
-      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1652A8]">
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#D8E8FC]">
         HOST INSTITUTION
       </span>
     </div>
@@ -61,7 +61,7 @@ function MsritLogo() {
 function HeapifyLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <div className="flex items-center justify-center rounded-lg bg-[#000000] px-4 py-1.5 shadow-sm">
+      <div className="flex items-center justify-center rounded-lg bg-black/60 px-4 py-1.5 border border-white/20 shadow-sm">
         <Image
           src="/images/heapify-logo.png"
           alt="Heapify Global Community"
@@ -70,7 +70,7 @@ function HeapifyLogo() {
           className="h-8 w-auto object-contain"
         />
       </div>
-      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1652A8]">
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#A3F06D]">
         COMMUNITY PARTNER
       </span>
     </div>
@@ -152,7 +152,7 @@ export default function Sponsors() {
                   />
                 </div>
 
-                {/* Sponsor Cards Grid with Light Blue Card Background */}
+                {/* Sponsor Cards Grid with Exact Royal Blue Register Button Background */}
                 <div
                   className={
                     isSingle
@@ -166,7 +166,7 @@ export default function Sponsors() {
                       href={sp.url}
                       target={sp.url.startsWith("http") ? "_blank" : undefined}
                       rel="noopener noreferrer"
-                      className="sponsor-card group flex flex-col justify-between rounded-2xl border-2 border-[#9AC7F2] bg-gradient-to-b from-[#EDF5FE] via-[#E2EFFD] to-[#D6E9FB] p-6 shadow-[0_8px_24px_rgba(10,50,110,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:from-[#F4F9FE] hover:to-[#DEF0FD] hover:shadow-[0_12px_32px_rgba(34,229,255,0.3)]"
+                      className="sponsor-card group flex flex-col justify-between rounded-xl border border-[#2B548A] bg-[#1648A8] p-6 shadow-[0_4px_16px_rgba(22,72,168,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1D5BC6] hover:shadow-[0_8px_24px_rgba(34,229,255,0.4)]"
                     >
                       <div className="py-3 flex min-h-[72px] items-center justify-center">
                         {sp.logo === "gdg" && <GDGLogo />}
@@ -175,8 +175,8 @@ export default function Sponsors() {
                         {sp.logo === "heapify" && <HeapifyLogo />}
                       </div>
 
-                      <div className="mt-4 border-t border-[#B6D8F8] pt-3 text-center">
-                        <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#2B4B70]">
+                      <div className="mt-4 border-t border-white/20 pt-3 text-center">
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#D8E8FC]">
                           {sp.desc}
                         </p>
                       </div>
