@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { SPONSORS_DATA } from "@/content/events";
 import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
@@ -8,11 +9,19 @@ import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
 function GDGLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <div className="flex items-center gap-2 font-pixel text-2xl sm:text-3xl text-[#22E5FF]">
-        <span>&lt;&gt;</span>
-        <span className="text-white">GDG</span>
+      <div className="flex items-center gap-2.5">
+        <Image
+          src="/images/gdg-logo.svg"
+          alt="Google Developer Groups"
+          width={46}
+          height={36}
+          className="h-8 w-auto object-contain"
+        />
+        <span className="font-heading text-xl font-extrabold tracking-tight text-[#071B3D]">
+          GDG
+        </span>
       </div>
-      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#A3F06D]">
+      <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1652A8]">
         Google Developer Groups
       </span>
     </div>
@@ -22,10 +31,10 @@ function GDGLogo() {
 function VoiceClubLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-1.5">
-      <span className="font-pixel text-2xl font-bold tracking-wider text-[#A3F06D] sm:text-3xl">
+      <span className="font-pixel text-2xl font-bold tracking-wider text-[#071B3D] sm:text-3xl">
         VOICE CLUB
       </span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-[#9EB3D6]">
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#0E7A3E]">
         TECH &amp; ORATION
       </span>
     </div>
@@ -35,11 +44,15 @@ function VoiceClubLogo() {
 function MsritLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-1.5">
-      <span className="font-pixel text-2xl font-bold tracking-wider text-[#22E5FF] sm:text-3xl">
-        MSRIT
-      </span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-[#9EB3D6]">
-        RAMAIAH INSTITUTE OF TECHNOLOGY
+      <Image
+        src="/images/msrit-logo-dark.png"
+        alt="Ramaiah Institute of Technology"
+        width={180}
+        height={48}
+        className="h-9 w-auto object-contain"
+      />
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1652A8]">
+        HOST INSTITUTION
       </span>
     </div>
   );
@@ -47,12 +60,18 @@ function MsritLogo() {
 
 function HeapifyLogo() {
   return (
-    <div className="flex flex-col items-center justify-center gap-1.5">
-      <span className="font-pixel text-2xl font-bold tracking-wider text-[#A3F06D] sm:text-3xl">
-        HEAPIFY
-      </span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-[#22E5FF]">
-        GLOBAL COMMUNITY
+    <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex items-center justify-center rounded-lg bg-[#000000] px-4 py-1.5 shadow-sm">
+        <Image
+          src="/images/heapify-logo.png"
+          alt="Heapify Global Community"
+          width={130}
+          height={38}
+          className="h-8 w-auto object-contain"
+        />
+      </div>
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1652A8]">
+        COMMUNITY PARTNER
       </span>
     </div>
   );
@@ -136,7 +155,7 @@ export default function Sponsors() {
                   />
                 </div>
 
-                {/* Sponsor Cards Grid */}
+                {/* Sponsor Cards Grid with Light Blue Card Background */}
                 <div
                   className={
                     isSingle
@@ -150,17 +169,17 @@ export default function Sponsors() {
                       href={sp.url}
                       target={sp.url.startsWith("http") ? "_blank" : undefined}
                       rel="noopener noreferrer"
-                      className="sponsor-card group flex flex-col justify-between rounded-xl border border-white/15 bg-[#06142E]/85 p-6 shadow-md transition-all duration-300 hover:border-[#22E5FF] hover:bg-[#091D42]"
+                      className="sponsor-card group flex flex-col justify-between rounded-2xl border-2 border-[#9AC7F2] bg-gradient-to-b from-[#EDF5FE] via-[#E2EFFD] to-[#D6E9FB] p-6 shadow-[0_8px_24px_rgba(10,50,110,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:from-[#F4F9FE] hover:to-[#DEF0FD] hover:shadow-[0_12px_32px_rgba(34,229,255,0.3)]"
                     >
-                      <div className="py-3">
+                      <div className="py-3 flex min-h-[72px] items-center justify-center">
                         {sp.logo === "gdg" && <GDGLogo />}
                         {sp.logo === "voice" && <VoiceClubLogo />}
                         {sp.logo === "msrit" && <MsritLogo />}
                         {sp.logo === "heapify" && <HeapifyLogo />}
                       </div>
 
-                      <div className="mt-4 border-t border-white/10 pt-3">
-                        <p className="font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
+                      <div className="mt-4 border-t border-[#B6D8F8] pt-3 text-center">
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#2B4B70]">
                           {sp.desc}
                         </p>
                       </div>
