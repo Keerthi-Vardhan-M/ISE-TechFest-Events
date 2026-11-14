@@ -129,16 +129,28 @@ export default function RegisterPage() {
 
       const result = await response.json();
 
-      if (!response.ok || !result.success) {
+      if (!response.ok || (result.status !== "OK" && !result.success)) {
         setServerError(
-          result.error || "Registration failed. Please verify your details and try again."
+          result.message || result.error || "Registration failed. Please verify your details and try again."
         );
         return;
       }
 
+      // Trigger celebratory confetti on registration success
+      import("canvas-confetti")
+        .then((confetti) => {
+          confetti.default({
+            particleCount: 120,
+            spread: 80,
+            origin: { y: 0.5 },
+            colors: ["#A3F06D", "#22E5FF", "#1648A8", "#FAF5E8"],
+          });
+        })
+        .catch(() => {});
+
       setReceipt({
         referenceId: result.referenceId || `AQ-${Date.now().toString(36).toUpperCase()}`,
-        eventName: activeEvent.name,
+        eventName: result.eventName || activeEvent.name,
         teamName: data.teamName,
         leaderName: data.leaderName,
         email: data.email,

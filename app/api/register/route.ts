@@ -111,8 +111,8 @@ export async function POST(req: NextRequest) {
     p_phone: data.phone,
     p_college: data.college,
     p_department_year: data.departmentYear,
-    p_members: data.members,
-    p_txn_id: data.txnId,
+    p_members: data.members ?? [],
+    p_txn_id: data.txnId ?? null,
   });
 
   if (error) {
@@ -190,6 +190,7 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(
     {
+      success: true,
       status: "OK",
       referenceId: result.id,
       event: data.event,
