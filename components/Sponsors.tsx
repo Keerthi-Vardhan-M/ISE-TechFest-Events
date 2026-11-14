@@ -45,6 +45,19 @@ function MsritLogo() {
   );
 }
 
+function HeapifyLogo() {
+  return (
+    <div className="flex flex-col items-center justify-center gap-1.5">
+      <span className="font-pixel text-2xl font-bold tracking-wider text-[#A3F06D] sm:text-3xl">
+        HEAPIFY
+      </span>
+      <span className="font-mono text-[10px] uppercase tracking-widest text-[#22E5FF]">
+        GLOBAL COMMUNITY
+      </span>
+    </div>
+  );
+}
+
 export default function Sponsors() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -70,8 +83,6 @@ export default function Sponsors() {
 
     return () => ctx.revert();
   }, []);
-
-  const tier = SPONSORS_DATA.tiers[0];
 
   return (
     <section
@@ -102,39 +113,63 @@ export default function Sponsors() {
             {SPONSORS_DATA.subtitle}
           </p>
 
-          {/* Divider Line */}
-          <div className="mx-auto my-8 flex max-w-2xl items-center gap-4 sm:my-12">
-            <div className="h-px flex-1 bg-[#22E5FF]/40" />
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-[#22E5FF]">
-              {tier.name}
-            </span>
-            <div className="h-px flex-1 bg-[#22E5FF]/40" />
-          </div>
-
-          {/* 3 Sponsor Cards: Google Developer Groups, Voice Club, MSRIT */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {tier.sponsors.map((sp) => (
-              <a
-                key={sp.name}
-                href={sp.url}
-                target={sp.url.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="sponsor-card group flex flex-col justify-between rounded-xl border border-white/15 bg-[#06142E]/85 p-6 shadow-md transition-all duration-300 hover:border-[#22E5FF] hover:bg-[#091D42]"
-              >
-                <div className="py-3">
-                  {sp.logo === "gdg" && <GDGLogo />}
-                  {sp.logo === "voice" && <VoiceClubLogo />}
-                  {sp.logo === "msrit" && <MsritLogo />}
+          {/* Iterate over all tiers: Official Sponsors & Community Partner */}
+          {SPONSORS_DATA.tiers.map((tier, tIdx) => {
+            const isSingle = tier.sponsors.length === 1;
+            return (
+              <div key={tier.name} className={tIdx > 0 ? "mt-12" : ""}>
+                {/* Divider Line */}
+                <div className="mx-auto my-8 flex max-w-2xl items-center gap-4 sm:my-10">
+                  <div
+                    className="h-px flex-1"
+                    style={{ backgroundColor: `${tier.accent}66` }}
+                  />
+                  <span
+                    className="font-mono text-xs font-bold uppercase tracking-[0.28em]"
+                    style={{ color: tier.accent }}
+                  >
+                    {tier.name}
+                  </span>
+                  <div
+                    className="h-px flex-1"
+                    style={{ backgroundColor: `${tier.accent}66` }}
+                  />
                 </div>
 
-                <div className="mt-4 border-t border-white/10 pt-3">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
-                    {sp.desc}
-                  </p>
+                {/* Sponsor Cards Grid */}
+                <div
+                  className={
+                    isSingle
+                      ? "mx-auto max-w-md"
+                      : "grid grid-cols-1 gap-5 sm:grid-cols-3"
+                  }
+                >
+                  {tier.sponsors.map((sp) => (
+                    <a
+                      key={sp.name}
+                      href={sp.url}
+                      target={sp.url.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      className="sponsor-card group flex flex-col justify-between rounded-xl border border-white/15 bg-[#06142E]/85 p-6 shadow-md transition-all duration-300 hover:border-[#22E5FF] hover:bg-[#091D42]"
+                    >
+                      <div className="py-3">
+                        {sp.logo === "gdg" && <GDGLogo />}
+                        {sp.logo === "voice" && <VoiceClubLogo />}
+                        {sp.logo === "msrit" && <MsritLogo />}
+                        {sp.logo === "heapify" && <HeapifyLogo />}
+                      </div>
+
+                      <div className="mt-4 border-t border-white/10 pt-3">
+                        <p className="font-mono text-[11px] uppercase tracking-wider text-[#9EB3D6]">
+                          {sp.desc}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
-              </a>
-            ))}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

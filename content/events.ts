@@ -518,5 +518,18 @@ export const SPONSORS_DATA = {
         },
       ],
     },
+    {
+      name: "COMMUNITY PARTNER",
+      accent: "#A3F06D",
+      sponsors: [
+        {
+          name: "Heapify",
+          tier: "Community Partner",
+          logo: "heapify",
+          url: "https://heapify.org",
+          desc: "Heapify Global Community • Empowering Builders & Innovators",
+        },
+      ],
+    },
   ] as SponsorTier[],
 };
