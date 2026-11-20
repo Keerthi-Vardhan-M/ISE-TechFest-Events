@@ -179,6 +179,3 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
     return { success: false, error: msg };
   }
 }
-
-
-\n
