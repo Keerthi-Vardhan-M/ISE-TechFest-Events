@@ -208,40 +208,6 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
         </div>
       </section>
 
-      {event.themeDomains?.length ? (
-        <section className="border-t border-[#D9D0B8] bg-[#F5EFE0]/70 px-4 py-16 sm:px-6 lg:py-20">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center">
-              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
-                GTM ARENA DOMAINS
-              </span>
-              <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
-                FOUR THEMES
-              </h2>
-              <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-[#4B5C7D]">
-                Domain-specific problem statements are revealed only to shortlisted teams at the event kickoff.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {event.themeDomains.map((domain) => (
-                <article
-                  key={domain.name}
-                  className="border-2 border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-all duration-300 hover:border-[#0A1B3D] hover:shadow-[4px_4px_0_#0A1B3D]"
-                >
-                  <h3 className="font-heading text-base font-bold text-[#0A1B3D]">
-                    {domain.name}
-                  </h3>
-                  <p className="mt-2.5 text-xs leading-relaxed text-[#4B5C7D]">
-                    {domain.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       {/* Competition Rounds Section */}
       <section id="rounds" className="px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-6xl">

@@ -23,11 +23,6 @@ export interface EventFaqItem {
   answer: string;
 }
 
-export interface EventThemeDomain {
-  name: string;
-  description: string;
-}
-
 export interface EventConfig {
   id: EventId;
   theme: EventId;
@@ -43,7 +38,6 @@ export interface EventConfig {
   eligibility: string;
   competitionIntro: string;
   registrationUrl: string;
-  themeDomains?: EventThemeDomain[];
   teamSize: {
     min: number;
     max: number;
@@ -206,24 +200,6 @@ export const EVENTS: Record<EventId, EventConfig> = {
     competitionIntro:
       "A 3.5-hour ideathon moves from team ideation to constraint adaptation, parallel lab evaluation, and a joint finalist pitch.",
     registrationUrl: "https://forms.gle/krtSLrZ83qauYCbW7",
-    themeDomains: [
-      {
-        name: "FinTech",
-        description: "Financial inclusion, digital payments, DeFi, risk analytics, and next-generation banking.",
-      },
-      {
-        name: "Blue Economy",
-        description: "Sustainable ocean resources, marine logistics, coastal monitoring, and maritime supply chains.",
-      },
-      {
-        name: "EV & Semiconductors",
-        description: "EV powertrains, battery management, charging infrastructure, and indigenous chip design.",
-      },
-      {
-        name: "Avionics & Flight Systems",
-        description: "UAVs, flight telemetry, navigation safety, aerospace diagnostics, and airspace management.",
-      },
-    ],
     teamSize: {
       min: 3,
       max: 4,
@@ -367,9 +343,9 @@ export const GENERAL_FAQS: EventFaqItem[] = [
       "It begins with a 20-hour online round. Shortlisted teams then attend a 4-hour offline round featuring two Donut Challenges. The offline schedule is 9:00 AM–1:00 PM IST.",
   },
   {
-    question: "When will the GTM Arena themes be announced?",
+    question: "When will the GTM Arena challenge be announced?",
     answer:
-      "The four GTM Arena themes will be revealed only to shortlisted teams. Teams should be ready to shape and adapt their go-to-market strategy around the theme they receive.",
+      "The challenge brief will be shared only with shortlisted teams at the event kickoff. Teams will build and adapt their go-to-market strategy around the brief they receive.",
   },
   {
     question: "Can our team enter both events?",
