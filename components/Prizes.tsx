@@ -87,7 +87,25 @@ export default function Prizes() {
         </p>
 
         {/* Track selector */}
-        <div role="tablist" aria-label="Choose an event for prize details" className="mt-6 inline-flex border border-[#D9D0B8] bg-[#FAF5E8] p-1 shadow-sm">
+        <div
+          role="tablist"
+          aria-label="Choose an event for prize details"
+          className="relative mx-auto mt-6 inline-flex min-w-[280px] border border-[#D9D0B8] bg-[#FAF5E8] p-1 shadow-sm sm:min-w-[320px]"
+          onPointerDownCapture={(event) => {
+            const track = (event.target as HTMLElement)
+              .closest<HTMLButtonElement>("[data-prize-track]")
+              ?.dataset.prizeTrack;
+            if (track === "automate" || track === "quant") setActiveTrack(track);
+          }}
+        >
+          <span
+            aria-hidden="true"
+            className={`rubber-segment-thumb pointer-events-none absolute bottom-1 top-1 left-1 z-0 ${
+              activeTrack === EVENT_LIST[0].id ? "" : "rubber-segment-thumb--second"
+            }`}
+          >
+            <span key={activeTrack} className="rubber-segment-impact" />
+          </span>
           {EVENT_LIST.map((ev) => (
             <button
               key={ev.id}
@@ -95,12 +113,11 @@ export default function Prizes() {
               role="tab"
               aria-selected={activeTrack === ev.id}
               aria-controls="prize-podium"
-              onClick={() => {
-                if (activeTrack !== ev.id) setActiveTrack(ev.id);
-              }}
-              className={`min-h-[42px] touch-manipulation px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1648A8] ${
+              data-prize-track={ev.id}
+              onClick={() => setActiveTrack(ev.id)}
+              className={`relative z-10 min-h-[42px] flex-1 touch-manipulation px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1648A8] ${
                 activeTrack === ev.id
-                  ? "bg-[#1648A8] text-white shadow-sm"
+                  ? "text-white"
                   : "text-[#4B5C7D] hover:text-[#0A1B3D]"
               }`}
             >

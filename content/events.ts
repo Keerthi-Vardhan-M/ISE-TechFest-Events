@@ -339,62 +339,47 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "Who can participate?",
     answer:
-      "Students in 1st, 2nd, or 3rd year with a valid institution ID card are eligible. Cross-branch and cross-year teams are welcome.",
+      "Students in 1st, 2nd, or 3rd year may participate. Teams can include students from different branches and year groups; bring a valid college ID.",
   },
   {
     question: "How do I register?",
     answer:
-      "Scroll to the Registration section below, pick your event, enter your team details (leader + 2–3 members), and submit to receive your instant Reference ID.",
+      "Open the Automate or GTM Arena event page and use its Register button. Each event has its own registration form, so submit a separate form for every event you want to enter.",
   },
   {
     question: "What is the team size requirement?",
     answer:
-      "Team size must be strictly 3 to 4 members (1 Leader + 2 or 3 additional members). Solo or 2-member participation is not permitted.",
+      "Teams must have 3 to 4 members. Solo and two-member teams cannot participate.",
   },
   {
     question: "Is there any registration fee?",
     answer:
-      "No! Registration is 100% FREE for both Automate Boring Task and QuantFinance.",
+      "No. Registration is free for both Automate Boring Task and GTM Arena.",
   },
   {
     question: "When and where are the competitions hosted?",
     answer:
-      "Both events are on 26 November 2026 at MSRIT, Bengaluru. Automate has a 20-hour online phase followed by a 9:00 AM–1:00 PM offline evaluation in ISE Lab 1 and ISE Lab 2. GTM Arena runs 1:30 PM–5:00 PM in the same labs.",
+      "Both events take place on 26 November 2026 at MSRIT, Bengaluru. Check each event page for its schedule and venue details.",
   },
   {
-    question: "Can our team participate in both events?",
+    question: "How does Automate Boring Task work?",
     answer:
-      "Yes! Automate Boring Task and QuantFinance are scheduled on 26 November 2026, and teams can register for both tracks individually.",
+      "It begins with a 20-hour online round. Shortlisted teams then attend a 4-hour offline round featuring two Donut Challenges. The offline schedule is 9:00 AM–1:00 PM IST.",
   },
   {
-    question: "What hardware or software do we need to bring?",
+    question: "When will the GTM Arena themes be announced?",
     answer:
-      "Bring laptops with chargers. For Automate Boring Task, bring your microcontrollers, sensors, and cables (bench AC power and test crates provided). For QuantFinance, laptops with Python 3.10+ or spreadsheet tools pre-installed.",
+      "The four GTM Arena themes will be revealed only to shortlisted teams. Teams should be ready to shape and adapt their go-to-market strategy around the theme they receive.",
   },
   {
-    question: "Is real money involved in QuantFinance?",
+    question: "Can our team enter both events?",
     answer:
-      "No. All trading rounds run on simulated virtual capital with historical, simulated, and synthetic market feeds.",
+      "Yes. Register separately through the Register button on each event page. Review both schedules to make sure your team can attend.",
   },
   {
-    question: "Are pre-built commercial robots allowed in Automate Boring Task?",
+    question: "Will trophies be given to winners?",
     answer:
-      "No. Turnkey commercial off-the-shelf robots are strictly disallowed. Custom prototypes, modular kits, and scripted hybrid pipelines built by the team are required.",
-  },
-  {
-    question: "What prizes and certificates will participants receive?",
-    answer:
-      "₹20,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹5,000, 2nd: ₹3,000, 3rd: ₹2,000 for each event), plus verified participation certificates for all registered teams. No trophies will be provided.",
-  },
-  {
-    question: "Will food, Wi-Fi, and accommodation be provided?",
-    answer:
-      "High-speed campus Wi-Fi, power strips, lunch, and refreshments are provided on event days. Outstation teams should contact the track leads for nearby accommodation guidance.",
-  },
-  {
-    question: "Who do I contact if I have further queries?",
-    answer:
-      "Reach out to Aarav Sharma (Robotics Lead: +91 98765 43211) or Diya Nair (Quant Lead: +91 98765 43212), or email events@campusfest.edu.",
+      "No trophies will be provided. See the event pages for the current prize details.",
   },
 ];
 
