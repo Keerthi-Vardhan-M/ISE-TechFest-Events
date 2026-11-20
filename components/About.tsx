@@ -160,29 +160,39 @@ export default function About() {
           {/* Left Quest Dialog Box with Campus Guide avatar — restored to clean light whitish cream */}
           <div className="about-left flex flex-col justify-between border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 shadow-[4px_4px_0_#0A1B3D] sm:p-7 md:p-8 lg:col-span-6">
             <div>
-              <div className="flex items-center gap-4 sm:gap-5">
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden border border-[#C4B79B] bg-[#F5EFE0] p-1 shadow-sm sm:h-16 sm:w-16">
-                  <Image
-                    src="/images/campus-guide-avatar.png"
-                    alt="Campus Guide Avatar"
-                    fill
-                    sizes="64px"
-                    className="object-cover"
-                  />
+              <div className="border border-[#D9D0B8] bg-[#F5EFE0]">
+                <div className="px-4 py-4 sm:px-5">
+                  <h3 className="font-pixel text-base font-bold leading-relaxed text-[#0A1B3D] sm:text-lg">
+                    Ramaiah Institute of Technology
+                  </h3>
+                  <a
+                    href="https://maps.google.com/maps?rlz=1C1UEAD_enIN1084IN1084&sca_esv=255b5630f5566803&pvq=CgkvbS8wNW4zXzmAAQE&fvr=1&vet=10CAAQoqAOahcKEwig2-jzx5aYAxUAAAAAHQAAAAAQBg..i&cs=0&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x3bae17dedd4dcca9:0x6075bd8d8aed97ab"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 inline-flex min-h-11 items-center font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#1648A8] underline decoration-[#A3F06D] underline-offset-4 transition-colors hover:text-[#0A1B3D] sm:text-sm"
+                  >
+                    Location ↗
+                  </a>
                 </div>
-                <div>
-                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0A1B3D]">
-                    {ABOUT_SECTION.questRole}
-                  </p>
-                  <p className="mt-1 text-xs text-[#4B5C7D] sm:text-sm">
-                    {ABOUT_SECTION.questSubtitle}
-                  </p>
+
+                <div className="border-t border-[#D9D0B8]">
+                  <h4 className="px-4 py-3 text-center font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0A1B3D] sm:px-5">
+                    Event Venues
+                  </h4>
+                  <div className="grid grid-cols-2 items-stretch border-t border-[#D9D0B8]">
+                    {["ISE Lab 1", "ISE Lab 2"].map((venue, index) => (
+                      <div
+                        key={venue}
+                        className={`flex h-24 items-center justify-center px-3 py-4 text-center font-pixel text-sm font-bold uppercase text-[#1648A8] sm:h-28 sm:text-base ${
+                          index === 1 ? "border-l border-[#D9D0B8]" : ""
+                        }`}
+                      >
+                        {venue}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-
-              <p className="mt-6 text-sm leading-relaxed text-[#0A1B3D] sm:text-base lg:text-lg">
-                {ABOUT_SECTION.questDescription}
-              </p>
             </div>
           </div>
 

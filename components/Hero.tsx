@@ -19,14 +19,13 @@ function computeTimeLeft(targetISO: string): TimeLeft {
   const now = Date.now();
   let diff = targetTime - now;
 
-  // Fallback: If device clock is set past target date or has discrepancy, show countdown to 25 Nov
+  // If the target has passed, count down to the same event date next year.
   if (isNaN(diff) || diff <= 0) {
-    const targetDate = new Date(targetISO);
     const currentDate = new Date();
-    // Compute remaining to Nov 25 using current year or next
-    let nextTarget = new Date(currentDate.getFullYear(), 10, 25, 9, 0, 0);
+    // Compute remaining to Nov 26 using current year or next
+    let nextTarget = new Date(currentDate.getFullYear(), 10, 26, 9, 0, 0);
     if (nextTarget.getTime() <= now) {
-      nextTarget = new Date(currentDate.getFullYear() + 1, 10, 25, 9, 0, 0);
+      nextTarget = new Date(currentDate.getFullYear() + 1, 10, 26, 9, 0, 0);
     }
     diff = Math.max(0, nextTarget.getTime() - now);
   }
@@ -311,33 +310,33 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
         />
       </div>
 
-      {/* Hero Content — strictly centered layout on mobile, right-aligned on desktop matching reference */}
+      {/* Centered hero content across all viewport sizes */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center px-4 text-center lg:mr-8 lg:max-w-2xl lg:items-end lg:text-right"
+        className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-4 text-center"
       >
-        <div className="flex w-full flex-col items-center text-center lg:items-end lg:text-right">
+        <div className="flex w-full flex-col items-center text-center">
           {/* Eyebrow: VOICE CLUB • MSRIT ISE PRESENTS with MSRIT ISE highlighted */}
           <p className="hero-reveal font-mono text-[10px] uppercase tracking-[0.28em] text-[#D8E3F5] sm:text-xs">
-            VOICE CLUB •{" "}
+            Vo&apos;ISE •{" "}
             <span className="font-bold text-[#A3F06D]">
               MSRIT ISE
             </span>{" "}
             PRESENTS
           </p>
 
-          {/* Event Title: AUTOMATE × QUANT */}
-          <h1
-            className="hero-reveal mt-2 font-pixel text-4xl font-extrabold tracking-tight text-[#A3F06D] sm:text-6xl md:text-7xl"
-            style={{
-              textShadow: "0 3px 0 #072513, 0 5px 0 #040F24",
-            }}
-          >
-            {ORGANISER_INFO.heroHeadline}
-          </h1>
+          {/* Event logo */}
+          <Image
+            src="/images/synchrons-2026-logo.png"
+            alt="Synchro'N'SE 2026"
+            width={1534}
+            height={638}
+            priority
+            className="hero-reveal mt-2 h-auto w-[min(92vw,44rem)] drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+          />
 
-          {/* Info, Timer & Buttons — shifted a little left in desktop web view per user request */}
-          <div className="flex w-full flex-col items-center lg:items-end lg:-translate-x-12 xl:-translate-x-16">
+          {/* Event date, timer, and actions */}
+          <div className="flex w-full flex-col items-center">
             {/* Star Divider matching reference screenshot */}
             <div className="hero-reveal my-2.5 flex w-44 items-center justify-center gap-2 text-white/40 sm:my-3 sm:w-56">
               <div className="h-px flex-1 bg-white/30" />
@@ -345,14 +344,9 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
               <div className="h-px flex-1 bg-white/30" />
             </div>
 
-            {/* Subtitle: CHANGE OF ERA / ANNUAL FEST 2026 */}
-            <p className="hero-reveal font-mono text-xs uppercase tracking-[0.24em] text-white sm:text-sm">
-              ANNUAL TECH SYMPOSIUM 2026
-            </p>
-
-            {/* Date & Location: "25 November 2026 • Bengaluru" */}
+            {/* Date & Location */}
             <p className="hero-reveal mt-1 text-xs text-[#D8E3F5] sm:text-sm">
-              25 November 2026 • {ORGANISER_INFO.city}
+              26 November 2026 • {ORGANISER_INFO.city}
             </p>
 
             {/* Countdown timer */}
@@ -385,14 +379,6 @@ export default function Hero({ onOpenRegister }: HeroProps = {}) {
 
             {/* Two Hero Action Buttons strictly matching reference screenshot (Slide 3) */}
             <div className="hero-reveal mt-5 flex w-full max-w-sm flex-row items-center justify-center gap-2.5 sm:mt-6 sm:max-w-none sm:gap-3">
-              {/* Left: Solid Lime REGISTER button */}
-              <Link
-                href="/register"
-                className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[3px] bg-[#A3F06D] px-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)] transition-all hover:bg-[#B8F588] sm:min-h-[46px] sm:flex-initial sm:px-8"
-              >
-                REGISTER
-              </Link>
-
               {/* Right: Dark Navy EXPLORE EVENTS button */}
               <a
                 href="#events"

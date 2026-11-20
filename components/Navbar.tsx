@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { isTouchDevice, prefersReducedMotion } from "@/lib/motion";
@@ -99,14 +100,14 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
           className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-16 sm:px-6"
         >
           {/* Brand Logo strictly styled like reference screenshot */}
-          <Link
-            href="/"
-            className="shrink-0 font-pixel text-lg font-bold tracking-wider text-[#A3F06D] sm:text-2xl"
-            style={{
-              textShadow: "0 2px 0 #072513",
-            }}
-          >
-            AUTO×QUANT
+          <Link href="/" aria-label="Synchro'N'SE 2026 home" className="shrink-0">
+            <Image
+              src="/images/synchrons-2026-logo.png"
+              alt="Synchro'N'SE 2026"
+              width={1534}
+              height={638}
+              className="h-11 w-32 object-contain sm:h-14 sm:w-44"
+            />
           </Link>
 
           {/* Desktop Nav Links */}
@@ -138,14 +139,6 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
 
           {/* Right Action buttons */}
           <div className="flex shrink-0 items-center gap-2">
-            {/* Desktop Register Button */}
-            <Link
-              href="/register"
-              className="hidden sm:inline-flex min-h-[38px] items-center justify-center rounded-[3px] bg-[#1648A8] px-5 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_rgba(22,72,168,0.45)] transition-all duration-200 hover:bg-[#1D5BC6]"
-            >
-              REGISTER
-            </Link>
-
             {/* Mobile Hamburger strictly matching reference screenshot (square dark blue button with white border) */}
             <button
               type="button"
@@ -182,14 +175,13 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
           <div className="relative z-10">
             {/* Drawer Header: Brand on left, Close button on right matching screenshot */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <span
-                className="font-pixel text-xl font-bold tracking-wider text-[#A3F06D]"
-                style={{
-                  textShadow: "0 2px 0 #072513",
-                }}
-              >
-                AUTO×QUANT
-              </span>
+              <Image
+                src="/images/synchrons-2026-logo.png"
+                alt="Synchro'N'SE 2026"
+                width={1534}
+                height={638}
+                className="h-12 w-36 object-contain"
+              />
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
@@ -223,16 +215,6 @@ export default function Navbar({ onOpenRegister }: NavbarProps) {
               ))}
             </ul>
 
-            {/* Solid Lime REGISTER button strictly matching screenshot */}
-            <div className="mt-6">
-              <Link
-                href="/register"
-                onClick={() => setMenuOpen(false)}
-                className="flex min-h-[46px] w-full items-center justify-center rounded-[3px] bg-[#A3F06D] font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#040F24] shadow-[0_4px_16px_rgba(163,240,109,0.35)]"
-              >
-                REGISTER
-              </Link>
-            </div>
           </div>
         </div>
       )}

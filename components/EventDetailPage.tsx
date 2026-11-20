@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   CheckCircle2,
   Phone,
-  Mail,
   ChevronDown,
 } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
@@ -64,12 +63,6 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
       {/* Top Header / Breadcrumbs Bar */}
       <header className="sticky top-0 z-40 border-b border-[#D9D0B8] bg-[#FAF5E8]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-end px-4 py-3 sm:px-6">
-          <Link
-              href={`/register?event=${event.id}`}
-              className="inline-flex min-h-[36px] items-center rounded-lg border border-[#0A1B3D] bg-[#0A1B3D] px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8]"
-            >
-              <span>Register Now</span>
-            </Link>
         </div>
       </header>
 
@@ -106,18 +99,19 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
 
               {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link
-                  href={`/register?event=${event.id}`}
-                  className="inline-flex min-h-[46px] items-center rounded-xl border-2 border-[#0A1B3D] bg-[#0A1B3D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[4px_4px_0_#1648A8] transition-all duration-200 hover:bg-[#1648A8]"
+                <a
+                  href={event.registrationUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-[46px] items-center border-2 border-[#0A1B3D] bg-[#0A1B3D] px-7 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[4px_4px_0_#1648A8] transition-colors hover:bg-[#1648A8]"
                 >
-                  <span>REGISTER TEAM FOR FREE</span>
-                </Link>
-
+                  Register
+                </a>
                 <a
                   href="#rounds"
                   className="inline-flex min-h-[46px] items-center border-2 border-[#0A1B3D] bg-[#FAF5E8] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#0A1B3D] shadow-[3px_3px_0_rgba(10,27,61,0.12)] transition-colors hover:bg-[#F5EFE0]"
                 >
-                  View Rounds &amp; Rules
+                  View Rounds
                 </a>
               </div>
             </div>
@@ -197,7 +191,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 <span>Eligibility</span>
               </div>
               <p className="mt-1 font-mono text-xs font-bold text-[#0A1B3D] sm:text-sm">
-                UG / PG Students
+                {event.eligibility}
               </p>
             </div>
 
@@ -214,6 +208,40 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
         </div>
       </section>
 
+      {event.themeDomains?.length ? (
+        <section className="border-t border-[#D9D0B8] bg-[#F5EFE0]/70 px-4 py-16 sm:px-6 lg:py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 text-center">
+              <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#1648A8]">
+                GTM ARENA DOMAINS
+              </span>
+              <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
+                FOUR THEMES
+              </h2>
+              <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-[#4B5C7D]">
+                Domain-specific problem statements are revealed only to shortlisted teams at the event kickoff.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {event.themeDomains.map((domain) => (
+                <article
+                  key={domain.name}
+                  className="border-2 border-[#D9D0B8] bg-[#FAF5E8] p-5 shadow-sm transition-all duration-300 hover:border-[#0A1B3D] hover:shadow-[4px_4px_0_#0A1B3D]"
+                >
+                  <h3 className="font-heading text-base font-bold text-[#0A1B3D]">
+                    {domain.name}
+                  </h3>
+                  <p className="mt-2.5 text-xs leading-relaxed text-[#4B5C7D]">
+                    {domain.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {/* Competition Rounds Section */}
       <section id="rounds" className="px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-6xl">
@@ -225,11 +253,15 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
               COMPETITION ROUNDS
             </h2>
             <p className="mt-2 text-sm text-[#4B5C7D]">
-              All rounds are conducted on campus. Teams advance based on score benchmarks.
+              {event.competitionIntro}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div
+            className={`grid grid-cols-1 gap-6 ${
+              event.rounds.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+            }`}
+          >
             {event.rounds.map((round) => (
               <div
                 key={round.number}
@@ -330,51 +362,7 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
                 ))}
               </div>
 
-              {/* Instant Registration Callout Card */}
-              <div className="mt-8 border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 text-center shadow-[5px_5px_0_#0A1B3D]">
-                <h3 className="font-pixel text-lg font-bold uppercase tracking-tight text-[#0A1B3D]">
-                  READY TO COMPETE?
-                </h3>
-                <p className="mt-1 font-mono text-xs text-[#4B5C7D]">
-                  Seats are capped at {event.seatCap} teams. Free entry for all college students.
-                </p>
-                <Link
-                  href={`/register?event=${event.id}`}
-                  className="mt-4 inline-flex min-h-[42px] items-center border-2 border-[#0A1B3D] bg-[#0A1B3D] px-6 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[3px_3px_0_#1648A8] transition-all hover:bg-[#1648A8]"
-                >
-                  <span>CLAIM YOUR TEAM SPOT</span>
-                </Link>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Rules & Eligibility Guidelines */}
-      <section className="px-4 py-16 sm:px-6 lg:py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-8 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#C82333]">
-              RULES &amp; CODE OF CONDUCT
-            </span>
-            <h2 className="mt-2 font-pixel text-3xl font-bold uppercase tracking-tight text-[#0A1B3D] sm:text-4xl">
-              OFFICIAL GUIDELINES
-            </h2>
-          </div>
-
-          <div className="border-2 border-[#D9D0B8] bg-[#FAF5E8] p-6 sm:p-8 shadow-sm">
-            <ul className="space-y-4">
-              {event.rules.map((rule, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center border border-[#0A1B3D] bg-[#0A1B3D] font-mono text-[10px] font-bold text-white">
-                    {idx + 1}
-                  </span>
-                  <p className="text-xs leading-relaxed text-[#0A1B3D] sm:text-sm">
-                    {rule}
-                  </p>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -430,30 +418,23 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
             {/* Coordinator Card */}
             <div className="border-2 border-[#0A1B3D] bg-[#FAF5E8] p-6 shadow-[5px_5px_0_#0A1B3D] sm:p-8">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#1648A8]">
-                TRACK COORDINATOR
+                EVENT COORDINATORS
               </span>
-              <h3 className="mt-2 font-heading text-xl font-bold text-[#0A1B3D]">
-                {event.contact.name}
-              </h3>
-              <p className="font-mono text-xs text-[#4B5C7D]">
-                {event.contact.role}
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3 font-mono text-xs">
-                <a
-                  href={`tel:${event.contact.phone.replace(/\s+/g, "")}`}
-                  className="inline-flex items-center gap-2 font-bold text-[#1648A8] hover:underline"
-                >
-                  <Phone className="h-4 w-4" />
-                  <span>{event.contact.phone}</span>
-                </a>
-                <a
-                  href={`mailto:${event.contact.email}`}
-                  className="inline-flex items-center gap-2 font-bold text-[#1648A8] hover:underline"
-                >
-                  <Mail className="h-4 w-4" />
-                  <span>{event.contact.email}</span>
-                </a>
+              <div className="mt-5 space-y-4">
+                {event.coordinators.map((coordinator) => (
+                  <div key={coordinator.phone} className="flex flex-wrap items-center justify-between gap-2 border-t border-[#D9D0B8] pt-3">
+                    <h3 className="font-heading text-sm font-bold text-[#0A1B3D]">
+                      {coordinator.name}
+                    </h3>
+                    <a
+                      href={`tel:${coordinator.phone.replace(/\s+/g, "")}`}
+                      className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#1648A8] hover:underline"
+                    >
+                      <Phone className="h-4 w-4" />
+                      <span>{coordinator.phone}</span>
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -484,23 +465,6 @@ export default function EventDetailPage({ event, allEvents }: EventDetailPagePro
         </div>
       </section>
 
-      {/* Floating Bottom Sticky Register Bar for mobile/tablet */}
-      <div className="sticky bottom-0 z-30 border-t border-[#D9D0B8] bg-[#FAF5E8]/95 p-3.5 backdrop-blur-md sm:hidden">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <span className="font-pixel text-xs text-[#1648A8]">{event.prizePool}</span>
-            <span className="block font-mono text-[9px] uppercase tracking-wider text-[#4B5C7D]">
-              {event.dateDisplay} • FREE
-            </span>
-          </div>
-          <Link
-            href={`/register?event=${event.id}`}
-            className="border border-[#0A1B3D] bg-[#0A1B3D] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#FAF5E8] shadow-[2px_2px_0_#1648A8]"
-          >
-            Register Now
-          </Link>
-        </div>
-      </div>
     </div>
   );
 }

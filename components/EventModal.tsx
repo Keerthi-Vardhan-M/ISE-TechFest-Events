@@ -184,16 +184,16 @@ export default function EventModal({ event, onClose, onRegister }: EventModalPro
 
           {/* Contact */}
           <section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs">
-            <div className="flex items-center gap-2.5">
-              <Phone className="h-4 w-4 text-[var(--accent-primary)]" />
-              <div>
-                <p className="font-semibold text-[#EDEFF5]">
-                  {event.contact.name} ({event.contact.role})
-                </p>
-                <p className="text-[#8A90A2]">
-                  {event.contact.phone} • {event.contact.email}
-                </p>
-              </div>
+            <div className="min-w-0 flex-1 space-y-2">
+              {event.coordinators.map((coordinator) => (
+                <div key={coordinator.phone} className="flex items-center gap-2.5">
+                  <Phone className="h-4 w-4 shrink-0 text-[var(--accent-primary)]" />
+                  <p className="min-w-0 text-[#EDEFF5]">
+                    <span className="font-semibold">{coordinator.name}</span>
+                    <span className="text-[#8A90A2]"> • {coordinator.phone}</span>
+                  </p>
+                </div>
+              ))}
             </div>
             <button
               type="button"

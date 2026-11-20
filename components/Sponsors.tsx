@@ -6,33 +6,29 @@ import gsap from "gsap";
 import { SPONSORS_DATA } from "@/content/events";
 import { ensureGsapRegistered, prefersReducedMotion } from "@/lib/motion";
 
-function GDGLogo() {
+function GeminiLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <div className="flex items-center gap-2.5">
-        <Image
-          src="/images/gdg-logo.svg"
-          alt="Google Developer Groups"
-          width={46}
-          height={36}
-          className="h-8 w-auto object-contain"
-        />
+        <svg aria-label="Gemini" role="img" viewBox="0 0 48 48" className="h-9 w-9" fill="none">
+          <path d="M24 3C26.6 15.4 32.6 21.4 45 24C32.6 26.6 26.6 32.6 24 45C21.4 32.6 15.4 26.6 3 24C15.4 21.4 21.4 15.4 24 3Z" fill="url(#gemini-gradient)" />
+          <defs><linearGradient id="gemini-gradient" x1="8" y1="8" x2="40" y2="40"><stop stopColor="#8E77F0"/><stop offset="0.52" stopColor="#4C9AFF"/><stop offset="1" stopColor="#59D6C5"/></linearGradient></defs>
+        </svg>
         <span className="font-heading text-xl font-extrabold tracking-tight text-white">
-          GDG
+          Gemini
         </span>
       </div>
       <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#A3F06D]">
-        Google Developer Groups
+        GOOGLE AI ASSISTANT
       </span>
     </div>
   );
 }
-
 function VoiceClubLogo() {
   return (
     <div className="flex flex-col items-center justify-center gap-1.5">
       <span className="font-pixel text-2xl font-bold tracking-wider text-white sm:text-3xl">
-        VOICE CLUB
+        Vo&apos;ISE
       </span>
       <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#A3F06D]">
         TECH &amp; ORATION
@@ -169,7 +165,7 @@ export default function Sponsors() {
                       className="sponsor-card group flex flex-col justify-between rounded-xl border border-[#2B548A] bg-[#1648A8] p-6 shadow-[0_4px_16px_rgba(22,72,168,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1D5BC6] hover:shadow-[0_8px_24px_rgba(34,229,255,0.4)]"
                     >
                       <div className="py-3 flex min-h-[72px] items-center justify-center">
-                        {sp.logo === "gdg" && <GDGLogo />}
+                        {sp.logo === "gemini" && <GeminiLogo />}
                         {sp.logo === "voice" && <VoiceClubLogo />}
                         {sp.logo === "msrit" && <MsritLogo />}
                         {sp.logo === "heapify" && <HeapifyLogo />}
@@ -191,3 +187,5 @@ export default function Sponsors() {
     </section>
   );
 }
+
+\n

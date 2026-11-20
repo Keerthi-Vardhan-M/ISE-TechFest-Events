@@ -14,10 +14,9 @@ interface PrizeTier {
   sizeClass: string;
   isGrand?: boolean;
 }
-
 export default function Prizes() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeTrack, setActiveTrack] = useState<"championship" | EventId>("championship");
+  const [activeTrack, setActiveTrack] = useState<EventId>("automate");
 
   useEffect(() => {
     ensureGsapRegistered();
@@ -43,33 +42,6 @@ export default function Prizes() {
   }, []);
 
   const getTiers = (): PrizeTier[] => {
-    if (activeTrack === "championship") {
-      return [
-        {
-          id: "silver",
-          rank: "2ND",
-          label: "1ST RUNNER UP",
-          amount: "₹3,000",
-          sizeClass: "w-44 h-52 sm:w-56 sm:h-64",
-        },
-        {
-          id: "gold",
-          rank: "1ST",
-          label: "CHAMPION",
-          amount: "₹5,000",
-          sizeClass: "w-52 h-64 sm:w-64 sm:h-76 -translate-y-3",
-          isGrand: true,
-        },
-        {
-          id: "bronze",
-          rank: "3RD",
-          label: "2ND RUNNER UP",
-          amount: "₹2,000",
-          sizeClass: "w-40 h-48 sm:w-52 sm:h-60",
-        },
-      ];
-    }
-
     const ev = EVENTS[activeTrack];
     return [
       {
@@ -111,28 +83,22 @@ export default function Prizes() {
           PRIZES
         </h2>
         <p className="mt-2 font-mono text-xs uppercase tracking-[0.28em] text-[#4B5C7D]">
-          TOTAL POOL • ₹20,000+ IN CASH &amp; CRYSTAL TROPHIES
+          TOTAL CASH PRIZE POOL • ₹20,000+
         </p>
 
-        {/* Clean Cream/Navy Track Filter */}
-        <div className="mt-6 inline-flex border border-[#D9D0B8] bg-[#FAF5E8] p-1 shadow-sm">
-          <button
-            type="button"
-            onClick={() => setActiveTrack("championship")}
-            className={`min-h-[38px] px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
-              activeTrack === "championship"
-                ? "bg-[#1648A8] text-white shadow-sm"
-                : "text-[#4B5C7D] hover:text-[#0A1B3D]"
-            }`}
-          >
-            All Tracks
-          </button>
+        {/* Track selector */}
+        <div role="tablist" aria-label="Choose an event for prize details" className="mt-6 inline-flex border border-[#D9D0B8] bg-[#FAF5E8] p-1 shadow-sm">
           {EVENT_LIST.map((ev) => (
             <button
               key={ev.id}
               type="button"
-              onClick={() => setActiveTrack(ev.id)}
-              className={`min-h-[38px] px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+              role="tab"
+              aria-selected={activeTrack === ev.id}
+              aria-controls="prize-podium"
+              onClick={() => {
+                if (activeTrack !== ev.id) setActiveTrack(ev.id);
+              }}
+              className={`min-h-[42px] touch-manipulation px-5 font-mono text-xs font-bold uppercase tracking-wider transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1648A8] ${
                 activeTrack === ev.id
                   ? "bg-[#1648A8] text-white shadow-sm"
                   : "text-[#4B5C7D] hover:text-[#0A1B3D]"
@@ -143,9 +109,8 @@ export default function Prizes() {
           ))}
         </div>
 
-        {/* 3 Trophy Cups Podium: Silver (Left), Gold (Center Elevated), Bronze (Right) */}
-        {/* Pure SVG trophy with transparent background - fixed directly to webpage */}
-        <div className="mt-14 grid grid-cols-1 items-end justify-items-center gap-y-12 sm:grid-cols-3 sm:gap-x-8">
+        {/* Cash prize podium */}
+        <div id="prize-podium" role="tabpanel" aria-live="polite" className="mt-14 grid grid-cols-1 items-end justify-items-center gap-y-12 sm:grid-cols-3 sm:gap-x-8">
           {prizeTiers.map((tier) => (
             <div
               key={tier.id}
@@ -157,15 +122,10 @@ export default function Prizes() {
                   : "order-3"
               }`}
             >
-              {/* Pure SVG Trophy Cup fixed seamlessly to cream background without rectangular boxes */}
               <div
-                className={`relative mx-auto flex items-center justify-center animate-float-slow transition-transform duration-500 ease-out group-hover:scale-105`}
+                className={`mx-auto flex h-36 w-36 items-center justify-center rounded-full border-2 border-[#D9D0B8] bg-[#FAF5E8] font-pixel text-2xl font-bold text-[#1648A8] shadow-[0_12px_24px_rgba(10,27,61,0.14)] animate-float-slow transition-transform duration-500 ease-out group-hover:scale-105 sm:h-44 sm:w-44 ${tier.isGrand ? "ring-4 ring-[#A3F06D]/50" : ""}`}
               >
-                <TrophySvg
-                  tier={tier.id}
-                  badgeText={tier.rank}
-                  className={`${tier.sizeClass} drop-shadow-[0_12px_24px_rgba(10,27,61,0.14)]`}
-                />
+                <TrophySvg tier={tier.id} badgeText={tier.rank} className={`${tier.sizeClass} drop-shadow-[0_12px_24px_rgba(10,27,61,0.14)]`} />
               </div>
 
               {/* Clean Crisp Prize Amount & Rank Label */}
@@ -189,3 +149,5 @@ export default function Prizes() {
     </section>
   );
 }
+
+\n

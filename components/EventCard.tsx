@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import type { EventConfig, EventId } from "@/content/events";
 
 interface EventCardProps {
@@ -76,7 +74,7 @@ export default function EventCard({
         </p>
       </div>
 
-      {/* Bottom Row: Prize Pool on left, Details Link & Register Arrow on right */}
+      {/* Bottom Row: Prize Pool and Details Link */}
       <div
         className="mt-6 flex items-center justify-between gap-2 border-t border-[#9EB3D6]/20 pt-3.5"
         onClick={(e) => e.stopPropagation()}
@@ -90,20 +88,15 @@ export default function EventCard({
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Link
-            href={`/events/${event.id}`}
+        <div className="flex items-center">
+          <a
+            href={event.registrationUrl}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex min-h-[36px] items-center justify-center border border-[#9EB3D6]/30 bg-[#06142E]/80 px-3.5 font-mono text-xs uppercase tracking-wider text-[#D8E3F5] transition-colors hover:border-[#22E5FF] hover:text-white"
           >
-            Details
-          </Link>
-          <Link
-            href={`/register?event=${event.id}`}
-            aria-label={`Register for ${event.name}`}
-            className="inline-flex h-9 w-9 items-center justify-center border border-[#9EB3D6]/40 bg-[#091D42] text-[#F4F6FB] transition-colors hover:border-[#A3F06D] hover:bg-[#A3F06D] hover:text-[#040F24]"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+            Register
+          </a>
         </div>
       </div>
     </article>

@@ -8,7 +8,6 @@ interface SendEmailParams {
   college: string;
   members: { name: string; email: string }[];
 }
-
 export async function sendRegistrationConfirmationEmail(params: SendEmailParams): Promise<{ success: boolean; error?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
 
@@ -43,7 +42,7 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
           <tr>
             <td style="background: linear-gradient(135deg, #071A3E 0%, #040F24 100%); padding: 28px 24px; border-bottom: 2px solid ${trackColor}; text-align: center;">
               <p style="margin: 0 0 6px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #A3F06D;">
-                VOICE CLUB • MSRIT ISE PRESENTS
+                Vo'ISE • MSRIT ISE PRESENTS
               </p>
               <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.05em; color: #FFFFFF;">
                 AUTOMATE × QUANT
@@ -104,7 +103,7 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
                 <table width="100%" style="font-size: 13px; color: #CBD5E1;">
                   <tr>
                     <td style="padding: 4px 0; color: #94A3B8; width: 85px;">📅 Date:</td>
-                    <td style="padding: 4px 0; font-weight: 600; color: #FFFFFF;">Wednesday, 25 November 2026</td>
+                    <td style="padding: 4px 0; font-weight: 600; color: #FFFFFF;">Thursday, 26 November 2026</td>
                   </tr>
                   <tr>
                     <td style="padding: 4px 0; color: #94A3B8;">⏰ Time:</td>
@@ -129,7 +128,7 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
               </div>
 
               <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #64748B;">
-                Need help or have queries? Feel free to reply to this email or contact the Voice Club coordinators at MSRIT ISE.
+                Need help or have queries? Feel free to reply to this email or contact the Vo'ISE coordinators at MSRIT ISE.
               </p>
             </td>
           </tr>
@@ -137,7 +136,7 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
           <!-- Footer -->
           <tr>
             <td style="background-color: #020919; padding: 18px 24px; border-top: 1px solid #142E5A; text-align: center; font-size: 11px; color: #475569;">
-              <p style="margin: 0 0 4px 0;">Voice Club • Department of ISE • Ramaiah Institute of Technology</p>
+              <p style="margin: 0 0 4px 0;">Vo'ISE • Department of ISE • Ramaiah Institute of Technology</p>
               <p style="margin: 0;">Automate × Quant 2026 • All Rights Reserved</p>
             </td>
           </tr>
@@ -181,3 +180,5 @@ export async function sendRegistrationConfirmationEmail(params: SendEmailParams)
   }
 }
 
+
+\n

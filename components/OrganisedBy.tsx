@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { Mail, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { ORGANISER_INFO } from "@/content/events";
 import { ensureGsapRegistered, MOTION_EASE, prefersReducedMotion } from "@/lib/motion";
 
@@ -48,34 +48,34 @@ export default function OrganisedBy() {
 
   const facultyCoordinators = [
     {
-      name: "Dr. Faculty Coordinator 1",
+      name: "Prashant Kambli",
       department: "Department of ISE, MSRIT",
       role: "Faculty Advisor",
       accent: "#22E5FF",
+      photo: "/images/prashant-kambli.jpg",
     },
     {
-      name: "Prof. Faculty Coordinator 2",
+      name: "Suresh Kumar K. R.",
       department: "Department of ISE, MSRIT",
       role: "Faculty Advisor",
       accent: "#A3F06D",
+      photo: "/images/suresh-kumar-kr.png",
     },
   ];
 
   const contacts = [
     {
-      name: "Aarav Sharma",
-      role: "Robotics Track Lead",
+      name: "Rohan C M",
+      role: "Automate Coordinator",
       track: "automate",
-      phone: "+91 98765 43211",
-      email: "automate@campusfest.edu",
+      phone: "+91 99007 81694",
       accent: "#22E5FF",
     },
     {
-      name: "Diya Nair",
-      role: "Quant Track Lead",
+      name: "Venkatesh Reddy K",
+      role: "GTM Arena Coordinator",
       track: "quant",
-      phone: "+91 98765 43212",
-      email: "quant@campusfest.edu",
+      phone: "+91 74115 82857",
       accent: "#19F58A",
     },
   ];
@@ -141,8 +141,17 @@ export default function OrganisedBy() {
             {facultyCoordinators.map((fac) => (
               <div
                 key={fac.name}
-                className="org-item flex flex-col justify-between rounded-xl border border-[#2B548A] bg-[#163463] p-6 text-left text-white shadow-[4px_4px_0_#06142E] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1A3D73]"
+                className="org-item flex flex-col items-center justify-between rounded-xl border border-[#2B548A] bg-[#163463] p-6 text-center text-white shadow-[4px_4px_0_#06142E] transition-all duration-300 hover:-translate-y-1 hover:border-[#22E5FF] hover:bg-[#1A3D73]"
               >
+                <div className="relative mb-5 h-40 w-32 overflow-hidden rounded-lg border-2 border-[#2B548A] bg-[#0A1E46] shadow-[3px_3px_0_#06142E]">
+                  <Image
+                    src={fac.photo}
+                    alt={`${fac.name}, faculty coordinator`}
+                    fill
+                    sizes="128px"
+                    className="object-cover object-top"
+                  />
+                </div>
                 <div>
                   <span
                     className="font-mono text-[10px] font-bold uppercase tracking-widest"
@@ -197,13 +206,6 @@ export default function OrganisedBy() {
                     <span>{c.phone}</span>
                   </a>
 
-                  <a
-                    href={`mailto:${c.email}`}
-                    className="inline-flex min-h-[40px] items-center gap-2 rounded bg-[#1D5BC6] px-4 py-2 font-bold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(29,91,198,0.45)] transition-colors hover:bg-[#2563EB]"
-                  >
-                    <Mail className="h-3.5 w-3.5" />
-                    <span>CONTACT</span>
-                  </a>
                 </div>
               </div>
             ))}

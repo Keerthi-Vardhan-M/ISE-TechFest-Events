@@ -23,6 +23,11 @@ export interface EventFaqItem {
   answer: string;
 }
 
+export interface EventThemeDomain {
+  name: string;
+  description: string;
+}
+
 export interface EventConfig {
   id: EventId;
   theme: EventId;
@@ -35,6 +40,10 @@ export interface EventConfig {
   dateDisplay: string;
   timeDisplay: string;
   venue: string;
+  eligibility: string;
+  competitionIntro: string;
+  registrationUrl: string;
+  themeDomains?: EventThemeDomain[];
   teamSize: {
     min: number;
     max: number;
@@ -49,28 +58,26 @@ export interface EventConfig {
   timeline: EventTimelineItem[];
   rules: string[];
   faqs: EventFaqItem[];
-  contact: {
+  coordinators: {
     name: string;
-    role: string;
     phone: string;
-    email: string;
-  };
+  }[];
 }
 
 export const ORGANISER_INFO = {
-  clubName: "Voice Club",
+  clubName: "Vo'ISE",
   collegeName: "MSRIT ISE",
   city: "Bengaluru",
-  logoText: "AUTO×QUANT",
-  festName: "AUTOMATE × QUANT '26",
-  heroEyebrow: "VOICE CLUB • MSRIT ISE PRESENTS",
-  heroHeadline: "AUTOMATE × QUANT",
+  logoText: "SYNCHRO'N'SE 2026",
+  festName: "SYNCHRO'N'SE 2026",
+  heroEyebrow: "Vo'ISE • MSRIT ISE PRESENTS",
+  heroHeadline: "SYNCHRO'N'SE 2026",
   heroSubline:
-    "Two flagship arenas — Robotics Automation & Quantitative Finance. 25 November 2026 • Main Campus.",
+    "Two flagship arenas — Robotics Automation & Quantitative Finance. 26 November 2026 • Main Campus.",
   contactEmail: "events@campusfest.edu",
   contactPhone: "+91 98765 43210",
   upiId: "techfest.club@okaxis",
-  upiPayeeName: "Voice Club",
+  upiPayeeName: "Vo'ISE",
   siteUrl: "https://automate-quant-events.vercel.app",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
@@ -92,7 +99,7 @@ export const ABOUT_SECTION = {
     { label: "DAYS", value: 1, suffix: "" },
     { label: "FLAGSHIP EVENTS", value: 2, suffix: "" },
     { label: "PRIZE POOL", value: 20000, prefix: "₹", suffix: "+" },
-    { label: "EXPECTED BUILDERS", value: 400, suffix: "+" },
+    { label: "EXPECTED BUILDERS", value: 200, suffix: "+" },
   ],
 } as const;
 
@@ -106,10 +113,14 @@ export const EVENTS: Record<EventId, EventConfig> = {
     tagline: "Design, program, and deploy an automated pipeline that eliminates repetitive human effort.",
     description:
       "Teams engineer a robotic, embedded, or hybrid workflow system capable of sorting, picking, or automating a multi-step industrial or campus task under strict cycle-time and accuracy constraints.",
-    dateISO: "2026-11-25T09:00:00+05:30",
-    dateDisplay: "25 Nov 2026",
-    timeDisplay: "09:00 AM – 05:00 PM IST",
-    venue: "Robotics Lab, Block A",
+    dateISO: "2026-11-26T09:00:00+05:30",
+    dateDisplay: "26 Nov 2026",
+    timeDisplay: "9:00 AM–1:00 PM IST",
+    venue: "ISE Lab 1 & ISE Lab 2",
+    eligibility: "1st, 2nd & 3rd Year Students",
+    competitionIntro:
+      "A 20-hour online build phase leads to a four-hour, shortlisted on-campus evaluation with two Donut Challenges.",
+    registrationUrl: "https://forms.gle/PveeszfrP2VCDEfEA",
     teamSize: {
       min: 3,
       max: 4,
@@ -120,52 +131,46 @@ export const EVENTS: Record<EventId, EventConfig> = {
     seatCap: 60,
     prizePool: "₹10,000",
     podium: [
-      { rank: "1st", title: "Grand Automator", reward: "₹5,000 + Trophy" },
-      { rank: "2nd", title: "Runner Up", reward: "₹3,000 + Certificate" },
-      { rank: "3rd", title: "Precision Award", reward: "₹2,000 + Certificate" },
+      { rank: "1st", title: "Automation Champion", reward: "₹5,000" },
+      { rank: "2nd", title: "Automation Runner-Up", reward: "₹3,000 + Certificate" },
+      { rank: "3rd", title: "Automation Finalist", reward: "₹2,000 + Certificate" },
     ],
     rounds: [
       {
         number: "01",
-        title: "Blueprint & Architecture Pitch",
-        duration: "45 mins",
+        title: "Online Build Round",
+        duration: "20 hours",
         summary:
-          "Present system schematic, actuation/logic flow, and failure-handling plan to the technical panel.",
+          "Teams develop and refine an automation solution during the online build phase.",
       },
       {
         number: "02",
-        title: "Live Automation Sprint",
-        duration: "120 mins",
+        title: "Shortlisted Offline Evaluation",
+        duration: "4 hours",
         summary:
-          "Execute the assigned repetitive task sequence autonomously. Scored on throughput, repeatability, and zero manual intervention.",
-      },
-      {
-        number: "03",
-        title: "Edge-Case Stress Test",
-        duration: "60 mins",
-        summary:
-          "Finalists handle injected fault conditions (misaligned crates, sensor noise, or payload variance).",
+          "The top 20 teams are split between two labs for two timed Donut Challenges, followed by evaluation and finalist presentations.",
       },
     ],
     timeline: [
-      { time: "09:00 AM", milestone: "Check-in & Hardware Inspection" },
-      { time: "10:00 AM", milestone: "Round 01: Blueprint Review" },
-      { time: "11:30 AM", milestone: "Round 02: Live Automation Sprint" },
-      { time: "02:30 PM", milestone: "Round 03: Edge-Case Stress Test" },
-      { time: "04:15 PM", milestone: "Results & Podium Ceremony" },
+      { time: "20 hours", milestone: "Online build round" },
+      { time: "09:00 AM", milestone: "Offline check-in and team allocation across ISE Lab 1 and ISE Lab 2" },
+      { time: "09:30–10:30 AM", milestone: "Donut Challenge 1" },
+      { time: "10:30–11:30 AM", milestone: "Donut Challenge 2" },
+      { time: "11:30 AM–12:10 PM", milestone: "Initial evaluation and shortlisting" },
+      { time: "12:15–01:00 PM", milestone: "Top five finalist presentations and winner announcements" },
     ],
     rules: [
       "Teams must consist of strictly 3 to 4 members with valid college ID cards (compulsory).",
       "Pre-built commercial turnkey robots are not permitted; custom controllers, scripts, and modular kits are allowed.",
       "All autonomous runs must operate without remote manual override once the start signal is given.",
-      "Standard 230V AC bench power is provided at Robotics Lab, Block A; bring your own microcontrollers and adapters.",
+      "The offline evaluation is hosted across ISE Lab 1 and ISE Lab 2; bring your own microcontrollers and adapters.",
       "Judges' decisions on cycle-time penalties and safety compliance are final.",
     ],
     faqs: [
       {
         question: "Who can participate?",
         answer:
-          "Any undergraduate or postgraduate student with a valid college ID can participate. Cross-department and cross-year teams are welcome.",
+          "Students in 1st, 2nd, or 3rd year are eligible. Teams may include members from different branches and year groups.",
       },
       {
         question: "Is this hardware-only or can we use software/RPA?",
@@ -178,26 +183,47 @@ export const EVENTS: Record<EventId, EventConfig> = {
           "Yes, teams bring their own laptops, microcontrollers, sensors, and actuators. Standard power strips and test crates are provided on-site.",
       },
     ],
-    contact: {
-      name: "Aarav Sharma",
-      role: "Robotics Track Lead",
-      phone: "+91 98765 43211",
-      email: "automate@campusfest.edu",
-    },
+    coordinators: [
+      { name: "Rohan C M", phone: "9900781694" },
+      { name: "Shivam", phone: "93391 33887" },
+      { name: "Pranav", phone: "81053 31414" },
+    ],
   },
   quant: {
     id: "quant",
     theme: "quant",
-    categoryLabel: "STOCK MARKET & QUANT",
-    name: "QuantFinance",
-    shortName: "QuantFinance",
-    tagline: "Decode market microstructure, backtest alpha, and out-trade the floor under live volatility.",
+    categoryLabel: "GO TO MARKET ARENA",
+    name: "GTM ARENA",
+    shortName: "GTM ARENA",
+    tagline: "Build a go-to-market strategy, validate your audience, and pitch a winning launch plan.",
     description:
-      "A high-intensity quantitative finance and simulated trading competition. Participants build systematic strategies, manage drawdown, and execute under simulated order-book shocks.",
-    dateISO: "2026-11-25T09:00:00+05:30",
-    dateDisplay: "25 Nov 2026",
-    timeDisplay: "09:00 AM – 05:00 PM IST",
-    venue: "Trading Lab, Seminar Hall",
+      "Go To Market Arena challenges teams to identify customers, shape a compelling value proposition, choose effective channels, and present a practical launch strategy backed by market insight.",
+    dateISO: "2026-11-26T13:30:00+05:30",
+    dateDisplay: "26 Nov 2026",
+    timeDisplay: "01:30 PM–05:00 PM IST",
+    venue: "ISE Lab 1 & ISE Lab 2",
+    eligibility: "1st, 2nd & 3rd Year Students",
+    competitionIntro:
+      "A 3.5-hour ideathon moves from team ideation to constraint adaptation, parallel lab evaluation, and a joint finalist pitch.",
+    registrationUrl: "https://forms.gle/krtSLrZ83qauYCbW7",
+    themeDomains: [
+      {
+        name: "FinTech",
+        description: "Financial inclusion, digital payments, DeFi, risk analytics, and next-generation banking.",
+      },
+      {
+        name: "Blue Economy",
+        description: "Sustainable ocean resources, marine logistics, coastal monitoring, and maritime supply chains.",
+      },
+      {
+        name: "EV & Semiconductors",
+        description: "EV powertrains, battery management, charging infrastructure, and indigenous chip design.",
+      },
+      {
+        name: "Avionics & Flight Systems",
+        description: "UAVs, flight telemetry, navigation safety, aerospace diagnostics, and airspace management.",
+      },
+    ],
     teamSize: {
       min: 3,
       max: 4,
@@ -208,70 +234,71 @@ export const EVENTS: Record<EventId, EventConfig> = {
     seatCap: 60,
     prizePool: "₹10,000",
     podium: [
-      { rank: "1st", title: "Alpha Architect", reward: "₹5,000 + Trophy" },
-      { rank: "2nd", title: "Quant Strategist", reward: "₹3,000 + Certificate" },
-      { rank: "3rd", title: "Risk Master", reward: "₹2,000 + Certificate" },
+      { rank: "1st", title: "Go-To-Market Champion", reward: "₹5,000" },
+      { rank: "2nd", title: "Market Strategy Runner-Up", reward: "₹3,000 + Certificate" },
+      { rank: "3rd", title: "Launch Strategy Finalist", reward: "₹2,000 + Certificate" },
     ],
     rounds: [
       {
         number: "01",
-        title: "Quant Aptitude & Market Microstructure",
+        title: "Problem Statement & Core Ideation",
         duration: "45 mins",
         summary:
-          "Rapid-fire probability, expected value, options intuition, and order-book mechanics.",
+          "After kickoff, teams receive their domain problem and develop a technical concept and go-to-market strategy.",
       },
       {
         number: "02",
-        title: "Strategy Backtest & Signal Lab",
-        duration: "90 mins",
+        title: "Constraint Injection & Adaptation",
+        duration: "45 mins",
         summary:
-          "Given historical OHLCV & tick datasets, design a strategy evaluated on Sharpe ratio and max drawdown.",
+          "Teams adapt their initial solution and finalize their pitch when new real-world constraints are introduced.",
       },
       {
         number: "03",
-        title: "Live Simulated Trading Floor",
-        duration: "90 mins",
+        title: "Parallel Lab Evaluation & Grand Finale",
+        duration: "1 hr 40 mins",
         summary:
-          "Trade across multi-asset simulated regimes with live news catalysts and liquidity squeezes.",
+          "Teams present in parallel labs; the top three advance to a joint final pitch before results are announced.",
       },
     ],
     timeline: [
-      { time: "09:00 AM", milestone: "Desk Allocation & Terminal Setup" },
-      { time: "09:45 AM", milestone: "Round 01: Quant Aptitude" },
-      { time: "11:00 AM", milestone: "Round 02: Strategy Backtest" },
-      { time: "02:00 PM", milestone: "Round 03: Live Simulated Floor" },
-      { time: "04:15 PM", milestone: "P&L Audit & Awards" },
+      { time: "01:30–01:45 PM", milestone: "Check-in, briefing, and lab seating" },
+      { time: "01:45–02:30 PM", milestone: "Problem statement disclosure and core ideation" },
+      { time: "02:30–03:15 PM", milestone: "Constraint release and solution adaptation" },
+      { time: "03:15–03:20 PM", milestone: "Transition and presentation setup" },
+      { time: "03:20–04:25 PM", milestone: "Parallel evaluations in ISE Lab 1 and ISE Lab 2" },
+      { time: "04:25–04:45 PM", milestone: "Top three teams' joint finalist pitches" },
+      { time: "04:45–05:00 PM", milestone: "Results announcement and awards" },
     ],
     rules: [
-      "Teams must consist of strictly 3 to 4 members with valid college ID cards (compulsory).",
-      "All trading is strictly simulated using virtual capital on the provided terminal environment.",
-      "Look-ahead bias, data leakage, or external signal scraping during backtest rounds results in disqualification.",
-      "Teams must bring at least one laptop per team with Python 3.10+ or spreadsheet tools pre-installed.",
-      "Final rankings combine risk-adjusted return (Sharpe/Calmar) and compliance with position limits.",
+      "Teams must consist of 3 to 4 members with valid college ID cards.",
+      "Students in 1st, 2nd, or 3rd year are eligible.",
+      "Teams receive their domain-specific problem statement at the event kickoff.",
+      "Teams must adapt their solution when new constraints are introduced during the ideation phase.",
+      "Final evaluation takes place in parallel across ISE Lab 1 and ISE Lab 2, followed by a joint pitch from the top three teams.",
     ],
     faqs: [
       {
-        question: "Do we need prior algorithmic trading experience?",
+        question: "Who can participate?",
         answer:
-          "Basic probability, Python or Excel familiarity, and market fundamentals are enough to start. Round 02 and 03 reward disciplined risk management.",
+          "Students in 1st, 2nd, or 3rd year can participate in a team of 3 to 4 members.",
       },
       {
-        question: "Is real money involved?",
+        question: "What is the event schedule?",
         answer:
-          "No. 100% of trading rounds run on virtual simulated capital and historical/synthetic market feeds.",
+          "GTM Arena runs from 1:30 PM to 5:00 PM, moving through ideation, constraint adaptation, lab evaluations, finalist pitches, and results.",
       },
       {
         question: "Can one person register for both events?",
         answer:
-          "Yes! Both events take place on 25 November 2026 with staggered stages, so your team can register for both tracks individually.",
+          "Yes! Both events take place on 26 November 2026 with staggered stages, so your team can register for both tracks individually.",
       },
     ],
-    contact: {
-      name: "Diya Nair",
-      role: "Quant Track Lead",
-      phone: "+91 98765 43212",
-      email: "quant@campusfest.edu",
-    },
+    coordinators: [
+      { name: "Venkatesh Reddy K", phone: "7411582857" },
+      { name: "Akash Konchigeri", phone: "8050346842" },
+      { name: "Rizwan Pasha", phone: "8618281144" },
+    ],
   },
 };
 
@@ -285,127 +312,34 @@ export interface MemoryPhoto {
   aspect: "tall" | "wide" | "square";
 }
 
-// Replace `src` with your real photos placed in `public/images/memories/...`
 export const MEMORIES_GALLERY: MemoryPhoto[] = [
-  {
-    id: "m1",
-    src: "/images/campus-arena.jpg",
-    alt: "MSRIT engineering campus arena",
-    caption: "Campus Arena & Labs",
-    aspect: "wide",
-  },
-  {
-    id: "m2",
-    src: "/images/event-automate.jpg",
-    alt: "Robotics and automation sprint",
-    caption: "Robotics Build Sprint",
-    aspect: "tall",
-  },
-  {
-    id: "m3",
-    src: "/images/event-quant.jpg",
-    alt: "Quantitative finance trading floor",
-    caption: "Quant Trading Floor",
-    aspect: "square",
-  },
-  {
-    id: "m4",
-    src: "/images/hero-sky-bg.jpg",
-    alt: "Symposium opening keynote",
-    caption: "Opening Ceremony",
-    aspect: "wide",
-  },
-  {
-    id: "m5",
-    src: "/images/event-automate.jpg",
-    alt: "Hardware debugging session",
-    caption: "Hardware Debugging",
-    aspect: "square",
-  },
-  {
-    id: "m6",
-    src: "/images/campus-arena.jpg",
-    alt: "Teams collaborating in seminar hall",
-    caption: "Team Collaboration",
-    aspect: "tall",
-  },
-  {
-    id: "m7",
-    src: "/images/hero-emblem.jpg",
-    alt: "Jury evaluation and mentoring",
-    caption: "Jury & Mentors",
-    aspect: "square",
-  },
-  {
-    id: "m8",
-    src: "/images/event-quant.jpg",
-    alt: "Podium winners celebration",
-    caption: "Podium Winners",
-    aspect: "wide",
-  },
-  {
-    id: "m9",
-    src: "/images/campus-arena.jpg",
-    alt: "Midnight coding sprint",
-    caption: "Midnight Coding Grind",
-    aspect: "tall",
-  },
-  {
-    id: "m10",
-    src: "/images/event-quant.jpg",
-    alt: "Alpha backtest terminal session",
-    caption: "Alpha Backtest Lab",
-    aspect: "square",
-  },
-  {
-    id: "m11",
-    src: "/images/event-automate.jpg",
-    alt: "Autonomous prototype demonstration",
-    caption: "Prototype Demo",
-    aspect: "wide",
-  },
-  {
-    id: "m12",
-    src: "/images/hero-sky-bg.jpg",
-    alt: "Trophy and awards presentation",
-    caption: "Trophy Unveiling",
-    aspect: "tall",
-  },
-  {
-    id: "m13",
-    src: "/images/event-quant.jpg",
-    alt: "Live order book simulated trading",
-    caption: "Live Trading Session",
-    aspect: "square",
-  },
-  {
-    id: "m14",
-    src: "/images/event-automate.jpg",
-    alt: "Robotic arm cycle testing",
-    caption: "Robotic Arm Testing",
-    aspect: "tall",
-  },
-  {
-    id: "m15",
-    src: "/images/campus-arena.jpg",
-    alt: "Final project pitch to industry judges",
-    caption: "Final Pitch Presentation",
-    aspect: "wide",
-  },
-  {
-    id: "m16",
-    src: "/images/hero-emblem.jpg",
-    alt: "Grand champions celebration ceremony",
-    caption: "Grand Champions Stage",
-    aspect: "square",
-  },
+  { id: "mem-01", src: "/images/memories/event-memory-01.webp", alt: "Students attending a presentation in an auditorium", caption: "Ideas in the Auditorium", aspect: "wide" },
+  { id: "mem-02", src: "/images/memories/event-memory-02.webp", alt: "Students presenting during a Gemini workshop", caption: "Gemini Workshop", aspect: "wide" },
+  { id: "mem-03", src: "/images/memories/event-memory-03.webp", alt: "Guest speaker addressing the audience", caption: "Guest Talk", aspect: "wide" },
+  { id: "mem-04", src: "/images/memories/event-memory-04.webp", alt: "Organizers and participants on stage at HackDays", caption: "HackDays at MSRIT", aspect: "wide" },
+  { id: "mem-05", src: "/images/memories/event-memory-05.webp", alt: "Participants and organizers gathered for a group photo", caption: "Community Group Photo", aspect: "wide" },
+  { id: "mem-06", src: "/images/memories/event-memory-06.webp", alt: "Hackathon participants gathered in the auditorium", caption: "Hackathon Participants", aspect: "wide" },
+  { id: "mem-07", src: "/images/memories/event-memory-07.webp", alt: "Award recipients and organizers on stage", caption: "Awards on Stage", aspect: "wide" },
+  { id: "mem-08", src: "/images/memories/event-memory-08.webp", alt: "Student sharing a project presentation", caption: "Project Presentation", aspect: "wide" },
+  { id: "mem-09", src: "/images/memories/event-memory-09.webp", alt: "Audience watching a program in the auditorium", caption: "Audience Session", aspect: "wide" },
+  { id: "mem-10", src: "/images/memories/event-memory-10.webp", alt: "Students listening to a speaker during a session", caption: "Learning Together", aspect: "wide" },
+  { id: "mem-11", src: "/images/memories/event-memory-11.webp", alt: "Ceremonial lamp lighting at the event", caption: "Opening Ceremony", aspect: "wide" },
+  { id: "mem-12", src: "/images/memories/event-memory-12.webp", alt: "Participants meeting and collaborating during the event", caption: "Meet the Community", aspect: "wide" },
+  { id: "mem-13", src: "/images/memories/event-memory-13.webp", alt: "Two students presenting an idea on stage", caption: "Ideas on Stage", aspect: "wide" },
+  { id: "mem-14", src: "/images/memories/event-memory-14.webp", alt: "Students presenting a project to the audience", caption: "Student Showcase", aspect: "wide" },
+  { id: "mem-15", src: "/images/memories/event-memory-15.webp", alt: "Attendees watching a presentation", caption: "Event Highlights", aspect: "wide" },
+  { id: "mem-16", src: "/images/memories/event-memory-16.webp", alt: "Students presenting a compliance review concept on stage", caption: "Compliance Review Pitch", aspect: "wide" },
+  { id: "mem-17", src: "/images/memories/event-memory-17.webp", alt: "Speaker presenting a Gemini workshop at Ramaiah Institute of Technology", caption: "Build with Gemini", aspect: "wide" },
+  { id: "mem-18", src: "/images/memories/event-memory-18.webp", alt: "Attendees discussing a presentation during the session", caption: "Workshop Discussion", aspect: "wide" },
+  { id: "mem-19", src: "/images/memories/event-memory-19.webp", alt: "Participants and organizers celebrating with award boards", caption: "Winners and Organizers", aspect: "wide" },
+  { id: "mem-20", src: "/images/memories/event-memory-20.webp", alt: "Student presenting an idea to the audience", caption: "Audience Presentation", aspect: "wide" },
 ];
 
 export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "Who can participate?",
     answer:
-      "All undergraduate and postgraduate college students with a valid institution ID card are eligible. Cross-college, cross-branch, and cross-year teams are welcome.",
+      "Students in 1st, 2nd, or 3rd year with a valid institution ID card are eligible. Cross-branch and cross-year teams are welcome.",
   },
   {
     question: "How do I register?",
@@ -425,12 +359,12 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "When and where are the competitions hosted?",
     answer:
-      "25 November 2026 (09:00 AM – 05:00 PM IST) at MSRIT, Bengaluru (Robotics Lab Block A for Automate Boring Task and Seminar Hall for QuantFinance).",
+      "Both events are on 26 November 2026 at MSRIT, Bengaluru. Automate has a 20-hour online phase followed by a 9:00 AM–1:00 PM offline evaluation in ISE Lab 1 and ISE Lab 2. GTM Arena runs 1:30 PM–5:00 PM in the same labs.",
   },
   {
     question: "Can our team participate in both events?",
     answer:
-      "Yes! Automate Boring Task and QuantFinance are scheduled on 25 November 2026, and teams can register for both tracks individually.",
+      "Yes! Automate Boring Task and QuantFinance are scheduled on 26 November 2026, and teams can register for both tracks individually.",
   },
   {
     question: "What hardware or software do we need to bring?",
@@ -450,7 +384,7 @@ export const GENERAL_FAQS: EventFaqItem[] = [
   {
     question: "What prizes and certificates will participants receive?",
     answer:
-      "₹20,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹5,000, 2nd: ₹3,000, 3rd: ₹2,000 for each event), plus championship trophies and verified participation certificates for all registered teams.",
+      "₹20,000+ total cash prize pool split across podium finishers in both tracks (1st: ₹5,000, 2nd: ₹3,000, 3rd: ₹2,000 for each event), plus verified participation certificates for all registered teams. No trophies will be provided.",
   },
   {
     question: "Will food, Wi-Fi, and accommodation be provided?",
@@ -496,14 +430,14 @@ export const SPONSORS_DATA = {
       accent: "#22E5FF",
       sponsors: [
         {
-          name: "Google Developer Groups",
+          name: "Gemini",
           tier: "Sponsor",
-          logo: "gdg",
-          url: "https://developers.google.com/community/gdg",
-          desc: "Global community of developers powered by Google technology",
+          logo: "gemini",
+          url: "https://gemini.google.com/",
+          desc: "Google's AI assistant for learning, research, and creative problem-solving",
         },
         {
-          name: "Voice Club",
+          name: "Vo'ISE",
           tier: "Sponsor",
           logo: "voice",
           url: "#",
